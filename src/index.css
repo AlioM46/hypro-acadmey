@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Tajawal", system-ui, -apple-system, sans-serif;
+  
+  --color-brand-blue: #293158;
+  --color-brand-blue-hover: #1e2442;
+  --color-brand-accent: #dc2626;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  body {
+    @apply antialiased bg-slate-50 text-slate-900 selection:bg-blue-200/50;
+  }
+}
+
+/* Minimal smooth entry animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
