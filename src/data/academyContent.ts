@@ -7,7 +7,9 @@
  */
 
 export interface AcademyStats {
-  value: string;
+  value?: string;
+  valueEn: string;
+  valueAr: string;
   labelEn: string;
   labelAr: string;
 }
@@ -109,10 +111,10 @@ export const academyContent: AcademyContent = {
     addressAr: "سورية، إدلب، المنطقة الصناعية"
   },
   stats: [
-    { value: "80%", labelEn: "Practical Work Focused", labelAr: "تدريب تطبيقي ومهني خالص" },
-    { value: "4 Months", labelEn: "Intensive Apprenticeship", labelAr: "4 أشهر من التأهيل والتمكين الكامل" },
-    { value: "20+ Years", labelEn: "Core Experts Experience", labelAr: "خبرة الموجهين والمدربين" },
-    { value: "92%", labelEn: "Placement Integration", labelAr: "معدل توظيف الخريجين بالورش" }
+    { valueEn: "80%", valueAr: "80%", labelEn: "Practical Work Focused", labelAr: "تدريب تطبيقي ومهني خالص" },
+    { valueEn: "4 Months", valueAr: "4 أشهر", labelEn: "Intensive Apprenticeship", labelAr: "4 أشهر من التأهيل والتمكين الكامل" },
+    { valueEn: "20+ Years", valueAr: "20+ عاماً", labelEn: "Core Experts Experience", labelAr: "خبرة الموجهين والمدربين" },
+    { valueEn: "92%", valueAr: "92%", labelEn: "Placement Integration", labelAr: "معدل توظيف الخريجين بالورش" }
   ],
   modules: [
     {
