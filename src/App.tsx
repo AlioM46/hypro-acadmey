@@ -2398,39 +2398,49 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.2 }}
-              className="bg-white text-slate-800"
+              className="py-16 bg-white text-slate-800 text-start"
             >
-              {/* Hero Header */}
-              <section className="relative py-24 md:py-32 overflow-hidden" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #232f5b 100%)' }}>
-                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                  <span className="inline-flex items-center gap-2 bg-white/10 border border-white/10 px-4 py-1.5 mb-6">
-                    <Building2 size={12} className="text-blue-400" />
-                    <span className="text-[10px] font-mono tracking-widest text-blue-300 uppercase font-bold">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-3xl space-y-3 pb-8 border-b border-slate-200 mb-12 animate-fade-in">
+                  <span className="inline-flex items-center gap-1.5 bg-blue-50 text-brand-blue border border-blue-100 px-3.5 py-1.5 rounded-full text-xs font-bold font-mono tracking-wide uppercase">
+                    <Building2 size={13} className="text-brand-blue" />
+                    <span>
                       {lang === 'en' ? 'INSTITUTIONAL PARTNERSHIPS' : 'الشراكات المؤسساتية'}
                     </span>
                   </span>
-                  <h1 className="text-4xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6">
+                  <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 font-sans">
                     {lang === 'en' ? 'Scaling Youth Employment & Clean Energy' : 'تمكين الشباب وتوطين مهن الطاقة النظيفة'}
-                  </h1>
-                  <p className="text-slate-400 text-base sm:text-lg leading-relaxed font-medium max-w-3xl mx-auto">
+                  </h2>
+                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-sans font-medium">
                     {lang === 'en'
                       ? 'We build strategic alliances with development partners, trade associations, and vocational funds to create sustainable employment pathways and upskill traditional workforces.'
                       : 'نبني تحالفات استراتيجية مع شركاء التنمية والجمعيات المهنية وصناديق التمويل لخلق مسارات توظيف مستدامة وتطوير القوى العاملة التقليدية.'}
                   </p>
                 </div>
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]" />
-              </section>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pb-12 border-b border-slate-200 mb-12">
+                  {[
+                    { val: '92%', en: 'Placement Rate', ar: 'Ù†Ø³Ø¨Ø© Ø§Ù„ØªÙˆØ¸ÙŠÙ' },
+                    { val: '3', en: 'Cooperation Models', ar: 'Ù†Ù…Ø§Ø°Ø¬ ØªØ¹Ø§ÙˆÙ†' },
+                    { val: '24+', en: 'Years Industry Insight', ar: 'Ø³Ù†Ø© Ø®Ø¨Ø±Ø© Ø³ÙˆÙ‚ÙŠØ©' },
+                    { val: '1000V', en: 'Safety Training Scope', ar: 'Ù†Ø·Ø§Ù‚ ØªØ¯Ø±ÙŠØ¨ Ø§Ù„Ø³Ù„Ø§Ù…Ø©' }
+                  ].map((s, i) => (
+                    <div key={i}>
+                      <div className="text-2xl sm:text-3xl font-black text-brand-blue">{s.val}</div>
+                      <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mt-1">{lang === 'en' ? s.en : s.ar}</div>
+                    </div>
+                  ))}
+                </div>
 
               {/* Partnership Models */}
-              <section className="py-20 bg-white border-b border-slate-200">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <div className="text-center mb-14">
-                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block mb-3">
+              <div className="pb-12 border-b border-slate-200 mb-12">
+                  <div className="max-w-3xl space-y-2 mb-8">
+                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">
                       {lang === 'en' ? 'COOPERATION FRAMEWORKS' : 'أطر التعاون المتاحة'}
                     </span>
-                    <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                    <h3 className="text-xl font-extrabold text-slate-900">
                       {lang === 'en' ? 'How We Partner With You' : 'كيف نتعاون معكم'}
-                    </h2>
+                    </h3>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-start">
@@ -2486,49 +2496,49 @@ export default function App() {
                     </div>
                   </div>
                 </div>
-              </section>
+              </div>
 
               {/* CTA Panel */}
-              <section className="py-16 bg-slate-50 border-b border-slate-200">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <div className="bg-brand-blue text-white p-10 sm:p-14 text-center relative overflow-hidden">
-                    <div className="relative z-10 space-y-6">
-                      <h3 className="text-2xl sm:text-3xl font-black tracking-tight">
+              <div className="bg-slate-50 border border-slate-200 p-8 flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
+                  <div className="space-y-2 max-w-2xl">
+                    <span className="text-[10px] font-mono font-bold text-brand-blue tracking-widest uppercase block">
+                      {lang === 'en' ? 'PARTNERSHIP OUTREACH' : 'ØªÙˆØ§ØµÙ„ Ø§Ù„Ø´Ø±Ø§ÙƒØ§Øª'}
+                    </span>
+                    <h3 className="text-xl font-black text-slate-900">
                         {lang === 'en' ? 'Ready to Build a Partnership?' : 'جاهزون لبناء شراكة؟'}
                       </h3>
-                      <p className="text-blue-200 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-medium">
+                    <p className="text-slate-500 text-xs leading-relaxed font-medium">
                         {lang === 'en'
                           ? 'We provide transparent project tracking, audit-compliant monitoring reports, student logs, and certified trade exams. Contact us to discuss your cooperation framework.'
                           : 'نوفر تقارير تتبع شفافة، ومعايير تقييم جودة متوافقة مع متطلبات التدقيق الدولي، وتوثيقاً كاملاً. تواصل معنا لمناقشة إطار التعاون.'}
                       </p>
-                      <div className="flex flex-wrap gap-4 justify-center">
+                  </div>
+                  <div className="flex flex-wrap gap-4">
                         <button
                           onClick={() => navigateTo('contact')}
-                          className="bg-white hover:bg-slate-100 text-brand-blue font-extrabold text-sm px-8 py-4 border-none cursor-pointer transition-all flex items-center gap-2"
+                          className="bg-brand-blue hover:bg-brand-blue-hover text-white font-extrabold text-xs px-8 py-4 transition-all cursor-pointer border-none whitespace-nowrap flex items-center gap-2"
                         >
                           <span>{lang === 'en' ? 'Inquire Partnership' : 'طلب مناقشة شراكة'}</span>
-                          <ArrowRight size={16} />
+                          <ArrowRight size={14} />
                         </button>
                         <a
                           href="https://wa.me/963955408202"
                           target="_blank"
                           rel="noreferrer"
-                          className="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-sm px-8 py-4 border-none cursor-pointer transition-all flex items-center gap-2"
+                          className="bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-xs px-8 py-4 transition-all border border-slate-200 whitespace-nowrap flex items-center gap-2 decoration-none"
                         >
-                          <MessageSquare size={16} className="fill-white" />
+                          <MessageSquare size={14} className="text-emerald-600" />
                           <span>{lang === 'en' ? 'WhatsApp Direct' : 'واتساب مباشر'}</span>
                         </a>
-                      </div>
-                    </div>
-                    <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
                   </div>
-                </div>
-              </section>
+              </div>
 
               {/* Partner Logos Grid */}
-              <section className="py-16 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <div className="text-center mb-10">
+              <div>
+                  <div className="space-y-2 mb-8">
+                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">
+                      {lang === 'en' ? 'STRATEGIC ALLIANCE NETWORK' : 'Ø´Ø¨ÙƒØ© Ø§Ù„ØªØ­Ø§Ù„ÙØ§Øª Ø§Ù„Ø§Ø³ØªØ±Ø§ØªÙŠØ¬ÙŠØ©'}
+                    </span>
                     <h3 className="text-xl font-extrabold text-slate-900">
                       {lang === 'en' ? 'Our Strategic Alliance Network' : 'شبكة التحالفات والمؤسسات الشريكة'}
                     </h3>
@@ -2545,8 +2555,7 @@ export default function App() {
                       </div>
                     ))}
                   </div>
-                </div>
-              </section>
+              </div>
             </motion.div>
           )}
 
