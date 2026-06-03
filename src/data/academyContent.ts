@@ -298,42 +298,82 @@ export const academyContent: AcademyContent = {
     {
       id: "faq-1",
       category: "student",
-      questionEn: "Do I need any background in electrical engineering or mechanics to enroll?",
-      questionAr: "هل أحتاج إلى خلفية مسبقة في الكهرباء أو الميكانيك للتسجيل في الدبلوم؟",
-      answerEn: "No prior experience is required. We start from ground zero (electrical basics, basic safety) up to deep hybrid batteries restoration and computer state-reading.",
-      answerAr: "لا، لا تشترط الأكاديمية أي معرفة مسبقة بالسيارات. نبدأ معك من الصفر تماماً (أسس الكهرباء العامة والسلامة) صعوداً إلى فك وترميم البطاريات المعقدة وقراءة وتصحيح أعطال الكمبيوتر."
+      questionEn: "Do I need any prior experience in electrical engineering or mechanics?",
+      questionAr: "هل أحتاج إلى خلفية مسبقة في الكهرباء أو الميكانيك للالتحاق بالدبلوم؟",
+      answerEn: "Absolutely not. Our curriculum is designed from ground zero — we start with electrical fundamentals, basic safety protocols, and tool familiarization before progressing to advanced hybrid battery diagnostics and computer-based fault reading. Over 60% of our graduates had zero prior automotive experience.",
+      answerAr: "لا على الإطلاق. صُمم منهجنا ليبدأ من الصفر التام — نبدأ بأساسيات الكهرباء، بروتوكولات السلامة، والتعرف على الأدوات قبل الانتقال إلى تشخيص بطاريات الهايبرد المتقدمة وقراءة الأعطال بالكمبيوتر. أكثر من 60% من خريجينا لم تكن لديهم أي خبرة سابقة في السيارات."
     },
     {
       id: "faq-2",
       category: "student",
-      questionEn: "Why is the duration restricted to exactly 4 months?",
-      questionAr: "لماذا تبلغ مدة الدراسة 4 أشهر فقط؟",
-      answerEn: "We eliminated theoretical filler modules. Because 80% of our daily curriculum is hands-on work inside an active workspace, you absorb 2 years' worth of conventional class learning in 4 intensive months.",
-      answerAr: "لقد قمنا بحذف الحشو النظري غير المفيد للعمل الفعلي. ولأن 80% من جدولك اليومي هو عمل وتطبيق فني مباشر بيديك على سيارات حقيقية، فستكتسب خبرة تساوي سنتي تعليم كلاسيكي خلال 4 أشهر مكثفة."
+      questionEn: "Why is the diploma only 4 months? Is that enough to become a technician?",
+      questionAr: "لماذا مدة الدبلوم 4 أشهر فقط؟ هل هذا كافٍ لأصبح فنياً مؤهلاً؟",
+      answerEn: "We eliminated all theoretical filler. Because 80% of your daily schedule is hands-on lab work on real vehicles, you absorb what would take 2 years in a traditional classroom. By Month 4, you're diagnosing real customer cars under expert supervision — not studying from textbooks.",
+      answerAr: "قمنا بحذف كل الحشو النظري غير المفيد. بما أن 80% من جدولك اليومي هو عمل تطبيقي مباشر على سيارات حقيقية، فإنك تكتسب ما يعادل سنتين من التعليم التقليدي. في الشهر الرابع، ستقوم بتشخيص سيارات زبائن فعلية تحت إشراف خبراء — وليس الدراسة من الكتب."
     },
     {
       id: "faq-3",
       category: "student",
-      questionEn: "What certificates do I receive, and is it recognized internationally?",
-      questionAr: "ما هي الشهادات التي أحصل عليها، وهل هي معترف بها خارج سوريا؟",
-      answerEn: "You receive a Professional Automotive Technician Diploma from Hypro Academy, accredited by state educational syndicates. We also verify your unique certificate online with an ID code, making it instantly verifiable by international dealers.",
-      answerAr: "ستحصل على شهادة دبلوم مهني في صيانة السيارات الحديثة من أكاديمية هايبـرو ومعتمدة نقابياً. كل خريج يستلم رمز تحقق رقمي فريد يتيح للوكلاء الإقليميين والشركاء التأكد من أصالة دراسته وخبراته كفني مؤهل."
+      questionEn: "What certificates will I receive? Are they recognized internationally?",
+      questionAr: "ما الشهادات التي سأحصل عليها؟ وهل هي معترف بها دولياً؟",
+      answerEn: "You receive a Professional Automotive Technician Diploma from Hypro Academy, accredited by state vocational syndicates. Each certificate includes a unique digital verification code that allows employers and international dealers to instantly verify your credentials online.",
+      answerAr: "ستحصل على دبلوم فني صيانة سيارات احترافي من أكاديمية هايبـرو، معتمد من النقابات المهنية الرسمية. تتضمن كل شهادة رمز تحقق رقمي فريد يتيح لأصحاب العمل والوكلاء الإقليميين التحقق الفوري من مؤهلاتك عبر الإنترنت."
     },
     {
       id: "faq-4",
-      category: "workshop",
-      questionEn: "How do you guarantee your students are capable of touching client cars?",
-      questionAr: "كيف تضمن الأكاديمية أن الخريج لديه الكفاءة الكافية للتعامل مع سيارات زبائني؟",
-      answerEn: "Students spend Month 4 dealing with real consumer cars under direct watch of expert engineers. We also subject every candidate to a rigorous high-voltage double-insulated circuit safety exam before graduation.",
-      answerAr: "يقضي طلاب المرحلة الأخيرة شهراً كاملاً بالعمل على سيارات عملاء حقيقية تحت رصد وتدقيق مباشر من مهندسي الصيانة. كما يخضع كل طالب لاختبار سلامة الفولت العالي بصرامة بالغة لضمان حماية المنشأة وصاحب السيارة."
+      category: "student",
+      questionEn: "How much does the diploma cost? Are payment plans available?",
+      questionAr: "كم تبلغ تكلفة الدبلوم؟ وهل توجد خطط تقسيط؟",
+      answerEn: "We offer competitive tuition rates that reflect the intensive, hands-on nature of our training. Flexible monthly installment plans are available throughout the 4-month program. Contact our admissions office via WhatsApp for the latest pricing and available discounts for early registration.",
+      answerAr: "نقدم رسوماً دراسية تنافسية تعكس الطبيعة المكثفة والعملية لتدريبنا. تتوفر خطط تقسيط شهرية مرنة طوال فترة البرنامج. تواصل مع مكتب القبول عبر واتساب للاطلاع على أحدث الأسعار والخصومات المتاحة للتسجيل المبكر."
     },
     {
       id: "faq-5",
+      category: "student",
+      questionEn: "What career opportunities are available after graduation?",
+      questionAr: "ما فرص العمل المتاحة بعد التخرج؟",
+      answerEn: "Our graduates work as EV/Hybrid diagnostic technicians, battery repair specialists, workshop supervisors, and dealer service consultants. With 92% job placement rate, we connect you directly with partner workshops, car dealerships, and international NGO-funded projects across the region.",
+      answerAr: "يعمل خريجونا كفنيي تشخيص سيارات كهربائية وهايبرد، وأخصائيي إصلاح بطاريات، ومشرفي ورش، ومستشاري خدمة لدى الوكلاء. مع نسبة توظيف 92%، نربطك مباشرة بالورش الشريكة ووكلاء السيارات والمشاريع الممولة من المنظمات الدولية."
+    },
+    {
+      id: "faq-6",
+      category: "workshop",
+      questionEn: "How do you ensure graduates are qualified to work on client vehicles?",
+      questionAr: "كيف تضمنون أن الخريج مؤهل للتعامل مع سيارات الزبائن؟",
+      answerEn: "In Month 4, students work exclusively on real customer cars under direct supervision of senior engineers. Every candidate must also pass a rigorous high-voltage safety certification exam — including double-insulated circuit handling and emergency shutdown protocols — before graduation.",
+      answerAr: "في الشهر الرابع، يعمل الطلاب حصرياً على سيارات زبائن حقيقية تحت إشراف مباشر من كبار المهندسين. يجب على كل مرشح أيضاً اجتياز اختبار شهادة سلامة الفولت العالي الصارم — بما في ذلك التعامل مع الدوائر المعزولة وبروتوكولات الإغلاق الطارئ — قبل التخرج."
+    },
+    {
+      id: "faq-7",
+      category: "workshop",
+      questionEn: "Can you train our existing mechanics to handle hybrid/EV vehicles?",
+      questionAr: "هل يمكنكم تدريب الميكانيكيين الحاليين لدينا على صيانة سيارات الهايبرد والكهرباء؟",
+      answerEn: "Yes. We offer customized upskilling programs for existing workshop teams. Your mechanics can attend accelerated modules focused specifically on high-voltage safety, battery diagnostics, and electronic calibration — without disrupting your workshop operations.",
+      answerAr: "نعم. نقدم برامج تطوير مخصصة لفرق الورش الحالية. يمكن لميكانيكييك حضور وحدات مكثفة تركز تحديداً على سلامة الفولت العالي، وتشخيص البطاريات، والمعايرة الإلكترونية — دون تعطيل عمليات ورشتك."
+    },
+    {
+      id: "faq-8",
+      category: "workshop",
+      questionEn: "What diagnostic equipment does your academy use for training?",
+      questionAr: "ما أجهزة التشخيص التي تستخدمها الأكاديمية في التدريب؟",
+      answerEn: "We use professional-grade equipment including HV battery cell balancers (up to 1000V DC), 4-channel oscilloscopes, OBD-II advanced scanners, insulated tool kits rated to IEC 60900, and dedicated power generation grids to ensure uninterrupted training despite local power outages.",
+      answerAr: "نستخدم أجهزة بمستوى احترافي تشمل موازنات خلايا بطاريات الفولت العالي (حتى 1000 فولت)، وراسمات إشارة بأربع قنوات، وأجهزة فحص OBD-II متقدمة، وأطقم أدوات معزولة بمعيار IEC 60900، ومولدات طاقة مخصصة لضمان استمرارية التدريب."
+    },
+    {
+      id: "faq-9",
       category: "ngo",
-      questionEn: "Are you fully operational and physically accessible within Syria?",
-      questionAr: "هل الأكاديمية موجودة وتمارس تدريبها عملياً وبشكل مادي داخل سوريا؟",
-      answerEn: "Yes. Hypro Academy runs fully equipped, physically modern laboratory and workshop facilities in Idleb, equipped with specialized power generation grids to ensure persistent teaching despite standard power outages.",
-      answerAr: "نعم. توجد للأكاديمية فروع حية مجهزة بأحدث أدوات الفحص والأجهزة الحقيقية في إدلب، كما نعتمد على مصادر طاقة ومولدات خاصة لضمان عدم تأثر ساعات التدريب العملي والتطبيقي بانقطاعات الطاقة العامة."
+      questionEn: "Is the academy physically operational inside Syria?",
+      questionAr: "هل الأكاديمية تعمل فعلياً وبشكل مادي داخل سوريا؟",
+      answerEn: "Yes. Hypro Academy operates fully equipped, modern laboratory and workshop facilities in Idleb. We maintain dedicated power generation infrastructure to ensure persistent, uninterrupted teaching regardless of standard power grid outages in the region.",
+      answerAr: "نعم. تدير أكاديمية هايبـرو مرافق مختبرات وورش حديثة ومجهزة بالكامل في إدلب. نملك بنية تحتية مخصصة لتوليد الطاقة لضمان استمرارية التدريس دون انقطاع بغض النظر عن انقطاعات شبكة الكهرباء في المنطقة."
+    },
+    {
+      id: "faq-10",
+      category: "ngo",
+      questionEn: "How does the NGO sponsorship and reporting process work?",
+      questionAr: "كيف تعمل عملية رعاية المنظمات وآلية التقارير؟",
+      answerEn: "We provide fully transparent project tracking: monthly progress reports, attendance logs, skills assessment results, and verified post-graduation employment data. All documentation is audit-compliant and formatted to meet international donor reporting standards.",
+      answerAr: "نقدم تتبعاً شفافاً بالكامل للمشاريع: تقارير تقدم شهرية، سجلات حضور، نتائج تقييم المهارات، وبيانات توظيف موثقة بعد التخرج. جميع الوثائق متوافقة مع معايير التدقيق ومُعدة لتلبية متطلبات تقارير المانحين الدوليين."
     }
   ],
   aboutUs: {

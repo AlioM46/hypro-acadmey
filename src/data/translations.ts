@@ -80,7 +80,7 @@ export const translations = {
     en: 'Our curriculum is built directly around real-world diagnostic workflows in active garages.',
     ar: 'على عكس المعاهد النظرية التقليدية، يتمحور تدريبنا حول صيانة الأعطال وحل مشاكل السيارات الميدانية.'
   },
-  readyExplore: { en: 'Ready to Explore our Detailed Program?', ar: 'هل تريد استكشاف تفاصيل الدورات التدريبية؟'},
+  readyExplore: { en: 'Ready to Explore our Detailed Program?', ar: 'هل تريد استكشاف تفاصيل الدورات التدريبية؟' },
   browseDetails: { en: 'Browse our 4 months course details containing duration, hours distribution and target competencies.', ar: 'تصفح تفاصيل ومفردات منهج صيانة السيارات الحديثة الموزع على مدار 4 فصول مكثفة.' },
   viewCourseDetails: { en: 'View Course Details', ar: 'عرض تفاصيل الدورات' },
 
@@ -206,7 +206,7 @@ export const translations = {
     ar: 'أكاديمية هايبـرو ليست مجرد مدرسة مهنية، بل هي حلقة وصل متكاملة تربط أطراف المهنة بالتوظيف المباشر. حدد صفتك أدناه لتلقي الإجابة:'
   },
   roleValueProposition: { en: 'ROLE VALUE PROPOSITION', ar: 'القيمة المضافة لشريحتك' },
-  tailoredBenefits: { en: 'Your Tailored Collaboration Benefits:', ar: 'المزايا المخصصة لصفحتك:'},
+  tailoredBenefits: { en: 'Your Tailored Collaboration Benefits:', ar: 'المزايا المخصصة لصفحتك:' },
   inquireProgram: { en: 'Inquire About This Program', ar: 'طلب استفسار عن هذا البرنامج' },
   exploreDetails: { en: 'Explore details →', ar: 'تصفح الميزات ←' },
 
@@ -221,5 +221,29 @@ export const translations = {
   tabStudent: { en: 'For Students', ar: 'للطلاب الفنيين' },
   tabWorkshop: { en: 'For Workshops', ar: 'لأصحاب الورش ومراكز الصيانة' },
   tabNgo: { en: 'For Ministries & NGOs', ar: 'للجهات الحكومية والمنظمات' },
-  noResults: { en: 'No matching questions found.', ar: 'لا توجد نتائج تماثل عبارة البحث الخاصة بك.' }
+  noResults: { en: 'No matching questions found.', ar: 'لا توجد نتائج تماثل عبارة البحث الخاصة بك.' },
+
+  // New Navigation Brief translation keys
+  programs: { en: 'Diplomas & Programs', ar: 'الدبلومات والبرامج' },
+  testingLab: { en: 'Testing Lab', ar: 'مختبر الفحص' },
+  partnerships: { en: 'Partnerships & Development', ar: 'الشراكات والتطوير' },
+  contactUsNav: { en: 'Contact Us', ar: 'اتصل بنا' },
+  visionGoals: { en: 'Our Vision & Goals', ar: 'رؤيتنا وأهدافنا' },
+  ourFaculty: { en: 'Our Faculty', ar: 'كادرنا التدريسي' },
+  accreditations: { en: 'Accreditations & Certifications', ar: 'الاعتمادات والشهادات' },
+  evTechDiploma: { en: 'EV Technology Diploma', ar: 'دبلوم تكنولوجيا السيارات الكهربائية' },
+  hybridDiploma: { en: 'Hybrid Systems Diploma', ar: 'دبلوم الأنظمة الهجينة (الهايبرد)' },
+  diagnosticsCourse: { en: 'Electronic Diagnostics Course', ar: 'دورة فحص إلكترونيات السيارات' },
+
+  // Additional Brief Keys
+  bookSeatNow: { en: 'Book Your Seat Now', ar: 'احجز مقعدك الآن' },
+  talkAdvisor: { en: 'Talk to Advisor', ar: 'تحدث مع المستشار' },
+  watchWorkshopsNav: { en: 'Watch Practical Workshops', ar: 'شاهد الورش العملية' },
+  whatYouWillLearn: { en: 'What You Will Learn', ar: 'ماذا ستتعلم' },
+  practicalTrainingTitle: { en: 'Practical Training', ar: 'التدريب العملي' },
+  quickRegRibbonTitle: { en: 'Quick Registration Ribbon', ar: 'التسجيل السريع والمباشر' },
+  whatsappVerification: { en: 'Register via WhatsApp', ar: 'احجز مقعدك عبر واتساب' },
+  fullNameLabel: { en: 'Full Name', ar: 'الاسم الكامل' },
+  phoneLabel: { en: 'Phone Number', ar: 'رقم الهاتف' },
+  govLabel: { en: 'Governorate', ar: 'المحافظة' }
 };
