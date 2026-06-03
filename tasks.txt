@@ -1,0 +1,30 @@
+ قسم الشركاء
+حتى لو محدود حالياً.
+أضف:
+* شركات
+* مراكز
+* موردين
+* جهات تعاون
+* أي تعاون رسمي
+
+
+in /partnerships is a different part
+also  I need a slider for partners like put it in the home page under hero it will include images for partners
+include some placeholders for now
+
+
+
+ قسم التسجيل السريع
+يجب أن يكون واضحاً جداً.
+المطلوب:
+* الاسم
+* الرقم
+* المحافظة
+* زر واتساب مباشر
+ولا تجعل التسجيل معقداً.
+
+also you have to change the design of the quick registration
+
+
+
+10: Faq Questions or section

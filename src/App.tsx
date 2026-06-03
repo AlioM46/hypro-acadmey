@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense, useEffect } from 'react';
+import React, { useState, lazy, Suspense, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Phone,
@@ -40,7 +40,7 @@ const DynamicForm = lazy(() => import('./components/DynamicForm'));
 const FAQSection = lazy(() => import('./components/FAQSection'));
 
 type CategoryType = 'student' | 'workshop' | 'dealer' | 'ngo';
-type PageType = 'home' | 'about' | 'programs' | 'testing-lab' | 'partnerships' | 'contact' | 'practical-training' | 'accreditations';
+type PageType = 'home' | 'about' | 'programs' | 'testing-lab' | 'partnerships' | 'contact' | 'practical-training' | 'accreditations' | 'team';
 
 export default function App() {
   const { lang, setLang, t, tObj, tVal } = useTranslation();
@@ -48,7 +48,7 @@ export default function App() {
 
   const getPageFromPath = (): PageType => {
     const path = window.location.pathname.replace(/^\//, '');
-    const validPages: PageType[] = ['home', 'about', 'programs', 'testing-lab', 'partnerships', 'contact', 'practical-training', 'accreditations'];
+    const validPages: PageType[] = ['home', 'about', 'programs', 'testing-lab', 'partnerships', 'contact', 'practical-training', 'accreditations', 'team'];
     return validPages.includes(path as PageType) ? (path as PageType) : 'home';
   };
 
@@ -182,6 +182,19 @@ export default function App() {
       descAr: "تغيير سوائل وزيوت الفولت العالي لعلب التروس الهجينة، الصيانة الوقائية السريعة، وتجربة إصلاح سيارات زبائن فعلية تحت ظروف العمل الميدانية.",
       image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=600&q=80"
     }
+  ];
+
+  const partnerLogos = [
+    { id: "toyota", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Toyota.svg/200px-Toyota.svg.png", name: "Toyota" },
+    { id: "mercedes", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mercedes-Logo.svg/150px-Mercedes-Logo.svg.png", name: "Mercedes-Benz" },
+    { id: "bmw", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/150px-BMW.svg.png", name: "BMW" },
+    { id: "hyundai", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Hyundai_Motor_Company_logo.svg/200px-Hyundai_Motor_Company_logo.svg.png", name: "Hyundai" },
+    { id: "kia", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Kia-logo.png/200px-Kia-logo.png", name: "KIA" },
+    { id: "nissan", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Nissan_logo_2020.svg/200px-Nissan_logo_2020.svg.png", name: "Nissan" },
+    { id: "honda", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Honda.svg/200px-Honda.svg.png", name: "Honda" },
+    { id: "ford", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Ford_Motor_Company_Logo.svg/200px-Ford_Motor_Company_Logo.svg.png", name: "Ford" },
+    { id: "bosch", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Robert_Bosch_GmbH_logo.svg/200px-Robert_Bosch_GmbH_logo.svg.png", name: "Bosch" },
+    { id: "denso", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/DENSO_logo.svg/200px-DENSO_logo.svg.png", name: "Denso" },
   ];
 
   const partners = [
@@ -353,7 +366,7 @@ export default function App() {
                     {t('visionGoals')}
                   </button>
                   <button
-                    onClick={() => navigateToAndScroll('about', 'our-faculty')}
+                    onClick={() => navigateTo('team')}
                     className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-t border-b border-slate-100 bg-transparent cursor-pointer w-full text-center"
                   >
                     {t('ourFaculty')}
@@ -513,7 +526,7 @@ export default function App() {
                       {t('visionGoals')}
                     </button>
                     <button
-                      onClick={() => navigateToAndScroll('about', 'our-faculty')}
+                      onClick={() => navigateTo('team')}
                       className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-t border-b border-slate-100 bg-transparent cursor-pointer w-full text-center"
                     >
                       {t('ourFaculty')}
@@ -698,7 +711,7 @@ export default function App() {
                           - {t('visionGoals')}
                         </button>
                         <button
-                          onClick={() => { setIsMobileMenuOpen(false); navigateToAndScroll('about', 'our-faculty'); }}
+                          onClick={() => { setIsMobileMenuOpen(false); navigateTo('team'); }}
                           className="py-1 text-slate-500 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer"
                         >
                           - {t('ourFaculty')}
@@ -887,6 +900,7 @@ export default function App() {
                       </button>
                     </div>
 
+
                     {/* Trust Indicators */}
                     <div className="pt-6 border-t border-white/10 flex flex-wrap gap-6 items-center text-xs text-slate-400 font-sans font-medium">
                       <div className="flex items-center gap-2">
@@ -908,24 +922,31 @@ export default function App() {
               </section>
 
               {/* PARTNER LOGOS INFINITE SLIDER */}
-              <section className="bg-slate-100 py-6 border-b border-slate-200 overflow-hidden relative z-20" dir="ltr">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-3 text-start flex items-center justify-between">
-                  <span className="text-[10px] font-mono font-bold text-slate-400 tracking-wider uppercase">
-                    {lang === 'en' ? 'OUR COOPERATION PARTNERS' : 'شركاء التدريب والتوظيف'}
-                  </span>
-                  <span className="text-[9px] font-sans text-slate-500">
-                    {lang === 'en' ? 'Companies • Centers • Suppliers • Collaborations' : 'شركات ومراكز • موردين • جهات تعاون رسمي'}
-                  </span>
-                </div>
-                <div className="relative w-full overflow-hidden flex items-center py-2">
-                  <div className="flex animate-marquee whitespace-nowrap gap-8 items-center">
-                    {partners.concat(partners).map((partner, idx) => (
-                      <div key={idx} className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-slate-200/60 shadow-sm whitespace-nowrap select-none hover:border-slate-350 transition-colors">
-                        <div className="w-2.5 h-2.5 bg-brand-blue" />
-                        <span className="text-xs font-bold text-slate-700 tracking-wider uppercase font-mono">{partner.logo}</span>
-                        <span className="text-[9px] px-1.5 py-0.5 bg-slate-150 text-slate-500 font-sans tracking-wide">
-                          {lang === 'en' ? partner.categoryEn : partner.categoryAr}
-                        </span>
+              <section className="bg-slate-50 py-6 border-b border-slate-200 overflow-hidden relative z-20" dir="ltr">
+                <div className="marquee-track">
+                  <div className="marquee-content">
+                    {[...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos].map((logo, idx) => (
+                      <div key={`a-${idx}`} className="flex-shrink-0 mx-8 flex items-center justify-center" style={{ width: '100px', height: '50px' }}>
+                        <img
+                          src={logo.url}
+                          alt={logo.name}
+                          className="max-h-[44px] max-w-[90px] object-contain opacity-40 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
+                          loading="lazy"
+                          draggable={false}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="marquee-content" aria-hidden="true">
+                    {[...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos].map((logo, idx) => (
+                      <div key={`b-${idx}`} className="flex-shrink-0 mx-8 flex items-center justify-center" style={{ width: '100px', height: '50px' }}>
+                        <img
+                          src={logo.url}
+                          alt={logo.name}
+                          className="max-h-[44px] max-w-[90px] object-contain opacity-40 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
+                          loading="lazy"
+                          draggable={false}
+                        />
                       </div>
                     ))}
                   </div>
@@ -1479,325 +1500,197 @@ export default function App() {
                 </div>
               </section>
 
-              {/* HIGH-CONVERSION QUICK REGISTRATION SECTION (Redesigned) */}
-              <section className="bg-slate-900 py-16 border-t border-slate-800 relative overflow-hidden text-start">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-                    
-                    {/* Left details column */}
-                    <div className="lg:col-span-5 space-y-6">
-                      <span className="text-[10px] font-mono tracking-widest text-blue-300 uppercase block font-bold">
-                        {lang === 'en' ? 'FAST REGISTRATION GATEWAY' : 'التسجيل السريع والمباشر'}
-                      </span>
-                      <h4 className="text-2xl sm:text-3xl font-black text-white font-sans tracking-tight">
-                        {lang === 'en' ? 'Secure Your Academic Seat in Seconds' : 'احجز مقعدك الدراسي في ثوانٍ معدودة'}
-                      </h4>
-                      <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-medium">
-                        {lang === 'en' 
-                          ? 'Fill out this simple form to lock in your seat registration. Clicking submit will automatically connect you with our Admissions Officer on WhatsApp for instant confirmation.' 
-                          : 'أدخل معلوماتك الأساسية أدناه وسجل اهتمامك فوراً. نقرة واحدة ستنقلك إلى الواتساب الرسمي لتأكيد الحجز والتواصل المباشر مع مكتب القبول والتسجيل بالأكاديمية.'}
-                      </p>
-                      
-                      {/* Checkmarks */}
-                      <div className="space-y-2 pt-2 text-slate-300 text-xs font-sans">
-                        <div className="flex items-center gap-2">
-                          <CheckCircle size={14} className="text-emerald-500" />
-                          <span>{lang === 'en' ? 'Instant WhatsApp verification' : 'تأكيد وحجز فوري وموثق عبر واتساب'}</span>
+              {/* HIGH-CONVERSION QUICK REGISTRATION SECTION */}
+              <section className="relative py-20 overflow-hidden" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #232f5b 100%)' }} id="quick-register">
+                {/* Accent top border */}
+                <div className="absolute top-0 left-0 right-0 h-1" style={{ background: 'linear-gradient(90deg, #3b82f6, #22d3ee, #10b981)' }} />
+                
+                <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                  {/* Badge */}
+                  <div className="inline-flex items-center gap-2 bg-white/10 border border-white/10 px-4 py-1.5 mb-6">
+                    <div className="w-2 h-2 bg-emerald-400 animate-pulse" style={{ borderRadius: '50%' }} />
+                    <span className="text-[10px] font-mono tracking-widest text-emerald-300 uppercase font-bold">
+                      {lang === 'en' ? 'REGISTRATION OPEN NOW' : 'التسجيل مفتوح الآن'}
+                    </span>
+                  </div>
+
+                  <h3 className="text-3xl sm:text-4xl font-black text-white font-sans tracking-tight leading-tight mb-3">
+                    {lang === 'en' ? 'Reserve Your Seat Now' : 'احجز مقعدك الآن'}
+                  </h3>
+                  <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-medium max-w-xl mx-auto mb-10">
+                    {lang === 'en' 
+                      ? 'Fill in your details and connect instantly via WhatsApp. It takes less than 30 seconds.' 
+                      : 'أدخل بياناتك وتواصل فوراً عبر واتساب. لن يستغرق الأمر أكثر من 30 ثانية.'}
+                  </p>
+
+                  {/* Form Card */}
+                  <div className="bg-white/[0.07] backdrop-blur-sm border border-white/10 p-8 sm:p-10">
+                    <form onSubmit={handleQuickRegister} className="space-y-5">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        {/* Name */}
+                        <div className="space-y-2 text-start">
+                          <label className="text-[10px] font-bold text-slate-400 uppercase font-mono tracking-wider flex items-center gap-1.5">
+                            <Users size={10} className="text-blue-400" />
+                            {t('fullNameLabel')}
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            value={quickRegName}
+                            onChange={(e) => setQuickRegName(e.target.value)}
+                            placeholder={lang === 'en' ? 'Your full name' : 'الاسم الثنائي أو الثلاثي'}
+                            className="w-full bg-white/10 border border-white/15 text-white text-sm px-4 py-3.5 placeholder-slate-500 focus:outline-none focus:border-blue-400 focus:bg-white/[0.12] transition-all h-[50px]"
+                          />
                         </div>
-                        <div className="flex items-center gap-2">
-                          <CheckCircle size={14} className="text-emerald-500" />
-                          <span>{lang === 'en' ? 'Takes under 1 minute' : 'يستغرق ملء الطلب أقل من دقيقة واحدة'}</span>
+                        {/* Phone */}
+                        <div className="space-y-2 text-start">
+                          <label className="text-[10px] font-bold text-slate-400 uppercase font-mono tracking-wider flex items-center gap-1.5">
+                            <Phone size={10} className="text-blue-400" />
+                            {t('phoneLabel')}
+                          </label>
+                          <input
+                            type="tel"
+                            required
+                            value={quickRegPhone}
+                            onChange={(e) => setQuickRegPhone(e.target.value)}
+                            placeholder={lang === 'en' ? '+963 XXX XXX XXX' : 'رقم الهاتف مع الرمز'}
+                            className="w-full bg-white/10 border border-white/15 text-white text-sm px-4 py-3.5 placeholder-slate-500 focus:outline-none focus:border-blue-400 focus:bg-white/[0.12] transition-all h-[50px] text-start"
+                            dir="ltr"
+                          />
                         </div>
-                        <div className="flex items-center gap-2">
-                          <CheckCircle size={14} className="text-emerald-500" />
-                          <span>{lang === 'en' ? 'No complicated requirements to start' : 'لا توجد شروط أو متمتطلبات معقدة للبدء'}</span>
+                        {/* Governorate */}
+                        <div className="space-y-2 text-start">
+                          <label className="text-[10px] font-bold text-slate-400 uppercase font-mono tracking-wider flex items-center gap-1.5">
+                            <MapPin size={10} className="text-blue-400" />
+                            {t('govLabel')}
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            value={quickRegGov}
+                            onChange={(e) => setQuickRegGov(e.target.value)}
+                            placeholder={lang === 'en' ? 'City / Governorate' : 'المحافظة أو المدينة'}
+                            className="w-full bg-white/10 border border-white/15 text-white text-sm px-4 py-3.5 placeholder-slate-500 focus:outline-none focus:border-blue-400 focus:bg-white/[0.12] transition-all h-[50px]"
+                          />
                         </div>
                       </div>
-                    </div>
 
-                    {/* Right Form Card Column */}
-                    <div className="lg:col-span-7">
-                      <div className="bg-white border border-slate-200 p-8 text-slate-800">
-                        <form 
-                          onSubmit={handleQuickRegister}
-                          className="space-y-4"
-                        >
-                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            {/* Name field */}
-                            <div className="space-y-1.5 text-start">
-                              <label className="text-[10px] font-bold text-slate-500 uppercase font-mono tracking-wider">
-                                {t('fullNameLabel')}
-                              </label>
-                              <input
-                                type="text"
-                                required
-                                value={quickRegName}
-                                onChange={(e) => setQuickRegName(e.target.value)}
-                                placeholder={lang === 'en' ? 'John Doe' : 'الاسم الثنائي أو الثلاثي'}
-                                className="w-full bg-slate-50 border border-slate-200 text-slate-800 text-xs px-4 py-3 placeholder-slate-400 focus:outline-none focus:border-brand-blue transition-colors h-[46px]"
-                              />
-                            </div>
+                      {/* WhatsApp CTA */}
+                      <button
+                        type="submit"
+                        className="w-full text-white font-extrabold text-sm sm:text-base py-4 sm:py-5 flex items-center justify-center gap-3 transition-all cursor-pointer border-none"
+                        style={{ background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)' }}
+                        onMouseEnter={(e) => (e.currentTarget.style.background = 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)')}
+                        onMouseLeave={(e) => (e.currentTarget.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)')}
+                      >
+                        <MessageSquare size={18} className="fill-white" />
+                        <span>{lang === 'en' ? 'Register via WhatsApp Now' : 'سجّل عبر واتساب الآن'}</span>
+                        <ArrowRight size={16} />
+                      </button>
+                    </form>
 
-                            {/* Phone field */}
-                            <div className="space-y-1.5 text-start">
-                              <label className="text-[10px] font-bold text-slate-500 uppercase font-mono tracking-wider">
-                                {t('phoneLabel')}
-                              </label>
-                              <input
-                                type="tel"
-                                required
-                                value={quickRegPhone}
-                                onChange={(e) => setQuickRegPhone(e.target.value)}
-                                placeholder={lang === 'en' ? '+963-955-408-202' : 'رقم الهاتف مع الرمز'}
-                                className="w-full bg-slate-50 border border-slate-200 text-slate-800 text-xs px-4 py-3 placeholder-slate-400 focus:outline-none focus:border-brand-blue transition-colors h-[46px] text-start"
-                              />
-                            </div>
-
-                            {/* Governorate field */}
-                            <div className="space-y-1.5 text-start">
-                              <label className="text-[10px] font-bold text-slate-500 uppercase font-mono tracking-wider">
-                                {t('govLabel')}
-                              </label>
-                              <input
-                                type="text"
-                                required
-                                value={quickRegGov}
-                                onChange={(e) => setQuickRegGov(e.target.value)}
-                                placeholder={lang === 'en' ? 'Idleb / Aleppo' : 'المحافظة أو المدينة'}
-                                className="w-full bg-slate-50 border border-slate-200 text-slate-800 text-xs px-4 py-3 placeholder-slate-400 focus:outline-none focus:border-brand-blue transition-colors h-[46px]"
-                              />
-                            </div>
-                          </div>
-
-                          {/* Submit button */}
-                          <div className="pt-2">
-                            <button
-                              type="submit"
-                              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm py-4 flex items-center justify-center gap-2 transition-all cursor-pointer border-none shadow-md"
-                            >
-                              <MessageSquare size={16} className="text-white fill-white" />
-                              <span>{lang === 'en' ? 'Confirm Seat via Direct WhatsApp' : 'احجز مقعدك الآن عبر واتساب مباشر'}</span>
-                            </button>
-                          </div>
-                        </form>
+                    {/* Trust row */}
+                    <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-6 text-[10px] text-slate-500 font-mono uppercase tracking-wider">
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle size={11} className="text-emerald-500" />
+                        <span>{lang === 'en' ? 'Instant confirmation' : 'تأكيد فوري'}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle size={11} className="text-emerald-500" />
+                        <span>{lang === 'en' ? 'Under 30 seconds' : 'أقل من 30 ثانية'}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle size={11} className="text-emerald-500" />
+                        <span>{lang === 'en' ? 'No requirements' : 'بدون شروط'}</span>
                       </div>
                     </div>
-
                   </div>
                 </div>
-                
-                {/* Background layout mesh */}
-                <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]" />
               </section>
 
+              {/* FAQ SECTION */}
+              <section className="py-16 bg-white border-b border-slate-200">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <Suspense fallback={<Skeleton className="h-96 w-full" />}>
+                    <FAQSection />
+                  </Suspense>
+                </div>
+              </section>
             </motion.div>
           )}
 
           {currentPage === 'about' && (
-            <motion.div
-              key="about"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.2 }}
-              className="bg-white text-slate-800"
-            >
-              {/* Mission, Vision & Regional Impact */}
-              <section className="py-20 md:py-24 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-200" id="vision-goals">
-                <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block mb-3">
-                  {lang === 'en' ? 'OUR MISSION & REGIONAL IMPACT' : 'رسالتنا وأثرنا الإقليمي التنموي'}
-                </span>
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-8">
-                  {lang === 'en' ? 'Transitioning Tech Labor Into Clean Energy' : 'تأهيل الكوادر الفنية نحو أنظمة الطاقة النظيفة'}
-                </h2>
-                <p className="text-slate-650 text-base sm:text-lg lg:text-xl leading-relaxed font-sans font-medium mb-6">
-                  {lang === 'en'
-                    ? 'Hypro Academy is built on the principles of institutional capacity building, economic youth empowerment, and technical modernization. By equipping local trainees with advanced diagnostics and high-voltage training, we create a vital bridge for sustainable employment across the region.'
-                    : 'تأسست أكاديمية هايبـرو على ركائز بناء القدرات المؤسساتية، وتمكين الشباب اقتصادياً، وتحديث التعليم الفني والمهني. نسعى لنقل الكفاءات في الشمال السوري من الصيانة الميكانيكية البسيطة إلى تشخيص الأنظمة الهجينة والكهربائية المتطورة.'}
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-10 border-t border-slate-100 mt-12 text-start animate-fade-in">
-                  <div>
-                    <h4 className="font-extrabold text-base text-slate-950 font-sans">{lang === 'en' ? 'Youth Empowerment' : 'تمكين الشباب'}</h4>
-                    <p className="text-slate-500 text-xs mt-2 leading-relaxed">{lang === 'en' ? 'Sponsoring youth with high-value technical skills that fight unemployment.' : 'توفير مهارات مهنية ذات دخل مرتفع تفتح آفاق التوظيف المباشر وتحارب البطالة.'}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-extrabold text-base text-slate-950 font-sans">{lang === 'en' ? 'Capacity Building' : 'بناء القدرات'}</h4>
-                    <p className="text-slate-500 text-xs mt-2 leading-relaxed">{lang === 'en' ? 'Standardizing inspection and safety protocols across local workshops.' : 'توحيد بروتوكولات الفحص وإجراءات السلامة المهنية لقطاع الصيانة المحلي.'}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-extrabold text-base text-slate-950 font-sans">{lang === 'en' ? 'Clean Ecosystems' : 'نقلة الطاقة النظيفة'}</h4>
-                    <p className="text-slate-500 text-xs mt-2 leading-relaxed">{lang === 'en' ? 'Preparing the local automotive workforce for hybrid and electric networks.' : 'تمهيد الطريق لاعتماد صيانة سيارات الطاقة النظيفة بشكل آمن ومعتمد.'}</p>
+            <motion.div key="about" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.2 }} className="py-16 bg-white text-slate-800 text-start">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-3xl space-y-3 pb-8 border-b border-slate-200 mb-12 animate-fade-in">
+                  <span className="inline-flex items-center gap-1.5 bg-blue-50 text-brand-blue border border-blue-100 px-3.5 py-1.5 rounded-full text-xs font-bold font-mono tracking-wide uppercase">
+                    <Layers size={13} className="text-brand-blue" />
+                    <span>{lang === 'en' ? 'ABOUT HYPRO ACADEMY' : 'عن أكاديمية هايبـرو'}</span>
+                  </span>
+                  <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 font-sans">{lang === 'en' ? 'Transitioning Tech Labor Into Clean Energy' : 'تأهيل الكوادر الفنية نحو أنظمة الطاقة النظيفة'}</h2>
+                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-sans font-medium">{lang === 'en' ? 'Hypro Academy is built on institutional capacity building, economic youth empowerment, and technical modernization.' : 'تأسست أكاديمية هايبـرو على ركائز بناء القدرات المؤسساتية وتمكين الشباب اقتصادياً وتحديث التعليم الفني.'}</p>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pb-12 border-b border-slate-200 mb-12">
+                  {[{ val: '24+', en: 'Years Experience', ar: 'سنة خبرة' }, { val: '92%', en: 'Job Placement', ar: 'نسبة التوظيف' }, { val: '80%', en: 'Practical', ar: 'تطبيق عملي' }, { val: '4', en: 'Months', ar: 'أشهر' }].map((s, i) => (
+                    <div key={i}><div className="text-2xl sm:text-3xl font-black text-brand-blue">{s.val}</div><div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mt-1">{lang === 'en' ? s.en : s.ar}</div></div>
+                  ))}
+                </div>
+
+                <div className="pb-12 border-b border-slate-200 mb-12">
+                  <h3 className="text-xl font-extrabold text-slate-900 mb-6">{lang === 'en' ? 'Our Core Pillars' : 'ركائزنا الأساسية'}</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {[{ icon: <Users size={18} />, en: 'Youth Empowerment', ar: 'تمكين الشباب', descEn: 'High-value technical skills opening direct employment pathways.', descAr: 'مهارات فنية عالية القيمة تفتح مسارات توظيف مباشرة.' }, { icon: <Award size={18} />, en: 'Capacity Building', ar: 'بناء القدرات', descEn: 'Standardizing inspection protocols across local workshops.', descAr: 'توحيد بروتوكولات الفحص وإجراءات السلامة المهنية.' }, { icon: <Zap size={18} />, en: 'Clean Energy Transition', ar: 'الانتقال للطاقة النظيفة', descEn: 'Preparing the workforce for hybrid and EV diagnostics.', descAr: 'تمهيد الطريق لصيانة سيارات الطاقة النظيفة بشكل آمن.' }].map((p, i) => (
+                      <div key={i} className="border border-slate-200 p-6 hover:border-brand-blue/30 transition-all">
+                        <div className="p-2.5 bg-blue-50 text-brand-blue w-11 h-11 flex items-center justify-center mb-4">{p.icon}</div>
+                        <h4 className="font-extrabold text-sm text-slate-900 mb-2">{lang === 'en' ? p.en : p.ar}</h4>
+                        <p className="text-slate-500 text-xs leading-relaxed">{lang === 'en' ? p.descEn : p.descAr}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </section>
 
-              {/* Institutional Accreditations Panel Link */}
-              <section className="py-16 bg-slate-50 border-b border-slate-200 text-start" id="accreditations-certs">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <div className="bg-white border border-slate-200 p-8 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div className="space-y-2 text-start max-w-2xl">
-                      <span className="text-[10px] font-mono font-bold text-brand-blue tracking-widest uppercase block">
-                        {lang === 'en' ? 'OFFICIAL CREDENTIALS' : 'الاعتمادات والتراخيص الرسمية'}
-                      </span>
-                      <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-tight">
-                        {lang === 'en' ? 'Accreditations & Certificates Portfolio' : 'حقيبة الاعتمادات والشهادات المعتمدة للطلاب'}
-                      </h3>
-                      <p className="text-slate-500 text-xs leading-relaxed font-medium">
-                        {lang === 'en'
-                          ? 'Explore our full TVET registrations, official Jordanian stamps, certificate models, and career worth in our dedicated certifications page.'
-                          : 'تعرف بالتفصيل على اعتماداتنا لدى الهيئات الأردنية والجهات الرسمية، واستعرض نماذج الشهادات الممنوحة وقيمتها المهنية.'}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => navigateTo('accreditations')}
-                      className="bg-brand-blue hover:bg-brand-blue-hover text-white font-extrabold text-xs px-8 py-4 transition-all cursor-pointer border-none whitespace-nowrap"
-                    >
-                      {lang === 'en' ? 'View Full Accreditations' : 'عرض الاعتمادات والشهادات كاملة'}
-                    </button>
+                <div className="bg-slate-50 border border-slate-200 p-8 flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
+                  <div className="space-y-2 max-w-2xl">
+                    <span className="text-[10px] font-mono font-bold text-brand-blue tracking-widest uppercase block">{lang === 'en' ? 'OFFICIAL CREDENTIALS' : 'الاعتمادات الرسمية'}</span>
+                    <h3 className="text-xl font-black text-slate-900">{lang === 'en' ? 'Accreditations & Certificates' : 'حقيبة الاعتمادات والشهادات'}</h3>
+                    <p className="text-slate-500 text-xs leading-relaxed font-medium">{lang === 'en' ? 'Explore our TVET registrations, official stamps, and certificate models.' : 'تعرف على اعتماداتنا لدى الجهات الرسمية واستعرض نماذج الشهادات.'}</p>
                   </div>
+                  <button onClick={() => navigateTo('accreditations')} className="bg-brand-blue hover:bg-brand-blue-hover text-white font-extrabold text-xs px-8 py-4 transition-all cursor-pointer border-none whitespace-nowrap flex items-center gap-2">
+                    <span>{lang === 'en' ? 'View Accreditations' : 'عرض الاعتمادات'}</span><ArrowRight size={14} />
+                  </button>
                 </div>
-              </section>
 
-              {/* Faculty & Instructor Grid */}
-              <section className="py-16 md:py-20 bg-white text-start" id="our-faculty">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <div className="max-w-3xl space-y-3 mb-12">
-                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">
-                      {lang === 'en' ? 'ELITE TECHNICAL MENTORS' : 'كادر المهندسين والمعلمين'}
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                      {lang === 'en' ? 'Learn Directly from Industrial Experts' : 'تلقّ الخبرة من رواد السوق مباشرة'}
-                    </h3>
-                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-medium">
-                      {lang === 'en'
-                        ? 'Our engineers are master bench-repair technicians who solve complex high-voltage diagnostics and logic board circuits on a daily basis.'
-                        : 'يعمل مدربونا يومياً في فحص وإصلاح بطاريات وعقول الهايبرد والسيارات الحديثة في الميدان، مما يضمن تلقيك لخبرة عملية حقيقية.'}
-                    </p>
+                <div>
+                  <div className="space-y-2 mb-8">
+                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">{lang === 'en' ? 'ELITE TECHNICAL MENTORS' : 'كادر المهندسين والمعلمين'}</span>
+                    <h3 className="text-xl font-extrabold text-slate-900">{lang === 'en' ? 'Learn From Industry Experts' : 'تلقّ الخبرة من رواد السوق'}</h3>
                   </div>
-
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {/* Faculty Member 1 */}
-                    <div className="bg-slate-50 border border-slate-200 flex flex-col justify-between">
-                      <div>
-                        <div className="aspect-[3/4] w-full bg-slate-100 overflow-hidden relative">
-                          <img 
-                            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" 
-                            alt="Eng. Ammar Al-Ahmad" 
-                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
-                          />
+                    {[
+                      { img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80', nameEn: 'Eng. Ammar Al-Ahmad', nameAr: 'المهندس عمار الأحمد', roleEn: 'Lead EV Mentor', roleAr: 'المدير المؤسس', expEn: '24 Years', expAr: '٢٤ عاماً' },
+                      { img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80', nameEn: 'Eng. Basel Al-Sagheer', nameAr: 'المهندس باسل الصغير', roleEn: 'Inverter Instructor', roleAr: 'مدرب صيانة مبدلات', expEn: '18 Years', expAr: '١٨ عاماً' },
+                      { img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80', nameEn: 'Eng. Omar Al-Sloom', nameAr: 'المهندس عمر السلوم', roleEn: 'Placement Officer', roleAr: 'مسؤول التشبيك', expEn: '12 Years', expAr: '١٢ عاماً' },
+                      { img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80', nameEn: 'Ustadh Munir Al-Khatib', nameAr: 'الأستاذ منير الخطيب', roleEn: 'Lab Director', roleAr: 'مدير المختبر', expEn: '15 Years', expAr: '١٥ عاماً' }
+                    ].map((m, idx) => (
+                      <div key={idx} className="border border-slate-200 flex flex-col justify-between group hover:border-brand-blue/30 transition-all">
+                        <div>
+                          <div className="aspect-[3/4] w-full bg-slate-100 overflow-hidden"><img src={m.img} alt={lang === 'en' ? m.nameEn : m.nameAr} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" /></div>
+                          <div className="p-5">
+                            <h4 className="font-extrabold text-sm text-slate-950">{lang === 'en' ? m.nameEn : m.nameAr}</h4>
+                            <span className="text-[10px] font-mono font-bold text-brand-blue tracking-wider block mt-1">{lang === 'en' ? m.roleEn : m.roleAr}</span>
+                          </div>
                         </div>
-                        <div className="p-6">
-                          <h4 className="font-extrabold text-base text-slate-950 font-sans">
-                            {lang === 'en' ? 'Eng. Ammar Al-Ahmad' : 'المهندس عمار الأحمد'}
-                          </h4>
-                          <span className="text-[10px] font-mono font-bold text-brand-blue tracking-wider block mt-1">
-                            {lang === 'en' ? 'Lead EV Mentor & Founding Director' : 'المدير المؤسس والموجه الرئيسي لسيارات الكهرباء'}
-                          </span>
-                          <p className="text-slate-500 text-xs mt-3 leading-relaxed">
-                            {lang === 'en' 
-                              ? 'Specialist in high-voltage micro-controller mapping, hybrid battery cell rebuilding, and ECU calibrations.'
-                              : 'أخصائي هندسة الالكترون وبرمجة العقول الإلكترونية وإعادة موازنة خلايا الفولت العالي. يشرف على اختبارات فحص الكفاءة.'}
-                          </p>
+                        <div className="px-5 pb-5 border-t border-slate-100 pt-3 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                          <span>{lang === 'en' ? 'EXPERIENCE:' : 'الخبرة:'}</span>
+                          <span className="text-slate-900 font-bold">{lang === 'en' ? m.expEn : m.expAr}</span>
                         </div>
                       </div>
-                      <div className="p-6 pt-0 border-t border-slate-150 mt-4 flex items-center justify-between text-[10px] font-mono text-slate-400">
-                        <span>{lang === 'en' ? 'EXPERIENCE:' : 'الخبرة:'}</span>
-                        <span className="text-slate-900 font-bold">{lang === 'en' ? '24 Years' : '٢٤ عاماً'}</span>
-                      </div>
-                    </div>
-
-                    {/* Faculty Member 2 */}
-                    <div className="bg-slate-50 border border-slate-200 flex flex-col justify-between">
-                      <div>
-                        <div className="aspect-[3/4] w-full bg-slate-100 overflow-hidden relative">
-                          <img 
-                            src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" 
-                            alt="Eng. Basel Al-Sagheer" 
-                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
-                          />
-                        </div>
-                        <div className="p-6">
-                          <h4 className="font-extrabold text-base text-slate-950 font-sans">
-                            {lang === 'en' ? 'Eng. Basel Al-Sagheer' : 'المهندس باسل الصغير'}
-                          </h4>
-                          <span className="text-[10px] font-mono font-bold text-brand-blue tracking-wider block mt-1">
-                            {lang === 'en' ? 'Senior Inverter & Calibration Instructor' : 'كبير مدربي صيانة مبدلات الطاقة والمحركات'}
-                          </span>
-                          <p className="text-slate-500 text-xs mt-3 leading-relaxed">
-                            {lang === 'en' 
-                              ? 'Expert in European, Toyota, and Korean hybrid dual powertrains diagnostics with focus on workplace safety.'
-                              : 'خبير تشخيص وحل أعطال العواكس (الأصناف الكورية واليابانية والأوروبية) مع تركيز صارم على بروتوكولات الأمان الفني.'}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="p-6 pt-0 border-t border-slate-150 mt-4 flex items-center justify-between text-[10px] font-mono text-slate-400">
-                        <span>{lang === 'en' ? 'EXPERIENCE:' : 'الخبرة:'}</span>
-                        <span className="text-slate-900 font-bold">{lang === 'en' ? '18 Years' : '١٨ عاماً'}</span>
-                      </div>
-                    </div>
-
-                    {/* Faculty Member 3 */}
-                    <div className="bg-slate-50 border border-slate-200 flex flex-col justify-between">
-                      <div>
-                        <div className="aspect-[3/4] w-full bg-slate-100 overflow-hidden relative">
-                          <img 
-                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80" 
-                            alt="Eng. Omar Al-Sloom" 
-                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
-                          />
-                        </div>
-                        <div className="p-6">
-                          <h4 className="font-extrabold text-base text-slate-950 font-sans">
-                            {lang === 'en' ? 'Eng. Omar Al-Sloom' : 'المهندس عمر السلوم'}
-                          </h4>
-                          <span className="text-[10px] font-mono font-bold text-brand-blue tracking-wider block mt-1">
-                            {lang === 'en' ? 'B2B & Placement Liaison Officer' : 'مسؤول التشبيك والتنسيق مع المنظمات والورش'}
-                          </span>
-                          <p className="text-slate-500 text-xs mt-3 leading-relaxed">
-                            {lang === 'en' 
-                              ? 'Manages placement pathways with NGO sponsors, local repair trade unions, and public agencies.'
-                              : 'يتعاون مع المنظمات المانحة والمؤسسات الشريكة لبناء مسارات رعاية التدريب وخلق فرص عمل واثقة.'}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="p-6 pt-0 border-t border-slate-150 mt-4 flex items-center justify-between text-[10px] font-mono text-slate-400">
-                        <span>{lang === 'en' ? 'EXPERIENCE:' : 'الخبرة:'}</span>
-                        <span className="text-slate-900 font-bold">{lang === 'en' ? '12 Years' : '١٢ عاماً'}</span>
-                      </div>
-                    </div>
-
-                    {/* Faculty Member 4 */}
-                    <div className="bg-slate-50 border border-slate-200 flex flex-col justify-between">
-                      <div>
-                        <div className="aspect-[3/4] w-full bg-slate-100 overflow-hidden relative">
-                          <img 
-                            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" 
-                            alt="Ustadh Munir Al-Khatib" 
-                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
-                          />
-                        </div>
-                        <div className="p-6">
-                          <h4 className="font-extrabold text-base text-slate-950 font-sans">
-                            {lang === 'en' ? 'Ustadh Munir Al-Khatib' : 'الأستاذ منير الخطيب'}
-                          </h4>
-                          <span className="text-[10px] font-mono font-bold text-brand-blue tracking-wider block mt-1">
-                            {lang === 'en' ? 'Lab Director & Safety Controller' : 'مدير المختبر والمشرف الميداني للسلامة'}
-                          </span>
-                          <p className="text-slate-500 text-xs mt-3 leading-relaxed">
-                            {lang === 'en' 
-                              ? 'Maintains insulated tools, HV diagnostic benches, and standard safety gear compliance.'
-                              : 'يشرف على حداثة أجهزة الفحص، والعدّة المعزولة وصيانة البطاريات وحماية الطلاب من صدمات الفولط المرتفع.'}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="p-6 pt-0 border-t border-slate-150 mt-4 flex items-center justify-between text-[10px] font-mono text-slate-400">
-                        <span>{lang === 'en' ? 'EXPERIENCE:' : 'الخبرة:'}</span>
-                        <span className="text-slate-900 font-bold">{lang === 'en' ? '15 Years' : '١٥ عاماً'}</span>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
-              </section>
+              </div>
             </motion.div>
           )}
 
@@ -2393,6 +2286,111 @@ export default function App() {
             </motion.div>
           )}
 
+          {currentPage === 'team' && (
+            <motion.div
+              key="team"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.2 }}
+              className="bg-white text-slate-800 text-start"
+            >
+              {/* HERO / HEADER */}
+              <section className="relative py-16 bg-slate-950 text-white overflow-hidden border-b border-slate-800">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                  <span className="text-[10px] font-mono tracking-widest text-blue-300 uppercase block font-bold mb-2">
+                    {lang === 'en' ? 'EXPERT INSTRUCTORS' : 'كادر الموجهين والخبراء'}
+                  </span>
+                  <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight font-sans text-white">
+                    {lang === 'en' ? 'Our Elite Engineering Mentors' : 'نخبة من كبار مهندسي صيانة السيارات والالكترون'}
+                  </h1>
+                  <p className="text-slate-350 text-xs sm:text-sm leading-relaxed max-w-3xl font-sans mt-3 font-medium">
+                    {lang === 'en'
+                      ? 'Learn directly from veterans with over 20+ years of active bench-repair experience. Our team provides hands-on diagnostic mastery on hybrid power systems, electric motor drivetrains, and electronic calibrations.'
+                      : 'تلقَّ المعرفة والخبرة من مهندسين مرجعيين يتنفسون المهنة في قلب السوق الحقيقية، وينقلون خبرتهم الممتدة لعقود مباشرةً إليك عبر تدريب تطبيقي مكثف.'}
+                  </p>
+                </div>
+                {/* Background layout mesh */}
+                <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
+              </section>
+
+              {/* Mentors Grid Section */}
+              <section className="py-20 bg-slate-50">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {academyContent.team.map((member, idx) => {
+                      const memberImages = [
+                        "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&h=500&q=80",
+                        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&h=500&q=80",
+                        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=500&q=80",
+                        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&h=500&q=80"
+                      ];
+
+                      return (
+                        <div
+                          key={idx}
+                          className="bg-white border border-slate-200 transition-all hover:border-slate-350 flex flex-col group"
+                          style={{ borderRadius: '0px' }}
+                        >
+                          {/* Image Container */}
+                          <div className="aspect-[4/5] bg-slate-100 overflow-hidden relative border-b border-slate-200">
+                            <img
+                              src={memberImages[idx]}
+                              alt={lang === 'en' ? member.nameEn : member.nameAr}
+                              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-105"
+                            />
+                            {/* Tenure tag */}
+                            <div className="absolute top-4 left-4 bg-slate-900/90 text-white font-mono text-[9px] font-bold tracking-widest px-3 py-1.5 border border-white/10 uppercase">
+                              {lang === 'en' ? member.experienceEn : member.experienceAr}
+                            </div>
+                          </div>
+
+                          {/* Member info */}
+                          <div className="p-6 flex-grow flex flex-col justify-between space-y-4">
+                            <div className="space-y-2">
+                              <span className="text-[10px] font-mono tracking-widest text-slate-400 font-bold block uppercase">
+                                {lang === 'en' ? member.roleEn : member.roleAr}
+                              </span>
+                              <h3 className="text-lg font-black text-slate-900">
+                                {lang === 'en' ? member.nameEn : member.nameAr}
+                              </h3>
+                              <p className="text-xs text-slate-500 leading-relaxed font-medium font-sans">
+                                {lang === 'en' ? member.bioEn : member.bioAr}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* High conversion CTA card */}
+                  <div className="mt-16 bg-[#232f5b] text-white p-8 md:p-12 border border-slate-800 text-center relative overflow-hidden">
+                    <div className="max-w-2xl mx-auto space-y-6 relative z-10">
+                      <h3 className="text-xl sm:text-2xl font-black font-sans leading-tight">
+                        {lang === 'en' ? 'Start Your Technical Journey With Experts' : 'ابدأ رحلة احترافك المهني مع كبار المهندسين'}
+                      </h3>
+                      <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-medium font-sans">
+                        {lang === 'en'
+                          ? 'Lock in your direct training slot under our veteran engineering mentors. Spaces are highly limited per cohort to ensure absolute hands-on lab supervision.'
+                          : 'احجز مقعدك الفني للتدريب العملي المباشر تحت إشراف نخبة من الخبراء والمهندسين. المقاعد محدودة جداً لضمان المتابعة الفردية.'}
+                      </p>
+                      <button
+                        onClick={() => navigateTo('contact')}
+                        className="bg-white text-brand-blue hover:bg-slate-100 font-extrabold text-sm px-8 py-4 transition-all cursor-pointer border-none inline-flex items-center gap-2"
+                      >
+                        <span>{t('bookSeatNow')}</span>
+                        <ArrowRight size={14} />
+                      </button>
+                    </div>
+                    <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
+                  </div>
+
+                </div>
+              </section>
+            </motion.div>
+          )}
+
           {currentPage === 'partnerships' && (
             <motion.div
               key="partnerships"
@@ -2400,97 +2398,155 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.2 }}
-              className="py-16 bg-white text-slate-800 text-start animate-fade-in"
+              className="bg-white text-slate-800"
             >
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* B2B / NGO Engagement Framework (Asymmetric Split Screen) */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pb-16 border-b border-slate-200">
-                  {/* Left (Larger content): Targets sponsors & sustainable initiatives */}
-                  <div className="lg:col-span-7 space-y-6">
-                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">
-                      {lang === 'en' ? 'B2B / NGO COOPERATION FRAMEWORK' : 'إطار التعاون مع المنظمات والمؤسسات B2B'}
+              {/* Hero Header */}
+              <section className="relative py-24 md:py-32 overflow-hidden" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #232f5b 100%)' }}>
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                  <span className="inline-flex items-center gap-2 bg-white/10 border border-white/10 px-4 py-1.5 mb-6">
+                    <Building2 size={12} className="text-blue-400" />
+                    <span className="text-[10px] font-mono tracking-widest text-blue-300 uppercase font-bold">
+                      {lang === 'en' ? 'INSTITUTIONAL PARTNERSHIPS' : 'الشراكات المؤسساتية'}
                     </span>
-                    <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                      {lang === 'en'
-                        ? 'Scaling Tech-Sector Youth Employment & Clean Energy'
-                        : 'تمكين الشباب وتوطين مهن الطاقة النظيفة بشكل مستدام'}
+                  </span>
+                  <h1 className="text-4xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6">
+                    {lang === 'en' ? 'Scaling Youth Employment & Clean Energy' : 'تمكين الشباب وتوطين مهن الطاقة النظيفة'}
+                  </h1>
+                  <p className="text-slate-400 text-base sm:text-lg leading-relaxed font-medium max-w-3xl mx-auto">
+                    {lang === 'en'
+                      ? 'We build strategic alliances with development partners, trade associations, and vocational funds to create sustainable employment pathways and upskill traditional workforces.'
+                      : 'نبني تحالفات استراتيجية مع شركاء التنمية والجمعيات المهنية وصناديق التمويل لخلق مسارات توظيف مستدامة وتطوير القوى العاملة التقليدية.'}
+                  </p>
+                </div>
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]" />
+              </section>
+
+              {/* Partnership Models */}
+              <section className="py-20 bg-white border-b border-slate-200">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="text-center mb-14">
+                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block mb-3">
+                      {lang === 'en' ? 'COOPERATION FRAMEWORKS' : 'أطر التعاون المتاحة'}
+                    </span>
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                      {lang === 'en' ? 'How We Partner With You' : 'كيف نتعاون معكم'}
                     </h2>
-                    <p className="text-slate-650 text-sm sm:text-base leading-relaxed font-sans font-medium">
-                      {lang === 'en'
-                        ? 'Hypro Academy builds strategic alliances with international development partners, local trade associations, and vocational training funds. We specialize in youth job-placement programs and upskilling traditional workforces to handle high-voltage and computer diagnostics safely.'
-                        : 'تقدم أكاديمية هايبـرو برنامجاً متكاملاً للشراكات وتصميم مسارات التمكين الاقتصادي بالتعاون مع المنظمات الدولية والمحلية وصناديق التنمية. نركز على سد فجوات البطالة وتأهيل الفنيين للعمل المباشر.'}
-                    </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
-                      <div className="border-l-2 border-brand-blue pl-4 text-start">
-                        <h4 className="font-extrabold text-sm text-slate-900">{lang === 'en' ? 'Scalable Youth Integration' : 'تشغيل وتدريب الكفاءات'}</h4>
-                        <p className="text-slate-500 text-xs mt-1">{lang === 'en' ? 'Targeted cohorts with verified job placement rates exceeding 92%.' : 'دورات مخصصة لتمكين الفئات الأقل حظاً بمسارات تشغيل حقيقية.'}</p>
-                      </div>
-                      <div className="border-l-2 border-brand-blue pl-4 text-start">
-                        <h4 className="font-extrabold text-sm text-slate-900">{lang === 'en' ? 'Clean Energy Deployment' : 'دعم مهن الطاقة النظيفة'}</h4>
-                        <p className="text-slate-500 text-xs mt-1">{lang === 'en' ? 'Establishing diagnostic protocols for imported hybrid & electric assets.' : 'بناء معايير فحص آمنة ومستدامة لسيارات الكهرباء والهايبرد بالمنطقة.'}</p>
-                      </div>
-                    </div>
                   </div>
 
-                  {/* Right (Smaller visually striking highlight block): Target focus */}
-                  <div className="lg:col-span-5 bg-brand-blue text-white p-8 border border-slate-200 relative overflow-hidden flex flex-col justify-between self-stretch">
-                    <div className="space-y-4 relative z-10">
-                      <h4 className="text-xl font-bold font-sans">
-                        {lang === 'en' ? 'Institutional Partnership Gate' : 'بوابة الشراكات والتمويل'}
-                      </h4>
-                      <p className="text-xs text-slate-300 leading-relaxed font-medium">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-start">
+                    <div className="bg-slate-50 border border-slate-200 p-8 hover:border-brand-blue/30 transition-all">
+                      <div className="p-3 bg-blue-50 text-brand-blue w-14 h-14 flex items-center justify-center mb-6">
+                        <Users size={24} />
+                      </div>
+                      <h4 className="font-extrabold text-lg text-slate-900 mb-3">{lang === 'en' ? 'Youth Cohort Sponsorship' : 'رعاية دورات تأهيل الشباب'}</h4>
+                      <p className="text-slate-500 text-sm leading-relaxed font-medium mb-5">
                         {lang === 'en'
-                          ? 'We offer transparent project tracking, audit-compliant monitoring reports, student logs, and certified trade exams.'
-                          : 'نوفر تقارير تتبع شفافة، ومعايير تقييم جودة متوافقة مع متطلبات التدقيق الدولي، وتوثيقاً كاملاً لمسارات الخريجين.'}
+                          ? 'Fund targeted training cohorts with verified job placement rates exceeding 92%. Transparent reporting and audit-compliant documentation.'
+                          : 'موّل دورات تدريبية مستهدفة بنسبة توظيف موثقة تتجاوز 92%. تقارير شفافة وتوثيق متوافق مع معايير التدقيق.'}
                       </p>
+                      <ul className="space-y-2.5 text-xs text-slate-600">
+                        <li className="flex items-center gap-2"><CheckCircle size={12} className="text-emerald-500 flex-shrink-0" />{lang === 'en' ? 'Monthly progress reports' : 'تقارير تقدم شهرية'}</li>
+                        <li className="flex items-center gap-2"><CheckCircle size={12} className="text-emerald-500 flex-shrink-0" />{lang === 'en' ? 'Verified employment tracking' : 'تتبع التوظيف الموثق'}</li>
+                        <li className="flex items-center gap-2"><CheckCircle size={12} className="text-emerald-500 flex-shrink-0" />{lang === 'en' ? 'Audit-ready documentation' : 'وثائق جاهزة للتدقيق'}</li>
+                      </ul>
                     </div>
-                    <div className="pt-8 relative z-10">
-                      <button
-                        onClick={() => navigateTo('contact')}
-                        className="bg-white hover:bg-slate-100 text-brand-blue font-extrabold text-xs px-6 py-3 border-none cursor-pointer"
-                      >
-                        {lang === 'en' ? 'Inquire B2B Partnership' : 'طلب مناقشة شراكة أو مشروع'}
-                      </button>
+
+                    <div className="bg-slate-50 border border-slate-200 p-8 hover:border-brand-blue/30 transition-all">
+                      <div className="p-3 bg-blue-50 text-brand-blue w-14 h-14 flex items-center justify-center mb-6">
+                        <Wrench size={24} />
+                      </div>
+                      <h4 className="font-extrabold text-lg text-slate-900 mb-3">{lang === 'en' ? 'Workshop Upskilling' : 'تطوير كوادر الورش'}</h4>
+                      <p className="text-slate-500 text-sm leading-relaxed font-medium mb-5">
+                        {lang === 'en'
+                          ? 'Upgrade your existing mechanics to handle hybrid and electric vehicles with accelerated training modules and safety certifications.'
+                          : 'طوّر ميكانيكييك الحاليين للتعامل مع سيارات الهايبرد والكهرباء بوحدات تدريب مكثفة وشهادات سلامة.'}
+                      </p>
+                      <ul className="space-y-2.5 text-xs text-slate-600">
+                        <li className="flex items-center gap-2"><CheckCircle size={12} className="text-emerald-500 flex-shrink-0" />{lang === 'en' ? 'Customized training modules' : 'وحدات تدريب مخصصة'}</li>
+                        <li className="flex items-center gap-2"><CheckCircle size={12} className="text-emerald-500 flex-shrink-0" />{lang === 'en' ? 'HV safety certification' : 'شهادة سلامة فولت عالي'}</li>
+                        <li className="flex items-center gap-2"><CheckCircle size={12} className="text-emerald-500 flex-shrink-0" />{lang === 'en' ? 'Flexible scheduling' : 'جدولة مرنة'}</li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-slate-50 border border-slate-200 p-8 hover:border-brand-blue/30 transition-all">
+                      <div className="p-3 bg-blue-50 text-brand-blue w-14 h-14 flex items-center justify-center mb-6">
+                        <Zap size={24} />
+                      </div>
+                      <h4 className="font-extrabold text-lg text-slate-900 mb-3">{lang === 'en' ? 'Clean Energy Deployment' : 'نشر مهن الطاقة النظيفة'}</h4>
+                      <p className="text-slate-500 text-sm leading-relaxed font-medium mb-5">
+                        {lang === 'en'
+                          ? 'Establish certified diagnostic protocols for imported hybrid and electric vehicles. Standardize safety procedures across your dealer network.'
+                          : 'أنشئ بروتوكولات تشخيص معتمدة لسيارات الهايبرد والكهرباء المستوردة. وحّد إجراءات السلامة عبر شبكة وكلائك.'}
+                      </p>
+                      <ul className="space-y-2.5 text-xs text-slate-600">
+                        <li className="flex items-center gap-2"><CheckCircle size={12} className="text-emerald-500 flex-shrink-0" />{lang === 'en' ? 'Certified protocols' : 'بروتوكولات معتمدة'}</li>
+                        <li className="flex items-center gap-2"><CheckCircle size={12} className="text-emerald-500 flex-shrink-0" />{lang === 'en' ? 'Dealer network support' : 'دعم شبكة الوكلاء'}</li>
+                        <li className="flex items-center gap-2"><CheckCircle size={12} className="text-emerald-500 flex-shrink-0" />{lang === 'en' ? 'International standards' : 'معايير دولية'}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* CTA Panel */}
+              <section className="py-16 bg-slate-50 border-b border-slate-200">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="bg-brand-blue text-white p-10 sm:p-14 text-center relative overflow-hidden">
+                    <div className="relative z-10 space-y-6">
+                      <h3 className="text-2xl sm:text-3xl font-black tracking-tight">
+                        {lang === 'en' ? 'Ready to Build a Partnership?' : 'جاهزون لبناء شراكة؟'}
+                      </h3>
+                      <p className="text-blue-200 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-medium">
+                        {lang === 'en'
+                          ? 'We provide transparent project tracking, audit-compliant monitoring reports, student logs, and certified trade exams. Contact us to discuss your cooperation framework.'
+                          : 'نوفر تقارير تتبع شفافة، ومعايير تقييم جودة متوافقة مع متطلبات التدقيق الدولي، وتوثيقاً كاملاً. تواصل معنا لمناقشة إطار التعاون.'}
+                      </p>
+                      <div className="flex flex-wrap gap-4 justify-center">
+                        <button
+                          onClick={() => navigateTo('contact')}
+                          className="bg-white hover:bg-slate-100 text-brand-blue font-extrabold text-sm px-8 py-4 border-none cursor-pointer transition-all flex items-center gap-2"
+                        >
+                          <span>{lang === 'en' ? 'Inquire Partnership' : 'طلب مناقشة شراكة'}</span>
+                          <ArrowRight size={16} />
+                        </button>
+                        <a
+                          href="https://wa.me/963955408202"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-sm px-8 py-4 border-none cursor-pointer transition-all flex items-center gap-2"
+                        >
+                          <MessageSquare size={16} className="fill-white" />
+                          <span>{lang === 'en' ? 'WhatsApp Direct' : 'واتساب مباشر'}</span>
+                        </a>
+                      </div>
                     </div>
                     <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
                   </div>
                 </div>
+              </section>
 
-                {/* The Strategic Partner Matrix (Grayscale Logos Hover Color) */}
-                <div className="pt-16 text-start">
-                  <div className="max-w-3xl space-y-2 mb-10">
+              {/* Partner Logos Grid */}
+              <section className="py-16 bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="text-center mb-10">
                     <h3 className="text-xl font-extrabold text-slate-900">
                       {lang === 'en' ? 'Our Strategic Alliance Network' : 'شبكة التحالفات والمؤسسات الشريكة'}
                     </h3>
-                    <p className="text-slate-500 text-xs font-medium">
+                    <p className="text-slate-500 text-xs font-medium mt-2">
                       {lang === 'en'
                         ? 'Collaborating with industry leaders, craft unions, and international development organizations.'
-                        : 'نتعاون جنباً إلى جنب مع قادة الصناعة، ونقابات الحرف، والجهات التنموية لتعزيز معايير التدريب.'}
+                        : 'نتعاون مع قادة الصناعة، ونقابات الحرف، والجهات التنموية لتعزيز معايير التدريب.'}
                     </p>
                   </div>
-
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-0 border border-slate-200">
-                    <div className="p-8 bg-white border-b border-r border-slate-200 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                      <span className="font-mono font-bold text-slate-400 hover:text-brand-blue text-xs uppercase tracking-wider">TVET JORDAN</span>
-                    </div>
-                    <div className="p-8 bg-white border-b border-r border-slate-200 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                      <span className="font-mono font-bold text-slate-400 hover:text-brand-blue text-xs uppercase tracking-wider">UN-DEVELOP</span>
-                    </div>
-                    <div className="p-8 bg-white border-b lg:border-b-0 border-r border-slate-200 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                      <span className="font-mono font-bold text-slate-400 hover:text-brand-blue text-xs uppercase tracking-wider">AL-KHEDMA</span>
-                    </div>
-                    <div className="p-8 bg-white border-b md:border-b-0 border-r border-slate-200 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                      <span className="font-mono font-bold text-slate-400 hover:text-brand-blue text-xs uppercase tracking-wider">SY AUTO UNION</span>
-                    </div>
-                    <div className="p-8 bg-white border-r border-slate-200 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                      <span className="font-mono font-bold text-slate-400 hover:text-brand-blue text-xs uppercase tracking-wider">HV SOLUTIONS</span>
-                    </div>
-                    <div className="p-8 bg-white flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                      <span className="font-mono font-bold text-slate-400 hover:text-brand-blue text-xs uppercase tracking-wider">MID EAST TECH</span>
-                    </div>
+                    {partnerLogos.slice(0, 6).map((logo, idx) => (
+                      <div key={idx} className="p-8 bg-white border-b border-r border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-all">
+                        <img src={logo.url} alt={logo.name} className="max-h-[40px] max-w-[80px] object-contain grayscale hover:grayscale-0 transition-all duration-300" loading="lazy" />
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </div>
+              </section>
             </motion.div>
           )}
 
@@ -2726,99 +2782,12 @@ export default function App() {
                 </div>
               </section>
 
-              {/* Friction-Reduction Accordion */}
-              <section className="py-16 md:py-20 bg-white border-b border-slate-200 text-start">
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <div className="max-w-3xl space-y-3 mb-10 text-start">
-                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">
-                      {lang === 'en' ? 'STUDENT SUPPORT PORTAL' : 'أسئلة وتسهيلات الدبلوم الدراسي'}
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                      {lang === 'en' ? 'Friction-Reduction Support & FAQ' : 'تسهيلات الأكاديمية وإزالة عقبات التسجيل'}
-                    </h3>
-                  </div>
-
-                  <div className="space-y-4">
-                    {/* FAQ 1: Installment plans */}
-                    <div className="border border-slate-200">
-                      <button
-                        onClick={() => setContactFaqOpen(contactFaqOpen === 0 ? null : 0)}
-                        className="w-full bg-slate-50 p-5 flex justify-between items-center cursor-pointer border-none font-sans text-start"
-                      >
-                        <span className="font-extrabold text-sm text-slate-900">
-                          {lang === 'en' ? 'Are there installment-based tuition plans available?' : 'هل تتوفر خطط دفع مقسطة للرسوم الدراسية؟'}
-                        </span>
-                        <span className="text-slate-450 font-bold">{contactFaqOpen === 0 ? '▲' : '▼'}</span>
-                      </button>
-                      {contactFaqOpen === 0 && (
-                        <div className="p-5 bg-white border-t border-slate-200 text-xs sm:text-sm text-slate-655 leading-relaxed font-sans">
-                          {lang === 'en'
-                            ? 'Yes. To make our professional diploma accessible to all technical students, we offer structured installment plans. Trainees can pay in monthly parts during their course.'
-                            : 'نعم، لتسهيل التحاق الطلاب، توفر الأكاديمية إمكانية تقسيط الرسوم الدراسية على دفعات شهرية ميسرة طوال فترة الدراسة الممتدة لـ 4 أشهر.'}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* FAQ 2: Scheduling */}
-                    <div className="border border-slate-200">
-                      <button
-                        onClick={() => setContactFaqOpen(contactFaqOpen === 1 ? null : 1)}
-                        className="w-full bg-slate-50 p-5 flex justify-between items-center cursor-pointer border-none font-sans text-start"
-                      >
-                        <span className="font-extrabold text-sm text-slate-900">
-                          {lang === 'en' ? 'What are the workshop schedules?' : 'ما هي أوقات الدوام والتدريب بالورش؟'}
-                        </span>
-                        <span className="text-slate-450 font-bold">{contactFaqOpen === 1 ? '▲' : '▼'}</span>
-                      </button>
-                      {contactFaqOpen === 1 && (
-                        <div className="p-5 bg-white border-t border-slate-200 text-xs sm:text-sm text-slate-655 leading-relaxed font-sans">
-                          {lang === 'en'
-                            ? 'We offer dual training sessions (morning and evening blocks) to accommodate working students and apprentices who run active workshops during the day.'
-                            : 'نقدم فترات تدريب صباحية ومسائية مرنة لتتناسب مع الطلاب الذين يديرون ورشهم الخاصة أو يعملون خلال فترات النهار.'}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* FAQ 3: Prerequisites */}
-                    <div className="border border-slate-200">
-                      <button
-                        onClick={() => setContactFaqOpen(contactFaqOpen === 2 ? null : 2)}
-                        className="w-full bg-slate-50 p-5 flex justify-between items-center cursor-pointer border-none font-sans text-start"
-                      >
-                        <span className="font-extrabold text-sm text-slate-900">
-                          {lang === 'en' ? 'Do I need prior engineering or mechanics experience to register?' : 'هل أحتاج إلى شهادة هندسية أو خبرة ميكانيكية مسبقة للتسجيل؟'}
-                        </span>
-                        <span className="text-slate-450 font-bold">{contactFaqOpen === 2 ? '▲' : '▼'}</span>
-                      </button>
-                      {contactFaqOpen === 2 && (
-                        <div className="p-5 bg-white border-t border-slate-200 text-xs sm:text-sm text-slate-655 leading-relaxed font-sans">
-                          {lang === 'en'
-                            ? 'No. Our curriculum is designed to build competencies from absolute ground zero. We teach general electrical safety up to high-voltage balancing cells.'
-                            : 'لا، لا تشترط الأكاديمية أي معرفة مسبقة. يبدأ منهجنا من الصفر الإلكتروني التام ويصعد بك تدريجياً لفك ومعايرة عقول وبطاريات السيارات الهجينة.'}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* FAQ 4: Placement Guarantee */}
-                    <div className="border border-slate-200">
-                      <button
-                        onClick={() => setContactFaqOpen(contactFaqOpen === 3 ? null : 3)}
-                        className="w-full bg-slate-50 p-5 flex justify-between items-center cursor-pointer border-none font-sans text-start"
-                      >
-                        <span className="font-extrabold text-sm text-slate-900">
-                          {lang === 'en' ? 'How does the job placement program guarantee employment?' : 'كيف يضمن برنامج التشبيك والتوظيف حصولي على عمل؟'}
-                        </span>
-                        <span className="text-slate-450 font-bold">{contactFaqOpen === 3 ? '▲' : '▼'}</span>
-                      </button>
-                      {contactFaqOpen === 3 && (
-                        <div className="p-5 bg-white border-t border-slate-200 text-xs sm:text-sm text-slate-655 leading-relaxed font-sans">
-                          {lang === 'en'
-                            ? 'Through our strategic partner network, we establish direct placement trade recommendations. We connect graduates directly to car dealers, NGOs, and workshops.'
-                            : 'نقوم بربط الخريجين مباشرة بالشركاء، مستوردي السيارات، المنظمات والورش الكبرى، حيث يعود 92% من طلابنا للعمل مباشرة بعد نيل شهادتهم.'}
-                        </div>
-                      )}
-                    </div>
-                  </div>
+              {/* FAQ Section - same as homepage */}
+              <section className="py-16 md:py-20 bg-white border-b border-slate-200">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <Suspense fallback={<Skeleton className="h-96 w-full" />}>
+                    <FAQSection />
+                  </Suspense>
                 </div>
               </section>
             </motion.div>

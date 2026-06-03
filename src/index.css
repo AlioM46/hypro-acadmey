@@ -18,6 +18,7 @@
 @layer base {
   *, *::before, *::after {
     border-radius: 0px !important;
+    font-family: 'Poppins', 'Tajawal', system-ui, -apple-system, sans-serif;
   }
 
   html {
@@ -48,7 +49,7 @@
     background: var(--color-brand-blue-hover);
   }
 
-  body, input, textarea, select, button, span, p, h1, h2, h3, h4, h5, h6, a, div {
+  body, input, textarea, select, button, span, p, h1, h2, h3, h4, h5, h6, a, div, label, li, td, th {
     font-family: 'Poppins', 'Tajawal', system-ui, -apple-system, sans-serif;
   }
 
@@ -75,19 +76,53 @@
 }
 
 /* Infinite logos marquee slider */
-@keyframes marquee {
+@keyframes marqueeScroll {
   0% {
-    transform: translateX(0%);
+    transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
 
+.marquee-track {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  user-select: none;
+}
+
+.marquee-content {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  animation: marqueeScroll 40s linear infinite;
+}
+
+.marquee-track:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+/* FAQ accordion smooth animations */
+.faq-answer-enter {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease-out;
+}
+
+.faq-answer-open {
+  max-height: 400px;
+  opacity: 1;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in;
+}
+
+/* Keep old animate-marquee for backward compat */
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 35s linear infinite;
+  animation: marqueeScroll 35s linear infinite;
 }
 
 .animate-marquee:hover {
