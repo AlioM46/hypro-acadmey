@@ -4,12 +4,22 @@
 @theme {
   --font-sans: "Poppins", "Tajawal", system-ui, -apple-system, sans-serif;
 
-  --color-brand-blue: #293158;
-  --color-brand-blue-hover: #1e2442;
+  --color-brand-blue: #232f5b;
+  --color-brand-blue-hover: #182142;
   --color-brand-accent: #dc2626;
+
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+  --shadow-2xl: none;
 }
 
 @layer base {
+  *, *::before, *::after {
+    border-radius: 0px !important;
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
@@ -30,7 +40,7 @@
 
   ::-webkit-scrollbar-thumb {
     background: var(--color-brand-blue);
-    border-radius: 9999px;
+    border-radius: 9999px !important;
     border: 2px solid #f1f5f9;
   }
 
