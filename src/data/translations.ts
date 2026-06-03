@@ -221,5 +221,29 @@ export const translations = {
   tabStudent: { en: 'For Students', ar: 'للطلاب الفنيين' },
   tabWorkshop: { en: 'For Workshops', ar: 'لأصحاب الورش ومراكز الصيانة' },
   tabNgo: { en: 'For Ministries & NGOs', ar: 'للجهات الحكومية والمنظمات' },
-  noResults: { en: 'No matching questions found.', ar: 'لا توجد نتائج تماثل عبارة البحث الخاصة بك.' }
+  noResults: { en: 'No matching questions found.', ar: 'لا توجد نتائج تماثل عبارة البحث الخاصة بك.' },
+
+  // New Navigation Brief translation keys
+  programs: { en: 'Diplomas & Programs', ar: 'الدبلومات والبرامج' },
+  testingLab: { en: 'Testing Lab', ar: 'مختبر الفحص' },
+  partnerships: { en: 'Partnerships & Development', ar: 'الشراكات والتطوير' },
+  contactUsNav: { en: 'Contact Us', ar: 'اتصل بنا' },
+  visionGoals: { en: 'Our Vision & Goals', ar: 'رؤيتنا وأهدافنا' },
+  ourFaculty: { en: 'Our Faculty', ar: 'كادرنا التدريسي' },
+  accreditations: { en: 'Accreditations & Certifications', ar: 'الاعتمادات والشهادات' },
+  evTechDiploma: { en: 'EV Technology Diploma', ar: 'دبلوم تكنولوجيا السيارات الكهربائية' },
+  hybridDiploma: { en: 'Hybrid Systems Diploma', ar: 'دبلوم الأنظمة الهجينة (الهايبرد)' },
+  diagnosticsCourse: { en: 'Electronic Diagnostics Course', ar: 'دورة فحص إلكترونيات السيارات' },
+
+  // Additional Brief Keys
+  bookSeatNow: { en: 'Book Your Seat Now', ar: 'احجز مقعدك الآن' },
+  talkAdvisor: { en: 'Talk to Advisor', ar: 'تحدث مع المستشار' },
+  watchWorkshopsNav: { en: 'Watch Practical Workshops', ar: 'شاهد الورش العملية' },
+  whatYouWillLearn: { en: 'What You Will Learn', ar: 'ماذا ستتعلم' },
+  practicalTrainingTitle: { en: 'Practical Training', ar: 'التدريب العملي' },
+  quickRegRibbonTitle: { en: 'Quick Registration Ribbon', ar: 'التسجيل السريع والمباشر' },
+  whatsappVerification: { en: 'Register via WhatsApp', ar: 'احجز مقعدك عبر واتساب' },
+  fullNameLabel: { en: 'Full Name', ar: 'الاسم الكامل' },
+  phoneLabel: { en: 'Phone Number', ar: 'رقم الهاتف' },
+  govLabel: { en: 'Governorate', ar: 'المحافظة' }
 };
