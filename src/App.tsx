@@ -21,7 +21,12 @@ import {
   CheckCircle2,
   Cpu,
   Menu,
-  X
+  X,
+  Battery,
+  Zap,
+  Settings,
+  Play,
+  Eye
 } from 'lucide-react';
 
 import { academyContent } from './data/academyContent';
@@ -35,7 +40,7 @@ const DynamicForm = lazy(() => import('./components/DynamicForm'));
 const FAQSection = lazy(() => import('./components/FAQSection'));
 
 type CategoryType = 'student' | 'workshop' | 'dealer' | 'ngo';
-type PageType = 'home' | 'about' | 'courses' | 'team' | 'diagnostics' | 'contact';
+type PageType = 'home' | 'about' | 'programs' | 'testing-lab' | 'partnerships' | 'contact' | 'practical-training';
 
 export default function App() {
   const { lang, setLang, t, tObj, tVal } = useTranslation();
@@ -43,14 +48,45 @@ export default function App() {
 
   const getPageFromPath = (): PageType => {
     const path = window.location.pathname.replace(/^\//, '');
-    const validPages: PageType[] = ['home', 'about', 'courses', 'team', 'diagnostics', 'contact'];
+    const validPages: PageType[] = ['home', 'about', 'programs', 'testing-lab', 'partnerships', 'contact', 'practical-training'];
     return validPages.includes(path as PageType) ? (path as PageType) : 'home';
   };
 
   const [currentPage, setCurrentPage] = useState<PageType>(getPageFromPath);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showStickyHeader, setShowStickyHeader] = useState(false);
-  const [isMobileTeamDropdownOpen, setIsMobileTeamDropdownOpen] = useState(false);
+  const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
+  const [isMobileProgramsOpen, setIsMobileProgramsOpen] = useState(false);
+
+  // Lightbox / Video Modal States
+  const [activeAccreditation, setActiveAccreditation] = useState<string | null>(null);
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const [activeVideoUrl, setActiveVideoUrl] = useState<string>('/hero-video.mp4');
+  const [galleryFilter, setGalleryFilter] = useState<'all' | 'students' | 'videos' | 'tools' | 'workshop'>('all');
+  const [lightboxTitle, setLightboxTitle] = useState<string | null>(null);
+  const [lightboxDesc, setLightboxDesc] = useState<string | null>(null);
+
+  // Quick Registration States
+  const [quickRegName, setQuickRegName] = useState('');
+  const [quickRegPhone, setQuickRegPhone] = useState('');
+  const [quickRegGov, setQuickRegGov] = useState('');
+
+  const handleQuickRegister = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!quickRegName || !quickRegPhone || !quickRegGov) {
+      alert(lang === 'en' ? 'Please fill in all fields.' : 'يرجى ملء جميع الحقول.');
+      return;
+    }
+    const message = lang === 'en'
+      ? `Hello Hypro Academy, I would like to register:\nName: ${quickRegName}\nPhone: ${quickRegPhone}\nGovernorate: ${quickRegGov}`
+      : `مرحباً أكاديمية هايبـرو، أود التسجيل:\nالاسم: ${quickRegName}\nالهاتف: ${quickRegPhone}\nالمحافظة: ${quickRegGov}`;
+    const whatsappUrl = `https://wa.me/963955408202?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  // Curriculum Accordion State
+  const [programAccordionOpen, setProgramAccordionOpen] = useState<string | null>('ev-tech');
+  const [contactFaqOpen, setContactFaqOpen] = useState<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,12 +114,160 @@ export default function App() {
     window.history.pushState(null, '', path);
     setCurrentPage(page);
     setIsMobileMenuOpen(false);
+    // Scroll to top on direct page change
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+  };
+
+  const navigateToAndScroll = (page: PageType, elementId: string) => {
+    navigateTo(page);
+    setTimeout(() => {
+      const el = document.getElementById(elementId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 150);
   };
 
   const stats = academyContent.stats;
   const meta = academyContent.meta;
   const contact = academyContent.contact;
   const modules = academyContent.modules;
+
+  const learnItems = [
+    {
+      icon: Battery,
+      titleEn: "Battery Systems",
+      titleAr: "أنظمة البطاريات",
+      descEn: "Hybrid & EV battery construction, cells testing, state-of-health diagnostics, module replacement, and computerized battery balancing.",
+      descAr: "دراسة وتفكيك بطاريات الهايبريد والكهرباء، فحص المقاومة الفنية للخلايا، تشخيص الأعطال واستبدال الأجزاء التالفة والموازنة المؤتمتة.",
+      image: "https://images.unsplash.com/photo-1548345680-f5475ea5df84?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      icon: Wrench,
+      titleEn: "Troubleshooting & Fault Finding",
+      titleAr: "تشخيص الأعطال والعيوب",
+      descEn: "Isolating short circuits, tracking parasitic draws, deciphering complex DTC trouble codes, and mapping wiring schematics.",
+      descAr: "تتبع الأعطال الكهربائية المعقدة والمتقطعة، قراءة وتحليل رموز الأعطال DTC، قراءة المخططات الهندسية وحصر المشاكل الفنية.",
+      image: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      icon: Cpu,
+      titleEn: "Hybrid Systems & Inverters",
+      titleAr: "أنظمة الهايبرد والهجين",
+      descEn: "Planetary gear synchronization, high-voltage inverter coolant management, traction motor operations, and regenerative breaking loops.",
+      descAr: "أجزاء الحركة الهجينة ونواقل الحركة، مبدلات الفولت العالي وعزلها، مضخة تبريد العاكس (Inverter)، ومكابح تدوير الطاقة.",
+      image: "https://images.unsplash.com/photo-1517524206127-48bbd363f3d7?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      icon: CheckCircle2,
+      titleEn: "Electronic Scanning & Calibration",
+      titleAr: "الفحص الإلكتروني وبرمجة العقول",
+      descEn: "OBD-II live data analysis, actuator testing, throttle adaptation, key coding, and electronic control unit (ECU) flashing.",
+      descAr: "التعامل الاحترافي مع أجهزة فحص السيارات وكشف الكمبيوتر OBD-II، قراءة البيانات الحية، برمجة البوابات الإلكترونية، وتهيئة العقول والـ ECU.",
+      image: "https://images.unsplash.com/photo-1507136566006-cfc505b114fc?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      icon: ShieldCheck,
+      titleEn: "Electrical Safety & Isolated Tools",
+      titleAr: "السلامة الكهربائية للفولت العالي",
+      descEn: "Working with up to 1000V DC safely, removal of MSD high-voltage loops, using double-insulated tools, and personal protective clothing (PPC).",
+      descAr: "بروتوكولات الأمان للجهود الفائقة التي تصل إلى 1000 فولت، فك قواطع الأمان MSD، استخدام المفكات والعدد المعزولة مهنياً.",
+      image: "https://images.unsplash.com/photo-1616788494707-ec28f08d05a1?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      icon: Settings,
+      titleEn: "Practical Maintenance Operations",
+      titleAr: "الصيانة العملية والتطبيق الميداني",
+      descEn: "Regular maintenance, direct fluid changes of hybrid gearboxes, replacing cells, and working on live customer vehicles under supervision.",
+      descAr: "تغيير سوائل وزيوت الفولت العالي لعلب التروس الهجينة، الصيانة الوقائية السريعة، وتجربة إصلاح سيارات زبائن فعلية تحت ظروف العمل الميدانية.",
+      image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=600&q=80"
+    }
+  ];
+
+  const galleryItems = [
+    {
+      id: 'gal-1',
+      category: 'students',
+      titleEn: 'Students Dismantling Toyota Hybrid Batteries',
+      titleAr: 'تفكيك بطارية تويوتا هايبريد في ورشة التدريب',
+      descEn: 'Trainees learning component isolation, safety inspection, and battery busbar cleaning.',
+      descAr: 'المتدربون يتعلمون عزل الأجزاء، الفحص الأمني، وتنظيف الخطوط النحاسية الموصلة للبطارية.',
+      image: 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80',
+      type: 'photo'
+    },
+    {
+      id: 'gal-2',
+      category: 'videos',
+      titleEn: 'High-Voltage Battery Cell Dismantling & Safety (Video)',
+      titleAr: 'فيديو تفكيك وفحص خلايا بطارية الفولت العالي',
+      descEn: 'Watch our students perform module extraction under absolute insulated parameters.',
+      descAr: 'فيديو يوضح سحب خلايا البطارية تحت معايير عزل وفولتية صارمة.',
+      image: 'https://images.unsplash.com/photo-1548345680-f5475ea5df84?auto=format&fit=crop&w=800&q=80',
+      videoUrl: '/hero-video.mp4',
+      type: 'video'
+    },
+    {
+      id: 'gal-3',
+      category: 'tools',
+      titleEn: 'Computerized Battery Diagnostic Balancer',
+      titleAr: 'جهاز توازن وشحن وتفريغ بطاريات الهايبريد',
+      descEn: 'Automated cell testing bench measuring internal resistance and modular health parameters.',
+      descAr: 'طاولة قياس وتفريغ الخلايا المؤتمتة لفحص قيم المقاومة الداخلية وحالة الخلايا بدقة.',
+      image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+      type: 'photo'
+    },
+    {
+      id: 'gal-4',
+      category: 'workshop',
+      titleEn: 'Main Diagnostic Workshop & Lift Area',
+      titleAr: 'صالة الصيانة والفحص الكبرى بالأكاديمية',
+      descEn: 'Live view of the workshop with multiple vehicles undergoing system scans and repair.',
+      descAr: 'لقطة حية لصالة الورشة والسيارات الحقيقية التي يجري تشخيصها.',
+      image: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80',
+      type: 'photo'
+    },
+    {
+      id: 'gal-5',
+      category: 'tools',
+      titleEn: '1000V Certified Double-Insulated Toolsets',
+      titleAr: 'العدد والمفكات المعزولة المخصصة للجهود العالية',
+      descEn: 'Professional VDE-certified tools and isolation equipment used for safe high-voltage operations.',
+      descAr: 'مجموعة العدة والقفازات المعزولة المعتمدة للتعامل مع الدوائر الكهربائية بجهد يصل إلى 1000 فولت.',
+      image: 'https://images.unsplash.com/photo-1616788494707-ec28f08d05a1?auto=format&fit=crop&w=800&q=80',
+      type: 'photo'
+    },
+    {
+      id: 'gal-6',
+      category: 'videos',
+      titleEn: 'Live Engine Diagnostic Scan and Tuning (Video)',
+      titleAr: 'فيديو تشخيص أعطال المحركات والبرمجة بالكمبيوتر',
+      descEn: 'Demonstrating dynamic sensors calibration and reading wave signals.',
+      descAr: 'شرح حي لمعايرة الحساسات وفحص موجات الإشارة بالكومبيوتر والسكوب.',
+      image: 'https://images.unsplash.com/photo-1517524206127-48bbd363f3d7?auto=format&fit=crop&w=800&q=80',
+      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-mechanical-technician-inspecting-a-car-engine-42247-large.mp4',
+      type: 'video'
+    },
+    {
+      id: 'gal-7',
+      category: 'students',
+      titleEn: 'Trainees Practicing Digital Multimeter Readings',
+      titleAr: 'الطلاب يتدربون على قياس قيم الجهد المستمر والمتناوب',
+      descEn: 'Hands-on training of circuit isolation checking and checking low voltage control links.',
+      descAr: 'تدريب الطلاب على قياس مقاومة العزل وفحص خطوط التحكم بجهد منخفض.',
+      image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80',
+      type: 'photo'
+    },
+    {
+      id: 'gal-8',
+      category: 'workshop',
+      titleEn: 'Hybrid and EV Powertrain Diagnostic Desk',
+      titleAr: 'لوحة التحكم والتشخيص المبرمج لمنظومة الهايبرد',
+      descEn: 'Testing the inverter modules and high voltage cooling loops on live setups.',
+      descAr: 'اختبار كفاءة المبدلات ومضخات التبريد الكهربائية على سيارات ومجسمات حية.',
+      image: 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80',
+      type: 'photo'
+    }
+  ];
 
   const whys = [
     {
@@ -115,7 +299,7 @@ export default function App() {
       <header
         className={`z-50 px-4 sm:px-6 lg:px-8 ${currentPage === 'home'
             ? 'absolute top-0 left-0 right-0 bg-transparent border-b border-white/30 py-6 text-white'
-            : 'sticky top-0 bg-brand-blue border-b border-white/20 py-4 shadow-sm text-white'
+            : 'sticky top-0 bg-brand-blue border-b border-white/20 py-4 text-white'
           }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
@@ -135,68 +319,105 @@ export default function App() {
             >
               {t('home')}
             </button>
-            <button
-              onClick={() => navigateTo('courses')}
-              className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'courses' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
-            >
-              {t('courses')}
-            </button>
-            <button
-              onClick={() => navigateTo('about')}
-              className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'about' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
-            >
-              {t('about')}
-            </button>
 
-            {/* Team with Dropdown */}
+            {/* About Us with Dropdown */}
             <div className="relative group py-2">
               <button
-                onClick={() => navigateTo('team')}
-                className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 flex items-center gap-1.5 ${currentPage === 'team'
+                onClick={() => navigateTo('about')}
+                className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 flex items-center gap-1.5 ${currentPage === 'about'
                     ? 'text-white font-extrabold border-b-2 border-white'
                     : 'text-white/85 hover:text-sky-400 font-semibold'
                   }`}
               >
-                <span>{t('team')}</span>
+                <span>{t('about')}</span>
                 <span className="text-[9px] opacity-75 group-hover:rotate-180 transition-transform duration-200">▼</span>
               </button>
 
-              {/* Dropdown container wrapper with padding gap connection */}
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-0 pt-3 w-52 z-50 hidden group-hover:flex flex-col">
-                <div className="bg-white text-slate-800 rounded-none shadow-2xl border border-slate-200 py-0 w-full flex flex-col text-center">
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-0 pt-3 w-64 z-50 hidden group-hover:flex flex-col">
+                <div className="bg-white text-slate-800 rounded-none border border-slate-200 py-0 w-full flex flex-col text-center shadow-lg">
                   <button
-                    onClick={() => { navigateTo('team'); }}
-                    className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-sm font-bold transition-colors border-none bg-transparent cursor-pointer w-full text-center"
+                    onClick={() => navigateToAndScroll('about', 'vision-goals')}
+                    className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer w-full text-center"
                   >
-                    {lang === 'en' ? 'Our Instructors' : 'مدربونا الأعزاء'}
+                    {t('visionGoals')}
                   </button>
                   <button
-                    onClick={() => { navigateTo('about'); }}
-                    className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-sm font-bold transition-colors border-t border-b border-slate-100 bg-transparent cursor-pointer w-full text-center"
+                    onClick={() => navigateToAndScroll('about', 'our-faculty')}
+                    className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-t border-b border-slate-100 bg-transparent cursor-pointer w-full text-center"
                   >
-                    {lang === 'en' ? 'Academy Profile' : 'ملف الأكاديمية'}
+                    {t('ourFaculty')}
                   </button>
                   <button
-                    onClick={() => navigateTo('contact')}
-                    className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-sm font-bold transition-colors border-none bg-transparent cursor-pointer w-full text-center"
+                    onClick={() => navigateToAndScroll('about', 'accreditations-certs')}
+                    className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer w-full text-center"
                   >
-                    {lang === 'en' ? 'Contact & Register' : 'التواصل والتسجيل'}
+                    {t('accreditations')}
+                  </button>
+                  <button
+                    onClick={() => navigateTo('practical-training')}
+                    className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-t border-slate-100 bg-transparent cursor-pointer w-full text-center"
+                  >
+                    {t('practicalTrainingTitle')}
+                  </button>
+                  <button
+                    onClick={() => navigateTo('testing-lab')}
+                    className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-t border-slate-100 bg-transparent cursor-pointer w-full text-center"
+                  >
+                    {t('testingLab')}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Programs with Dropdown */}
+            <div className="relative group py-2">
+              <button
+                onClick={() => navigateTo('programs')}
+                className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 flex items-center gap-1.5 ${currentPage === 'programs'
+                    ? 'text-white font-extrabold border-b-2 border-white'
+                    : 'text-white/85 hover:text-sky-400 font-semibold'
+                  }`}
+              >
+                <span>{t('programs')}</span>
+                <span className="text-[9px] opacity-75 group-hover:rotate-180 transition-transform duration-200">▼</span>
+              </button>
+
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-0 pt-3 w-72 z-50 hidden group-hover:flex flex-col">
+                <div className="bg-white text-slate-800 rounded-none border border-slate-200 py-0 w-full flex flex-col text-center shadow-lg">
+                  <button
+                    onClick={() => navigateToAndScroll('programs', 'ev-tech')}
+                    className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer w-full text-center"
+                  >
+                    {t('evTechDiploma')}
+                  </button>
+                  <button
+                    onClick={() => navigateToAndScroll('programs', 'hybrid-sys')}
+                    className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-t border-b border-slate-100 bg-transparent cursor-pointer w-full text-center"
+                  >
+                    {t('hybridDiploma')}
+                  </button>
+                  <button
+                    onClick={() => navigateToAndScroll('programs', 'elec-diag')}
+                    className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer w-full text-center"
+                  >
+                    {t('diagnosticsCourse')}
                   </button>
                 </div>
               </div>
             </div>
 
             <button
-              onClick={() => navigateTo('diagnostics')}
-              className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'diagnostics' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
+              onClick={() => navigateTo('partnerships')}
+              className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'partnerships' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
             >
-              {t('diagnostics')}
+              {t('partnerships')}
             </button>
+
             <button
               onClick={() => navigateTo('contact')}
               className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'contact' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
             >
-              {t('contact')}
+              {t('contactUsNav')}
             </button>
           </nav>
 
@@ -205,7 +426,7 @@ export default function App() {
             <button
               onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
               id="lang-toggle-button"
-              className="bg-white/10 hover:bg-white/20 text-white border border-white/10 font-bold text-[10px] sm:text-xs px-3 py-2 rounded-xl flex items-center gap-1.5 transition-all cursor-pointer uppercase font-sans"
+              className="bg-white/10 hover:bg-white/20 text-white border border-white/10 font-bold text-[10px] sm:text-xs px-3 py-2 flex items-center gap-1.5 transition-all cursor-pointer uppercase font-sans"
             >
               <Globe size={13} className="text-blue-200" />
               <span>{lang === 'en' ? 'العربية (AR)' : 'ENGLISH (EN)'}</span>
@@ -213,7 +434,7 @@ export default function App() {
 
             <button
               onClick={() => navigateTo('contact')}
-              className={`hidden sm:flex font-extrabold text-xs px-4 py-2 rounded-xl items-center gap-1.5 transition-all shadow-sm cursor-pointer border ${currentPage !== 'home'
+              className={`hidden sm:flex font-extrabold text-xs px-4 py-2 items-center gap-1.5 transition-all cursor-pointer border ${currentPage !== 'home'
                   ? 'bg-white text-brand-blue hover:bg-slate-50 border-transparent'
                   : 'bg-brand-blue hover:bg-brand-blue-hover text-white border-white/20'
                 }`}
@@ -238,7 +459,7 @@ export default function App() {
       {/* STICKY SLIDE-DOWN HEADER (Home page only) */}
       {currentPage === 'home' && (
         <header
-          className={`fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 bg-brand-blue/95 backdrop-blur-md border-b border-white/20 py-3.5 shadow-lg text-white transform transition-all duration-300 ease-out ${showStickyHeader ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'
+          className={`fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 bg-brand-blue/95 backdrop-blur-md border-b border-white/20 py-3.5 text-white transform transition-all duration-300 ease-out ${showStickyHeader ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'
             }`}
         >
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
@@ -258,68 +479,105 @@ export default function App() {
               >
                 {t('home')}
               </button>
-              <button
-                onClick={() => navigateTo('courses')}
-                className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'courses' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
-              >
-                {t('courses')}
-              </button>
-              <button
-                onClick={() => navigateTo('about')}
-                className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'about' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
-              >
-                {t('about')}
-              </button>
 
-              {/* Team with Dropdown */}
+              {/* About Us dropdown */}
               <div className="relative group py-2">
                 <button
-                  onClick={() => navigateTo('team')}
-                  className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 flex items-center gap-1.5 ${currentPage === 'team'
+                  onClick={() => navigateTo('about')}
+                  className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 flex items-center gap-1.5 ${currentPage === 'about'
                       ? 'text-white font-extrabold border-b-2 border-white'
                       : 'text-white/85 hover:text-sky-400 font-semibold'
                     }`}
                 >
-                  <span>{t('team')}</span>
+                  <span>{t('about')}</span>
                   <span className="text-[9px] opacity-75 group-hover:rotate-180 transition-transform duration-200">▼</span>
                 </button>
 
-                {/* Dropdown container wrapper with padding gap connection */}
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-0 pt-3 w-52 z-50 hidden group-hover:flex flex-col">
-                  <div className="bg-white text-slate-800 rounded-none shadow-2xl border border-slate-200 py-0 w-full flex flex-col text-center">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-0 pt-3 w-64 z-50 hidden group-hover:flex flex-col">
+                  <div className="bg-white text-slate-800 rounded-none border border-slate-200 py-0 w-full flex flex-col text-center shadow-lg">
                     <button
-                      onClick={() => { navigateTo('team'); }}
-                      className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-sm font-bold transition-colors border-none bg-transparent cursor-pointer w-full text-center"
+                      onClick={() => navigateToAndScroll('about', 'vision-goals')}
+                      className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer w-full text-center"
                     >
-                      {lang === 'en' ? 'Our Instructors' : 'مدربونا الأعزاء'}
+                      {t('visionGoals')}
                     </button>
                     <button
-                      onClick={() => { navigateTo('about'); }}
-                      className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-sm font-bold transition-colors border-t border-b border-slate-100 bg-transparent cursor-pointer w-full text-center"
+                      onClick={() => navigateToAndScroll('about', 'our-faculty')}
+                      className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-t border-b border-slate-100 bg-transparent cursor-pointer w-full text-center"
                     >
-                      {lang === 'en' ? 'Academy Profile' : 'ملف الأكاديمية'}
+                      {t('ourFaculty')}
                     </button>
                     <button
-                      onClick={() => navigateTo('contact')}
-                      className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-sm font-bold transition-colors border-none bg-transparent cursor-pointer w-full text-center"
+                      onClick={() => navigateToAndScroll('about', 'accreditations-certs')}
+                      className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer w-full text-center"
                     >
-                      {lang === 'en' ? 'Contact & Register' : 'التواصل والتسجيل'}
+                      {t('accreditations')}
+                    </button>
+                    <button
+                      onClick={() => navigateTo('practical-training')}
+                      className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-t border-slate-100 bg-transparent cursor-pointer w-full text-center"
+                    >
+                      {t('practicalTrainingTitle')}
+                    </button>
+                    <button
+                      onClick={() => navigateTo('testing-lab')}
+                      className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-t border-slate-100 bg-transparent cursor-pointer w-full text-center"
+                    >
+                      {t('testingLab')}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Programs dropdown */}
+              <div className="relative group py-2">
+                <button
+                  onClick={() => navigateTo('programs')}
+                  className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 flex items-center gap-1.5 ${currentPage === 'programs'
+                      ? 'text-white font-extrabold border-b-2 border-white'
+                      : 'text-white/85 hover:text-sky-400 font-semibold'
+                    }`}
+                >
+                  <span>{t('programs')}</span>
+                  <span className="text-[9px] opacity-75 group-hover:rotate-180 transition-transform duration-200">▼</span>
+                </button>
+
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-0 pt-3 w-72 z-50 hidden group-hover:flex flex-col">
+                  <div className="bg-white text-slate-800 rounded-none border border-slate-200 py-0 w-full flex flex-col text-center shadow-lg">
+                    <button
+                      onClick={() => navigateToAndScroll('programs', 'ev-tech')}
+                      className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer w-full text-center"
+                    >
+                      {t('evTechDiploma')}
+                    </button>
+                    <button
+                      onClick={() => navigateToAndScroll('programs', 'hybrid-sys')}
+                      className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-t border-b border-slate-100 bg-transparent cursor-pointer w-full text-center"
+                    >
+                      {t('hybridDiploma')}
+                    </button>
+                    <button
+                      onClick={() => navigateToAndScroll('programs', 'elec-diag')}
+                      className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer w-full text-center"
+                    >
+                      {t('diagnosticsCourse')}
                     </button>
                   </div>
                 </div>
               </div>
 
               <button
-                onClick={() => navigateTo('diagnostics')}
-                className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'diagnostics' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
+                onClick={() => navigateTo('partnerships')}
+                className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'partnerships' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
               >
-                {t('diagnostics')}
+                {t('partnerships')}
               </button>
+
               <button
                 onClick={() => navigateTo('contact')}
                 className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'contact' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
               >
-                {t('contact')}
+                {t('contactUsNav')}
               </button>
             </nav>
 
@@ -328,7 +586,7 @@ export default function App() {
               <button
                 onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
                 id="lang-toggle-button-sticky"
-                className="bg-white/10 hover:bg-white/20 text-white border border-white/10 font-bold text-[10px] sm:text-xs px-3 py-2 rounded-xl flex items-center gap-1.5 transition-all cursor-pointer uppercase font-sans"
+                className="bg-white/10 hover:bg-white/20 text-white border border-white/10 font-bold text-[10px] sm:text-xs px-3 py-2 flex items-center gap-1.5 transition-all cursor-pointer uppercase font-sans"
               >
                 <Globe size={13} className="text-blue-200" />
                 <span>{lang === 'en' ? 'العربية (AR)' : 'ENGLISH (EN)'}</span>
@@ -336,7 +594,7 @@ export default function App() {
 
               <button
                 onClick={() => navigateTo('contact')}
-                className="hidden sm:flex font-extrabold text-xs px-4 py-2 rounded-xl items-center gap-1.5 transition-all shadow-sm cursor-pointer border bg-white text-brand-blue hover:bg-slate-50 border-transparent"
+                className="hidden sm:flex font-extrabold text-xs px-4 py-2 items-center gap-1.5 transition-all cursor-pointer border bg-white text-brand-blue hover:bg-slate-50 border-transparent"
               >
                 <Clock size={12} />
                 <span>{t('registerNow')}</span>
@@ -399,34 +657,22 @@ export default function App() {
               <div className="flex-grow overflow-y-auto px-4 py-6 space-y-2 flex flex-col text-start">
                 <button
                   onClick={() => { setIsMobileMenuOpen(false); navigateTo('home'); }}
-                  className={`py-2.5 px-4 rounded-xl text-start text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'home' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50 hover:text-brand-blue'}`}
+                  className={`py-2.5 px-4 text-start text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'home' ? 'bg-blue-50 text-brand-blue font-extrabold' : 'bg-transparent text-slate-650 hover:bg-slate-50 hover:text-brand-blue'}`}
                 >
                   {t('home')}
                 </button>
-                <button
-                  onClick={() => { setIsMobileMenuOpen(false); navigateTo('courses'); }}
-                  className={`py-2.5 px-4 rounded-xl text-start text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'courses' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50 hover:text-brand-blue'}`}
-                >
-                  {t('courses')}
-                </button>
-                <button
-                  onClick={() => { setIsMobileMenuOpen(false); navigateTo('about'); }}
-                  className={`py-2.5 px-4 rounded-xl text-start text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'about' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50 hover:text-brand-blue'}`}
-                >
-                  {t('about')}
-                </button>
 
-                {/* Team navigation with collapsible Mobile Sublinks */}
+                {/* About Us with collapsible Mobile Sublinks */}
                 <div className="space-y-1">
                   <button
-                    onClick={() => setIsMobileTeamDropdownOpen(!isMobileTeamDropdownOpen)}
-                    className={`w-full py-2.5 px-4 rounded-xl flex items-center justify-between text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'team' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50 hover:text-brand-blue'}`}
+                    onClick={() => setIsMobileAboutOpen(!isMobileAboutOpen)}
+                    className={`w-full py-2.5 px-4 flex items-center justify-between text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'about' ? 'bg-blue-50 text-brand-blue font-extrabold' : 'bg-transparent text-slate-650 hover:bg-slate-50 hover:text-brand-blue'}`}
                   >
-                    <span>{t('team')}</span>
-                    <span className={`text-[10px] transition-transform duration-205 ${isMobileTeamDropdownOpen ? 'rotate-180' : ''}`}>▼</span>
+                    <span>{t('about')}</span>
+                    <span className={`text-[10px] transition-transform duration-200 ${isMobileAboutOpen ? 'rotate-180' : ''}`}>▼</span>
                   </button>
                   <AnimatePresence>
-                    {isMobileTeamDropdownOpen && (
+                    {isMobileAboutOpen && (
                       <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
@@ -435,22 +681,75 @@ export default function App() {
                         className="pl-6 pr-4 border-l-2 border-slate-100 space-y-1.5 mt-1 flex flex-col items-start overflow-hidden font-sans"
                       >
                         <button
-                          onClick={() => { setIsMobileMenuOpen(false); navigateTo('team'); }}
+                          onClick={() => { setIsMobileMenuOpen(false); navigateToAndScroll('about', 'vision-goals'); }}
                           className="py-1 text-slate-500 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer"
                         >
-                          - {lang === 'en' ? 'Our Instructors' : 'مدربونا الأعزاء'}
+                          - {t('visionGoals')}
                         </button>
                         <button
-                          onClick={() => { setIsMobileMenuOpen(false); navigateTo('about'); }}
+                          onClick={() => { setIsMobileMenuOpen(false); navigateToAndScroll('about', 'our-faculty'); }}
                           className="py-1 text-slate-500 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer"
                         >
-                          - {lang === 'en' ? 'Academy Profile' : 'ملف الأكاديمية'}
+                          - {t('ourFaculty')}
                         </button>
                         <button
-                          onClick={() => { setIsMobileMenuOpen(false); navigateTo('contact'); }}
+                          onClick={() => { setIsMobileMenuOpen(false); navigateToAndScroll('about', 'accreditations-certs'); }}
                           className="py-1 text-slate-500 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer"
                         >
-                          - {lang === 'en' ? 'Contact & Register' : 'التواصل والتسجيل'}
+                          - {t('accreditations')}
+                        </button>
+                        <button
+                          onClick={() => { setIsMobileMenuOpen(false); navigateTo('practical-training'); }}
+                          className="py-1 text-slate-500 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer"
+                        >
+                          - {t('practicalTrainingTitle')}
+                        </button>
+                        <button
+                          onClick={() => { setIsMobileMenuOpen(false); navigateTo('testing-lab'); }}
+                          className="py-1 text-slate-500 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer"
+                        >
+                          - {t('testingLab')}
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {/* Programs with collapsible Mobile Sublinks */}
+                <div className="space-y-1">
+                  <button
+                    onClick={() => setIsMobileProgramsOpen(!isMobileProgramsOpen)}
+                    className={`w-full py-2.5 px-4 flex items-center justify-between text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'programs' ? 'bg-blue-50 text-brand-blue font-extrabold' : 'bg-transparent text-slate-650 hover:bg-slate-50 hover:text-brand-blue'}`}
+                  >
+                    <span>{t('programs')}</span>
+                    <span className={`text-[10px] transition-transform duration-200 ${isMobileProgramsOpen ? 'rotate-180' : ''}`}>▼</span>
+                  </button>
+                  <AnimatePresence>
+                    {isMobileProgramsOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="pl-6 pr-4 border-l-2 border-slate-100 space-y-1.5 mt-1 flex flex-col items-start overflow-hidden font-sans"
+                      >
+                        <button
+                          onClick={() => { setIsMobileMenuOpen(false); navigateToAndScroll('programs', 'ev-tech'); }}
+                          className="py-1 text-slate-500 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer"
+                        >
+                          - {t('evTechDiploma')}
+                        </button>
+                        <button
+                          onClick={() => { setIsMobileMenuOpen(false); navigateToAndScroll('programs', 'hybrid-sys'); }}
+                          className="py-1 text-slate-500 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer"
+                        >
+                          - {t('hybridDiploma')}
+                        </button>
+                        <button
+                          onClick={() => { setIsMobileMenuOpen(false); navigateToAndScroll('programs', 'elec-diag'); }}
+                          className="py-1 text-slate-500 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer"
+                        >
+                          - {t('diagnosticsCourse')}
                         </button>
                       </motion.div>
                     )}
@@ -458,16 +757,16 @@ export default function App() {
                 </div>
 
                 <button
-                  onClick={() => { setIsMobileMenuOpen(false); navigateTo('diagnostics'); }}
-                  className={`py-2.5 px-4 rounded-xl text-start text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'diagnostics' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50 hover:text-brand-blue'}`}
+                  onClick={() => { setIsMobileMenuOpen(false); navigateTo('partnerships'); }}
+                  className={`py-2.5 px-4 text-start text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'partnerships' ? 'bg-blue-50 text-brand-blue font-extrabold' : 'bg-transparent text-slate-650 hover:bg-slate-50 hover:text-brand-blue'}`}
                 >
-                  {t('diagnostics')}
+                  {t('partnerships')}
                 </button>
                 <button
                   onClick={() => { setIsMobileMenuOpen(false); navigateTo('contact'); }}
-                  className={`py-2.5 px-4 rounded-xl text-start text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'contact' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50 hover:text-brand-blue'}`}
+                  className={`py-2.5 px-4 text-start text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'contact' ? 'bg-blue-50 text-brand-blue font-extrabold' : 'bg-transparent text-slate-650 hover:bg-slate-50 hover:text-brand-blue'}`}
                 >
-                  {t('contact')}
+                  {t('contactUsNav')}
                 </button>
               </div>
 
@@ -549,21 +848,31 @@ export default function App() {
                     </p>
 
                     {/* CTAs */}
-                    <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                    <div className="flex flex-wrap gap-4 pt-2">
                       <button
                         onClick={() => navigateTo('contact')}
-                        className="bg-brand-blue hover:bg-brand-blue-hover text-white border border-white/10 font-extrabold text-sm px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md"
+                        className="bg-white text-brand-blue hover:bg-slate-100 font-extrabold text-sm px-6 py-4 flex items-center justify-center gap-2 transition-all cursor-pointer border-none"
                       >
                         <Send size={15} />
-                        <span>{t('ctaHeroPrimary')}</span>
+                        <span>{t('bookSeatNow')}</span>
                       </button>
 
-                      <button
-                        onClick={() => navigateTo('about')}
-                        className="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-sm px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md"
+                      <a
+                        href={contact.whatsapp}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="bg-[#232f5b] hover:bg-brand-blue-hover text-white border border-white/20 font-bold text-sm px-6 py-4 flex items-center justify-center gap-2 transition-all cursor-pointer decoration-none"
                       >
-                        <Layers size={14} className="text-blue-300" />
-                        <span>{t('learnMission')}</span>
+                        <MessageSquare size={14} className="text-emerald-450" />
+                        <span>{t('talkAdvisor')}</span>
+                      </a>
+
+                      <button
+                        onClick={() => setVideoModalOpen(true)}
+                        className="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-sm px-6 py-4 flex items-center justify-center gap-2 transition-all cursor-pointer"
+                      >
+                        <Clock size={14} className="text-blue-300 rotate-90" />
+                        <span>{t('watchWorkshopsNav')}</span>
                       </button>
                     </div>
 
@@ -588,7 +897,7 @@ export default function App() {
               </section>
 
               {/* CORE STATISTICS TICKER PANEL */}
-              <section className="bg-white border-b border-slate-200 py-8 relative z-20 shadow-sm">
+              <section className="bg-white border-b border-slate-200 py-8 relative z-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center animate-fade-in">
                     {stats.map((stat, idx) => (
@@ -605,13 +914,82 @@ export default function App() {
                 </div>
               </section>
 
+              {/* MARKET URGENCY COMPONENT (Why This Field Matters) */}
+              <section className="py-16 bg-slate-50 border-b border-slate-200 text-start">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="max-w-3xl space-y-3 mb-12">
+                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">
+                      {lang === 'en' ? 'MARKET URGENCY REPORT' : 'تقرير حيوية السوق والفرص'}
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                      {lang === 'en' ? 'Why Automotive Diagnostics Matters Now' : 'لماذا يعتبر فحص وبرمجة السيارات الفرصة الأقوى حالياً؟'}
+                    </h3>
+                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-medium">
+                      {lang === 'en' 
+                        ? 'The global and regional automotive industry is going through a rapid technical revolution. Traditional mechanical repairs are decaying as vehicles become rolling computers.' 
+                        : 'يمر قطاع صيانة السيارات بالشمال السوري والمنطقة بثورة برمجية وإلكترونية غير مسبوقة. يتلاشى الميكانيك التقليدي لصالح الأنظمة الذكية وفحص الكمبيوتر.'}
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border border-slate-200">
+                    <div className="p-8 bg-white border-b sm:border-b-0 sm:border-r border-slate-200 text-start">
+                      <div className="text-4xl font-black text-brand-blue tracking-tight font-sans">85%</div>
+                      <h4 className="font-extrabold text-sm text-slate-800 mt-3 font-sans">
+                        {lang === 'en' ? 'Global EV/Hybrid Shift' : 'التحول العالمي للسيارات الذكية'}
+                      </h4>
+                      <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                        {lang === 'en' 
+                          ? 'Expected share of new cars using hybrid/electric platforms by 2030.' 
+                          : 'الحصة المتوقعة للسيارات الكهربائية والهجينة في الأسواق الإقليمية بحلول عام 2030.'}
+                      </p>
+                    </div>
+
+                    <div className="p-8 bg-white border-b sm:border-b-0 lg:border-r border-slate-200 text-start">
+                      <div className="text-4xl font-black text-brand-accent tracking-tight font-sans">-70%</div>
+                      <h4 className="font-extrabold text-sm text-slate-800 mt-3 font-sans">
+                        {lang === 'en' ? 'Mechanical Parts Decay' : 'تراجع صيانة الميكانيك التقليدي'}
+                      </h4>
+                      <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                        {lang === 'en' 
+                          ? 'Fewer moving parts means traditional mechanical jobs are shrinking fast.' 
+                          : 'المحركات والبطاريات الحديثة تحتوي على قطع ميكانيكية أقل، مما يعجل باندثار الصيانة التقليدية.'}
+                      </p>
+                    </div>
+
+                    <div className="p-8 bg-white border-b sm:border-r border-slate-200 text-start">
+                      <div className="text-4xl font-black text-brand-blue tracking-tight font-sans">#1</div>
+                      <h4 className="font-extrabold text-sm text-slate-800 mt-3 font-sans">
+                        {lang === 'en' ? 'Early-Mover Advantage' : 'الريادة والسبق التجاري'}
+                      </h4>
+                      <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                        {lang === 'en' 
+                          ? 'Be the first certified diagnostics workshop in your area to capture high-margin clients.' 
+                          : 'كن الأول في منطقتك بامتلاك شهادة رسمية وعتاد معزول لصيانة بطاريات وعقول الهايبرد الكهربائية.'}
+                      </p>
+                    </div>
+
+                    <div className="p-8 bg-white text-start">
+                      <div className="text-4xl font-black text-brand-blue tracking-tight font-sans">4.2x</div>
+                      <h4 className="font-extrabold text-sm text-slate-800 mt-3 font-sans">
+                        {lang === 'en' ? 'Increased Diagnostic Demand' : 'تضاعف الطلب على فنيي الكمبيوتر'}
+                      </h4>
+                      <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                        {lang === 'en' 
+                          ? 'Dealerships and workshops pay premium salaries for certified scan-tool specialists.' 
+                          : 'الوكالات والمراكز الكبرى تتنافس لدفع رواتب عالية للفنيين القادرين على فك الشفرات وقراءة المخططات.'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
               {/* ALTERNATING IMAGE & TEXT FEATURES */}
               <section className="py-16 bg-white border-b border-slate-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
 
                   {/* Row 1: Image Left, Text Right */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                    <div className="relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 aspect-[4/3] bg-slate-100">
+                    <div className="relative overflow-hidden border border-slate-200 aspect-[4/3] bg-slate-100">
                       <img
                         src="https://images.unsplash.com/photo-1517524206127-48bbd363f3d7?auto=format&fit=crop&w=500&q=50"
                         alt="Hands-on training"
@@ -645,7 +1023,7 @@ export default function App() {
                         {t('altRow2Desc')}
                       </p>
                     </div>
-                    <div className="relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 aspect-[4/3] bg-slate-100 md:order-2 order-1">
+                    <div className="relative overflow-hidden border border-slate-200 aspect-[4/3] bg-slate-100 md:order-2 order-1">
                       <img
                         src="https://images.unsplash.com/photo-1616788494707-ec28f08d05a1?auto=format&fit=crop&w=500&q=50"
                         alt="Accredited training"
@@ -657,7 +1035,7 @@ export default function App() {
 
                   {/* Row 3: Image Left, Text Right */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                    <div className="relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 aspect-[4/3] bg-slate-100">
+                    <div className="relative overflow-hidden border border-slate-200 aspect-[4/3] bg-slate-100">
                       <img
                         src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?auto=format&fit=crop&w=500&q=50"
                         alt="Employment placement"
@@ -681,8 +1059,250 @@ export default function App() {
                 </div>
               </section>
 
+              {/* WHAT YOU WILL LEARN SECTION */}
+              <section className="py-16 bg-slate-50 border-b border-slate-200 text-start">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="max-w-3xl space-y-3 mb-12">
+                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">
+                      {lang === 'en' ? 'SKILLS & SYLLABUS' : 'ماذا ستتعلم؟ المهارات الأساسية'}
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                      {lang === 'en' ? '6 Core Pillars of Advanced Diagnostics' : '٦ محاور رئيسية لاحتراف الصيانة الفنية'}
+                    </h3>
+                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-medium">
+                      {lang === 'en'
+                        ? 'Our intensive training program maps out the six most demanded skills in the automotive repair market today.'
+                        : 'يغطي برنامجنا التدريبي المحاور الستة الأكثر طلباً في سوق العمل وصيانة السيارات الحديثة.'}
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {learnItems.map((item, idx) => {
+                      const IconComponent = item.icon;
+                      return (
+                        <div
+                          key={idx}
+                          className="group relative overflow-hidden border border-slate-200 aspect-[16/10] bg-[#232f5b] flex flex-col justify-end p-6 transition-all duration-300"
+                        >
+                          {/* Background Image with Dark Overlay */}
+                          <div className="absolute inset-0 z-0">
+                            <img
+                              src={item.image}
+                              alt={lang === 'en' ? item.titleEn : item.titleAr}
+                              loading="lazy"
+                              className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500 opacity-30 group-hover:opacity-50"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950/20" />
+                          </div>
+
+                          {/* Content Overlay */}
+                          <div className="relative z-10 space-y-2 text-start">
+                            <div className="flex items-center gap-3">
+                              <div className="p-2.5 bg-brand-blue border border-white/20 text-white transition-transform group-hover:scale-110 duration-300">
+                                <IconComponent size={18} className="text-white" />
+                              </div>
+                              <span className="text-[10px] font-mono tracking-widest text-slate-400 block uppercase">
+                                {lang === 'en' ? `MODULE 0${idx + 1}` : `المحور 0${idx + 1}`}
+                              </span>
+                            </div>
+                            
+                            <h4 className="text-base sm:text-lg font-extrabold text-white leading-tight font-sans">
+                              {lang === 'en' ? item.titleEn : item.titleAr}
+                            </h4>
+                            
+                            <p className="text-xs text-slate-350 leading-relaxed font-medium transition-colors duration-300 group-hover:text-white">
+                              {lang === 'en' ? item.descEn : item.descAr}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </section>
+
+              {/* PRACTICAL GALLERY REMOVED FROM HOME PAGE (Moved to subpage) */}
+
+              {/* CAREER PATHWAYS SECTION (What Happens After Graduation?) */}
+              <section className="py-16 bg-white border-b border-slate-200 text-start">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="max-w-3xl space-y-3 mb-12">
+                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">
+                      {lang === 'en' ? 'VOCATIONAL DEPLOYMENT MAP' : 'مخطط التمكين المهني والتوجيه'}
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                      {lang === 'en' ? 'Your Career Placement Pathways' : 'أين ستعمل بعد التخرج؟ فرص ومسارات مضمونة'}
+                    </h3>
+                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-medium">
+                      {lang === 'en' 
+                        ? 'We build direct placement connections to three distinct career markets to ensure you transition immediately into higher-income jobs.' 
+                        : 'نبني قنوات توظيف وتشبيك مباشرة مع ثلاثة أسواق رئيسية لنضمن انتقالك فوراً للعمل وكسب عوائد مالية مجزية.'}
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {/* Local Syria Market */}
+                    <div className="border border-slate-200 p-8 flex flex-col justify-between hover:border-slate-350 transition-colors">
+                      <div className="space-y-4">
+                        <span className="text-[10px] font-mono tracking-wider text-slate-400 uppercase block">01 / LOCAL PLACEMENT</span>
+                        <h4 className="text-lg font-extrabold text-slate-900 font-sans">
+                          {lang === 'en' ? 'Syrian Domestic Market' : 'السوق المحلي (الشمال السوري)'}
+                        </h4>
+                        <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                          {lang === 'en' 
+                            ? 'Authorized diagnostic hubs, localized NGO programs, fleet maintenance workshops, and independent garages in Idleb and rural zones.' 
+                            : 'مراكز صيانة كمبيوتر السيارات الحديثة، برامج التدريب المدعومة، الورش الخاصة، وأسطول الصيانة للمؤسسات في إدلب وريفها.'}
+                        </p>
+                      </div>
+                      <div className="pt-6 border-t border-slate-100 mt-8 flex items-center justify-between text-xs font-mono">
+                        <span className="text-slate-400">{lang === 'en' ? 'EST. SALARY:' : 'الراتب المتوقع:'}</span>
+                        <span className="text-brand-blue font-bold">$300 - $600 / Mo</span>
+                      </div>
+                    </div>
+
+                    {/* Regional Jordan & Gulf */}
+                    <div className="border border-slate-200 p-8 flex flex-col justify-between hover:border-slate-350 transition-colors">
+                      <div className="space-y-4">
+                        <span className="text-[10px] font-mono tracking-wider text-slate-400 uppercase block">02 / REGIONAL EXPORT</span>
+                        <h4 className="text-lg font-extrabold text-slate-900 font-sans">
+                          {lang === 'en' ? 'Jordan & Gulf Dealerships' : 'الأسواق الإقليمية (الأردن والخليج)'}
+                        </h4>
+                        <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                          {lang === 'en' 
+                            ? 'Direct employment recommendations into authorized dealership service bays, battery remanufacturing clinics, and private fleet networks.' 
+                            : 'التوظيف المباشر بناءً على التوصية الحرفية في كبرى وكالات صيانة الهايبرد، وشركات النقل ومراكز تبريد وتجديد الخلايا الإقليمية.'}
+                        </p>
+                      </div>
+                      <div className="pt-6 border-t border-slate-100 mt-8 flex items-center justify-between text-xs font-mono">
+                        <span className="text-slate-400">{lang === 'en' ? 'EST. SALARY:' : 'الراتب المتوقع:'}</span>
+                        <span className="text-brand-blue font-bold">$1,200 - $2,500 / Mo</span>
+                      </div>
+                    </div>
+
+                    {/* Entrepreneurial */}
+                    <div className="border border-slate-200 p-8 flex flex-col justify-between hover:border-slate-350 transition-colors">
+                      <div className="space-y-4">
+                        <span className="text-[10px] font-mono tracking-wider text-slate-400 uppercase block">03 / PRIVATE BUSINESS</span>
+                        <h4 className="text-lg font-extrabold text-slate-900 font-sans">
+                          {lang === 'en' ? 'Your Diagnostics Enterprise' : 'إنشاء مركزك المستقل الخاص'}
+                        </h4>
+                        <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                          {lang === 'en' 
+                            ? 'Establish your own diagnostics shop, hybrid battery cell rebuilding center, or mobile EV roadside scan service.' 
+                            : 'تأسيس ورشة فحص الأعطال الخاصة بك، مركز صيانة وإعادة توازن بطاريات الهايبرد، أو تقديم خدمة الكشف المتنقلة.'}
+                        </p>
+                      </div>
+                      <div className="pt-6 border-t border-slate-100 mt-8 flex items-center justify-between text-xs font-mono">
+                        <span className="text-slate-400">{lang === 'en' ? 'EST. NET PROFIT:' : 'الأرباح الصافية:'}</span>
+                        <span className="text-brand-blue font-bold">$1,500 - $4,000 / Mo</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* ALUMNI TRUST & SUCCESS METRICS */}
+              <section className="py-16 bg-slate-50 border-b border-slate-200 text-start">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="max-w-3xl space-y-3 mb-12">
+                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">
+                      {lang === 'en' ? 'ALUMNI TRUST VERIFICATIONS' : 'شهادات خريجينا الموثقة'}
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                      {lang === 'en' ? 'Verified Placement & Career Outcomes' : 'قصص نجاح مهنية حقيقية من السوق'}
+                    </h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {/* Testimony 1 */}
+                    <div className="bg-white border border-slate-200 p-8 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center gap-4 mb-6">
+                          <img
+                            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80"
+                            alt="Mustafa H."
+                            className="w-16 h-16 object-cover border border-slate-200 grayscale"
+                          />
+                          <div>
+                            <div className="font-extrabold text-sm text-slate-900">Mustafa H.</div>
+                            <div className="text-[10px] text-slate-450 font-mono">Alumnus 2025</div>
+                            <div className="flex gap-0.5 mt-1 text-xs text-amber-500 font-sans">
+                              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                          </div>
+                        </div>
+                        <p className="text-slate-800 text-xs sm:text-sm leading-relaxed font-medium font-sans italic">
+                          {lang === 'en'
+                            ? '"I was a traditional mechanic doing simple oil changes. After 4 months at Hypro, I opened my own hybrid battery diagnostics center in Idleb. I earn three times more now."'
+                            : '"كنت أعمل كميكانيكي تقليدي وبأجور بسيطة. بعد إتمام دبلوم الـ 4 أشهر في هايبـرو، افتتحت مركزي الخاص لصيانة بطاريات الهايبرد في المنطقة الصناعية، وتضاعف دخلي ٣ مرات."'}
+                        </p>
+                      </div>
+                      <div className="pt-4 border-t border-slate-100 mt-6 text-xs text-slate-450 font-mono">
+                        {lang === 'en' ? 'Diagnostic Shop Owner, Idleb' : 'مالك مركز صيانة، إدلب'}
+                      </div>
+                    </div>
+
+                    {/* Testimony 2 */}
+                    <div className="bg-white border border-slate-200 p-8 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center gap-4 mb-6">
+                          <img
+                            src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&h=120&q=80"
+                            alt="Ahmad A."
+                            className="w-16 h-16 object-cover border border-slate-200 grayscale"
+                          />
+                          <div>
+                            <div className="font-extrabold text-sm text-slate-900">Ahmad A.</div>
+                            <div className="text-[10px] text-slate-450 font-mono">Alumnus 2025</div>
+                            <div className="flex gap-0.5 mt-1 text-xs text-amber-500 font-sans">
+                              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                          </div>
+                        </div>
+                        <p className="text-slate-800 text-xs sm:text-sm leading-relaxed font-medium font-sans italic">
+                          {lang === 'en'
+                            ? '"I enrolled with zero background in electronics. Today I work as a senior Diagnostic Lead in an authorized agency workshop, easily decoding Toyota HV system faults."'
+                            : '"التحقت بالأكاديمية بدون أي معرفة مسبقة بالكهرباء. اليوم أعمل كفني فحص وتشخيص رئيسي في مركز خدمة كبير، وأتعامل بثقة تامة مع أكواد السلامة وعقول السيارات."'}
+                        </p>
+                      </div>
+                      <div className="pt-4 border-t border-slate-100 mt-6 text-xs text-slate-450 font-mono">
+                        {lang === 'en' ? 'Dealership Scanner Specialist' : 'فني فحص وتشخيص وكالة'}
+                      </div>
+                    </div>
+
+                    {/* Testimony 3 */}
+                    <div className="bg-white border border-slate-200 p-8 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center gap-4 mb-6">
+                          <img
+                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=120&h=120&q=80"
+                            alt="Yaseen K."
+                            className="w-16 h-16 object-cover border border-slate-200 grayscale"
+                          />
+                          <div>
+                            <div className="font-extrabold text-sm text-slate-900">Yaseen K.</div>
+                            <div className="text-[10px] text-slate-450 font-mono">Alumnus 2025</div>
+                            <div className="flex gap-0.5 mt-1 text-xs text-amber-500 font-sans">
+                              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                          </div>
+                        </div>
+                        <p className="text-slate-800 text-xs sm:text-sm leading-relaxed font-medium font-sans italic">
+                          {lang === 'en'
+                            ? '"The job placement program is 100% real. I passed my high-voltage trade test on Tuesday and started working in an NGO-sponsored fleet on Sunday."'
+                            : '"برنامج التوظيف والتشبيك حقيقي وفعال. أنهيت امتحاني العملي النهائي يوم الثلاثاء، وبدأت العمل كفني صيانة معتمد لأسطول سيارات المنظمة صباح يوم الأحد."'}
+                        </p>
+                      </div>
+                      <div className="pt-4 border-t border-slate-100 mt-6 text-xs text-slate-450 font-mono">
+                        {lang === 'en' ? 'Fleet Maintenance Technician' : 'فني صيانة أسطول سيارات'}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
               {/* B2B & INSTITUTIONAL ALLIANCE HUB */}
-              <section className="bg-slate-50 border-b border-slate-200 py-16 lg:py-20 text-start" id="b2b-alliance-hub">
+              <section className="bg-white border-b border-slate-200 py-16 lg:py-20 text-start" id="b2b-alliance-hub">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="max-w-3xl space-y-3 mb-12">
                     <span className="inline-flex items-center gap-1.5 bg-blue-50 text-brand-blue border border-blue-100 px-3.5 py-1.5 rounded-full text-xs font-bold font-mono tracking-wide uppercase">
@@ -698,9 +1318,9 @@ export default function App() {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in">
-                    <div className="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between shadow-sm">
+                    <div className="bg-white border border-slate-200 p-6 flex flex-col justify-between">
                       <div>
-                        <div className="p-3 bg-blue-50 text-brand-blue rounded-xl w-12 h-12 flex items-center justify-center mb-4">
+                        <div className="p-3 bg-blue-50 text-brand-blue w-12 h-12 flex items-center justify-center mb-4">
                           <Wrench size={20} />
                         </div>
                         <h4 className="font-bold text-base text-slate-900 font-sans">
@@ -715,16 +1335,16 @@ export default function App() {
                       </div>
                       <button
                         onClick={() => { setActiveCategory('workshop'); navigateTo('contact'); }}
-                        className="mt-6 w-full py-2.5 px-4 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                        className="mt-6 w-full py-2.5 px-4 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer border-none"
                       >
                         <span>{t('workshopPartnerships')}</span>
                         <ArrowRight size={12} className="text-brand-blue" />
                       </button>
                     </div>
 
-                    <div className="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between shadow-sm">
+                    <div className="bg-white border border-slate-200 p-6 flex flex-col justify-between">
                       <div>
-                        <div className="p-3 bg-blue-50 text-brand-blue rounded-xl w-12 h-12 flex items-center justify-center mb-4">
+                        <div className="p-3 bg-blue-50 text-brand-blue w-12 h-12 flex items-center justify-center mb-4">
                           <Building2 size={20} />
                         </div>
                         <h4 className="font-bold text-base text-slate-900 font-sans">
@@ -739,16 +1359,16 @@ export default function App() {
                       </div>
                       <button
                         onClick={() => { setActiveCategory('dealer'); navigateTo('contact'); }}
-                        className="mt-6 w-full py-2.5 px-4 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                        className="mt-6 w-full py-2.5 px-4 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer border-none"
                       >
                         <span>{t('agencyProtocols')}</span>
                         <ArrowRight size={12} className="text-brand-blue" />
                       </button>
                     </div>
 
-                    <div className="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between shadow-sm">
+                    <div className="bg-white border border-slate-200 p-6 flex flex-col justify-between">
                       <div>
-                        <div className="p-3 bg-blue-50 text-brand-blue rounded-xl w-12 h-12 flex items-center justify-center mb-4">
+                        <div className="p-3 bg-blue-50 text-brand-blue w-12 h-12 flex items-center justify-center mb-4">
                           <Users size={20} />
                         </div>
                         <h4 className="font-bold text-base text-slate-900 font-sans">
@@ -763,7 +1383,7 @@ export default function App() {
                       </div>
                       <button
                         onClick={() => { setActiveCategory('ngo'); navigateTo('contact'); }}
-                        className="mt-6 w-full py-2.5 px-4 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                        className="mt-6 w-full py-2.5 px-4 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer border-none"
                       >
                         <span>{t('ngoSupport')}</span>
                         <ArrowRight size={12} className="text-brand-blue" />
@@ -774,7 +1394,7 @@ export default function App() {
               </section>
 
               {/* VOCATIONAL HIGHLIGHT CARDS & CREDENTIALS SECTION */}
-              <section className="py-16 bg-slate-50 border-b border-slate-200">
+              <section className="py-16 bg-slate-50 border-b border-slate-200 text-start">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                   <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-sans">
                     {t('whyTitle')}
@@ -787,8 +1407,8 @@ export default function App() {
                     {whys.map((w, idx) => {
                       const Icon = w.icon;
                       return (
-                        <div key={idx} className="bg-white border border-slate-200 p-6 rounded-2xl relative transition-all hover:shadow-md">
-                          <div className="p-3 bg-blue-50 text-brand-blue rounded-xl w-12 h-12 flex items-center justify-center mb-5">
+                        <div key={idx} className="bg-white border border-slate-200 p-6 relative transition-all hover:border-slate-350">
+                          <div className="p-3 bg-blue-50 text-brand-blue w-12 h-12 flex items-center justify-center mb-5">
                             <Icon size={20} />
                           </div>
                           <h4 className="font-bold text-lg text-slate-900 mb-2 font-sans">
@@ -805,7 +1425,7 @@ export default function App() {
               </section>
 
               {/* QUICK NAV TO DETAILED SECTIONS */}
-              <section className="py-16 bg-white text-center">
+              <section className="py-16 bg-white text-center border-b border-slate-200">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
                   <h3 className="text-2xl font-bold text-slate-900">
                     {t('readyExplore')}
@@ -814,13 +1434,100 @@ export default function App() {
                     {t('browseDetails')}
                   </p>
                   <button
-                    onClick={() => navigateTo('courses')}
-                    className="bg-brand-blue hover:bg-brand-blue-hover text-white font-bold text-xs px-8 py-3.5 rounded-xl transition-all cursor-pointer border-none inline-flex items-center gap-2 shadow-sm"
+                    onClick={() => navigateTo('programs')}
+                    className="bg-brand-blue hover:bg-brand-blue-hover text-white font-bold text-xs px-8 py-3.5 transition-all cursor-pointer border-none inline-flex items-center gap-2"
                   >
                     <span>{t('viewCourseDetails')}</span>
                     <ArrowRight size={14} />
                   </button>
                 </div>
+              </section>
+
+              {/* HIGH-CONVERSION QUICK REGISTRATION RIBBON */}
+              <section className="bg-brand-blue text-white py-12 border-t border-white/10 relative overflow-hidden">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-start">
+                  <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+                    
+                    {/* Headings */}
+                    <div className="max-w-xl space-y-2">
+                      <span className="text-[10px] font-mono tracking-widest text-blue-300 uppercase block font-bold">
+                        {lang === 'en' ? 'FAST REGISTRATION GATEWAY' : 'بوابة القبول والتسجيل السريع'}
+                      </span>
+                      <h4 className="text-xl sm:text-2xl font-black text-white font-sans tracking-tight">
+                        {lang === 'en' ? 'Secure Your Seat Instantly' : 'احجز مقعدك الدراسي في ثوانٍ'}
+                      </h4>
+                      <p className="text-slate-300 text-xs sm:text-sm font-medium leading-relaxed font-sans">
+                        {lang === 'en' 
+                          ? 'Fill in your details below and finalize verification instantly via our direct WhatsApp admissions desk.' 
+                          : 'أدخل معلوماتك الأساسية أدناه وأرسلها مباشرة لقسم القبول والتسجيل لتأكيد الحجز فوراً عبر واتساب.'}
+                      </p>
+                    </div>
+
+                    {/* Minimalist 3-field Form */}
+                    <form 
+                      onSubmit={handleQuickRegister}
+                      className="w-full lg:w-auto flex flex-col sm:flex-row items-stretch sm:items-end gap-3 flex-grow max-w-3xl"
+                    >
+                      {/* Name field */}
+                      <div className="flex-grow space-y-1.5 text-start">
+                        <label className="text-[10px] font-bold text-slate-300 uppercase font-mono tracking-wider">
+                          {t('fullNameLabel')}
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={quickRegName}
+                          onChange={(e) => setQuickRegName(e.target.value)}
+                          placeholder={lang === 'en' ? 'John Doe' : 'الاسم الثنائي أو الثلاثي'}
+                          className="w-full bg-white/5 border border-white/20 text-white text-xs px-4 py-3 placeholder-slate-500 focus:outline-none focus:border-white transition-colors h-[46px]"
+                        />
+                      </div>
+
+                      {/* Phone field */}
+                      <div className="flex-grow space-y-1.5 text-start">
+                        <label className="text-[10px] font-bold text-slate-300 uppercase font-mono tracking-wider">
+                          {t('phoneLabel')}
+                        </label>
+                        <input
+                          type="tel"
+                          required
+                          value={quickRegPhone}
+                          onChange={(e) => setQuickRegPhone(e.target.value)}
+                          placeholder={lang === 'en' ? '+963-955-408-202' : 'رقم الهاتف مع الرمز'}
+                          className="w-full bg-white/5 border border-white/20 text-white text-xs px-4 py-3 placeholder-slate-500 focus:outline-none focus:border-white transition-colors h-[46px] text-start"
+                        />
+                      </div>
+
+                      {/* Governorate field */}
+                      <div className="flex-grow space-y-1.5 text-start">
+                        <label className="text-[10px] font-bold text-slate-300 uppercase font-mono tracking-wider">
+                          {t('govLabel')}
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={quickRegGov}
+                          onChange={(e) => setQuickRegGov(e.target.value)}
+                          placeholder={lang === 'en' ? 'Idleb / Aleppo' : 'المحافظة أو المدينة'}
+                          className="w-full bg-white/5 border border-white/20 text-white text-xs px-4 py-3 placeholder-slate-500 focus:outline-none focus:border-white transition-colors h-[46px]"
+                        />
+                      </div>
+
+                      {/* Submit button */}
+                      <button
+                        type="submit"
+                        className="bg-white hover:bg-slate-100 text-brand-blue font-extrabold text-xs px-6 py-4 flex items-center justify-center gap-1.5 transition-all cursor-pointer border-none h-[46px] sm:min-w-[170px]"
+                      >
+                        <MessageSquare size={13} className="text-emerald-600" />
+                        <span>{t('whatsappVerification')}</span>
+                      </button>
+                    </form>
+
+                  </div>
+                </div>
+
+                {/* Grid decorative background */}
+                <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
               </section>
 
             </motion.div>
@@ -833,305 +1540,258 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.2 }}
-              className="py-16 bg-white text-start"
+              className="bg-white text-slate-800"
             >
-              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 animate-fade-in">
-
-                {/* Header */}
-                <div className="space-y-3 pb-8 border-b border-slate-200">
-                  <span className="inline-flex items-center gap-1.5 bg-blue-50 text-brand-blue border border-blue-100 px-3.5 py-1.5 rounded-full text-xs font-bold font-mono tracking-wide uppercase">
-                    <Building2 size={13} />
-                    <span>{t('ourProfile')}</span>
-                  </span>
-                  <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight font-sans">
-                    {t('aboutTitle')}
-                  </h2>
-                  <p className="text-slate-500 text-xs sm:text-sm font-medium leading-relaxed">
-                    {t('aboutDesc')}
-                  </p>
+              {/* Mission, Vision & Regional Impact */}
+              <section className="py-20 md:py-24 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-200" id="vision-goals">
+                <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block mb-3">
+                  {lang === 'en' ? 'OUR MISSION & REGIONAL IMPACT' : 'رسالتنا وأثرنا الإقليمي التنموي'}
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-8">
+                  {lang === 'en' ? 'Transitioning Tech Labor Into Clean Energy' : 'تأهيل الكوادر الفنية نحو أنظمة الطاقة النظيفة'}
+                </h2>
+                <p className="text-slate-650 text-base sm:text-lg lg:text-xl leading-relaxed font-sans font-medium mb-6">
+                  {lang === 'en'
+                    ? 'Hypro Academy is built on the principles of institutional capacity building, economic youth empowerment, and technical modernization. By equipping local trainees with advanced diagnostics and high-voltage training, we create a vital bridge for sustainable employment across the region.'
+                    : 'تأسست أكاديمية هايبـرو على ركائز بناء القدرات المؤسساتية، وتمكين الشباب اقتصادياً، وتحديث التعليم الفني والمهني. نسعى لنقل الكفاءات في الشمال السوري من الصيانة الميكانيكية البسيطة إلى تشخيص الأنظمة الهجينة والكهربائية المتطورة.'}
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-10 border-t border-slate-100 mt-12 text-start animate-fade-in">
+                  <div>
+                    <h4 className="font-extrabold text-base text-slate-950 font-sans">{lang === 'en' ? 'Youth Empowerment' : 'تمكين الشباب'}</h4>
+                    <p className="text-slate-500 text-xs mt-2 leading-relaxed">{lang === 'en' ? 'Sponsoring youth with high-value technical skills that fight unemployment.' : 'توفير مهارات مهنية ذات دخل مرتفع تفتح آفاق التوظيف المباشر وتحارب البطالة.'}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-extrabold text-base text-slate-950 font-sans">{lang === 'en' ? 'Capacity Building' : 'بناء القدرات'}</h4>
+                    <p className="text-slate-500 text-xs mt-2 leading-relaxed">{lang === 'en' ? 'Standardizing inspection and safety protocols across local workshops.' : 'توحيد بروتوكولات الفحص وإجراءات السلامة المهنية لقطاع الصيانة المحلي.'}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-extrabold text-base text-slate-950 font-sans">{lang === 'en' ? 'Clean Ecosystems' : 'نقلة الطاقة النظيفة'}</h4>
+                    <p className="text-slate-500 text-xs mt-2 leading-relaxed">{lang === 'en' ? 'Preparing the local automotive workforce for hybrid and electric networks.' : 'تمهيد الطريق لاعتماد صيانة سيارات الطاقة النظيفة بشكل آمن ومعتمد.'}</p>
+                  </div>
                 </div>
+              </section>
 
-                {/* Story */}
-                <div className="py-10 space-y-6">
-                  <h3 className="text-xl font-bold text-slate-900">
-                    {t('ourOrigin')}
-                  </h3>
-                  <p className="text-slate-650 text-sm sm:text-base leading-relaxed font-sans font-medium bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                    {tObj(academyContent.aboutUs, 'story')}
-                  </p>
-                </div>
-
-                {/* Mission and Vision */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-4">
-
-                  {/* Mission Card */}
-                  <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-3">
-                    <div className="p-3 bg-blue-50 text-brand-blue rounded-xl w-12 h-12 flex items-center justify-center">
-                      <Award size={20} />
-                    </div>
-                    <h4 className="font-bold text-lg text-slate-900 font-sans">
-                      {t('ourMission')}
-                    </h4>
-                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-sans font-medium">
-                      {tObj(academyContent.aboutUs, 'mission')}
+              {/* Institutional Accreditations Panel */}
+              <section className="py-16 md:py-20 bg-slate-50 border-b border-slate-200 text-start" id="accreditations-certs">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="max-w-3xl space-y-3 mb-12">
+                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">
+                      {lang === 'en' ? 'VOCATIONAL CREDENTIALS' : 'الاعتمادات والشهادات الرسمية'}
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                      {lang === 'en' ? 'Official Licenses & Stamp Credibility' : 'الوثائق والتراخيص المعتمدة'}
+                    </h3>
+                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-medium">
+                      {lang === 'en'
+                        ? 'To ensure B2B trust and employment validity, Hypro Academy maintains registrations and alignment with TVET syndicates.'
+                        : 'لضمان ثقة المانحين وأصحاب العمل وصحة الشهادات الصادرة، تحتفظ أكاديمية هايبـرو بتراخيص رسمية ومواءمة مع نقابات الحرف الفنية.'}
                     </p>
                   </div>
 
-                  {/* Vision Card */}
-                  <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-3">
-                    <div className="p-3 bg-blue-50 text-brand-blue rounded-xl w-12 h-12 flex items-center justify-center">
-                      <Globe size={20} />
-                    </div>
-                    <h4 className="font-bold text-lg text-slate-900 font-sans">
-                      {t('ourVision')}
-                    </h4>
-                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-sans font-medium">
-                      {tObj(academyContent.aboutUs, 'vision')}
-                    </p>
-                  </div>
-
-                </div>
-
-                {/* Accreditations */}
-                <div className="pt-10 space-y-4">
-                  <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono">
-                    {t('vocationalLegitimacy')}
-                  </h4>
-                  <div className="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 space-y-6">
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
-                      {t('vocationalLegitimacyDesc')}
-                    </p>
-
-                    <div className="flex flex-wrap gap-4 pt-2 border-t border-slate-800">
-                      <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
-                        <CheckCircle size={14} className="text-emerald-400" />
-                        <span>{t('certifiedIdlebOffice')}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
-                        <CheckCircle size={14} className="text-emerald-400" />
-                        <span>{t('highVoltageSafety')}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bottom CTA */}
-                <div className="pt-12 text-center">
-                  <button
-                    onClick={() => navigateTo('contact')}
-                    className="bg-brand-blue hover:bg-brand-blue-hover text-white font-extrabold text-sm px-8 py-3.5 rounded-xl transition-all cursor-pointer border-none inline-flex items-center gap-2 shadow-sm"
-                  >
-                    <Send size={14} />
-                    <span>{t('initiatePartnership')}</span>
-                  </button>
-                </div>
-
-              </div>
-            </motion.div>
-          )}
-
-          {currentPage === 'courses' && (
-            <motion.div
-              key="courses"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.2 }}
-              className="py-16 bg-white text-start"
-            >
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                {/* Header */}
-                <div className="max-w-3xl space-y-3 pb-8 border-b border-slate-200 mb-8">
-                  <span className="inline-flex items-center gap-1.5 bg-blue-50 text-brand-blue border border-blue-100 px-3.5 py-1.5 rounded-full text-xs font-bold font-mono tracking-wide uppercase">
-                    <Layers size={13} className="text-brand-blue" />
-                    <span>{t('certifiedDiploma')}</span>
-                  </span>
-                  <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 font-sans">
-                    {t('coursesTitle')}
-                  </h2>
-                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-sans font-medium">
-                    {t('coursesDesc')}
-                  </p>
-                </div>
-
-                {/* Courses List Layout */}
-                <div className="space-y-10">
-                  {modules.map((m, index) => (
-                    <div
-                      key={m.id}
-                      className="bg-slate-50 border border-slate-200 rounded-2xl p-6 md:p-8 flex flex-col lg:flex-row gap-8 items-start transition-all hover:shadow-sm"
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    {/* Credential 1 */}
+                    <div 
+                      onClick={() => setActiveAccreditation('https://images.unsplash.com/photo-1589330694653-ded6df53f7ee?auto=format&fit=crop&w=800&q=80')}
+                      className="bg-white border border-slate-200 p-4 hover:border-slate-350 transition-all cursor-zoom-in"
                     >
-                      {/* Left Info: Months & General Stats */}
-                      <div className="lg:w-1/3 space-y-4 w-full">
-                        <span className="inline-flex items-center gap-1.5 bg-brand-blue text-white px-3 py-1 rounded-full text-[10px] font-bold font-mono uppercase tracking-wider">
-                          {t('stage')} 0{index + 1}
-                        </span>
-
-                        <h3 className="text-xl font-bold text-slate-900 leading-tight font-sans">
-                          {tObj(m, 'title')}
-                        </h3>
-
-                        <p className="text-xs font-semibold text-slate-500 font-mono block">
-                          {m.month}
-                        </p>
-
-                        <div className="space-y-2 pt-2 text-xs text-slate-500 border-t border-slate-200">
-                          <div className="flex justify-between py-1">
-                            <span>{t('duration')}</span>
-                            <span className="font-bold text-slate-800">{tObj(m, 'duration')}</span>
-                          </div>
-                          <div className="flex justify-between py-1">
-                            <span>{t('practicalRatio')}</span>
-                            <span className="font-bold text-brand-blue">{tObj(m, 'ratio')}</span>
-                          </div>
-                        </div>
-
-                        {/* Practical Ratio Bar */}
-                        <div className="space-y-1.5 pt-1">
-                          <div className="flex justify-between text-[9px] text-slate-400 font-mono">
-                            <span>{t('practical')}</span>
-                            <span>{t('theory')}</span>
-                          </div>
-                          <div className="h-2 rounded-full bg-slate-250 flex overflow-hidden">
-                            <div
-                              className="bg-brand-blue h-full"
-                              style={{ width: m.id === 'mod-1' ? '70%' : m.id === 'mod-4' ? '100%' : '80%' }}
-                            />
-                            <div
-                              className="bg-slate-300 h-full"
-                              style={{ width: m.id === 'mod-1' ? '30%' : m.id === 'mod-4' ? '0%' : '20%' }}
-                            />
-                          </div>
-                        </div>
+                      <div className="aspect-[4/3] w-full bg-slate-100 overflow-hidden relative border border-slate-100">
+                        <img 
+                          src="https://images.unsplash.com/photo-1589330694653-ded6df53f7ee?auto=format&fit=crop&w=600&q=80" 
+                          alt="TVET Jordan Stamp Alignment" 
+                          className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+                        />
                       </div>
-
-                      {/* Right Info: Vetted Skills & Action */}
-                      <div className="lg:w-2/3 w-full bg-white border border-slate-200 rounded-xl p-5 md:p-6 flex flex-col justify-between self-stretch shadow-sm">
-                        <div className="space-y-4">
-                          <h4 className="text-xs font-bold text-slate-500 font-sans uppercase tracking-wider">
-                            {t('targetCompetencies')}
-                          </h4>
-
-                          <ul className="space-y-3">
-                            {(tObj(m, 'skills') as unknown as string[])?.map((skill, sIdx) => (
-                              <li key={sIdx} className="flex items-start gap-3 text-xs md:text-sm text-slate-650 leading-relaxed text-start font-medium font-sans">
-                                <CheckCircle2 size={16} className="text-brand-blue mt-0.5 flex-shrink-0" />
-                                <span>{skill}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        <div className="pt-6 border-t border-slate-100 mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-                          <div className="flex items-center gap-2 text-[10px] text-slate-400">
-                            <Cpu size={14} className="text-brand-blue" />
-                            <span>{t('standardizedTools')}</span>
-                          </div>
-                          <button
-                            onClick={() => navigateTo('contact')}
-                            className="bg-brand-blue hover:bg-brand-blue-hover text-white font-bold text-[11px] px-5 py-2.5 rounded-lg transition-all cursor-pointer border-none shadow-sm"
-                          >
-                            {t('inquireEnroll')}
-                          </button>
-                        </div>
+                      <div className="mt-4 font-sans text-start">
+                        <h4 className="font-extrabold text-sm text-slate-900">{lang === 'en' ? 'Jordanian TVET Accreditation' : 'اعتماد نقابات الحرف الفنية (TVET)'}</h4>
+                        <p className="text-slate-500 text-[11px] mt-1">{lang === 'en' ? 'Alignment code: JO-TVET-9021' : 'اعتماد تدريب مهني وترخيص صيانة السيارات الحديثة'}</p>
                       </div>
-
                     </div>
-                  ))}
-                </div>
 
-                {/* Additional Info Cards */}
-                <div className="mt-16 bg-slate-900 text-white rounded-3xl p-6 sm:p-10 border border-slate-800 grid grid-cols-1 md:grid-cols-3 gap-8">
-                  <div className="space-y-2 text-start">
-                    <div className="text-brand-blue font-sans text-xs font-bold uppercase tracking-wider">{t('insulatedTitle')}</div>
-                    <h4 className="font-extrabold text-base text-white font-sans">{t('hvProtection')}</h4>
-                    <p className="text-slate-400 text-xs leading-relaxed font-medium">{t('insulatedDesc')}</p>
+                    {/* Credential 2 */}
+                    <div 
+                      onClick={() => setActiveAccreditation('https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80')}
+                      className="bg-white border border-slate-200 p-4 hover:border-slate-350 transition-all cursor-zoom-in"
+                    >
+                      <div className="aspect-[4/3] w-full bg-slate-100 overflow-hidden relative border border-slate-100">
+                        <img 
+                          src="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=600&q=80" 
+                          alt="Syndicate stamp" 
+                          className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+                        />
+                      </div>
+                      <div className="mt-4 font-sans text-start">
+                        <h4 className="font-extrabold text-sm text-slate-900">{lang === 'en' ? 'Official Syndicate Stamp' : 'الختم النقابي والتجاري للمهنة'}</h4>
+                        <p className="text-slate-500 text-[11px] mt-1">{lang === 'en' ? 'Authorized vocational registry' : 'سجل ترخيص رقمي رسمي للخريجين والمنتسبين'}</p>
+                      </div>
+                    </div>
+
+                    {/* Credential 3 */}
+                    <div 
+                      onClick={() => setActiveAccreditation('https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80')}
+                      className="bg-white border border-slate-200 p-4 hover:border-slate-350 transition-all cursor-zoom-in"
+                    >
+                      <div className="aspect-[4/3] w-full bg-slate-100 overflow-hidden relative border border-slate-100">
+                        <img 
+                          src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80" 
+                          alt="HV Handling Safety stamp" 
+                          className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+                        />
+                      </div>
+                      <div className="mt-4 font-sans text-start">
+                        <h4 className="font-extrabold text-sm text-slate-900">{lang === 'en' ? 'HV Safety & Diagnostics Code' : 'شهادة أمان الفولت العالي والكهرباء'}</h4>
+                        <p className="text-slate-500 text-[11px] mt-1">{lang === 'en' ? '1000V safe handling credentials' : 'بروتوكولات الأمان الفني وعزل البطاريات الكهربائية'}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="space-y-2 text-start">
-                    <div className="text-brand-blue font-sans text-xs font-bold uppercase tracking-wider">{t('liveFaultDrills')}</div>
-                    <h4 className="font-extrabold text-base text-white font-sans">{t('realTroubleshooting')}</h4>
-                    <p className="text-slate-400 text-xs leading-relaxed font-medium">{t('liveFaultDesc')}</p>
-                  </div>
-                  <div className="space-y-2 text-start">
-                    <div className="text-brand-blue font-sans text-xs font-bold uppercase tracking-wider">{t('directPlacement')}</div>
-                    <h4 className="font-extrabold text-base text-white font-sans">{t('employmentGuarantee')}</h4>
-                    <p className="text-slate-400 text-xs leading-relaxed font-medium">{t('directPlacementDesc')}</p>
-                  </div>
                 </div>
+              </section>
 
-              </div>
-            </motion.div>
-          )}
+              {/* Faculty & Instructor Grid */}
+              <section className="py-16 md:py-20 bg-white text-start" id="our-faculty">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="max-w-3xl space-y-3 mb-12">
+                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">
+                      {lang === 'en' ? 'ELITE TECHNICAL MENTORS' : 'كادر المهندسين والمعلمين'}
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                      {lang === 'en' ? 'Learn Directly from Industrial Experts' : 'تلقّ الخبرة من رواد السوق مباشرة'}
+                    </h3>
+                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-medium">
+                      {lang === 'en'
+                        ? 'Our engineers are master bench-repair technicians who solve complex high-voltage diagnostics and logic board circuits on a daily basis.'
+                        : 'يعمل مدربونا يومياً في فحص وإصلاح بطاريات وعقول الهايبرد والسيارات الحديثة في الميدان، مما يضمن تلقيك لخبرة عملية حقيقية.'}
+                    </p>
+                  </div>
 
-          {currentPage === 'team' && (
-            <motion.div
-              key="team"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.2 }}
-              className="py-16 bg-white text-start"
-            >
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                {/* Header text */}
-                <div className="max-w-3xl space-y-3 pb-10 border-b border-slate-200 mb-12 animate-fade-in">
-                  <span className="inline-flex items-center gap-1.5 bg-blue-50 text-brand-blue border border-blue-100 px-3.5 py-1.5 rounded-full text-xs font-bold font-mono tracking-wide uppercase">
-                    <Users size={13} />
-                    <span>{t('ourEliteMentors')}</span>
-                  </span>
-                  <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 font-sans">
-                    {t('mentorsTitle')}
-                  </h2>
-                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-sans font-medium">
-                    {t('mentorsDesc')}
-                  </p>
-                </div>
-
-                {/* Team member grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-fade-in">
-                  {academyContent.team.map((member, idx) => (
-                    <div key={idx} className="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:shadow-md transition-all flex flex-col justify-between">
-                      <div className="space-y-4">
-
-                        {/* Avatar */}
-                        <div className="w-14 h-14 rounded-2xl bg-brand-blue text-white flex items-center justify-center font-extrabold text-lg shadow-sm">
-                          {member.nameEn.split(' ').slice(1).map(n => n[0]).join('') || 'HY'}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* Faculty Member 1 */}
+                    <div className="bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                      <div>
+                        <div className="aspect-[3/4] w-full bg-slate-100 overflow-hidden relative">
+                          <img 
+                            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" 
+                            alt="Eng. Ammar Al-Ahmad" 
+                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+                          />
                         </div>
-
-                        {/* Name and title */}
-                        <div>
-                          <h4 className="font-extrabold text-base text-slate-900 font-sans">
-                            {tObj(member, 'name')}
+                        <div className="p-6">
+                          <h4 className="font-extrabold text-base text-slate-950 font-sans">
+                            {lang === 'en' ? 'Eng. Ammar Al-Ahmad' : 'المهندس عمار الأحمد'}
                           </h4>
-                          <span className="text-[10px] font-mono font-bold tracking-wide uppercase text-brand-blue block mt-1">
-                            {tObj(member, 'role')}
+                          <span className="text-[10px] font-mono font-bold text-brand-blue tracking-wider block mt-1">
+                            {lang === 'en' ? 'Lead EV Mentor & Founding Director' : 'المدير المؤسس والموجه الرئيسي لسيارات الكهرباء'}
                           </span>
+                          <p className="text-slate-500 text-xs mt-3 leading-relaxed">
+                            {lang === 'en' 
+                              ? 'Specialist in high-voltage micro-controller mapping, hybrid battery cell rebuilding, and ECU calibrations.'
+                              : 'أخصائي هندسة الالكترون وبرمجة العقول الإلكترونية وإعادة موازنة خلايا الفولت العالي. يشرف على اختبارات فحص الكفاءة.'}
+                          </p>
                         </div>
-
-                        {/* Bio */}
-                        <p className="text-slate-500 text-xs leading-relaxed font-sans font-medium text-start">
-                          {tObj(member, 'bio')}
-                        </p>
                       </div>
-
-                      {/* Tenure */}
-                      <div className="pt-4 border-t border-slate-200 mt-5 flex items-center justify-between text-[10px] font-mono text-slate-400 font-bold">
-                        <span>{t('tenure')}</span>
-                        <span className="text-slate-800 font-bold">{tObj(member, 'experience')}</span>
+                      <div className="p-6 pt-0 border-t border-slate-150 mt-4 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                        <span>{lang === 'en' ? 'EXPERIENCE:' : 'الخبرة:'}</span>
+                        <span className="text-slate-900 font-bold">{lang === 'en' ? '24 Years' : '٢٤ عاماً'}</span>
                       </div>
                     </div>
-                  ))}
-                </div>
 
-              </div>
+                    {/* Faculty Member 2 */}
+                    <div className="bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                      <div>
+                        <div className="aspect-[3/4] w-full bg-slate-100 overflow-hidden relative">
+                          <img 
+                            src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" 
+                            alt="Eng. Basel Al-Sagheer" 
+                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+                          />
+                        </div>
+                        <div className="p-6">
+                          <h4 className="font-extrabold text-base text-slate-950 font-sans">
+                            {lang === 'en' ? 'Eng. Basel Al-Sagheer' : 'المهندس باسل الصغير'}
+                          </h4>
+                          <span className="text-[10px] font-mono font-bold text-brand-blue tracking-wider block mt-1">
+                            {lang === 'en' ? 'Senior Inverter & Calibration Instructor' : 'كبير مدربي صيانة مبدلات الطاقة والمحركات'}
+                          </span>
+                          <p className="text-slate-500 text-xs mt-3 leading-relaxed">
+                            {lang === 'en' 
+                              ? 'Expert in European, Toyota, and Korean hybrid dual powertrains diagnostics with focus on workplace safety.'
+                              : 'خبير تشخيص وحل أعطال العواكس (الأصناف الكورية واليابانية والأوروبية) مع تركيز صارم على بروتوكولات الأمان الفني.'}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="p-6 pt-0 border-t border-slate-150 mt-4 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                        <span>{lang === 'en' ? 'EXPERIENCE:' : 'الخبرة:'}</span>
+                        <span className="text-slate-900 font-bold">{lang === 'en' ? '18 Years' : '١٨ عاماً'}</span>
+                      </div>
+                    </div>
+
+                    {/* Faculty Member 3 */}
+                    <div className="bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                      <div>
+                        <div className="aspect-[3/4] w-full bg-slate-100 overflow-hidden relative">
+                          <img 
+                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80" 
+                            alt="Eng. Omar Al-Sloom" 
+                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+                          />
+                        </div>
+                        <div className="p-6">
+                          <h4 className="font-extrabold text-base text-slate-950 font-sans">
+                            {lang === 'en' ? 'Eng. Omar Al-Sloom' : 'المهندس عمر السلوم'}
+                          </h4>
+                          <span className="text-[10px] font-mono font-bold text-brand-blue tracking-wider block mt-1">
+                            {lang === 'en' ? 'B2B & Placement Liaison Officer' : 'مسؤول التشبيك والتنسيق مع المنظمات والورش'}
+                          </span>
+                          <p className="text-slate-500 text-xs mt-3 leading-relaxed">
+                            {lang === 'en' 
+                              ? 'Manages placement pathways with NGO sponsors, local repair trade unions, and public agencies.'
+                              : 'يتعاون مع المنظمات المانحة والمؤسسات الشريكة لبناء مسارات رعاية التدريب وخلق فرص عمل واثقة.'}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="p-6 pt-0 border-t border-slate-150 mt-4 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                        <span>{lang === 'en' ? 'EXPERIENCE:' : 'الخبرة:'}</span>
+                        <span className="text-slate-900 font-bold">{lang === 'en' ? '12 Years' : '١٢ عاماً'}</span>
+                      </div>
+                    </div>
+
+                    {/* Faculty Member 4 */}
+                    <div className="bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                      <div>
+                        <div className="aspect-[3/4] w-full bg-slate-100 overflow-hidden relative">
+                          <img 
+                            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" 
+                            alt="Ustadh Munir Al-Khatib" 
+                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+                          />
+                        </div>
+                        <div className="p-6">
+                          <h4 className="font-extrabold text-base text-slate-950 font-sans">
+                            {lang === 'en' ? 'Ustadh Munir Al-Khatib' : 'الأستاذ منير الخطيب'}
+                          </h4>
+                          <span className="text-[10px] font-mono font-bold text-brand-blue tracking-wider block mt-1">
+                            {lang === 'en' ? 'Lab Director & Safety Controller' : 'مدير المختبر والمشرف الميداني للسلامة'}
+                          </span>
+                          <p className="text-slate-500 text-xs mt-3 leading-relaxed">
+                            {lang === 'en' 
+                              ? 'Maintains insulated tools, HV diagnostic benches, and standard safety gear compliance.'
+                              : 'يشرف على حداثة أجهزة الفحص، والعدّة المعزولة وصيانة البطاريات وحماية الطلاب من صدمات الفولط المرتفع.'}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="p-6 pt-0 border-t border-slate-150 mt-4 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                        <span>{lang === 'en' ? 'EXPERIENCE:' : 'الخبرة:'}</span>
+                        <span className="text-slate-900 font-bold">{lang === 'en' ? '15 Years' : '١٥ عاماً'}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
             </motion.div>
           )}
 
-          {currentPage === 'diagnostics' && (
+          {currentPage === 'programs' && (
             <motion.div
-              key="diagnostics"
+              key="programs"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
@@ -1139,25 +1799,517 @@ export default function App() {
               className="py-16 bg-white text-slate-800 text-start"
             >
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Header */}
+                <div className="max-w-3xl space-y-3 pb-8 border-b border-slate-200 mb-12 animate-fade-in">
+                  <span className="inline-flex items-center gap-1.5 bg-blue-50 text-brand-blue border border-blue-100 px-3.5 py-1.5 rounded-full text-xs font-bold font-mono tracking-wide uppercase">
+                    <Layers size={13} className="text-brand-blue" />
+                    <span>{t('certifiedDiploma')}</span>
+                  </span>
+                  <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 font-sans">
+                    {lang === 'en' ? 'Diplomas & Technical Curriculums' : 'الدبلومات والبرامج الفنية المعتمدة'}
+                  </h2>
+                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-sans font-medium">
+                    {lang === 'en'
+                      ? 'Detailed modular syllabuses mapping out core diagnostics competencies, contact hours, and practical work ratios.'
+                      : 'مخططات برامجنا الدراسية المفصلة وجدول الساعات الأكاديمية والمهارات المقسمة حسب معايير التدريب المهني.'}
+                  </p>
+                </div>
 
-                <div className="max-w-3xl space-y-3 pb-8 border-b border-slate-200 mb-10 animate-fade-in">
+                {/* Rigid Tabular Accordion */}
+                <div className="space-y-6">
+                  {/* EV Tech Diploma */}
+                  <div className="border border-slate-200" id="ev-tech">
+                    <button
+                      onClick={() => setProgramAccordionOpen(programAccordionOpen === 'ev-tech' ? null : 'ev-tech')}
+                      className="w-full bg-slate-50 p-6 flex justify-between items-center cursor-pointer border-none font-sans text-start"
+                    >
+                      <div>
+                        <h4 className="text-lg font-black text-slate-900">{t('evTechDiploma')}</h4>
+                        <span className="text-xs text-brand-blue font-mono font-bold mt-1 block">360 CONTACT HOURS | 80/20 PRACTICAL-TO-THEORETICAL RATIO</span>
+                      </div>
+                      <span className="text-slate-450 font-bold">{programAccordionOpen === 'ev-tech' ? '▲' : '▼'}</span>
+                    </button>
+                    {programAccordionOpen === 'ev-tech' && (
+                      <div className="p-6 bg-white border-t border-slate-200 overflow-x-auto">
+                        <table className="w-full border-collapse border border-slate-200 text-xs sm:text-sm text-start font-sans">
+                          <thead>
+                            <tr className="bg-brand-blue text-white text-start">
+                              <th className="border border-slate-200 p-3 text-start font-bold uppercase">{lang === 'en' ? 'Stage / Module' : 'المرحلة / المساق'}</th>
+                              <th className="border border-slate-200 p-3 text-start font-bold uppercase">{lang === 'en' ? 'Syllabus & Competency Guidelines' : 'مخطط المنهج والمهارات المكتسبة'}</th>
+                              <th className="border border-slate-200 p-3 text-start font-bold uppercase">{lang === 'en' ? 'Practical Hours' : 'ساعات العملي'}</th>
+                              <th className="border border-slate-200 p-3 text-start font-bold uppercase">{lang === 'en' ? 'Theoretical Hours' : 'ساعات النظري'}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td className="border border-slate-200 p-3 font-bold">Stage 1</td>
+                              <td className="border border-slate-200 p-3">High-Voltage Net Loop, MSD Interlocks & Protective insulated gear safety drills.</td>
+                              <td className="border border-slate-200 p-3 font-mono">72 Hours</td>
+                              <td className="border border-slate-200 p-3 font-mono">18 Hours</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-slate-200 p-3 font-bold">Stage 2</td>
+                              <td className="border border-slate-200 p-3">Three-Phase AC Traction Motors, Resolver Timing, Regenerative Braking calibrations.</td>
+                              <td className="border border-slate-200 p-3 font-mono">72 Hours</td>
+                              <td className="border border-slate-200 p-3 font-mono">18 Hours</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-slate-200 p-3 font-bold">Stage 3</td>
+                              <td className="border border-slate-200 p-3">EV Inverters & DC-DC Converters Thermal management & Coolant loop troubleshooting.</td>
+                              <td className="border border-slate-200 p-3 font-mono">72 Hours</td>
+                              <td className="border border-slate-200 p-3 font-mono">18 Hours</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-slate-200 p-3 font-bold">Stage 4</td>
+                              <td className="border border-slate-200 p-3">Structural battery architectures (Tesla, BYD cells) & Safe dismantling trade exam.</td>
+                              <td className="border border-slate-200 p-3 font-mono">72 Hours</td>
+                              <td className="border border-slate-200 p-3 font-mono">18 Hours</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Hybrid Systems Diploma */}
+                  <div className="border border-slate-200" id="hybrid-sys">
+                    <button
+                      onClick={() => setProgramAccordionOpen(programAccordionOpen === 'hybrid-sys' ? null : 'hybrid-sys')}
+                      className="w-full bg-slate-50 p-6 flex justify-between items-center cursor-pointer border-none font-sans text-start"
+                    >
+                      <div>
+                        <h4 className="text-lg font-black text-slate-900">{t('hybridDiploma')}</h4>
+                        <span className="text-xs text-brand-blue font-mono font-bold mt-1 block">240 CONTACT HOURS | 80/20 PRACTICAL-TO-THEORETICAL RATIO</span>
+                      </div>
+                      <span className="text-slate-450 font-bold">{programAccordionOpen === 'hybrid-sys' ? '▲' : '▼'}</span>
+                    </button>
+                    {programAccordionOpen === 'hybrid-sys' && (
+                      <div className="p-6 bg-white border-t border-slate-200 overflow-x-auto">
+                        <table className="w-full border-collapse border border-slate-200 text-xs sm:text-sm text-start font-sans">
+                          <thead>
+                            <tr className="bg-brand-blue text-white text-start">
+                              <th className="border border-slate-200 p-3 text-start font-bold uppercase">{lang === 'en' ? 'Stage / Module' : 'المرحلة / المساق'}</th>
+                              <th className="border border-slate-200 p-3 text-start font-bold uppercase">{lang === 'en' ? 'Syllabus & Competency Guidelines' : 'مخطط المنهج والمهارات المكتسبة'}</th>
+                              <th className="border border-slate-200 p-3 text-start font-bold uppercase">{lang === 'en' ? 'Practical Hours' : 'ساعات العملي'}</th>
+                              <th className="border border-slate-200 p-3 text-start font-bold uppercase">{lang === 'en' ? 'Theoretical Hours' : 'ساعات النظري'}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td className="border border-slate-200 p-3 font-bold">Stage 1</td>
+                              <td className="border border-slate-200 p-3">Toyota Synergistic Drive (THS) & Hyundai Dual-Motor Transmission Architectures.</td>
+                              <td className="border border-slate-200 p-3 font-mono">48 Hours</td>
+                              <td className="border border-slate-200 p-3 font-mono">12 Hours</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-slate-200 p-3 font-bold">Stage 2</td>
+                              <td className="border border-slate-200 p-3">NiMH & Lithium-Ion battery pack inspections, Cell balancing & internal resistance scans.</td>
+                              <td className="border border-slate-200 p-3 font-mono">48 Hours</td>
+                              <td className="border border-slate-200 p-3 font-mono">12 Hours</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-slate-200 p-3 font-bold">Stage 3</td>
+                              <td className="border border-slate-200 p-3">DC-DC Step-Down Converters, High voltage cabin heating lines & A/C compressor diagnosis.</td>
+                              <td className="border border-slate-200 p-3 font-mono">48 Hours</td>
+                              <td className="border border-slate-200 p-3 font-mono">12 Hours</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-slate-200 p-3 font-bold">Stage 4</td>
+                              <td className="border border-slate-200 p-3">Live drivetrain diagnostic check speed runs, trouble code (DTC) reading & data calibration.</td>
+                              <td className="border border-slate-200 p-3 font-mono">48 Hours</td>
+                              <td className="border border-slate-200 p-3 font-mono">12 Hours</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Electronic Diagnostics Course */}
+                  <div className="border border-slate-200" id="elec-diag">
+                    <button
+                      onClick={() => setProgramAccordionOpen(programAccordionOpen === 'elec-diag' ? null : 'elec-diag')}
+                      className="w-full bg-slate-50 p-6 flex justify-between items-center cursor-pointer border-none font-sans text-start"
+                    >
+                      <div>
+                        <h4 className="text-lg font-black text-slate-900">{t('diagnosticsCourse')}</h4>
+                        <span className="text-xs text-brand-blue font-mono font-bold mt-1 block">120 CONTACT HOURS | 80/20 PRACTICAL-TO-THEORETICAL RATIO</span>
+                      </div>
+                      <span className="text-slate-450 font-bold">{programAccordionOpen === 'elec-diag' ? '▲' : '▼'}</span>
+                    </button>
+                    {programAccordionOpen === 'elec-diag' && (
+                      <div className="p-6 bg-white border-t border-slate-200 overflow-x-auto">
+                        <table className="w-full border-collapse border border-slate-200 text-xs sm:text-sm text-start font-sans">
+                          <thead>
+                            <tr className="bg-brand-blue text-white text-start">
+                              <th className="border border-slate-200 p-3 text-start font-bold uppercase">{lang === 'en' ? 'Stage / Module' : 'المرحلة / المساق'}</th>
+                              <th className="border border-slate-200 p-3 text-start font-bold uppercase">{lang === 'en' ? 'Syllabus & Competency Guidelines' : 'مخطط المنهج والمهارات المكتسبة'}</th>
+                              <th className="border border-slate-200 p-3 text-start font-bold uppercase">{lang === 'en' ? 'Practical Hours' : 'ساعات العملي'}</th>
+                              <th className="border border-slate-200 p-3 text-start font-bold uppercase">{lang === 'en' ? 'Theoretical Hours' : 'ساعات النظري'}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td className="border border-slate-200 p-3 font-bold">Stage 1</td>
+                              <td className="border border-slate-200 p-3">OBD-II standard codes, scan-tool parameter data, fuel trim and diagnostic fault codes.</td>
+                              <td className="border border-slate-200 p-3 font-mono">24 Hours</td>
+                              <td className="border border-slate-200 p-3 font-mono">6 Hours</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-slate-200 p-3 font-bold">Stage 2</td>
+                              <td className="border border-slate-200 p-3">Sensors, Actuators & ECU micro-controller calibrations (throttle bodies, air flow).</td>
+                              <td className="border border-slate-200 p-3 font-mono">24 Hours</td>
+                              <td className="border border-slate-200 p-3 font-mono">6 Hours</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-slate-200 p-3 font-bold">Stage 3</td>
+                              <td className="border border-slate-200 p-3">Controller Area Network (CAN) bus circuit analysis, signal wire faults and gateway debugging.</td>
+                              <td className="border border-slate-200 p-3 font-mono">24 Hours</td>
+                              <td className="border border-slate-200 p-3 font-mono">6 Hours</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-slate-200 p-3 font-bold">Stage 4</td>
+                              <td className="border border-slate-200 p-3">Electronic Module Scanning & Oscilloscope wave capture for sensor signal tracking.</td>
+                              <td className="border border-slate-200 p-3 font-mono">24 Hours</td>
+                              <td className="border border-slate-200 p-3 font-mono">6 Hours</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {currentPage === 'practical-training' && (
+            <motion.div
+              key="practical-training"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.2 }}
+              className="bg-white"
+            >
+              {/* PRACTICAL & FIELD TRAINING GALLERY SECTION */}
+              <section className="py-16 bg-white border-b border-slate-200 text-start">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  
+                  {/* Section Title */}
+                  <div className="max-w-3xl space-y-3 mb-12">
+                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">
+                      {lang === 'en' ? 'PRACTICAL APPLICATION' : 'التدريب العملي (لا كلام.. بل تطبيق حقيقي باليد)'}
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                      {lang === 'en' ? 'Step Inside Our High-Voltage Facilities' : 'شاهد بيئة العمل والأجهزة وتطبيقات طلابنا'}
+                    </h3>
+                    <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-medium">
+                      {lang === 'en'
+                        ? 'We bypass dry slides and textbooks. Trainees immediately handle live hybrid battery banks, diagnostics tools, and customer vehicles.'
+                        : 'تجاوزنا التلقين والكلام النظري الجاف. يشاهد المصلحون المتدربون ويتعاملون مباشرة مع بنك خلايا النحاس، أجهزة القياس والفحص، وسيارات عملاء حقيقية.'}
+                    </p>
+                  </div>
+
+                  {/* Filter Tabs */}
+                  <div className="flex flex-wrap gap-2 mb-8 flex-row">
+                    {[
+                      { id: 'all', labelEn: 'All Gallery', labelAr: 'معرض الصور والفيديوهات' },
+                      { id: 'students', labelEn: 'Students in Action', labelAr: 'الطلاب أثناء التطبيق' },
+                      { id: 'videos', labelEn: 'Field Videos', labelAr: 'فيديوهات ميدانية حية' },
+                      { id: 'tools', labelEn: 'Tools & Equipment', labelAr: 'المعدات والأجهزة' },
+                      { id: 'workshop', labelEn: 'Real Workshop', labelAr: 'صور حقيقية للورشة' }
+                    ].map(tab => (
+                      <button
+                        key={tab.id}
+                        onClick={() => setGalleryFilter(tab.id as any)}
+                        className={`px-5 py-2.5 border text-xs font-extrabold font-sans tracking-wide uppercase transition-all duration-200 cursor-pointer ${
+                          galleryFilter === tab.id
+                            ? 'bg-brand-blue text-white border-brand-blue'
+                            : 'bg-slate-50 text-slate-650 hover:bg-slate-100 border-slate-200'
+                        }`}
+                        style={{ borderRadius: '0px' }}
+                      >
+                        {lang === 'en' ? tab.labelEn : tab.labelAr}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Gallery Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {galleryItems
+                      .filter(item => galleryFilter === 'all' || item.category === galleryFilter)
+                      .map(item => (
+                        <div
+                          key={item.id}
+                          onClick={() => {
+                            if (item.type === 'video') {
+                              setActiveVideoUrl(item.videoUrl || '');
+                              setVideoModalOpen(true);
+                            } else {
+                              setActiveAccreditation(item.image);
+                              setLightboxTitle(lang === 'en' ? item.titleEn : item.titleAr);
+                              setLightboxDesc(lang === 'en' ? item.descEn : item.descAr);
+                            }
+                          }}
+                          className="group relative overflow-hidden border border-slate-200 aspect-[4/3] bg-slate-950 cursor-pointer"
+                        >
+                          {/* Image */}
+                          <img
+                            src={item.image}
+                            alt={lang === 'en' ? item.titleEn : item.titleAr}
+                            loading="lazy"
+                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500 opacity-60 group-hover:opacity-85"
+                          />
+
+                          {/* Media Type Overlay */}
+                          {item.type === 'video' ? (
+                            <div className="absolute inset-0 flex items-center justify-center bg-slate-950/20 group-hover:bg-slate-950/45 transition-colors duration-300">
+                              <div className="w-14 h-14 bg-white text-brand-blue flex items-center justify-center transition-transform duration-300 group-hover:scale-110 border border-brand-blue/10">
+                                <Play size={20} className="fill-brand-blue text-brand-blue ml-1" />
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="absolute inset-0 flex items-center justify-center bg-slate-950/0 group-hover:bg-slate-950/40 transition-all duration-300 opacity-0 group-hover:opacity-100">
+                              <div className="w-12 h-12 bg-white text-brand-blue flex items-center justify-center border border-slate-200">
+                                <Eye size={18} className="text-brand-blue" />
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Captions Overlay */}
+                          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/95 via-slate-950/65 to-transparent p-4 pt-10 text-start">
+                            <span className="text-[9px] font-mono tracking-widest text-slate-400 block uppercase mb-1">
+                              {item.category === 'students' && (lang === 'en' ? 'Students in Action' : 'الطلاب أثناء التطبيق')}
+                              {item.category === 'videos' && (lang === 'en' ? 'Field Video Clip' : 'فيديو التدريب الميداني')}
+                              {item.category === 'tools' && (lang === 'en' ? 'Tools & Equipment' : 'الأجهزة والمعدات')}
+                              {item.category === 'workshop' && (lang === 'en' ? 'Real Workshop' : 'صالة الورشة الحية')}
+                            </span>
+                            <h4 className="text-xs sm:text-sm font-extrabold text-white leading-tight font-sans line-clamp-1">
+                              {lang === 'en' ? item.titleEn : item.titleAr}
+                            </h4>
+                            <p className="text-[10px] text-slate-300 leading-relaxed font-sans mt-1 line-clamp-2">
+                              {lang === 'en' ? item.descEn : item.descAr}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </section>
+            </motion.div>
+          )}
+
+          {currentPage === 'partnerships' && (
+            <motion.div
+              key="partnerships"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.2 }}
+              className="py-16 bg-white text-slate-800 text-start animate-fade-in"
+            >
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* B2B / NGO Engagement Framework (Asymmetric Split Screen) */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pb-16 border-b border-slate-200">
+                  {/* Left (Larger content): Targets sponsors & sustainable initiatives */}
+                  <div className="lg:col-span-7 space-y-6">
+                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">
+                      {lang === 'en' ? 'B2B / NGO COOPERATION FRAMEWORK' : 'إطار التعاون مع المنظمات والمؤسسات B2B'}
+                    </span>
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                      {lang === 'en'
+                        ? 'Scaling Tech-Sector Youth Employment & Clean Energy'
+                        : 'تمكين الشباب وتوطين مهن الطاقة النظيفة بشكل مستدام'}
+                    </h2>
+                    <p className="text-slate-650 text-sm sm:text-base leading-relaxed font-sans font-medium">
+                      {lang === 'en'
+                        ? 'Hypro Academy builds strategic alliances with international development partners, local trade associations, and vocational training funds. We specialize in youth job-placement programs and upskilling traditional workforces to handle high-voltage and computer diagnostics safely.'
+                        : 'تقدم أكاديمية هايبـرو برنامجاً متكاملاً للشراكات وتصميم مسارات التمكين الاقتصادي بالتعاون مع المنظمات الدولية والمحلية وصناديق التنمية. نركز على سد فجوات البطالة وتأهيل الفنيين للعمل المباشر.'}
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
+                      <div className="border-l-2 border-brand-blue pl-4 text-start">
+                        <h4 className="font-extrabold text-sm text-slate-900">{lang === 'en' ? 'Scalable Youth Integration' : 'تشغيل وتدريب الكفاءات'}</h4>
+                        <p className="text-slate-500 text-xs mt-1">{lang === 'en' ? 'Targeted cohorts with verified job placement rates exceeding 92%.' : 'دورات مخصصة لتمكين الفئات الأقل حظاً بمسارات تشغيل حقيقية.'}</p>
+                      </div>
+                      <div className="border-l-2 border-brand-blue pl-4 text-start">
+                        <h4 className="font-extrabold text-sm text-slate-900">{lang === 'en' ? 'Clean Energy Deployment' : 'دعم مهن الطاقة النظيفة'}</h4>
+                        <p className="text-slate-500 text-xs mt-1">{lang === 'en' ? 'Establishing diagnostic protocols for imported hybrid & electric assets.' : 'بناء معايير فحص آمنة ومستدامة لسيارات الكهرباء والهايبرد بالمنطقة.'}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right (Smaller visually striking highlight block): Target focus */}
+                  <div className="lg:col-span-5 bg-brand-blue text-white p-8 border border-slate-200 relative overflow-hidden flex flex-col justify-between self-stretch">
+                    <div className="space-y-4 relative z-10">
+                      <h4 className="text-xl font-bold font-sans">
+                        {lang === 'en' ? 'Institutional Partnership Gate' : 'بوابة الشراكات والتمويل'}
+                      </h4>
+                      <p className="text-xs text-slate-300 leading-relaxed font-medium">
+                        {lang === 'en'
+                          ? 'We offer transparent project tracking, audit-compliant monitoring reports, student logs, and certified trade exams.'
+                          : 'نوفر تقارير تتبع شفافة، ومعايير تقييم جودة متوافقة مع متطلبات التدقيق الدولي، وتوثيقاً كاملاً لمسارات الخريجين.'}
+                      </p>
+                    </div>
+                    <div className="pt-8 relative z-10">
+                      <button
+                        onClick={() => navigateTo('contact')}
+                        className="bg-white hover:bg-slate-100 text-brand-blue font-extrabold text-xs px-6 py-3 border-none cursor-pointer"
+                      >
+                        {lang === 'en' ? 'Inquire B2B Partnership' : 'طلب مناقشة شراكة أو مشروع'}
+                      </button>
+                    </div>
+                    <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
+                  </div>
+                </div>
+
+                {/* The Strategic Partner Matrix (Grayscale Logos Hover Color) */}
+                <div className="pt-16 text-start">
+                  <div className="max-w-3xl space-y-2 mb-10">
+                    <h3 className="text-xl font-extrabold text-slate-900">
+                      {lang === 'en' ? 'Our Strategic Alliance Network' : 'شبكة التحالفات والمؤسسات الشريكة'}
+                    </h3>
+                    <p className="text-slate-500 text-xs font-medium">
+                      {lang === 'en'
+                        ? 'Collaborating with industry leaders, craft unions, and international development organizations.'
+                        : 'نتعاون جنباً إلى جنب مع قادة الصناعة، ونقابات الحرف، والجهات التنموية لتعزيز معايير التدريب.'}
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-0 border border-slate-200">
+                    <div className="p-8 bg-white border-b border-r border-slate-200 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
+                      <span className="font-mono font-bold text-slate-400 hover:text-brand-blue text-xs uppercase tracking-wider">TVET JORDAN</span>
+                    </div>
+                    <div className="p-8 bg-white border-b border-r border-slate-200 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
+                      <span className="font-mono font-bold text-slate-400 hover:text-brand-blue text-xs uppercase tracking-wider">UN-DEVELOP</span>
+                    </div>
+                    <div className="p-8 bg-white border-b lg:border-b-0 border-r border-slate-200 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
+                      <span className="font-mono font-bold text-slate-400 hover:text-brand-blue text-xs uppercase tracking-wider">AL-KHEDMA</span>
+                    </div>
+                    <div className="p-8 bg-white border-b md:border-b-0 border-r border-slate-200 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
+                      <span className="font-mono font-bold text-slate-400 hover:text-brand-blue text-xs uppercase tracking-wider">SY AUTO UNION</span>
+                    </div>
+                    <div className="p-8 bg-white border-r border-slate-200 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
+                      <span className="font-mono font-bold text-slate-400 hover:text-brand-blue text-xs uppercase tracking-wider">HV SOLUTIONS</span>
+                    </div>
+                    <div className="p-8 bg-white flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
+                      <span className="font-mono font-bold text-slate-400 hover:text-brand-blue text-xs uppercase tracking-wider">MID EAST TECH</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {currentPage === 'testing-lab' && (
+            <motion.div
+              key="testing-lab"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.2 }}
+              className="py-16 bg-white text-slate-800 text-start animate-fade-in"
+            >
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Header */}
+                <div className="max-w-3xl space-y-3 pb-8 border-b border-slate-200 mb-10">
                   <span className="inline-flex items-center gap-1.5 bg-blue-50 text-brand-blue border border-blue-100 px-3.5 py-1.5 rounded-full text-xs font-bold font-mono tracking-wide uppercase">
                     <Wrench size={13} className="text-brand-blue" />
                     <span>{t('interactiveDiagnostics')}</span>
                   </span>
                   <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 font-sans">
-                    {t('diagnosticsLabTitle')}
+                    {lang === 'en' ? 'Industrial Diagnostic Infrastructure' : 'مختبر فحص الأنظمة وبطاريات الفولت العالي'}
                   </h2>
                   <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-sans font-medium">
-                    {t('diagnosticsLabDesc')}
+                    {lang === 'en'
+                      ? 'Explore the physical testing apparatus and technical specifications deployed live at Hypro Academy.'
+                      : 'تصفح مواصفات وأجهزة الفحص والقياسات الحقيقية المتوفرة لتطبيق الطلاب العملي والورش المهنية بالأكاديمية.'}
                   </p>
                 </div>
 
-                {/* Powertrain simulator */}
-                <Suspense fallback={<Skeleton />}>
-                  <InteractivePowertrain />
-                </Suspense>
+                {/* Infrastructure Spec Sheets */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-12">
+                  {/* Spec Card 1 */}
+                  <div className="border border-slate-200 p-6 flex flex-col md:flex-row gap-6 bg-slate-50">
+                    <div className="w-full md:w-1/3 aspect-[4/3] bg-slate-100 border border-slate-100 overflow-hidden">
+                      <img 
+                        src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80" 
+                        alt="Hypro HV Battery Tester" 
+                        className="w-full h-full object-cover grayscale"
+                      />
+                    </div>
+                    <div className="w-full md:w-2/3 space-y-4">
+                      <h4 className="font-extrabold text-sm text-slate-900 uppercase font-mono tracking-wider text-start">
+                        {lang === 'en' ? 'Hypro HV Battery Tester (HV-9000)' : 'جهاز تفريغ وموازنة بطاريات الفولت العالي (HV-9000)'}
+                      </h4>
+                      <table className="w-full border-collapse text-xs font-sans">
+                        <tbody>
+                          <tr className="border-b border-slate-200">
+                            <td className="py-2 font-bold text-slate-500 text-start">{lang === 'en' ? 'Apparatus Type' : 'نوع الجهاز'}</td>
+                            <td className="py-2 text-slate-800 text-start">{lang === 'en' ? 'Cell balancer & charge tester' : 'شحن وموازنة وتفريغ الخلايا'}</td>
+                          </tr>
+                          <tr className="border-b border-slate-200">
+                            <td className="py-2 font-bold text-slate-500 text-start">{lang === 'en' ? 'Max Voltage' : 'أقصى جهد'}</td>
+                            <td className="py-2 text-slate-800 text-start font-mono">1000V DC</td>
+                          </tr>
+                          <tr className="border-b border-slate-200">
+                            <td className="py-2 font-bold text-slate-500 text-start">{lang === 'en' ? 'Core Capability' : 'القدرة الأساسية'}</td>
+                            <td className="py-2 text-slate-800 text-start">{lang === 'en' ? 'Cell balancing, resistance check' : 'موازنة الخلايا، كشف المقاومة الداخلية'}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
 
+                  {/* Spec Card 2 */}
+                  <div className="border border-slate-200 p-6 flex flex-col md:flex-row gap-6 bg-slate-50">
+                    <div className="w-full md:w-1/3 aspect-[4/3] bg-slate-100 border border-slate-100 overflow-hidden">
+                      <img 
+                        src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80" 
+                        alt="Technical diagnostic oscilloscopes" 
+                        className="w-full h-full object-cover grayscale"
+                      />
+                    </div>
+                    <div className="w-full md:w-2/3 space-y-4">
+                      <h4 className="font-extrabold text-sm text-slate-900 uppercase font-mono tracking-wider text-start">
+                        {lang === 'en' ? 'Advanced Oscilloscope & Scanning Rack' : 'منظومة رصد إشارات الحساسات والعواكس'}
+                      </h4>
+                      <table className="w-full border-collapse text-xs font-sans">
+                        <tbody>
+                          <tr className="border-b border-slate-200">
+                            <td className="py-2 font-bold text-slate-500 text-start">{lang === 'en' ? 'Apparatus Type' : 'نوع الجهاز'}</td>
+                            <td className="py-2 text-slate-800 text-start">{lang === 'en' ? '4-Channel logic wave analyser' : 'محلل إشارات الحساسات وخطوط CAN-Bus'}</td>
+                          </tr>
+                          <tr className="border-b border-slate-200">
+                            <td className="py-2 font-bold text-slate-500 text-start">{lang === 'en' ? 'Max Frequency' : 'التردد الأقصى'}</td>
+                            <td className="py-2 text-slate-800 text-start font-mono">100 MHz</td>
+                          </tr>
+                          <tr className="border-b border-slate-200">
+                            <td className="py-2 font-bold text-slate-500 text-start">{lang === 'en' ? 'Core Capability' : 'القدرة الأساسية'}</td>
+                            <td className="py-2 text-slate-800 text-start">{lang === 'en' ? 'Capture resolver timing, bus errors' : 'كشف تردد موجة الحساس، عزل خطوط البيانات'}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Powertrain simulator */}
+                <div className="pt-8 border-t border-slate-100">
+                  <div className="max-w-3xl space-y-2 mb-8">
+                    <h3 className="text-xl font-bold text-slate-900">
+                      {lang === 'en' ? 'Interactive Hybrid Powertrain Simulator' : 'محاكي تدفق طاقة المحرك الهجين التفاعلي'}
+                    </h3>
+                    <p className="text-slate-500 text-xs font-medium">
+                      {lang === 'en'
+                        ? 'Simulate throttle inputs, braking energy capture, and battery charging flows in real time.'
+                        : 'اختبر تدفق الشحن وتوليد الطاقة وحركة التروس عند الكبح والتسارع في محرك الهايبرد التفاعلي.'}
+                    </p>
+                  </div>
+                  <Suspense fallback={<Skeleton />}>
+                    <InteractivePowertrain />
+                  </Suspense>
+                </div>
               </div>
             </motion.div>
           )}
@@ -1169,81 +2321,106 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.2 }}
+              className="bg-white text-slate-800"
             >
-              <section className="py-16 bg-slate-50 text-slate-800 relative border-b border-slate-200" id="contact-form-section">
+              {/* Split 50/50 Contact Section */}
+              <section className="py-16 bg-slate-50 border-b border-slate-200" id="contact-form-section">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start animate-fade-in">
-
-                    {/* Contacts info */}
-                    <div className="lg:col-span-4 space-y-6 text-start">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start animate-fade-in text-start">
+                    
+                    {/* Left: Contact stack & Map coordinates */}
+                    <div className="space-y-6">
                       <div className="space-y-2">
-                        <span className="inline-flex items-center gap-1 bg-blue-50 text-brand-blue border border-blue-100 px-3.5 py-1.5 rounded-full text-[10px] font-bold font-mono tracking-wide uppercase">
+                        <span className="inline-flex items-center gap-1 bg-blue-50 text-brand-blue border border-blue-100 px-3.5 py-1.5 rounded-full text-[10px] font-bold font-mono tracking-wide uppercase font-sans">
                           <CheckCircle size={11} className="text-brand-blue" />
                           <span>{t('directChannels')}</span>
                         </span>
-                        <h3 className="text-2xl font-extrabold tracking-tight font-sans leading-tight text-slate-900">
+                        <h3 className="text-3xl font-extrabold tracking-tight font-sans leading-tight text-slate-900">
                           {t('connectAdmissions')}
                         </h3>
-                        <p className="text-slate-500 text-xs leading-relaxed font-sans font-medium">
+                        <p className="text-slate-500 text-xs sm:text-sm font-medium leading-relaxed font-sans">
                           {t('contactPrompt')}
                         </p>
                       </div>
 
-                      {/* Fast clickable cards */}
-                      <div className="space-y-3">
+                      {/* Contact Stack Cards */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <a
                           href={contact.whatsapp}
                           target="_blank"
                           rel="noreferrer"
-                          className="flex items-center gap-3 bg-white hover:bg-slate-100 border border-slate-200 p-4 rounded-xl transition-all cursor-pointer group decoration-none"
+                          className="flex items-center gap-3 bg-white hover:bg-slate-100 border border-slate-200 p-4 transition-all cursor-pointer group decoration-none"
                         >
-                          <div className="p-2.5 bg-emerald-50 text-emerald-600 rounded-xl">
+                          <div className="p-2.5 bg-emerald-50 text-emerald-600">
                             <MessageSquare size={18} />
                           </div>
                           <div>
-                            <span className="text-[10px] font-sans font-bold uppercase text-slate-400 block">{t('officialWhatsApp')}</span>
+                            <span className="text-[9px] font-sans font-bold uppercase text-slate-400 block">{t('officialWhatsApp')}</span>
                             <span className="text-xs font-bold text-slate-700 group-hover:text-brand-blue transition-colors">{t('chatInstantly')}</span>
                           </div>
                         </a>
 
                         <a
                           href={`tel:${contact.phone}`}
-                          className="flex items-center gap-3 bg-white hover:bg-slate-100 border border-slate-200 p-4 rounded-xl transition-all cursor-pointer group decoration-none"
+                          className="flex items-center gap-3 bg-white hover:bg-slate-100 border border-slate-200 p-4 transition-all cursor-pointer group decoration-none"
                         >
-                          <div className="p-2.5 bg-blue-50 text-brand-blue rounded-xl">
+                          <div className="p-2.5 bg-blue-50 text-brand-blue">
                             <Phone size={18} />
                           </div>
                           <div>
-                            <span className="text-[10px] font-sans font-bold uppercase text-slate-400 block">{t('phoneCall')}</span>
+                            <span className="text-[9px] font-sans font-bold uppercase text-slate-400 block">{t('phoneCall')}</span>
                             <span className="text-xs font-bold text-slate-700 group-hover:text-brand-blue transition-colors" dir="ltr">{contact.phone}</span>
                           </div>
                         </a>
 
-                        <div className="flex items-center gap-3 bg-white border border-slate-200 p-4 rounded-xl">
-                          <div className="p-2.5 bg-blue-50 text-brand-blue rounded-xl">
+                        <div className="flex items-center gap-3 bg-white border border-slate-200 p-4">
+                          <div className="p-2.5 bg-blue-50 text-brand-blue">
                             <MapPin size={18} />
                           </div>
                           <div>
-                            <span className="text-[10px] font-sans font-bold uppercase text-slate-400 block">{t('campusBase')}</span>
+                            <span className="text-[9px] font-sans font-bold uppercase text-slate-400 block">{t('campusBase')}</span>
                             <span className="text-xs font-bold text-slate-700">{lang === 'en' ? contact.addressEn : contact.addressAr}</span>
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-3 bg-white border border-slate-200 p-4 rounded-xl">
-                          <div className="p-2.5 bg-slate-100 text-slate-500 rounded-xl">
+                        <div className="flex items-center gap-3 bg-white border border-slate-200 p-4">
+                          <div className="p-2.5 bg-slate-100 text-slate-500">
                             <Clock size={18} />
                           </div>
                           <div>
-                            <span className="text-[10px] font-sans font-bold uppercase text-slate-400 block">{t('officeHours')}</span>
+                            <span className="text-[9px] font-sans font-bold uppercase text-slate-400 block">{t('officeHours')}</span>
                             <span className="text-xs font-bold text-slate-700">{t('officeHoursDays')}</span>
                           </div>
                         </div>
                       </div>
 
+                      {/* Coordinates & styled Map block */}
+                      <div className="bg-brand-blue text-white p-6 border border-slate-200 relative overflow-hidden flex flex-col justify-between">
+                        <div className="space-y-3 relative z-10 text-start">
+                          <span className="text-[9px] font-mono tracking-widest text-blue-300 uppercase block font-bold">
+                            {lang === 'en' ? 'GEOGRAPHIC COORDINATES' : 'الإحداثيات الجغرافية والموقع'}
+                          </span>
+                          <h4 className="text-base font-extrabold font-sans">
+                            {lang === 'en' ? 'Idleb Industrial District Campus' : 'مقر أكاديمية هايبـرو - إدلب الصناعية'}
+                          </h4>
+                          <div className="text-xs text-slate-300 space-y-1.5 font-mono">
+                            <div>GPS: 35.9322° N, 36.6339° E</div>
+                            <div>{lang === 'en' ? 'Main Road, Block B-12' : 'الشارع الرئيسي، ريف إدلب'}</div>
+                          </div>
+                        </div>
+                        {/* Clean vector mock map */}
+                        <div className="h-28 bg-white/5 border border-white/10 mt-6 relative z-10 flex items-center justify-center font-mono text-[10px] text-slate-400">
+                          <div className="absolute inset-0 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px] opacity-15" />
+                          <div className="absolute w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
+                          <div className="absolute w-2 h-2 bg-emerald-500 rounded-full" />
+                          <span>{lang === 'en' ? 'Idleb Industrial Campus Map Grid' : 'شبكة خرائط مقر الأكاديمية - إدلب'}</span>
+                        </div>
+                        <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
+                      </div>
                     </div>
 
-                    {/* Form */}
-                    <div className="lg:col-span-8">
+                    {/* Right: The main Dynamic Registration Form */}
+                    <div className="bg-white border border-slate-200 p-6 sm:p-8">
                       <Suspense fallback={<Skeleton />}>
                         <DynamicForm
                           activeCategory={activeCategory}
@@ -1252,6 +2429,102 @@ export default function App() {
                       </Suspense>
                     </div>
 
+                  </div>
+                </div>
+              </section>
+
+              {/* Friction-Reduction Accordion */}
+              <section className="py-16 md:py-20 bg-white border-b border-slate-200 text-start">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="max-w-3xl space-y-3 mb-10 text-start">
+                    <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">
+                      {lang === 'en' ? 'STUDENT SUPPORT PORTAL' : 'أسئلة وتسهيلات الدبلوم الدراسي'}
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                      {lang === 'en' ? 'Friction-Reduction Support & FAQ' : 'تسهيلات الأكاديمية وإزالة عقبات التسجيل'}
+                    </h3>
+                  </div>
+
+                  <div className="space-y-4">
+                    {/* FAQ 1: Installment plans */}
+                    <div className="border border-slate-200">
+                      <button
+                        onClick={() => setContactFaqOpen(contactFaqOpen === 0 ? null : 0)}
+                        className="w-full bg-slate-50 p-5 flex justify-between items-center cursor-pointer border-none font-sans text-start"
+                      >
+                        <span className="font-extrabold text-sm text-slate-900">
+                          {lang === 'en' ? 'Are there installment-based tuition plans available?' : 'هل تتوفر خطط دفع مقسطة للرسوم الدراسية؟'}
+                        </span>
+                        <span className="text-slate-450 font-bold">{contactFaqOpen === 0 ? '▲' : '▼'}</span>
+                      </button>
+                      {contactFaqOpen === 0 && (
+                        <div className="p-5 bg-white border-t border-slate-200 text-xs sm:text-sm text-slate-655 leading-relaxed font-sans">
+                          {lang === 'en'
+                            ? 'Yes. To make our professional diploma accessible to all technical students, we offer structured installment plans. Trainees can pay in monthly parts during their course.'
+                            : 'نعم، لتسهيل التحاق الطلاب، توفر الأكاديمية إمكانية تقسيط الرسوم الدراسية على دفعات شهرية ميسرة طوال فترة الدراسة الممتدة لـ 4 أشهر.'}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* FAQ 2: Scheduling */}
+                    <div className="border border-slate-200">
+                      <button
+                        onClick={() => setContactFaqOpen(contactFaqOpen === 1 ? null : 1)}
+                        className="w-full bg-slate-50 p-5 flex justify-between items-center cursor-pointer border-none font-sans text-start"
+                      >
+                        <span className="font-extrabold text-sm text-slate-900">
+                          {lang === 'en' ? 'What are the workshop schedules?' : 'ما هي أوقات الدوام والتدريب بالورش؟'}
+                        </span>
+                        <span className="text-slate-450 font-bold">{contactFaqOpen === 1 ? '▲' : '▼'}</span>
+                      </button>
+                      {contactFaqOpen === 1 && (
+                        <div className="p-5 bg-white border-t border-slate-200 text-xs sm:text-sm text-slate-655 leading-relaxed font-sans">
+                          {lang === 'en'
+                            ? 'We offer dual training sessions (morning and evening blocks) to accommodate working students and apprentices who run active workshops during the day.'
+                            : 'نقدم فترات تدريب صباحية ومسائية مرنة لتتناسب مع الطلاب الذين يديرون ورشهم الخاصة أو يعملون خلال فترات النهار.'}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* FAQ 3: Prerequisites */}
+                    <div className="border border-slate-200">
+                      <button
+                        onClick={() => setContactFaqOpen(contactFaqOpen === 2 ? null : 2)}
+                        className="w-full bg-slate-50 p-5 flex justify-between items-center cursor-pointer border-none font-sans text-start"
+                      >
+                        <span className="font-extrabold text-sm text-slate-900">
+                          {lang === 'en' ? 'Do I need prior engineering or mechanics experience to register?' : 'هل أحتاج إلى شهادة هندسية أو خبرة ميكانيكية مسبقة للتسجيل؟'}
+                        </span>
+                        <span className="text-slate-450 font-bold">{contactFaqOpen === 2 ? '▲' : '▼'}</span>
+                      </button>
+                      {contactFaqOpen === 2 && (
+                        <div className="p-5 bg-white border-t border-slate-200 text-xs sm:text-sm text-slate-655 leading-relaxed font-sans">
+                          {lang === 'en'
+                            ? 'No. Our curriculum is designed to build competencies from absolute ground zero. We teach general electrical safety up to high-voltage balancing cells.'
+                            : 'لا، لا تشترط الأكاديمية أي معرفة مسبقة. يبدأ منهجنا من الصفر الإلكتروني التام ويصعد بك تدريجياً لفك ومعايرة عقول وبطاريات السيارات الهجينة.'}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* FAQ 4: Placement Guarantee */}
+                    <div className="border border-slate-200">
+                      <button
+                        onClick={() => setContactFaqOpen(contactFaqOpen === 3 ? null : 3)}
+                        className="w-full bg-slate-50 p-5 flex justify-between items-center cursor-pointer border-none font-sans text-start"
+                      >
+                        <span className="font-extrabold text-sm text-slate-900">
+                          {lang === 'en' ? 'How does the job placement program guarantee employment?' : 'كيف يضمن برنامج التشبيك والتوظيف حصولي على عمل؟'}
+                        </span>
+                        <span className="text-slate-450 font-bold">{contactFaqOpen === 3 ? '▲' : '▼'}</span>
+                      </button>
+                      {contactFaqOpen === 3 && (
+                        <div className="p-5 bg-white border-t border-slate-200 text-xs sm:text-sm text-slate-655 leading-relaxed font-sans">
+                          {lang === 'en'
+                            ? 'Through our strategic partner network, we establish direct placement trade recommendations. We connect graduates directly to car dealers, NGOs, and workshops.'
+                            : 'نقوم بربط الخريجين مباشرة بالشركاء، مستوردي السيارات، المنظمات والورش الكبرى، حيث يعود 92% من طلابنا للعمل مباشرة بعد نيل شهادتهم.'}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </section>
@@ -1330,6 +2603,97 @@ export default function App() {
 
         </div>
       </footer>
+
+      {/* Lightbox Modal for Accreditations */}
+      <AnimatePresence>
+        {activeAccreditation && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => {
+              setActiveAccreditation(null);
+              setLightboxTitle(null);
+              setLightboxDesc(null);
+            }}
+            className="fixed inset-0 bg-slate-950/90 z-55 flex items-center justify-center p-4 cursor-zoom-out"
+          >
+            <motion.div
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.95 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white max-w-3xl w-full border border-slate-200 p-6 relative flex flex-col items-center"
+            >
+              <button
+                onClick={() => {
+                  setActiveAccreditation(null);
+                  setLightboxTitle(null);
+                  setLightboxDesc(null);
+                }}
+                className="absolute top-4 right-4 text-slate-800 hover:text-brand-blue p-2 bg-transparent border-none cursor-pointer"
+              >
+                <X size={24} />
+              </button>
+              <img
+                src={activeAccreditation}
+                alt="Accreditation Certificate"
+                className="max-h-[70vh] w-auto object-contain border border-slate-100"
+              />
+              <div className="mt-4 text-center font-sans">
+                <h5 className="font-extrabold text-sm text-slate-900">
+                  {lightboxTitle || (lang === 'en' ? 'Official Institutional Credential' : 'وثيقة الاعتماد المؤسساتي الرسمية')}
+                </h5>
+                <p className="text-slate-500 text-xs mt-1">
+                  {lightboxDesc || (lang === 'en' 
+                    ? 'Verified by TVET authorities, crafts syndicates, and corporate training divisions.' 
+                    : 'معتمدة وموثقة من قبل هيئات التدريب المهني، نقابات الحرفيين، ووكالات الصيانة.')}
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Video Lightbox Modal */}
+      <AnimatePresence>
+        {videoModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setVideoModalOpen(false)}
+            className="fixed inset-0 bg-slate-950/90 z-55 flex items-center justify-center p-4 cursor-zoom-out"
+          >
+            <motion.div
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.95 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white max-w-4xl w-full border border-slate-200 p-2 relative"
+            >
+              <button
+                onClick={() => setVideoModalOpen(false)}
+                className="absolute -top-12 right-0 text-white hover:text-blue-300 p-2 bg-transparent border-none cursor-pointer flex items-center gap-1 font-bold text-xs"
+              >
+                <X size={20} />
+                <span>{lang === 'en' ? 'Close' : 'إغلاق'}</span>
+              </button>
+              
+              {/* Aspect Ratio video container */}
+              <div className="aspect-video w-full bg-black">
+                <video
+                  key={activeVideoUrl}
+                  src={activeVideoUrl}
+                  controls
+                  autoPlay
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
