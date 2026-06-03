@@ -1,18 +1,18 @@
 import { useState, lazy, Suspense, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Phone, 
-  MapPin, 
-  Mail, 
-  Globe, 
-  Clock, 
-  Award, 
-  CheckCircle, 
-  MessageSquare, 
-  Send, 
-  Layers, 
-  Wrench, 
-  ShieldCheck, 
+import {
+  Phone,
+  MapPin,
+  Mail,
+  Globe,
+  Clock,
+  Award,
+  CheckCircle,
+  MessageSquare,
+  Send,
+  Layers,
+  Wrench,
+  ShieldCheck,
   ArrowRight,
   Building2,
   Handshake,
@@ -40,7 +40,7 @@ type PageType = 'home' | 'about' | 'courses' | 'team' | 'diagnostics' | 'contact
 export default function App() {
   const { lang, setLang, t, tObj, tVal } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<CategoryType>('student');
-  
+
   const getPageFromPath = (): PageType => {
     const path = window.location.pathname.replace(/^\//, '');
     const validPages: PageType[] = ['home', 'about', 'courses', 'team', 'diagnostics', 'contact'];
@@ -49,6 +49,19 @@ export default function App() {
 
   const [currentPage, setCurrentPage] = useState<PageType>(getPageFromPath);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showStickyHeader, setShowStickyHeader] = useState(false);
+  const [isMobileTeamDropdownOpen, setIsMobileTeamDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowStickyHeader(window.scrollY >= 400);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const handlePopState = () => {
@@ -98,51 +111,90 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans flex flex-col">
-      {/* HEADER */}
-      <header className="sticky top-0 z-50 bg-brand-blue text-white border-b border-brand-blue-hover px-4 sm:px-6 lg:px-8 py-3.5 shadow-sm">
+      {/* STATIC/RELATIVE HEADER */}
+      <header
+        className={`z-50 px-4 sm:px-6 lg:px-8 ${currentPage === 'home'
+            ? 'absolute top-0 left-0 right-0 bg-transparent border-b border-white/30 py-6 text-white'
+            : 'sticky top-0 bg-brand-blue border-b border-white/20 py-4 shadow-sm text-white'
+          }`}
+      >
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          
+
           {/* Logo */}
-          <Logo 
-            onClick={() => navigateTo('home')} 
-            className="cursor-pointer hover:opacity-90 transition-opacity" 
+          <Logo
+            onClick={() => navigateTo('home')}
+            imgClassName="h-16 sm:h-22"
+            className="cursor-pointer hover:opacity-90 transition-opacity"
           />
 
           {/* Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6 text-xs font-bold uppercase tracking-wider">
-            <button 
+          <nav className="hidden lg:flex items-center gap-6 text-sm font-bold uppercase tracking-wider">
+            <button
               onClick={() => navigateTo('home')}
-              className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'home' ? 'text-white font-extrabold border-b-2 border-brand-accent' : 'text-blue-100/70 hover:text-white font-semibold'}`}
+              className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'home' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
             >
               {t('home')}
             </button>
-            <button 
+            <button
               onClick={() => navigateTo('courses')}
-              className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'courses' ? 'text-white font-extrabold border-b-2 border-brand-accent' : 'text-blue-100/70 hover:text-white font-semibold'}`}
+              className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'courses' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
             >
               {t('courses')}
             </button>
-            <button 
+            <button
               onClick={() => navigateTo('about')}
-              className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'about' ? 'text-white font-extrabold border-b-2 border-brand-accent' : 'text-blue-100/70 hover:text-white font-semibold'}`}
+              className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'about' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
             >
               {t('about')}
             </button>
-            <button 
-              onClick={() => navigateTo('team')}
-              className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'team' ? 'text-white font-extrabold border-b-2 border-brand-accent' : 'text-blue-100/70 hover:text-white font-semibold'}`}
-            >
-              {t('team')}
-            </button>
-            <button 
+
+            {/* Team with Dropdown */}
+            <div className="relative group py-2">
+              <button
+                onClick={() => navigateTo('team')}
+                className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 flex items-center gap-1.5 ${currentPage === 'team'
+                    ? 'text-white font-extrabold border-b-2 border-white'
+                    : 'text-white/85 hover:text-sky-400 font-semibold'
+                  }`}
+              >
+                <span>{t('team')}</span>
+                <span className="text-[9px] opacity-75 group-hover:rotate-180 transition-transform duration-200">▼</span>
+              </button>
+
+              {/* Dropdown container wrapper with padding gap connection */}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-0 pt-3 w-52 z-50 hidden group-hover:flex flex-col">
+                <div className="bg-white text-slate-800 rounded-none shadow-2xl border border-slate-200 py-0 w-full flex flex-col text-center">
+                  <button
+                    onClick={() => { navigateTo('team'); }}
+                    className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-sm font-bold transition-colors border-none bg-transparent cursor-pointer w-full text-center"
+                  >
+                    {lang === 'en' ? 'Our Instructors' : 'مدربونا الأعزاء'}
+                  </button>
+                  <button
+                    onClick={() => { navigateTo('about'); }}
+                    className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-sm font-bold transition-colors border-t border-b border-slate-100 bg-transparent cursor-pointer w-full text-center"
+                  >
+                    {lang === 'en' ? 'Academy Profile' : 'ملف الأكاديمية'}
+                  </button>
+                  <button
+                    onClick={() => navigateTo('contact')}
+                    className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-sm font-bold transition-colors border-none bg-transparent cursor-pointer w-full text-center"
+                  >
+                    {lang === 'en' ? 'Contact & Register' : 'التواصل والتسجيل'}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <button
               onClick={() => navigateTo('diagnostics')}
-              className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'diagnostics' ? 'text-white font-extrabold border-b-2 border-brand-accent' : 'text-blue-100/70 hover:text-white font-semibold'}`}
+              className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'diagnostics' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
             >
               {t('diagnostics')}
             </button>
-            <button 
+            <button
               onClick={() => navigateTo('contact')}
-              className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'contact' ? 'text-white font-extrabold border-b-2 border-brand-accent' : 'text-blue-100/70 hover:text-white font-semibold'}`}
+              className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'contact' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
             >
               {t('contact')}
             </button>
@@ -161,7 +213,10 @@ export default function App() {
 
             <button
               onClick={() => navigateTo('contact')}
-              className="hidden sm:flex bg-brand-accent hover:bg-brand-accent/90 text-white font-extrabold text-xs px-4 py-2 rounded-xl items-center gap-1.5 transition-all shadow-sm cursor-pointer border-none"
+              className={`hidden sm:flex font-extrabold text-xs px-4 py-2 rounded-xl items-center gap-1.5 transition-all shadow-sm cursor-pointer border ${currentPage !== 'home'
+                  ? 'bg-white text-brand-blue hover:bg-slate-50 border-transparent'
+                  : 'bg-brand-blue hover:bg-brand-blue-hover text-white border-white/20'
+                }`}
             >
               <Clock size={12} />
               <span>{t('registerNow')}</span>
@@ -170,85 +225,276 @@ export default function App() {
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="flex lg:hidden p-2 text-blue-100 hover:text-white focus:outline-none transition-colors border-none bg-transparent cursor-pointer"
+              className="flex lg:hidden p-3 text-blue-100 hover:text-white focus:outline-none transition-colors border-none bg-transparent cursor-pointer"
               aria-label="Toggle Menu"
             >
-              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {isMobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
             </button>
           </div>
 
         </div>
+      </header>
 
-      {/* Mobile Menu Panel */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="lg:hidden bg-brand-blue border-b border-brand-blue-hover shadow-sm overflow-hidden text-start"
-          >
-            <div className="px-4 pt-3 pb-6 space-y-3 flex flex-col font-sans text-sm font-bold uppercase tracking-wider">
-              <button 
-                onClick={() => { setIsMobileMenuOpen(false); navigateTo('home'); }}
-                className={`py-2.5 px-3 rounded-xl text-start transition-all cursor-pointer border-none ${currentPage === 'home' ? 'bg-white/10 text-white font-extrabold' : 'bg-transparent text-blue-100 hover:text-white'}`}
+      {/* STICKY SLIDE-DOWN HEADER (Home page only) */}
+      {currentPage === 'home' && (
+        <header
+          className={`fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 bg-brand-blue/95 backdrop-blur-md border-b border-white/20 py-3.5 shadow-lg text-white transform transition-all duration-300 ease-out ${showStickyHeader ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'
+            }`}
+        >
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+
+            {/* Logo */}
+            <Logo
+              onClick={() => navigateTo('home')}
+              imgClassName="h-14 sm:h-18"
+              className="cursor-pointer hover:opacity-90 transition-opacity"
+            />
+
+            {/* Navigation Links */}
+            <nav className="hidden lg:flex items-center gap-6 text-sm font-bold uppercase tracking-wider">
+              <button
+                onClick={() => navigateTo('home')}
+                className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'home' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
               >
                 {t('home')}
               </button>
-              <button 
-                onClick={() => { setIsMobileMenuOpen(false); navigateTo('courses'); }}
-                className={`py-2.5 px-3 rounded-xl text-start transition-all cursor-pointer border-none ${currentPage === 'courses' ? 'bg-white/10 text-white font-extrabold' : 'bg-transparent text-blue-100 hover:text-white'}`}
+              <button
+                onClick={() => navigateTo('courses')}
+                className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'courses' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
               >
                 {t('courses')}
               </button>
-              <button 
-                onClick={() => { setIsMobileMenuOpen(false); navigateTo('about'); }}
-                className={`py-2.5 px-3 rounded-xl text-start transition-all cursor-pointer border-none ${currentPage === 'about' ? 'bg-white/10 text-white font-extrabold' : 'bg-transparent text-blue-100 hover:text-white'}`}
+              <button
+                onClick={() => navigateTo('about')}
+                className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'about' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
               >
                 {t('about')}
               </button>
-              <button 
-                onClick={() => { setIsMobileMenuOpen(false); navigateTo('team'); }}
-                className={`py-2.5 px-3 rounded-xl text-start transition-all cursor-pointer border-none ${currentPage === 'team' ? 'bg-white/10 text-white font-extrabold' : 'bg-transparent text-blue-100 hover:text-white'}`}
-              >
-                {t('team')}
-              </button>
-              <button 
-                onClick={() => { setIsMobileMenuOpen(false); navigateTo('diagnostics'); }}
-                className={`py-2.5 px-3 rounded-xl text-start transition-all cursor-pointer border-none ${currentPage === 'diagnostics' ? 'bg-white/10 text-white font-extrabold' : 'bg-transparent text-blue-100 hover:text-white'}`}
+
+              {/* Team with Dropdown */}
+              <div className="relative group py-2">
+                <button
+                  onClick={() => navigateTo('team')}
+                  className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 flex items-center gap-1.5 ${currentPage === 'team'
+                      ? 'text-white font-extrabold border-b-2 border-white'
+                      : 'text-white/85 hover:text-sky-400 font-semibold'
+                    }`}
+                >
+                  <span>{t('team')}</span>
+                  <span className="text-[9px] opacity-75 group-hover:rotate-180 transition-transform duration-200">▼</span>
+                </button>
+
+                {/* Dropdown container wrapper with padding gap connection */}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-0 pt-3 w-52 z-50 hidden group-hover:flex flex-col">
+                  <div className="bg-white text-slate-800 rounded-none shadow-2xl border border-slate-200 py-0 w-full flex flex-col text-center">
+                    <button
+                      onClick={() => { navigateTo('team'); }}
+                      className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-sm font-bold transition-colors border-none bg-transparent cursor-pointer w-full text-center"
+                    >
+                      {lang === 'en' ? 'Our Instructors' : 'مدربونا الأعزاء'}
+                    </button>
+                    <button
+                      onClick={() => { navigateTo('about'); }}
+                      className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-sm font-bold transition-colors border-t border-b border-slate-100 bg-transparent cursor-pointer w-full text-center"
+                    >
+                      {lang === 'en' ? 'Academy Profile' : 'ملف الأكاديمية'}
+                    </button>
+                    <button
+                      onClick={() => navigateTo('contact')}
+                      className="px-6 py-4 hover:bg-slate-50 text-slate-800 hover:text-brand-blue text-sm font-bold transition-colors border-none bg-transparent cursor-pointer w-full text-center"
+                    >
+                      {lang === 'en' ? 'Contact & Register' : 'التواصل والتسجيل'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                onClick={() => navigateTo('diagnostics')}
+                className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'diagnostics' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
               >
                 {t('diagnostics')}
               </button>
-              <button 
-                onClick={() => { setIsMobileMenuOpen(false); navigateTo('contact'); }}
-                className={`py-2.5 px-3 rounded-xl text-start transition-all cursor-pointer border-none ${currentPage === 'contact' ? 'bg-white/10 text-white font-extrabold' : 'bg-transparent text-blue-100 hover:text-white'}`}
+              <button
+                onClick={() => navigateTo('contact')}
+                className={`transition-all cursor-pointer bg-transparent border-none pb-0.5 ${currentPage === 'contact' ? 'text-white font-extrabold border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'}`}
               >
                 {t('contact')}
               </button>
+            </nav>
+
+            {/* Controls */}
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
+                id="lang-toggle-button-sticky"
+                className="bg-white/10 hover:bg-white/20 text-white border border-white/10 font-bold text-[10px] sm:text-xs px-3 py-2 rounded-xl flex items-center gap-1.5 transition-all cursor-pointer uppercase font-sans"
+              >
+                <Globe size={13} className="text-blue-200" />
+                <span>{lang === 'en' ? 'العربية (AR)' : 'ENGLISH (EN)'}</span>
+              </button>
 
               <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  navigateTo('contact');
-                }}
-                className="w-full mt-2 bg-brand-accent hover:bg-brand-accent/90 text-white font-extrabold text-xs py-3 rounded-xl flex items-center justify-center gap-1.5 transition-all shadow-sm cursor-pointer border-none sm:hidden"
+                onClick={() => navigateTo('contact')}
+                className="hidden sm:flex font-extrabold text-xs px-4 py-2 rounded-xl items-center gap-1.5 transition-all shadow-sm cursor-pointer border bg-white text-brand-blue hover:bg-slate-50 border-transparent"
               >
                 <Clock size={12} />
                 <span>{t('registerNow')}</span>
               </button>
+
+              {/* Mobile Hamburger Button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="flex lg:hidden p-3 text-blue-100 hover:text-white focus:outline-none transition-colors border-none bg-transparent cursor-pointer"
+                aria-label="Toggle Menu"
+              >
+                {isMobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
+              </button>
             </div>
-          </motion.div>
+
+          </div>
+        </header>
+      )}
+
+      {/* Mobile Menu Slide-in Drawer */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            {/* Backdrop dim overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.45 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-slate-900 z-40 lg:hidden"
+            />
+
+            {/* Drawer panel (slides from right) */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'tween', ease: 'easeInOut', duration: 0.35 }}
+              className="fixed top-0 right-0 bottom-0 h-full w-[290px] sm:w-[340px] bg-white z-50 shadow-2xl flex flex-col justify-between text-slate-800 lg:hidden"
+            >
+              {/* Header */}
+              <div className="p-5 flex items-center justify-between border-b border-slate-100">
+                <Logo
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    navigateTo('home');
+                  }}
+                  imgClassName="h-10 sm:h-12"
+                  className="cursor-pointer"
+                />
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-slate-700 hover:text-brand-blue p-1 border-none bg-transparent cursor-pointer transition-colors"
+                >
+                  <X size={26} />
+                </button>
+              </div>
+
+              {/* Navigation Links */}
+              <div className="flex-grow overflow-y-auto px-4 py-6 space-y-2 flex flex-col text-start">
+                <button
+                  onClick={() => { setIsMobileMenuOpen(false); navigateTo('home'); }}
+                  className={`py-2.5 px-4 rounded-xl text-start text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'home' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50 hover:text-brand-blue'}`}
+                >
+                  {t('home')}
+                </button>
+                <button
+                  onClick={() => { setIsMobileMenuOpen(false); navigateTo('courses'); }}
+                  className={`py-2.5 px-4 rounded-xl text-start text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'courses' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50 hover:text-brand-blue'}`}
+                >
+                  {t('courses')}
+                </button>
+                <button
+                  onClick={() => { setIsMobileMenuOpen(false); navigateTo('about'); }}
+                  className={`py-2.5 px-4 rounded-xl text-start text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'about' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50 hover:text-brand-blue'}`}
+                >
+                  {t('about')}
+                </button>
+
+                {/* Team navigation with collapsible Mobile Sublinks */}
+                <div className="space-y-1">
+                  <button
+                    onClick={() => setIsMobileTeamDropdownOpen(!isMobileTeamDropdownOpen)}
+                    className={`w-full py-2.5 px-4 rounded-xl flex items-center justify-between text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'team' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50 hover:text-brand-blue'}`}
+                  >
+                    <span>{t('team')}</span>
+                    <span className={`text-[10px] transition-transform duration-205 ${isMobileTeamDropdownOpen ? 'rotate-180' : ''}`}>▼</span>
+                  </button>
+                  <AnimatePresence>
+                    {isMobileTeamDropdownOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="pl-6 pr-4 border-l-2 border-slate-100 space-y-1.5 mt-1 flex flex-col items-start overflow-hidden font-sans"
+                      >
+                        <button
+                          onClick={() => { setIsMobileMenuOpen(false); navigateTo('team'); }}
+                          className="py-1 text-slate-500 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer"
+                        >
+                          - {lang === 'en' ? 'Our Instructors' : 'مدربونا الأعزاء'}
+                        </button>
+                        <button
+                          onClick={() => { setIsMobileMenuOpen(false); navigateTo('about'); }}
+                          className="py-1 text-slate-500 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer"
+                        >
+                          - {lang === 'en' ? 'Academy Profile' : 'ملف الأكاديمية'}
+                        </button>
+                        <button
+                          onClick={() => { setIsMobileMenuOpen(false); navigateTo('contact'); }}
+                          className="py-1 text-slate-500 hover:text-brand-blue text-xs font-bold transition-colors border-none bg-transparent cursor-pointer"
+                        >
+                          - {lang === 'en' ? 'Contact & Register' : 'التواصل والتسجيل'}
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                <button
+                  onClick={() => { setIsMobileMenuOpen(false); navigateTo('diagnostics'); }}
+                  className={`py-2.5 px-4 rounded-xl text-start text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'diagnostics' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50 hover:text-brand-blue'}`}
+                >
+                  {t('diagnostics')}
+                </button>
+                <button
+                  onClick={() => { setIsMobileMenuOpen(false); navigateTo('contact'); }}
+                  className={`py-2.5 px-4 rounded-xl text-start text-sm font-bold border-none transition-all cursor-pointer ${currentPage === 'contact' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50 hover:text-brand-blue'}`}
+                >
+                  {t('contact')}
+                </button>
+              </div>
+
+              {/* Footer / CTA in Drawer */}
+              <div className="p-5 border-t border-slate-100 bg-slate-50">
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    navigateTo('contact');
+                  }}
+                  className="w-full bg-brand-blue hover:bg-brand-blue-hover text-white font-extrabold text-xs py-3.5 rounded-xl flex items-center justify-center gap-1.5 transition-all shadow-md cursor-pointer border-none"
+                >
+                  <Clock size={12} />
+                  <span>{t('registerNow')}</span>
+                </button>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
-      </header>
 
 
 
       {/* DYNAMIC ROUTER SECTION */}
       <main className="flex-grow">
         <AnimatePresence mode="wait">
-          
+
           {currentPage === 'home' && (
             <motion.div
               key="home"
@@ -258,98 +504,82 @@ export default function App() {
               transition={{ duration: 0.2 }}
             >
               {/* HERO SCREEN CONTAINER */}
-              <section className="bg-white text-slate-800 py-16 lg:py-20 relative overflow-hidden border-b border-slate-200">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    
-                    {/* Hero text */}
-                    <div className="lg:col-span-7 space-y-6 text-start order-2 lg:order-1">
-                      
-                      <div className="flex flex-wrap gap-2">
-                        <span className="inline-flex items-center gap-1.5 bg-blue-50 text-brand-blue border border-blue-100 px-3.5 py-1.5 rounded-full text-xs font-bold font-sans tracking-wide uppercase">
-                          <Wrench size={12} />
-                          <span>{t('heroBadge')}</span>
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 border border-slate-200 px-3.5 py-1.5 rounded-full text-xs font-bold font-sans tracking-wide uppercase">
-                          <Award size={12} />
-                          <span>{t('heroBadge2')}</span>
-                        </span>
-                      </div>
+              <section className="relative min-h-[90vh] lg:min-h-screen flex items-center justify-start bg-slate-950 text-white pt-32 lg:pt-40 pb-20 overflow-hidden border-b border-slate-800">
+                {/* Background Video (Desktop/Tablet) */}
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover z-0 hidden md:block"
+                >
+                  <source src="/hero-video.mp4" type="video/mp4" />
+                </video>
 
-                      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight font-sans text-slate-900">
-                        {t('heroTitlePart1')} <span className="text-brand-blue">{t('heroTitlePart2')}</span>
-                      </h1>
+                {/* Fallback Background Image (Mobile) */}
+                <img
+                  src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=1200&q=80"
+                  alt="Hypro Automotive Technician diagnostic check"
+                  className="absolute inset-0 w-full h-full object-cover z-0 md:hidden grayscale brightness-75"
+                />
 
-                      <p className="text-slate-650 text-sm sm:text-base leading-relaxed max-w-2xl font-sans font-medium">
-                        {t('heroSubtitle')}
-                      </p>
+                {/* Dark Vignette Overlay for Readability */}
+                <div className="absolute inset-0 bg-slate-950/65 z-10" />
 
-                      {/* CTAs */}
-                      <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                        <button
-                          onClick={() => navigateTo('contact')}
-                          className="bg-brand-blue hover:bg-brand-blue-hover text-white font-extrabold text-sm px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm border-none"
-                        >
-                          <Send size={15} />
-                          <span>{t('ctaHeroPrimary')}</span>
-                        </button>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
+                  <div className="max-w-3xl space-y-6 text-start">
 
-                        <button
-                          onClick={() => navigateTo('about')}
-                          className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-bold text-sm px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm"
-                        >
-                          <Layers size={14} className="text-brand-blue" />
-                          <span>{t('learnMission')}</span>
-                        </button>
-                      </div>
-
-                      {/* Trust Indicators */}
-                      <div className="pt-6 border-t border-slate-200 flex flex-wrap gap-6 items-center text-xs text-slate-500 font-sans font-medium">
-                        <div className="flex items-center gap-2">
-                          <CheckCircle size={14} className="text-brand-blue" />
-                          <span>{t('syndicateStandards')}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <CheckCircle size={14} className="text-brand-blue" />
-                          <span>{t('secureVerify')}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <CheckCircle size={14} className="text-brand-blue" />
-                          <span>{t('practicalFocus')}</span>
-                        </div>
-                      </div>
-
+                    <div className="flex flex-wrap gap-2">
+                      <span className="inline-flex items-center gap-1.5 bg-blue-500/10 text-blue-300 border border-blue-400/20 px-3.5 py-1.5 rounded-full text-xs font-bold font-sans tracking-wide uppercase">
+                        <Wrench size={12} />
+                        <span>{t('heroBadge')}</span>
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 bg-white/5 text-slate-300 border border-white/10 px-3.5 py-1.5 rounded-full text-xs font-bold font-sans tracking-wide uppercase">
+                        <Award size={12} />
+                        <span>{t('heroBadge2')}</span>
+                      </span>
                     </div>
 
-                    {/* Side Hero Image */}
-                    <div className="lg:col-span-5 relative w-full order-1 lg:order-2 mb-8 lg:mb-0">
-                      <div className="relative rounded-2xl overflow-hidden shadow-md border border-slate-200 bg-white aspect-video lg:aspect-square group">
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/10 to-transparent z-10" />
-                        
-                        <img 
-                          src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=600&q=60" 
-                          alt="Hypro Automotive Technician diagnostic check" 
-                          referrerPolicy="no-referrer"
-                          loading="eager"
-                          fetchPriority="high"
-                          className="absolute inset-0 w-full h-full object-cover grayscale brightness-95 group-hover:scale-[1.02] transition-transform duration-500 ease-out"
-                        />
-                        
-                        <div className="absolute top-4 right-4 z-20 bg-brand-blue text-white text-[10px] font-sans font-bold px-3 py-1.5 rounded-full shadow-sm">
-                          {t('liveLabWork')}
-                        </div>
-                        
-                        <div className="absolute bottom-6 left-6 right-6 z-20 text-start space-y-2">
-                          <span className="text-[9px] font-sans tracking-wider text-blue-200 block font-bold uppercase">
-                            {t('trainingHubDirectives')}
-                          </span>
-                          <h4 className="font-extrabold text-white text-base leading-snug font-sans">
-                            {t('practicalDiagnostics')}
-                          </h4>
-                          <p className="text-slate-200 text-xs font-sans leading-normal font-medium max-w-sm">
-                            {t('practicalDiagnosticsDesc')}
-                          </p>
-                        </div>
+                    <h1 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold tracking-tight leading-tight font-sans text-white">
+                      {t('heroTitlePart1')} <span className="text-blue-400">{t('heroTitlePart2')}</span>
+                    </h1>
+
+                    <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl font-sans font-medium">
+                      {t('heroSubtitle')}
+                    </p>
+
+                    {/* CTAs */}
+                    <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                      <button
+                        onClick={() => navigateTo('contact')}
+                        className="bg-brand-blue hover:bg-brand-blue-hover text-white border border-white/10 font-extrabold text-sm px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md"
+                      >
+                        <Send size={15} />
+                        <span>{t('ctaHeroPrimary')}</span>
+                      </button>
+
+                      <button
+                        onClick={() => navigateTo('about')}
+                        className="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-sm px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md"
+                      >
+                        <Layers size={14} className="text-blue-300" />
+                        <span>{t('learnMission')}</span>
+                      </button>
+                    </div>
+
+                    {/* Trust Indicators */}
+                    <div className="pt-6 border-t border-white/10 flex flex-wrap gap-6 items-center text-xs text-slate-400 font-sans font-medium">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle size={14} className="text-blue-400" />
+                        <span>{t('syndicateStandards')}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle size={14} className="text-blue-400" />
+                        <span>{t('secureVerify')}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle size={14} className="text-blue-400" />
+                        <span>{t('practicalFocus')}</span>
                       </div>
                     </div>
 
@@ -378,13 +608,13 @@ export default function App() {
               {/* ALTERNATING IMAGE & TEXT FEATURES */}
               <section className="py-16 bg-white border-b border-slate-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-                  
+
                   {/* Row 1: Image Left, Text Right */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                     <div className="relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 aspect-[4/3] bg-slate-100">
-                      <img 
-                        src="https://images.unsplash.com/photo-1517524206127-48bbd363f3d7?auto=format&fit=crop&w=500&q=50" 
-                        alt="Hands-on training" 
+                      <img
+                        src="https://images.unsplash.com/photo-1517524206127-48bbd363f3d7?auto=format&fit=crop&w=500&q=50"
+                        alt="Hands-on training"
                         loading="lazy"
                         className="w-full h-full object-cover"
                       />
@@ -416,9 +646,9 @@ export default function App() {
                       </p>
                     </div>
                     <div className="relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 aspect-[4/3] bg-slate-100 md:order-2 order-1">
-                      <img 
-                        src="https://images.unsplash.com/photo-1616788494707-ec28f08d05a1?auto=format&fit=crop&w=500&q=50" 
-                        alt="Accredited training" 
+                      <img
+                        src="https://images.unsplash.com/photo-1616788494707-ec28f08d05a1?auto=format&fit=crop&w=500&q=50"
+                        alt="Accredited training"
                         loading="lazy"
                         className="w-full h-full object-cover"
                       />
@@ -428,9 +658,9 @@ export default function App() {
                   {/* Row 3: Image Left, Text Right */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                     <div className="relative rounded-2xl overflow-hidden shadow-sm border border-slate-200 aspect-[4/3] bg-slate-100">
-                      <img 
-                        src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?auto=format&fit=crop&w=500&q=50" 
-                        alt="Employment placement" 
+                      <img
+                        src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?auto=format&fit=crop&w=500&q=50"
+                        alt="Employment placement"
                         loading="lazy"
                         className="w-full h-full object-cover"
                       />
@@ -483,8 +713,8 @@ export default function App() {
                           })}
                         </p>
                       </div>
-                      <button 
-                        onClick={() => { setActiveCategory('workshop'); navigateTo('contact'); }} 
+                      <button
+                        onClick={() => { setActiveCategory('workshop'); navigateTo('contact'); }}
                         className="mt-6 w-full py-2.5 px-4 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                       >
                         <span>{t('workshopPartnerships')}</span>
@@ -507,8 +737,8 @@ export default function App() {
                           })}
                         </p>
                       </div>
-                      <button 
-                        onClick={() => { setActiveCategory('dealer'); navigateTo('contact'); }} 
+                      <button
+                        onClick={() => { setActiveCategory('dealer'); navigateTo('contact'); }}
                         className="mt-6 w-full py-2.5 px-4 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                       >
                         <span>{t('agencyProtocols')}</span>
@@ -531,8 +761,8 @@ export default function App() {
                           })}
                         </p>
                       </div>
-                      <button 
-                        onClick={() => { setActiveCategory('ngo'); navigateTo('contact'); }} 
+                      <button
+                        onClick={() => { setActiveCategory('ngo'); navigateTo('contact'); }}
                         className="mt-6 w-full py-2.5 px-4 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                       >
                         <span>{t('ngoSupport')}</span>
@@ -606,7 +836,7 @@ export default function App() {
               className="py-16 bg-white text-start"
             >
               <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 animate-fade-in">
-                
+
                 {/* Header */}
                 <div className="space-y-3 pb-8 border-b border-slate-200">
                   <span className="inline-flex items-center gap-1.5 bg-blue-50 text-brand-blue border border-blue-100 px-3.5 py-1.5 rounded-full text-xs font-bold font-mono tracking-wide uppercase">
@@ -633,7 +863,7 @@ export default function App() {
 
                 {/* Mission and Vision */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-4">
-                  
+
                   {/* Mission Card */}
                   <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-3">
                     <div className="p-3 bg-blue-50 text-brand-blue rounded-xl w-12 h-12 flex items-center justify-center">
@@ -710,7 +940,7 @@ export default function App() {
               className="py-16 bg-white text-start"
             >
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                
+
                 {/* Header */}
                 <div className="max-w-3xl space-y-3 pb-8 border-b border-slate-200 mb-8">
                   <span className="inline-flex items-center gap-1.5 bg-blue-50 text-brand-blue border border-blue-100 px-3.5 py-1.5 rounded-full text-xs font-bold font-mono tracking-wide uppercase">
@@ -728,7 +958,7 @@ export default function App() {
                 {/* Courses List Layout */}
                 <div className="space-y-10">
                   {modules.map((m, index) => (
-                    <div 
+                    <div
                       key={m.id}
                       className="bg-slate-50 border border-slate-200 rounded-2xl p-6 md:p-8 flex flex-col lg:flex-row gap-8 items-start transition-all hover:shadow-sm"
                     >
@@ -737,7 +967,7 @@ export default function App() {
                         <span className="inline-flex items-center gap-1.5 bg-brand-blue text-white px-3 py-1 rounded-full text-[10px] font-bold font-mono uppercase tracking-wider">
                           {t('stage')} 0{index + 1}
                         </span>
-                        
+
                         <h3 className="text-xl font-bold text-slate-900 leading-tight font-sans">
                           {tObj(m, 'title')}
                         </h3>
@@ -764,13 +994,13 @@ export default function App() {
                             <span>{t('theory')}</span>
                           </div>
                           <div className="h-2 rounded-full bg-slate-250 flex overflow-hidden">
-                            <div 
-                              className="bg-brand-blue h-full" 
-                              style={{ width: m.id === 'mod-1' ? '70%' : m.id === 'mod-4' ? '100%' : '80%' }} 
+                            <div
+                              className="bg-brand-blue h-full"
+                              style={{ width: m.id === 'mod-1' ? '70%' : m.id === 'mod-4' ? '100%' : '80%' }}
                             />
-                            <div 
-                              className="bg-slate-300 h-full" 
-                              style={{ width: m.id === 'mod-1' ? '30%' : m.id === 'mod-4' ? '0%' : '20%' }} 
+                            <div
+                              className="bg-slate-300 h-full"
+                              style={{ width: m.id === 'mod-1' ? '30%' : m.id === 'mod-4' ? '0%' : '20%' }}
                             />
                           </div>
                         </div>
@@ -782,7 +1012,7 @@ export default function App() {
                           <h4 className="text-xs font-bold text-slate-500 font-sans uppercase tracking-wider">
                             {t('targetCompetencies')}
                           </h4>
-                          
+
                           <ul className="space-y-3">
                             {(tObj(m, 'skills') as unknown as string[])?.map((skill, sIdx) => (
                               <li key={sIdx} className="flex items-start gap-3 text-xs md:text-sm text-slate-650 leading-relaxed text-start font-medium font-sans">
@@ -844,7 +1074,7 @@ export default function App() {
               className="py-16 bg-white text-start"
             >
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                
+
                 {/* Header text */}
                 <div className="max-w-3xl space-y-3 pb-10 border-b border-slate-200 mb-12 animate-fade-in">
                   <span className="inline-flex items-center gap-1.5 bg-blue-50 text-brand-blue border border-blue-100 px-3.5 py-1.5 rounded-full text-xs font-bold font-mono tracking-wide uppercase">
@@ -864,7 +1094,7 @@ export default function App() {
                   {academyContent.team.map((member, idx) => (
                     <div key={idx} className="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:shadow-md transition-all flex flex-col justify-between">
                       <div className="space-y-4">
-                        
+
                         {/* Avatar */}
                         <div className="w-14 h-14 rounded-2xl bg-brand-blue text-white flex items-center justify-center font-extrabold text-lg shadow-sm">
                           {member.nameEn.split(' ').slice(1).map(n => n[0]).join('') || 'HY'}
@@ -909,7 +1139,7 @@ export default function App() {
               className="py-16 bg-white text-slate-800 text-start"
             >
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                
+
                 <div className="max-w-3xl space-y-3 pb-8 border-b border-slate-200 mb-10 animate-fade-in">
                   <span className="inline-flex items-center gap-1.5 bg-blue-50 text-brand-blue border border-blue-100 px-3.5 py-1.5 rounded-full text-xs font-bold font-mono tracking-wide uppercase">
                     <Wrench size={13} className="text-brand-blue" />
@@ -943,7 +1173,7 @@ export default function App() {
               <section className="py-16 bg-slate-50 text-slate-800 relative border-b border-slate-200" id="contact-form-section">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start animate-fade-in">
-                    
+
                     {/* Contacts info */}
                     <div className="lg:col-span-4 space-y-6 text-start">
                       <div className="space-y-2">
@@ -961,7 +1191,7 @@ export default function App() {
 
                       {/* Fast clickable cards */}
                       <div className="space-y-3">
-                        <a 
+                        <a
                           href={contact.whatsapp}
                           target="_blank"
                           rel="noreferrer"
@@ -976,7 +1206,7 @@ export default function App() {
                           </div>
                         </a>
 
-                        <a 
+                        <a
                           href={`tel:${contact.phone}`}
                           className="flex items-center gap-3 bg-white hover:bg-slate-100 border border-slate-200 p-4 rounded-xl transition-all cursor-pointer group decoration-none"
                         >
@@ -1011,13 +1241,13 @@ export default function App() {
                       </div>
 
                     </div>
-                    
+
                     {/* Form */}
                     <div className="lg:col-span-8">
                       <Suspense fallback={<Skeleton />}>
-                        <DynamicForm 
-                          activeCategory={activeCategory} 
-                          setActiveCategory={setActiveCategory} 
+                        <DynamicForm
+                          activeCategory={activeCategory}
+                          setActiveCategory={setActiveCategory}
                         />
                       </Suspense>
                     </div>
@@ -1034,11 +1264,11 @@ export default function App() {
       {/* FOOTER */}
       <footer className="bg-slate-900 text-white pt-16 pb-8 border-t border-slate-800 relative text-start">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-slate-800">
-            
+
             <div className="space-y-4 md:col-span-2">
-              <Logo />
+              <Logo imgClassName="h-10 sm:h-12" />
 
               <p className="text-slate-400 text-xs leading-relaxed max-w-sm font-sans pt-1 font-medium">
                 {lang === 'en' ? meta.descriptionEn : meta.descriptionAr}
@@ -1079,7 +1309,7 @@ export default function App() {
                   <MessageSquare size={13} className="text-emerald-400" />
                   <span>{t('telegramWaLink')}</span>
                 </a>
-                
+
                 <div className="pt-2 text-[10px] text-slate-500 font-mono">
                   {t('admissionsHours')}
                   <div className="text-slate-400 mt-1 font-sans font-medium">
