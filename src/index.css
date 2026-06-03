@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", "Tajawal", system-ui, -apple-system, sans-serif;
-  
+  --font-sans: "Poppins", "Tajawal", system-ui, -apple-system, sans-serif;
+
   --color-brand-blue: #293158;
   --color-brand-blue-hover: #1e2442;
   --color-brand-accent: #dc2626;
@@ -12,8 +13,35 @@
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    font-family: 'Poppins', 'Tajawal', system-ui, -apple-system, sans-serif;
+    scrollbar-color: var(--color-brand-blue) #f1f5f9;
+    scrollbar-width: thin;
   }
-  
+
+  /* Custom scrollbar styling for webkit browsers */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-brand-blue);
+    border-radius: 9999px;
+    border: 2px solid #f1f5f9;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-brand-blue-hover);
+  }
+
+  body, input, textarea, select, button, span, p, h1, h2, h3, h4, h5, h6, a, div {
+    font-family: 'Poppins', 'Tajawal', system-ui, -apple-system, sans-serif;
+  }
+
   body {
     @apply antialiased bg-slate-50 text-slate-900 selection:bg-blue-200/50;
   }
@@ -21,11 +49,17 @@
 
 /* Minimal smooth entry animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-in {
   animation: fadeIn 0.4s ease-out forwards;
 }
-
