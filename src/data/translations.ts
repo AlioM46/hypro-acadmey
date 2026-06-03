@@ -80,7 +80,7 @@ export const translations = {
     en: 'Our curriculum is built directly around real-world diagnostic workflows in active garages.',
     ar: 'على عكس المعاهد النظرية التقليدية، يتمحور تدريبنا حول صيانة الأعطال وحل مشاكل السيارات الميدانية.'
   },
-  readyExplore: { en: 'Ready to Explore our Detailed Program?', ar: 'هل تريد استكشاف تفاصيل الدورات التدريبية؟'},
+  readyExplore: { en: 'Ready to Explore our Detailed Program?', ar: 'هل تريد استكشاف تفاصيل الدورات التدريبية؟' },
   browseDetails: { en: 'Browse our 4 months course details containing duration, hours distribution and target competencies.', ar: 'تصفح تفاصيل ومفردات منهج صيانة السيارات الحديثة الموزع على مدار 4 فصول مكثفة.' },
   viewCourseDetails: { en: 'View Course Details', ar: 'عرض تفاصيل الدورات' },
 
@@ -206,7 +206,7 @@ export const translations = {
     ar: 'أكاديمية هايبـرو ليست مجرد مدرسة مهنية، بل هي حلقة وصل متكاملة تربط أطراف المهنة بالتوظيف المباشر. حدد صفتك أدناه لتلقي الإجابة:'
   },
   roleValueProposition: { en: 'ROLE VALUE PROPOSITION', ar: 'القيمة المضافة لشريحتك' },
-  tailoredBenefits: { en: 'Your Tailored Collaboration Benefits:', ar: 'المزايا المخصصة لصفحتك:'},
+  tailoredBenefits: { en: 'Your Tailored Collaboration Benefits:', ar: 'المزايا المخصصة لصفحتك:' },
   inquireProgram: { en: 'Inquire About This Program', ar: 'طلب استفسار عن هذا البرنامج' },
   exploreDetails: { en: 'Explore details →', ar: 'تصفح الميزات ←' },
 

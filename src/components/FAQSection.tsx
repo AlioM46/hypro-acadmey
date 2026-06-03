@@ -22,13 +22,13 @@ export default function FAQSection() {
   // Filter logic
   const filteredFaqs = faqs.filter(f => {
     const categoryMatches = activeTab === 'all' || f.category === activeTab;
-    
+
     const query = searchQuery.trim().toLowerCase();
     if (!query) return categoryMatches;
 
     const questionText = tObj(f, 'question').toLowerCase();
     const answerText = tObj(f, 'answer').toLowerCase();
-    
+
     return categoryMatches && (questionText.includes(query) || answerText.includes(query));
   });
 
@@ -54,9 +54,8 @@ export default function FAQSection() {
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder={t('searchPlaceholder')}
           id="faq-search-input"
-          className={`w-full bg-white border border-slate-200 rounded-2xl ${
-            lang === 'en' ? 'pl-11 pr-4' : 'pr-11 pl-4'
-          } py-3.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-brand-blue transition-colors shadow-sm`}
+          className={`w-full bg-white border border-slate-200 rounded-2xl ${lang === 'en' ? 'pl-11 pr-4' : 'pr-11 pl-4'
+            } py-3.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-brand-blue transition-colors shadow-sm`}
         />
       </div>
 
@@ -67,11 +66,10 @@ export default function FAQSection() {
             key={tab}
             onClick={() => setActiveTab(tab)}
             id={`btn-faq-tab-${tab}`}
-            className={`px-4 py-2 rounded-full text-xs font-semibold cursor-pointer transition-all ${
-              activeTab === tab
+            className={`px-4 py-2 rounded-full text-xs font-semibold cursor-pointer transition-all ${activeTab === tab
                 ? 'bg-brand-blue text-white shadow-sm border-none'
                 : 'bg-white border border-slate-200 hover:border-slate-300 text-slate-600'
-            }`}
+              }`}
           >
             {tab === 'all' && t('tabAll')}
             {tab === 'student' && t('tabStudent')}
@@ -110,9 +108,8 @@ export default function FAQSection() {
                 </button>
 
                 <div
-                  className={`transition-all duration-300 ${
-                    isOpen ? 'max-h-[300px] border-t border-slate-100' : 'max-h-0'
-                  } overflow-hidden`}
+                  className={`transition-all duration-300 ${isOpen ? 'max-h-[300px] border-t border-slate-100' : 'max-h-0'
+                    } overflow-hidden`}
                 >
                   <p className="p-5 text-xs md:text-sm leading-relaxed text-slate-650 bg-slate-50/50 text-start font-medium font-sans">
                     {tObj(faq, 'answer')}
