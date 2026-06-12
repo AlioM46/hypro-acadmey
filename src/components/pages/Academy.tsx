@@ -16,7 +16,7 @@ type PageType = 'home' | 'about' | 'programs' | 'testing-lab' | 'partnerships' |
 
 interface AcademyProps {
   navigateTo: (page: PageType) => void;
-  setActiveCategory: (category: 'student' | 'workshop' | 'dealer' | 'ngo') => void;
+  setActiveCategory: (category: 'student' | 'workshop' | 'dealer' | 'ngo' | 'trainer') => void;
 }
 
 export default function Academy({ navigateTo, setActiveCategory }: AcademyProps) {

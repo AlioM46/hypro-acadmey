@@ -28,7 +28,7 @@ import Volunteers from './components/pages/Volunteers';
 import Legal from './components/pages/Legal';
 import Academy from './components/pages/Academy';
 
-type CategoryType = 'student' | 'workshop' | 'dealer' | 'ngo';
+type CategoryType = 'student' | 'workshop' | 'dealer' | 'ngo' | 'trainer';
 type PageType = 'home' | 'about' | 'programs' | 'testing-lab' | 'partnerships' | 'contact' | 'practical-training' | 'accreditations' | 'team' | 'careers' | 'b2b' | 'gallery' | 'news' | 'volunteers' | 'legal' | 'academy';
 
 export default function App() {

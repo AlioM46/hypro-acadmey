@@ -231,6 +231,7 @@ export const translations = {
   workshop: { en: 'Workshop', ar: 'ورشة' },
   dealer: { en: 'Dealer', ar: 'وكيل' },
   ngo: { en: 'Ministry/NGO', ar: 'منظمة' },
+  trainer: { en: 'Trainer / Instructor', ar: 'مدرب' },
 
   // Audience Pathways
   audienceTitle: { en: 'Who Are You? Find Your Answers', ar: 'ما هو هدفك؟ اعثر على إجابتك المحددة' },

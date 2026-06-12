@@ -4,8 +4,8 @@ import { useTranslation } from '../hooks/useTranslation';
 
 interface DynamicFormProps {
   lang?: 'en' | 'ar'; // Backward compatibility
-  activeCategory: 'student' | 'workshop' | 'dealer' | 'ngo';
-  setActiveCategory: (category: 'student' | 'workshop' | 'dealer' | 'ngo') => void;
+  activeCategory: 'student' | 'workshop' | 'dealer' | 'ngo' | 'trainer';
+  setActiveCategory: (category: 'student' | 'workshop' | 'dealer' | 'ngo' | 'trainer') => void;
 }
 
 export default function DynamicForm({ activeCategory, setActiveCategory }: DynamicFormProps) {
@@ -70,6 +70,18 @@ export default function DynamicForm({ activeCategory, setActiveCategory }: Dynam
           { id: 'source', labelEn: 'Referral Source', labelAr: 'مصدر الإحالة', type: 'select', optionsEn: ['Website', 'Partner Organization', 'UN Network', 'Conference', 'Other'], optionsAr: ['الموقع الإلكتروني', 'منظمة شريكة', 'شبكة الأمم المتحدة', 'مؤتمر', 'أخرى'], required: false },
           { id: 'notes', labelEn: 'Project Scope & Notes', labelAr: 'نطاق المشروع وملاحظات', type: 'textarea', placeholderEn: 'Describe geographic scope, timeline, and budget range...', placeholderAr: 'صف النطاق الجغرافي والجدول الزمني ونطاق الميزانية...', required: false }
         ];
+      case 'trainer':
+        return [
+          { id: 'firstName', labelEn: 'First Name', labelAr: 'الاسم الأول', type: 'text', placeholderEn: 'e.g. Mahmoud', placeholderAr: 'مثال: محمود', required: true },
+          { id: 'lastName', labelEn: 'Last Name', labelAr: 'اسم العائلة', type: 'text', placeholderEn: 'e.g. Al-Ahmad', placeholderAr: 'مثال: الأحمد', required: true },
+          { id: 'email', labelEn: 'Email Address', labelAr: 'البريد الإلكتروني', type: 'email', placeholderEn: 'e.g. mahmoud@email.com', placeholderAr: 'مثال: mahmoud@email.com', required: true },
+          { id: 'phone', labelEn: 'Phone / WhatsApp', labelAr: 'رقم الهاتف / الواتساب', type: 'tel', placeholderEn: 'e.g. +963-955-500200', placeholderAr: 'مثال: 0955500200', required: true },
+          { id: 'city', labelEn: 'City / Location', labelAr: 'المحافظة / المدينة', type: 'select', optionsEn: ['Idleb', 'Aleppo', 'Hama', 'Latakia', 'Damascus', 'Other'], optionsAr: ['إدلب', 'حلب', 'حماة', 'اللاذقية', 'دمشق', 'أخرى'], required: true },
+          { id: 'specialty', labelEn: 'Specialty / Domain', labelAr: 'التخصص التدريبي', type: 'select', optionsEn: ['Electric & Hybrid Vehicles', 'Automotive Electronics', 'High-Voltage Battery Diagnostics', 'Alternative Energy Systems', 'Diagnostics & Scan Tools'], optionsAr: ['السيارات الكهربائية والهجينة', 'إلكترونيات وكهرباء السيارات', 'تشخيص وصيانة بطاريات الجهد العالي', 'أنظمة الطاقة البديلة والمتجددة', 'أجهزة الفحص وتشخيص الأعطال'], required: true },
+          { id: 'experience', labelEn: 'Years of Experience', labelAr: 'سنوات الخبرة', type: 'number', placeholderEn: 'e.g. 5', placeholderAr: 'مثال: 5', required: true },
+          { id: 'cvLink', labelEn: 'CV / Resume Link', labelAr: 'رابط السيرة الذاتية (لينكد إن أو درايف)', type: 'text', placeholderEn: 'e.g. https://linkedin.com/in/...', placeholderAr: 'مثال: https://linkedin.com/in/...', required: false },
+          { id: 'notes', labelEn: 'Training Experience Details', labelAr: 'تفاصيل خبراتك التدريبية والملاحظات', type: 'textarea', placeholderEn: 'Describe courses taught or domain expertise...', placeholderAr: 'صف خبراتك أو تفاصيل إضافية تريد مشاركتها...', required: false }
+        ];
       default:
         return [];
     }
@@ -129,7 +141,7 @@ export default function DynamicForm({ activeCategory, setActiveCategory }: Dynam
           {t('roleHeading')}
         </label>
         <div className="flex flex-wrap gap-1 bg-slate-100 p-1">
-          {(['student', 'workshop', 'dealer', 'ngo'] as const).map((cat) => (
+          {(['student', 'workshop', 'dealer', 'ngo', 'trainer'] as const).map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}

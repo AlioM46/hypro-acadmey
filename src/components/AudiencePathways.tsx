@@ -5,8 +5,8 @@ import { useTranslation } from '../hooks/useTranslation';
 
 interface AudiencePathwaysProps {
   lang?: 'en' | 'ar'; // Keeping this for backward compatibility while refactoring
-  activeCategory: 'student' | 'workshop' | 'dealer' | 'ngo';
-  setActiveCategory: (category: 'student' | 'workshop' | 'dealer' | 'ngo') => void;
+  activeCategory: 'student' | 'workshop' | 'dealer' | 'ngo' | 'trainer';
+  setActiveCategory: (category: 'student' | 'workshop' | 'dealer' | 'ngo' | 'trainer') => void;
 }
 
 export default function AudiencePathways({ activeCategory, setActiveCategory }: AudiencePathwaysProps) {
@@ -57,7 +57,7 @@ export default function AudiencePathways({ activeCategory, setActiveCategory }: 
   ];
 
   const activeRoleData = roles.find(r => r.id === activeCategory) || roles[0];
-  const activeBenefits = benefits[activeCategory];
+  const activeBenefits = benefits[activeCategory as 'student' | 'workshop' | 'dealer' | 'ngo'] || benefits['student'];
 
   return (
     <div className="py-12" id="answers-hub">

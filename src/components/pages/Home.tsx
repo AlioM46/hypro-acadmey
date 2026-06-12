@@ -22,8 +22,8 @@ type PageType = 'home' | 'about' | 'programs' | 'testing-lab' | 'partnerships' |
 interface HomeProps {
   navigateTo: (page: PageType) => void;
   setVideoModalOpen: (open: boolean) => void;
-  activeCategory: 'student' | 'workshop' | 'dealer' | 'ngo';
-  setActiveCategory: (category: 'student' | 'workshop' | 'dealer' | 'ngo') => void;
+  activeCategory: 'student' | 'workshop' | 'dealer' | 'ngo' | 'trainer';
+  setActiveCategory: (category: 'student' | 'workshop' | 'dealer' | 'ngo' | 'trainer') => void;
 }
 
 export default function Home({ navigateTo, setVideoModalOpen, activeCategory, setActiveCategory }: HomeProps) {
