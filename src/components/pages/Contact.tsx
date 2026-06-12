@@ -48,7 +48,7 @@ export default function Contact({ activeCategory, setActiveCategory }: ContactPr
       phone: '+963 23 881 200',
       whatsapp: 'https://wa.me/963955408203',
       addressEn: 'Main Industrial Area, Idlib, Syria',
-      addressAr: 'المنطقة الصناعية، إدلب، سوريا',
+      addressAr: 'إدلب، سوريا - حي الضبيط، بجانب مسجد الفرقان،',
       gps: '35.9306° N, 36.6394° E',
       locationEn: 'Idlib Industrial Center',
       locationAr: 'مركز إدلب الصناعي للتدريب',
@@ -95,7 +95,7 @@ export default function Contact({ activeCategory, setActiveCategory }: ContactPr
       <section className="py-16 bg-slate-50 border-b border-slate-200" id="contact-form-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start animate-fade-in text-start">
-            
+
             {/* Left: Contact stack & Map coordinates */}
             <div className="space-y-6">
               <div className="space-y-2">
@@ -107,7 +107,7 @@ export default function Contact({ activeCategory, setActiveCategory }: ContactPr
                   {lang === 'en' ? 'Select Branch Office & Contact Info' : 'اختر الفرع ومعلومات الاتصال'}
                 </h3>
                 <p className="text-slate-500 text-xs sm:text-sm font-medium leading-relaxed font-sans">
-                  {lang === 'en' 
+                  {lang === 'en'
                     ? 'We have multiple operating centers in Syria. Choose your nearest city to view local phone numbers and WhatsApp advisors.'
                     : 'لدينا مراكز تشغيل وتدريب متعددة في سوريا. اختر مدينتك الأقرب لعرض أرقام التواصل ومستشاري القبول المباشرين.'}
                 </p>
@@ -123,7 +123,7 @@ export default function Contact({ activeCategory, setActiveCategory }: ContactPr
                     className={`flex-1 text-center py-2 px-3 text-xs font-bold transition-all cursor-pointer border-none rounded-none ${selectedCityId === city.id
                       ? 'bg-brand-blue text-white'
                       : 'bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-                    }`}
+                      }`}
                   >
                     {lang === 'en' ? city.nameEn : city.nameAr}
                   </button>

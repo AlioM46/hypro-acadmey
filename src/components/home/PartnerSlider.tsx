@@ -2,7 +2,7 @@ import React from 'react';
 
 const partnerLogos = [
   { id: "toyota", url: "https://cdn.simpleicons.org/toyota/EB0A1E", name: "Toyota" },
-  { id: "mercedes", url: "https://cdn.simpleicons.org/mercedes/000000", name: "Mercedes-Benz" },
+  { id: "mercedes", url: "https://cdn.simpleicons.org/mercedesbenz/000000", name: "Mercedes-Benz" },
   { id: "bmw", url: "https://cdn.simpleicons.org/bmw/0066B3", name: "BMW" },
   { id: "hyundai", url: "https://cdn.simpleicons.org/hyundai/002C5F", name: "Hyundai" },
   { id: "kia", url: "https://cdn.simpleicons.org/kia/05141F", name: "KIA" },
@@ -10,7 +10,7 @@ const partnerLogos = [
   { id: "honda", url: "https://cdn.simpleicons.org/honda/E60012", name: "Honda" },
   { id: "ford", url: "https://cdn.simpleicons.org/ford/003399", name: "Ford" },
   { id: "bosch", url: "https://cdn.simpleicons.org/bosch/E20015", name: "Bosch" },
-  { id: "denso", url: "https://cdn.simpleicons.org/denso/E60012", name: "Denso" },
+  { id: "tesla", url: "https://cdn.simpleicons.org/tesla/CC0000", name: "Tesla" },
 ];
 
 export default function PartnerSlider() {
