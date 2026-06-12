@@ -107,8 +107,8 @@ export const academyContent: AcademyContent = {
     whatsapp: "https://wa.me/963955408202", // Instant WhatsApp messaging API trigger
     telegram: "https://t.me/hypro_academy_sy",
     email: "info@hyproacademy.org",
-    addressEn: "Industrial District Road, Idleb, Syria",
-    addressAr: "سورية، إدلب، المنطقة الصناعية"
+    addressEn: "Industrial District Road, Syria",
+    addressAr: "سوريا، المنطقة الصناعية"
   },
   stats: [
     { valueEn: "80%", valueAr: "80%", labelEn: "Practical Work Focused", labelAr: "تدريب تطبيقي ومهني خالص" },
@@ -364,8 +364,8 @@ export const academyContent: AcademyContent = {
       category: "ngo",
       questionEn: "Is the academy physically operational inside Syria?",
       questionAr: "هل الأكاديمية تعمل فعلياً وبشكل مادي داخل سوريا؟",
-      answerEn: "Yes. Hypro Academy operates fully equipped, modern laboratory and workshop facilities in Idleb. We maintain dedicated power generation infrastructure to ensure persistent, uninterrupted teaching regardless of standard power grid outages in the region.",
-      answerAr: "نعم. تدير أكاديمية هايبـرو مرافق مختبرات وورش حديثة ومجهزة بالكامل في إدلب. نملك بنية تحتية مخصصة لتوليد الطاقة لضمان استمرارية التدريس دون انقطاع بغض النظر عن انقطاعات شبكة الكهرباء في المنطقة."
+      answerEn: "Yes. Hypro Academy operates fully equipped, modern laboratory and workshop facilities in Syria. We maintain dedicated power generation infrastructure to ensure persistent, uninterrupted teaching regardless of standard power grid outages in the region.",
+      answerAr: "نعم. تدير أكاديمية هايبـرو مرافق مختبرات وورش حديثة ومجهزة بالكامل في سوريا. نملك بنية تحتية مخصصة لتوليد الطاقة لضمان استمرارية التدريس دون انقطاع بغض النظر عن انقطاعات شبكة الكهرباء في المنطقة."
     },
     {
       id: "faq-10",
@@ -377,8 +377,8 @@ export const academyContent: AcademyContent = {
     }
   ],
   aboutUs: {
-    storyEn: "Hypro Academy was born in Idleb to fill an urgent local crisis in modern automotive maintenance. With the rapid arrival of Hybrid and Pure Electric vehicles (EVs) into Northern Syrian markets, traditional workshops struggled with high-voltage electronics. Our academy acts as a critical bridge—equipping local youth with high-tech, high-income practical skills while providing workshop operators, agencies, and public fleets with fully qualified, syndicate-approved technicians.",
-    storyAr: "تأسست أكاديمية هايبـرو في مدينة إدلب استجابةً لأزمة محلية حقيقية وملحة في صيانة المركبات الحديثة. فمع تدفق سيارات الهايبرد والكهرباء (EV) إلى أسواق الشمال السوري، وجدت الورش الفنية التقليدية صعوبة بالغة في التعامل مع معقدات الكهرباء والفولت العالي. تُعد أكاديميتنا جسراً إنقاذياً تقنياً يمنح الحرفيين والشباب المهارات الفنية المتقدمة ذات الدخل المرتفع، ويسد ثغرة ندرة المصلحين الخبراء لدى أصحاب صالات الصيانة والمؤسسات والمنظمات الإنسانية.",
+    storyEn: "Hypro Academy was born in Syria to fill an urgent local crisis in modern automotive maintenance. With the rapid arrival of Hybrid and Pure Electric vehicles (EVs) into Northern Syrian markets, traditional workshops struggled with high-voltage electronics. Our academy acts as a critical bridge—equipping local youth with high-tech, high-income practical skills while providing workshop operators, agencies, and public fleets with fully qualified, syndicate-approved technicians.",
+    storyAr: "تأسست أكاديمية هايبـرو في سوريا استجابةً لأزمة محلية حقيقية وملحة في صيانة المركبات الحديثة. فمع تدفق سيارات الهايبرد والكهرباء (EV) إلى أسواق الشمال السوري، وجدت الورش الفنية التقليدية صعوبة بالغة في التعامل مع معقدات الكهرباء والفولت العالي. تُعد أكاديميتنا جسراً إنقاذياً تقنياً يمنح الحرفيين والشباب المهارات الفنية المتقدمة ذات الدخل المرتفع، ويسد ثغرة ندرة المصلحين الخبراء لدى أصحاب صالات الصيانة والمؤسسات والمنظمات الإنسانية.",
     missionEn: "To provide world-standard, 100% practical, safe vocational training routines that empower young people, boost domestic repair infrastructure, and guarantee prompt employment through deep-rooted institutional networks.",
     missionAr: "تمكين الكوادر الفنية الوطنية وتأهيل الشباب مهنياً بنسبة 100% عملي آمن ومطابق للمواصفات الدولية، لتسريع إعادة الإعمار وحل أزمات ندرة الخبرة وتأمين مسارات تشغيل موثوقة في سوق الصيانة.",
     visionEn: "To become the premier hub for modern sustainable technology and hybrid powertrain diagnostics training across Syria and the regional market.",
