@@ -19,7 +19,7 @@ export default function Lightbox({ imageSrc, title, desc, lang, onClose }: Light
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-slate-950/90 z-55 flex items-center justify-center p-4 cursor-zoom-out"
+          className="fixed inset-0 bg-slate-950/90 z-[100] flex items-center justify-center p-4 cursor-zoom-out"
         >
           <motion.div
             initial={{ scale: 0.95 }}
