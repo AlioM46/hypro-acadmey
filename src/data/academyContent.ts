@@ -95,24 +95,24 @@ export interface AcademyContent {
 
 export const academyContent: AcademyContent = {
   meta: {
-    titleEn: "Hypro Academy",
-    titleAr: "أكاديمية هايبـرو",
-    taglineEn: "Master Electric, Hybrid, & Fuel Engineering in 4 Months",
-    taglineAr: "احترف صيانة السيارات الكهربائية، الهجينة (الهايبرد) والبنزين خلال 4 أشهر",
+    titleEn: "goHypro Academy",
+    titleAr: "أكاديمية جو هايبـرو",
+    taglineEn: "Master Electric, Hybrid, & Fuel Engineering in 300+ Hours",
+    taglineAr: "احترف صيانة السيارات الكهربائية، الهجينة (الهايبرد) والبنزين خلال أكثر من 300 ساعة تدريبية",
     descriptionEn: "A high-performance vocational school providing 80% practical hands-on training, expert mentors with 20+ years of experience, and a guaranteed placement ecosystem with top workshops, car dealers, and ministries.",
-    descriptionAr: "أكاديمية مهنية متخصصة تمنحك دبلوم عملي وتدريب في ورشات حقيقية بنسبة 80%، بإشراف مدربين بخبرة تزيد عن 20 عاماً، مع نظام تشغيل وتوظيف مباشر بالتعاون مع وكلاء وصالات الصيانة والمنظمات."
+    descriptionAr: "أكاديمية مهنية متخصصة تمنحك دبلوم تدريبي مهني وعملي وتدريب في ورشات حقيقية بنسبة 80%، بإشراف مدربين بخبرة تزيد عن 20 عاماً، مع نظام تشغيل وتوظيف مباشر بالتعاون مع وكلاء وصالات الصيانة والمنظمات."
   },
   contact: {
     phone: "+963-955-408-202", // Syria country code + sample number
-    whatsapp: "https://wa.me/963955408202", // Instant WhatsApp messaging API trigger
-    telegram: "https://t.me/hypro_academy_sy",
-    email: "info@hyproacademy.org",
+    whatsapp: "https://wa.me/962796616549", // Instant WhatsApp messaging API trigger
+    telegram: "https://t.me/gohypro_academy_sy",
+    email: "office@goHypro.com",
     addressEn: "Industrial District Road, Syria",
     addressAr: "سوريا، المنطقة الصناعية"
   },
   stats: [
     { valueEn: "80%", valueAr: "80%", labelEn: "Practical Work Focused", labelAr: "تدريب تطبيقي ومهني خالص" },
-    { valueEn: "4 Months", valueAr: "4 أشهر", labelEn: "Intensive Apprenticeship", labelAr: "4 أشهر من التأهيل والتمكين الكامل" },
+    { valueEn: "300+ Hours", valueAr: "300+ ساعة", labelEn: "Intensive Apprenticeship", labelAr: "أكثر من 300 ساعة من التأهيل والتمكين المهني" },
     { valueEn: "20+ Years", valueAr: "20+ عاماً", labelEn: "Core Experts Experience", labelAr: "خبرة الموجهين والمدربين" },
     { valueEn: "92%", valueAr: "92%", labelEn: "Placement Integration", labelAr: "معدل توظيف الخريجين بالورش" }
   ],
@@ -222,9 +222,9 @@ export const academyContent: AcademyContent = {
       },
       {
         titleEn: "National & Global Certification",
-        titleAr: "شهادة مهنية معتمدة داخلياً وخارجياً",
-        descriptionEn: "Your 4-month diploma is widely accredited by syndicates and local ministries, enabling you to practice, register your shop, or export your skills.",
-        descriptionAr: "شهادة دبلوم معتمدة تتيح لك ترخيص مصلحتك الخاصة، السفر خارجاً، أو التثبيت الفوري في النقابات والمؤسسات المهنية."
+        titleAr: "شهادة مهنية معتمدة دولياً ومحلياً",
+        descriptionEn: "Your 300+ hour vocational training diploma is widely accredited internationally and by local ministries, enabling you to practice, register your shop, or export your skills.",
+        descriptionAr: "شهادة دبلوم تدريبي مهني معتمدة تتيح لك ترخيص مصلحتك الخاصة، السفر خارجاً، أو التثبيت الفوري في المؤسسات والهيئات المهنية."
       },
       {
         titleEn: "Guaranteed Interview Pathways",
@@ -263,7 +263,7 @@ export const academyContent: AcademyContent = {
       {
         titleEn: "Structured Apprenticeship Schemes",
         titleAr: "برامج تدريب وتشغيل مدمجة",
-        descriptionEn: "Sponsor or co-host 4th-month apprentices in your authorized showroom service centers. Minimize hiring risk by evaluating them live.",
+        descriptionEn: "Sponsor or co-host apprentices in your authorized showroom service centers during their final phase of training. Minimize hiring risk by evaluating them live.",
         descriptionAr: "يمكنك رعاية أو استضافة طلاب المرحلة الأخيرة للعمل كمتدربين في صالات العرض التابعة لك، وتجربة مهاراتهم قبل اتخاذ قرار توظيفهم الفعلي."
       },
       {
@@ -306,25 +306,25 @@ export const academyContent: AcademyContent = {
     {
       id: "faq-2",
       category: "student",
-      questionEn: "Why is the diploma only 4 months? Is that enough to become a technician?",
-      questionAr: "لماذا مدة الدبلوم 4 أشهر فقط؟ هل هذا كافٍ لأصبح فنياً مؤهلاً؟",
-      answerEn: "We eliminated all theoretical filler. Because 80% of your daily schedule is hands-on lab work on real vehicles, you absorb what would take 2 years in a traditional classroom. By Month 4, you're diagnosing real customer cars under expert supervision — not studying from textbooks.",
-      answerAr: "قمنا بحذف كل الحشو النظري غير المفيد. بما أن 80% من جدولك اليومي هو عمل تطبيقي مباشر على سيارات حقيقية، فإنك تكتسب ما يعادل سنتين من التعليم التقليدي. في الشهر الرابع، ستقوم بتشخيص سيارات زبائن فعلية تحت إشراف خبراء — وليس الدراسة من الكتب."
+      questionEn: "Why is the program 300+ hours? Is that enough to become a technician?",
+      questionAr: "لماذا مدة الدبلوم التدريبي المهني 300+ ساعة؟ هل هذا كافٍ لأصبح فنياً مؤهلاً؟",
+      answerEn: "We eliminated all theoretical filler. Because 80% of your daily schedule is hands-on lab work on real vehicles, you absorb what would take 2 years in a traditional classroom. Within the 300+ hours of training, you're diagnosing real customer cars under expert supervision — not studying from textbooks.",
+      answerAr: "قمنا بحذف كل الحشو النظري غير المفيد. بما أن 80% من جدولك اليومي هو عمل تطبيقي مباشر على سيارات حقيقية، فإنك تكتسب ما يعادل سنتين من التعليم التقليدي. خلال 300+ ساعة تدريبية، ستقوم بتشخيص سيارات زبائن فعلية تحت إشراف خبراء — وليس الدراسة من الكتب."
     },
     {
       id: "faq-3",
       category: "student",
       questionEn: "What certificates will I receive? Are they recognized internationally?",
       questionAr: "ما الشهادات التي سأحصل عليها؟ وهل هي معترف بها دولياً؟",
-      answerEn: "You receive a Professional Automotive Technician Diploma from Hypro Academy, accredited by state vocational syndicates. Each certificate includes a unique digital verification code that allows employers and international dealers to instantly verify your credentials online.",
-      answerAr: "ستحصل على دبلوم فني صيانة سيارات احترافي من أكاديمية هايبـرو، معتمد من النقابات المهنية الرسمية. تتضمن كل شهادة رمز تحقق رقمي فريد يتيح لأصحاب العمل والوكلاء الإقليميين التحقق الفوري من مؤهلاتك عبر الإنترنت."
+      answerEn: "You receive a Professional Automotive Technician Diploma from goHypro Academy, accredited internationally and by vocational bodies. Each certificate includes a unique digital verification code that allows employers and international dealers to instantly verify your credentials online.",
+      answerAr: "ستحصل على دبلوم تدريبي مهني فني صيانة سيارات احترافي من أكاديمية جو هايبـرو، معتمد دولياً ومحلياً من الجهات المهنية الرسمية. تتضمن كل شهادة رمز تحقق رقمي فريد يتيح لأصحاب العمل والوكلاء الإقليميين التحقق الفوري من مؤهلاتك عبر الإنترنت."
     },
     {
       id: "faq-4",
       category: "student",
       questionEn: "How much does the diploma cost? Are payment plans available?",
       questionAr: "كم تبلغ تكلفة الدبلوم؟ وهل توجد خطط تقسيط؟",
-      answerEn: "We offer competitive tuition rates that reflect the intensive, hands-on nature of our training. Flexible monthly installment plans are available throughout the 4-month program. Contact our admissions office via WhatsApp for the latest pricing and available discounts for early registration.",
+      answerEn: "We offer competitive tuition rates that reflect the intensive, hands-on nature of our training. Flexible monthly installment plans are available throughout the 300+ hour training program. Contact our admissions office via WhatsApp for the latest pricing and available discounts for early registration.",
       answerAr: "نقدم رسوماً دراسية تنافسية تعكس الطبيعة المكثفة والعملية لتدريبنا. تتوفر خطط تقسيط شهرية مرنة طوال فترة البرنامج. تواصل مع مكتب القبول عبر واتساب للاطلاع على أحدث الأسعار والخصومات المتاحة للتسجيل المبكر."
     },
     {
@@ -340,8 +340,8 @@ export const academyContent: AcademyContent = {
       category: "workshop",
       questionEn: "How do you ensure graduates are qualified to work on client vehicles?",
       questionAr: "كيف تضمنون أن الخريج مؤهل للتعامل مع سيارات الزبائن؟",
-      answerEn: "In Month 4, students work exclusively on real customer cars under direct supervision of senior engineers. Every candidate must also pass a rigorous high-voltage safety certification exam — including double-insulated circuit handling and emergency shutdown protocols — before graduation.",
-      answerAr: "في الشهر الرابع، يعمل الطلاب حصرياً على سيارات زبائن حقيقية تحت إشراف مباشر من كبار المهندسين. يجب على كل مرشح أيضاً اجتياز اختبار شهادة سلامة الفولت العالي الصارم — بما في ذلك التعامل مع الدوائر المعزولة وبروتوكولات الإغلاق الطارئ — قبل التخرج."
+      answerEn: "During the final phase of training, students work exclusively on real customer cars under direct supervision of senior engineers. Every candidate must also pass a rigorous high-voltage safety certification exam — including double-insulated circuit handling and emergency shutdown protocols — before graduation.",
+      answerAr: "في المرحلة الأخيرة من التدريب، يعمل الطلاب حصرياً على سيارات زبائن حقيقية تحت إشراف مباشر من كبار المهندسين. يجب على كل مرشح أيضاً اجتياز اختبار شهادة سلامة الفولت العالي الصارم — بما في ذلك التعامل مع الدوائر المعزولة وبروتوكولات الإغلاق الطارئ — قبل التخرج."
     },
     {
       id: "faq-7",
@@ -364,8 +364,8 @@ export const academyContent: AcademyContent = {
       category: "ngo",
       questionEn: "Is the academy physically operational inside Syria?",
       questionAr: "هل الأكاديمية تعمل فعلياً وبشكل مادي داخل سوريا؟",
-      answerEn: "Yes. Hypro Academy operates fully equipped, modern laboratory and workshop facilities in Syria. We maintain dedicated power generation infrastructure to ensure persistent, uninterrupted teaching regardless of standard power grid outages in the region.",
-      answerAr: "نعم. تدير أكاديمية هايبـرو مرافق مختبرات وورش حديثة ومجهزة بالكامل في سوريا. نملك بنية تحتية مخصصة لتوليد الطاقة لضمان استمرارية التدريس دون انقطاع بغض النظر عن انقطاعات شبكة الكهرباء في المنطقة."
+      answerEn: "Yes. goHypro Academy operates fully equipped, modern laboratory and workshop facilities in Syria. We maintain dedicated power generation infrastructure to ensure persistent, uninterrupted teaching regardless of standard power grid outages in the region.",
+      answerAr: "نعم. تدير أكاديمية جو هايبـرو مرافق مختبرات وورش حديثة ومجهزة بالكامل في سوريا. نملك بنية تحتية مخصصة لتوليد الطاقة لضمان استمرارية التدريس دون انقطاع بغض النظر عن انقطاعات شبكة الكهرباء في المنطقة."
     },
     {
       id: "faq-10",
@@ -377,8 +377,8 @@ export const academyContent: AcademyContent = {
     }
   ],
   aboutUs: {
-    storyEn: "Hypro Academy was born in Syria to fill an urgent local crisis in modern automotive maintenance. With the rapid arrival of Hybrid and Pure Electric vehicles (EVs) into Northern Syrian markets, traditional workshops struggled with high-voltage electronics. Our academy acts as a critical bridge—equipping local youth with high-tech, high-income practical skills while providing workshop operators, agencies, and public fleets with fully qualified, syndicate-approved technicians.",
-    storyAr: "تأسست أكاديمية هايبـرو في سوريا استجابةً لأزمة محلية حقيقية وملحة في صيانة المركبات الحديثة. فمع تدفق سيارات الهايبرد والكهرباء (EV) إلى أسواق الشمال السوري، وجدت الورش الفنية التقليدية صعوبة بالغة في التعامل مع معقدات الكهرباء والفولت العالي. تُعد أكاديميتنا جسراً إنقاذياً تقنياً يمنح الحرفيين والشباب المهارات الفنية المتقدمة ذات الدخل المرتفع، ويسد ثغرة ندرة المصلحين الخبراء لدى أصحاب صالات الصيانة والمؤسسات والمنظمات الإنسانية.",
+    storyEn: "goHypro Academy was born in Syria to fill an urgent local crisis in modern automotive maintenance. With the rapid arrival of Hybrid and Pure Electric vehicles (EVs) into Syrian domestic markets, traditional workshops struggled with high-voltage electronics. Our academy acts as a critical bridge—equipping local youth with high-tech, high-income practical skills while providing workshop operators, agencies, and public fleets with fully qualified, syndicate-approved technicians.",
+    storyAr: "تأسست أكاديمية جو هايبـرو في سوريا استجابةً لأزمة محلية حقيقية وملحة في صيانة المركبات الحديثة. فمع تدفق سيارات الهايبرد والكهرباء (EV) إلى أسواق الداخل السوري، وجدت الورش الفنية التقليدية صعوبة بالغة في التعامل مع معقدات الكهرباء والفولت العالي. تُعد أكاديميتنا جسراً إنقاذياً تقنياً يمنح الحرفيين والشباب المهارات الفنية المتقدمة ذات الدخل المرتفع، ويسد ثغرة ندرة المصلحين الخبراء لدى أصحاب صالات الصيانة والمؤسسات والمنظمات الإنسانية.",
     missionEn: "To provide world-standard, 100% practical, safe vocational training routines that empower young people, boost domestic repair infrastructure, and guarantee prompt employment through deep-rooted institutional networks.",
     missionAr: "تمكين الكوادر الفنية الوطنية وتأهيل الشباب مهنياً بنسبة 100% عملي آمن ومطابق للمواصفات الدولية، لتسريع إعادة الإعمار وحل أزمات ندرة الخبرة وتأمين مسارات تشغيل موثوقة في سوق الصيانة.",
     visionEn: "To become the premier hub for modern sustainable technology and hybrid powertrain diagnostics training across Syria and the regional market.",

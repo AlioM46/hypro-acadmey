@@ -18,20 +18,20 @@ export const translations = {
   theory: { en: 'THEORY', ar: 'نظري' },
 
   // Hero Section
-  logoSubtitle: { en: 'Hypro Group', ar: 'مجموعة هايبـرو' },
-  heroBadge: { en: 'HYPRO GROUP', ar: 'مجموعة هايبـرو' },
+  logoSubtitle: { en: 'goHypro Group', ar: 'مجموعة جو هايبـرو' },
+  heroBadge: { en: 'GOHYPRO GROUP', ar: 'مجموعة جو هايبـرو' },
   heroBadge2: { en: 'Technology, Training & Services', ar: 'التكنولوجيا، التدريب والخدمات الهندسية' },
-  heroTitlePart1: { en: 'Empowering Technical Future', ar: 'تمكين المستقبل التقني' },
-  heroTitlePart2: { en: 'Training & Energy Solutions in Syria', ar: 'والتدريب والخدمات الهندسية في سوريا' },
+  heroTitlePart1: { en: 'We Build Future Skills', ar: 'نبني مهارات المستقبل' },
+  heroTitlePart2: { en: '& Connect Them to the Job Market', ar: 'ونربطها بسوق العمل' },
   heroSubtitle: {
-    en: 'Hypro is a leading platform for training, qualification, and technical development in Syria. Under the Hypro umbrella, Hypro Academy provides specialized vocational programs in electric, hybrid, and alternative energy diagnostics, alongside engineering services and technical consultation.',
-    ar: 'هايبـرو هي منصة رائدة للتدريب والتأهيل والتطوير التقني في سوريا. تندرج تحتها أكاديمية هايبـرو لتقديم البرامج التخصصية في صيانة السيارات الكهربائية والهايبرد وأنظمة الطاقة البديلة، بالإضافة إلى الخدمات الهندسية وحلول الطاقة.'
+    en: 'goHypro is a leading platform for training, qualification, and technical development in Syria. Under the goHypro umbrella, goHypro Academy provides specialized vocational programs in electric, hybrid, and alternative energy diagnostics, alongside engineering services and technical consultation.',
+    ar: 'جو هايبـرو هي منصة رائدة للتدريب والتأهيل والتطوير التقني في سوريا. تندرج تحتها أكاديمية جو هايبـرو لتقديم البرامج التخصصية في صيانة السيارات الكهربائية والهايبرد وأنظمة الطاقة البديلة، بالإضافة إلى الخدمات الهندسية وحلول الطاقة.'
   },
   ctaHeroPrimary: { en: 'Register Academic Spot', ar: 'احجز مقعدك الدراسي الآن' },
   ctaHeroSecondary: { en: 'Partnership Programs', ar: 'برامج الشراكة المباشرة' },
   learnMission: { en: 'Learn Our Mission', ar: 'رسالتنا وأهداف التمكين' },
-  syndicateStandards: { en: 'Syndicate Licensed Standards', ar: 'تدريب وتراخيص نقابية وحرفية معتمدة' },
-  secureVerify: { en: 'Secure Online Verify Code', ar: 'شهادات فنية رقمية مع كود تحقق للوكالات' },
+  syndicateStandards: { en: 'International Training Standards', ar: 'تدريب وتراخيص مهنية وحرفية معتمدة دولياً ومحلياً' },
+  secureVerify: { en: 'Secure Online Verify Code', ar: 'شهادات مهنية رقمية مع كود تحقق للوكالات' },
   practicalFocus: { en: '100% Practical Field Focus', ar: 'أجهزة فحص وكشف حية ومطابقة كلياً' },
 
   // Hero image overlay
@@ -47,14 +47,14 @@ export const translations = {
   altRow1Tag: { en: '01 . PRACTICAL TRAINING', ar: '٠١ . المنهج التطبيقي المباشر' },
   altRow1Title: { en: '80% Hands-On Shop Experience', ar: '80% تطبيق فني مباشر باليد' },
   altRow1Desc: {
-    en: 'Ditch the classroom slides. Learn by working directly on high-voltage battery modules, electric drive motors, and computer diagnosis systems under veteran guides.',
-    ar: 'ابتعد عن الكتب والمناهج الورقية الجافة. اقضِ ساعات تدريبك في فك وتركيب بطاريات الفولت العالي، وإصلاح المحركات، وفحص كمبيوتر السيارات OBD-II مع نخبة من الفنيين.'
+    en: 'Practical training in real workshops, supervised by professional trainers, from zero to mastery, to become ready for the job market with confidence and efficiency.',
+    ar: 'تدريب عملي في مشاغل حقيقية، بإشراف مدربين محترفين، من الصفر إلى الاحتراف، لتصبح جاهزاً لسوق العمل بثقة وكفاءة.'
   },
-  altRow2Tag: { en: '02 . ACCREDITED DIPLOMA', ar: '٠٢ . شهادة ودبلوم معتمد' },
-  altRow2Title: { en: 'Syndicate Approved Certification', ar: 'دبلوم مهني مرخص ومعترف به نقابياً' },
+  altRow2Tag: { en: '02 . ACCREDITED DIPLOMA', ar: '٠٢ . شهادة ودبلوم تدريبي مهني معتمد' },
+  altRow2Title: { en: 'Internationally Approved Certification', ar: 'دبلوم تدريبي مهني مرخص ومعترف به دولياً ومحلياً' },
   altRow2Desc: {
-    en: 'Graduate with an accredited professional certificate recognized by crafts unions, enabling you to secure licensing, open your shop, or practice internationally.',
-    ar: 'احصل على شهادة مهنية معتمدة تفتح لك التراخيص المهنية للانتساب لنقابات الحرفيين، وفتح مركز صيانة خاص بك، أو العمل كفني تشخيص محترف.'
+    en: 'Graduate with an accredited professional certificate recognized globally, enabling you to secure licensing, open your shop, or practice internationally.',
+    ar: 'احصل على شهادة مهنية معتمدة تفتح لك التراخيص المهنية لفتح مركز صيانة خاص بك، أو العمل كفني تشخيص محترف محلياً ودولياً.'
   },
   altRow3Tag: { en: '03 . EMPLOYMENT PATHWAYS', ar: '٠٣ . مسار توظيف مباشر' },
   altRow3Title: { en: 'Direct Placement into Local Garages', ar: 'ربط حقيقي مباشر مع سوق العمل' },
@@ -65,36 +65,36 @@ export const translations = {
 
   // B2B & Alliances
   b2bTag: { en: 'B2B & INSTITUTIONAL ALLIANCES', ar: 'بوابة الشراكات والتشبيك المهني للمؤسسات في سوريا' },
-  b2bTitle: { en: 'Empowering Syrian Workforce & Repair Infrastructure', ar: 'تمكين الشباب وسد الثغرة التقنية للمؤسسات والورش بالشمال السوري' },
+  b2bTitle: { en: 'Empowering Syrian Workforce & Repair Infrastructure', ar: 'تمكين الشباب وسد الثغرة التقنية للمؤسسات والورش بالداخل السوري' },
   b2bDesc: {
     en: 'We build direct placement partnerships with active workshops, fleet importers, and humanitarian sponsors to secure immediate employment.',
-    ar: 'توفير التدريب التطبيقي المباشر للشباب يتبعه مباشرة التشبيك مع كبرى ورشات الشمال ومستوردي السيارات والمنظمات التنموية لتأمين التوظيف المستدام.'
+    ar: 'توفير التدريب التطبيقي المباشر للشباب يتبعه مباشرة التشبيك مع كبرى الورشات بالداخل السوري ومستوردي السيارات والمنظمات التنموية لتأمين التوظيف المستدام.'
   },
   workshopPartnerships: { en: 'Workshop Partnerships', ar: 'خيارات التعاون مع الورش' },
   agencyProtocols: { en: 'Agency Protocols', ar: 'خيارات التعاون مع الوكالات' },
   ngoSupport: { en: 'NGO Support Intake', ar: 'تفعيل رعاية المنظمات' },
 
   // Why Section
-  whyTitle: { en: 'Why Train with Hypro Academy?', ar: 'لماذا يفضلون أكاديمية هايبـرو؟' },
+  whyTitle: { en: 'Why Train with goHypro Academy?', ar: 'لماذا يفضلون أكاديمية جو هايبـرو؟' },
   whyDesc: {
     en: 'Our curriculum is built directly around real-world diagnostic workflows in active garages.',
     ar: 'على عكس المعاهد النظرية التقليدية، يتمحور تدريبنا حول صيانة الأعطال وحل مشاكل السيارات الميدانية.'
   },
   readyExplore: { en: 'Ready to Explore our Detailed Program?', ar: 'هل تريد استكشاف تفاصيل الدورات التدريبية؟' },
-  browseDetails: { en: 'Browse our 4 months course details containing duration, hours distribution and target competencies.', ar: 'تصفح تفاصيل ومفردات منهج صيانة السيارات الحديثة الموزع على مدار 4 فصول مكثفة.' },
+  browseDetails: { en: 'Browse our 300+ hours course details containing duration, hours distribution and target competencies.', ar: 'تصفح تفاصيل ومفردات منهج صيانة السيارات الحديثة الموزع على مدار فصول تدريبية مكثفة.' },
   viewCourseDetails: { en: 'View Course Details', ar: 'عرض تفاصيل الدورات' },
 
   // About Section
   ourProfile: { en: 'OUR PROFILE & RESPONSIBILITY', ar: 'مستند التعريف والخدمة الوطنية' },
-  aboutTitle: { en: 'About Hypro Academy', ar: 'أكاديمية هايبـرو في سوريا' },
+  aboutTitle: { en: 'About goHypro Academy', ar: 'أكاديمية جو هايبـرو في سوريا' },
   aboutDesc: {
     en: 'The premier academy in Syria providing 100% practical high-voltage and hybrid diagnostic education.',
     ar: 'المركز المتكامل الأول في سوريا لتخريج وتأهيل مصلحي سيارات الفولت الهجين، والكهرباء الكاملة، والكمبيوتر العملي.'
   },
-  aboutPlatformTitle: { en: 'Who We Are & Our Strategic Vision', ar: 'منصة وتعريف HiPro Academy' },
+  aboutPlatformTitle: { en: 'Who We Are & Our Strategic Vision', ar: 'منصة وتعريف goHypro Academy' },
   aboutPlatformPara1: {
-    en: 'HiPro Academy is a specialized platform for technical training, qualification, and development. It builds vocational competencies and aligns them with market needs, focusing on electric and hybrid vehicles, alternative energy, modern batteries, and future technologies.',
-    ar: 'HiPro Academy هي منصة متخصصة في التدريب والتأهيل والتطوير التقني، تعمل على بناء الكفاءات المهنية وربطها باحتياجات سوق العمل، مع التركيز على قطاعات المركبات الكهربائية والهجينة، والطاقة البديلة، والبطاريات الحديثة، والتقنيات المستقبلية.'
+    en: 'goHypro Academy is a specialized platform for technical training, qualification, and development. It builds vocational competencies and aligns them with market needs, focusing on electric and hybrid vehicles, alternative energy, modern batteries, and future technologies.',
+    ar: 'goHypro Academy هي منصة متخصصة في التدريب والتأهيل والتطوير التقني، تعمل على بناء الكفاءات المهنية وربطها باحتياجات سوق العمل، مع التركيز على قطاعات المركبات الكهربائية والهجينة، والطاقة البديلة، والبطاريات الحديثة، والتقنيات المستقبلية.'
   },
   aboutPlatformPara2: {
     en: 'We believe the future of development starts with human capital and technology transfer. Therefore, we strive to build an integrated ecosystem combining practical training, research and development, and local/international partnerships to prepare qualified cohorts capable of keeping up with global technical transformations.',
@@ -130,7 +130,7 @@ export const translations = {
   vocationalLegitimacy: { en: 'Vocational Legitimacy & Auditing Standards', ar: 'معايير التدقيق والموثوقية المهنية' },
   vocationalLegitimacyDesc: {
     en: 'We are fully registered and standardized in affiliation with local craft syndicates. Every graduate profile undergoes live, high voltage handling tests before receiving state-licensable diplomas.',
-    ar: 'تلتزم الأكاديمية بنظام مالي وتدريسي شفاف تماماً. لا يتم إصدار أي شهادة أو ورقة تخرج دون اجتياز الطالب لاختبار "السلامة والتعامل الفني الآمن" تحت إشراف نخبة من المهندسين وممثلي النقابات الحرفية.'
+    ar: 'تلتزم الأكاديمية بنظام مالي وتدريسي شفاف تماماً. لا يتم إصدار أي شهادة أو ورقة تخرج دون اجتياز الطالب لاختبار "السلامة والتعامل الفني الآمن" تحت إشراف نخبة من المهندسين وممثلي الجهات المهنية والتعليمية.'
   },
   certifiedIdlebOffice: { en: 'Certified Syria Office', ar: 'مقر سوريا النشط' },
   highVoltageSafety: { en: 'High-Voltage Safety Badge', ar: 'تراخيص السلامة الفولتية' },
@@ -146,11 +146,11 @@ export const translations = {
   tenure: { en: 'TENURE', ar: 'سنوات العطاء' },
 
   // Course Details Extras
-  certifiedDiploma: { en: '4-MONTH CERTIFIED DIPLOMA', ar: 'الخطة الأكاديمية والمقاييس المنهجية' },
+  certifiedDiploma: { en: '300+ HOURS CERTIFIED DIPLOMA', ar: 'الخطة التدريبية المهنية والمقاييس المنهجية' },
   coursesTitle: { en: 'Our Courses & Program Syllabus', ar: 'دوراتنا التدريبية ومنهج صيانة السيارات' },
   coursesDesc: {
-    en: 'Explore the detailed technical courses included in our automotive diploma. Get comprehensive details on modules, duration, practical-theory ratio and covered skills.',
-    ar: 'تصفح تفاصيل ومفردات منهج صيانة السيارات الحديثة الموزع على مدار 4 فصول فنية مكثفة للتأهيل والتشغيل.'
+    en: 'Explore the detailed technical courses included in our automotive training program. Get comprehensive details on modules, duration, practical-theory ratio and covered skills.',
+    ar: 'تصفح تفاصيل ومفردات منهج صيانة السيارات الحديثة الموزع على مدار فصول فنية مكثفة للتأهيل والتشغيل.'
   },
   insulatedTitle: { en: '01. 100% Insulated', ar: '٠١. عدّة معزولة بالكامل' },
   hvProtection: { en: 'High Voltage Protection', ar: 'حماية قصوى وعزل آمن' },
@@ -168,7 +168,7 @@ export const translations = {
   employmentGuarantee: { en: 'Employment Guarantee', ar: 'عقود صيانة وتوصية مباشرة' },
   directPlacementDesc: {
     en: 'Top performing candidates receive direct recruitment matches into major regional service workshops & NGO networks.',
-    ar: 'نوصي بأوائل الخريجين للتوظيف المباشر لدى كبرى ورشات الشمال السوري وموزعي قطع الغيار.'
+    ar: 'نوصي بأوائل الخريجين للتوظيف المباشر لدى كبرى الورشات في سوريا وموزعي قطع الغيار.'
   },
 
   // Simulator
@@ -207,12 +207,12 @@ export const translations = {
   channels: { en: 'Channels', ar: 'قنوات التواصل' },
   telegramWaLink: { en: 'Direct Official Telegram / WA', ar: 'رابط واتساب الاستفساري المباشر' },
   admissionsHours: { en: 'Admissions Office Hours:', ar: 'ساعات عمل مكتب القبول:' },
-  footerCopyright: { en: '© 2026 Hypro Academy. All Rights Reserved.', ar: '© ٢٠٢٦ أكاديمية هايبـرو لتدريب صيانة هندسة السيارات. جميع الحقوق محفوظة.' },
+  footerCopyright: { en: '© 2026 goHypro Academy. All Rights Reserved.', ar: '© ٢٠٢٦ أكاديمية جو هايبـرو لتدريب صيانة هندسة السيارات. جميع الحقوق محفوظة.' },
   cleanLayout: { en: 'Clean & premium design layout.', ar: 'تصميم أكاديمي بسيط ومميز.' },
 
   // Dynamic Form
   applyCollaborate: { en: 'APPLY / COLLABORATE', ar: 'التقديم والانضمام المباشر' },
-  connectHypro: { en: 'Connect with Hypro', ar: 'ابدأ التسجيل أو الشراكة' },
+  connectHypro: { en: 'Connect with goHypro', ar: 'ابدأ التسجيل أو الشراكة' },
   formDesc: {
     en: 'Complete this quick customized sheet to register your interest. You will be redirected to confirm via WhatsApp with our admissions office.',
     ar: 'يرجى ملء هذا النموذج البسيط لتسجيل اهتمامك، ومن ثم النقر لتأكيد التسجيل الفوري والتواصل مع مكتب القبول عبر واتساب.'
@@ -236,8 +236,8 @@ export const translations = {
   // Audience Pathways
   audienceTitle: { en: 'Who Are You? Find Your Answers', ar: 'ما هو هدفك؟ اعثر على إجابتك المحددة' },
   audienceDesc: {
-    en: 'Hypro Academy is more than a school. It is an automotive job-placement ecosystem. Click your role below to see how we specifically support you:',
-    ar: 'أكاديمية هايبـرو ليست مجرد مدرسة مهنية، بل هي حلقة وصل متكاملة تربط أطراف المهنة بالتوظيف المباشر. حدد صفتك أدناه لتلقي الإجابة:'
+    en: 'goHypro Academy is more than a school. It is an automotive job-placement ecosystem. Click your role below to see how we specifically support you:',
+    ar: 'أكاديمية جو هايبـرو ليست مجرد مدرسة مهنية، بل هي حلقة وصل متكاملة تربط أطراف المهنة بالتوظيف المباشر. حدد صفتك أدناه لتلقي الإجابة:'
   },
   roleValueProposition: { en: 'ROLE VALUE PROPOSITION', ar: 'القيمة المضافة لشريحتك' },
   tailoredBenefits: { en: 'Your Tailored Collaboration Benefits:', ar: 'المزايا المخصصة لصفحتك:' },
@@ -258,36 +258,36 @@ export const translations = {
   noResults: { en: 'No matching questions found.', ar: 'لا توجد نتائج تماثل عبارة البحث الخاصة بك.' },
 
   // Hypro Ecosystem Section
-  ecoSectionTag: { en: 'HYPRO INTEGRATED SOLUTIONS', ar: 'حلول مجموعة هايبـرو المتكاملة' },
+  ecoSectionTag: { en: 'GOHYPRO INTEGRATED SOLUTIONS', ar: 'حلول مجموعة جو هايبـرو المتكاملة' },
   ecoSectionTitle: { en: 'Specialized Engineering & Training Ecosystem', ar: 'منظومة الخدمات الهندسية والتعليمية التخصصية' },
-  ecoSectionDesc: { en: 'Hypro Group delivers a unified portfolio of technical solutions, spanning vocational qualification, sustainable renewable energy grids, and specialized engineering consultations in Syria.', ar: 'منصة رائدة لتقديم حلول متكاملة تغطي مجالات التأهيل الفني، ومشاريع الطاقة المتجددة، والاستشارات الهندسية لدعم البنية التحتية وسوق العمل في سوريا.' },
-  ecoAcademyTitle: { en: 'Hypro Academy', ar: 'أكاديمية هايبـرو' },
+  ecoSectionDesc: { en: 'goHypro Group delivers a unified portfolio of technical solutions, spanning vocational qualification, sustainable renewable energy grids, and specialized engineering consultations in Syria.', ar: 'منصة رائدة لتقديم حلول متكاملة تغطي مجالات التأهيل الفني، ومشاريع الطاقة المتجددة، والاستشارات الهندسية لدعم البنية التحتية وسوق العمل في سوريا.' },
+  ecoAcademyTitle: { en: 'goHypro Academy', ar: 'أكاديمية جو هايبـرو' },
   ecoAcademyDesc: { en: 'The premier vocational training school offering intensive hands-on diplomas in EV, Hybrid, and automotive electronics diagnostics.', ar: 'المنصة الأولى والمركز المتكامل للتأهيل والتدريب المهني التطبيقي في صيانة وتشخيص سيارات الكهرباء والهايبرد وإلكترونيات السيارات.' },
-  ecoEnergyTitle: { en: 'Hypro Energy', ar: 'هايبـرو للطاقة' },
+  ecoEnergyTitle: { en: 'goHypro Energy', ar: 'جو هايبـرو للطاقة' },
   ecoEnergyDesc: { en: 'Advanced solar energy systems, modern storage solutions, battery remanufacturing, and renewable infrastructure projects.', ar: 'منظومات الطاقة الشمسية والبديلة المتقدمة، خلايا الخزن الحديثة، وإعادة تجديد وتدوير البطاريات والمشاريع المستدامة.' },
-  ecoServicesTitle: { en: 'Hypro Services', ar: 'هايبـرو للخدمات الهندسية' },
+  ecoServicesTitle: { en: 'goHypro Services', ar: 'جو هايبـرو للخدمات الهندسية' },
   ecoServicesDesc: { en: 'Technical consultations, automotive diagnostics support, custom workshop installations, and engineering audits for fleets.', ar: 'الاستشارات الهندسية والفنية، دعم مراكز الصيانة، تجهيز وتطوير الورشات بالعدد الذكية، ومعايرة عقول ومحركات الطاقة.' },
   comingSoon: { en: 'Coming Soon', ar: 'قريباً' },
   activeBranch: { en: 'Active Platform', ar: 'منصة نشطة' },
   exploreAcademy: { en: 'Explore Academy Courses', ar: 'استكشاف دورات الأكاديمية' },
-  ecoAcademyPoints: { en: 'Intensive 4-month vocational diploma | 80% practical training in active workshops | Syndicate accredited certifications | 92% direct employment placement rate', ar: 'دبلوم مهني مكثف لمدة 4 أشهر | 80% تطبيق عملي مباشر في الورشات الحية | شهادات معتمدة ونقابية مرخصة | نسبة توظيف مباشرة تصل إلى 92%' },
+  ecoAcademyPoints: { en: 'Intensive 300+ hours vocational training | 80% practical training in active workshops | Internationally accredited certifications | 92% direct employment placement rate', ar: 'دبلوم تدريبي مهني مكثف لمدة 300+ ساعة | 80% تطبيق عملي مباشر في الورشات الحية | شهادات معتمدة ومرخصة دولياً | نسبة توظيف مباشرة تصل إلى 92%' },
   ecoEnergyPoints: { en: 'Advanced solar energy systems | High-voltage battery diagnostics & remanufacturing | Smart grid development for enterprises | Clean energy transition consultation', ar: 'تركيب وتطوير منظومات الطاقة الشمسية والبديلة | فحص وإعادة تأهيل بطاريات الفولت العالي | تطوير شبكات الطاقة الذكية للمؤسسات | استشارات التحول نحو الطاقة المستدامة' },
   ecoServicesPoints: { en: 'Technical consultations & engineering audits | Custom diagnostics setup for workshops | Factory-level ECU calibration & programming | Fleet maintenance standardization', ar: 'استشارات هندسية متخصصة وتدقيق للمشاريع | تجهيز الورش بأحدث أجهزة الفحص والعدد | برمجة ومعايرة العقول والأنظمة الإلكترونية | توحيد معايير صيانة أساطيل النقل' },
-  energyPortalTitle: { en: 'Hypro Energy Division', ar: 'قسم هايبـرو للطاقة والحلول البديلة' },
+  energyPortalTitle: { en: 'goHypro Energy Division', ar: 'قسم جو هايبـرو للطاقة والحلول البديلة' },
   energyPortalSubtitle: { en: 'Advanced renewable energy grids, high-voltage battery clinics, and industrial storage projects engineered to secure sustainable local power.', ar: 'حلول ذكية للمستقبل تشمل منظومات الطاقة الشمسية الكبيرة، وإعادة تأهيل بطاريات الجهد المرتفع وصيانة العواكس لضمان استقرار طاقة المؤسسات.' },
-  servicesPortalTitle: { en: 'Hypro Engineering & Consultations', ar: 'قسم الخدمات الهندسية والاستشارية للورشات' },
+  servicesPortalTitle: { en: 'goHypro Engineering & Consultations', ar: 'قسم الخدمات الهندسية والاستشارية للورشات' },
   servicesPortalSubtitle: { en: 'Equipping service centers with smart diagnostic arrays, factory-level programming support, and comprehensive technical audits.', ar: 'نعمل على تمكين البنية التحتية للصيانة عبر رفد الورش بأحدث العدد والبرمجيات الذكية، وبرمجة الأنظمة وتوحيد معايير جودة العمل.' },
 
   // New Navigation Brief translation keys
-  programs: { en: 'Diplomas & Programs', ar: 'الدبلومات والبرامج' },
+  programs: { en: 'Diplomas & Programs', ar: 'الدبلومات التدريبية والبرامج' },
   testingLab: { en: 'Testing Lab', ar: 'مختبر الفحص' },
   partnerships: { en: 'Partnerships & Development', ar: 'الشراكات والتطوير' },
   contactUsNav: { en: 'Contact Us', ar: 'اتصل بنا' },
   visionGoals: { en: 'Our Vision & Goals', ar: 'رؤيتنا وأهدافنا' },
   ourFaculty: { en: 'Our Faculty', ar: 'كادرنا التدريسي' },
   accreditations: { en: 'Accreditations & Certifications', ar: 'الاعتمادات والشهادات' },
-  evTechDiploma: { en: 'EV Technology Diploma', ar: 'دبلوم تكنولوجيا السيارات الكهربائية' },
-  hybridDiploma: { en: 'Hybrid Systems Diploma', ar: 'دبلوم الأنظمة الهجينة (الهايبرد)' },
+  evTechDiploma: { en: 'EV Technology Diploma', ar: 'دبلوم تدريبي مهني في تكنولوجيا السيارات الكهربائية' },
+  hybridDiploma: { en: 'Hybrid Systems Diploma', ar: 'دبلوم تدريبي مهني في الأنظمة الهجينة (الهايبرد)' },
   diagnosticsCourse: { en: 'Electronic Diagnostics Course', ar: 'دورة فحص إلكترونيات السيارات' },
 
   // Additional Brief Keys
@@ -305,8 +305,8 @@ export const translations = {
   // Careers / Placement translations
   careers: { en: 'Careers & Placement', ar: 'سوق العمل والتشغيل' },
   careerIntro: {
-    en: 'At HiPro Academy, our role doesn\'t end with training—it begins there. We work actively to connect our trainees and graduates with companies, employers, garages, and active projects in alternative energy and modern vehicles.',
-    ar: 'في HiPro Academy لا ينتهي دورنا عند التدريب، بل يبدأ منه. نعمل على ربط المتدربين بالخريجين والشركات وأصحاب الأعمال ومراكز الصيانة والمشاريع العاملة في قطاعات الطاقة البديلة والمركبات الحديثة.'
+    en: 'At goHypro Academy, our role doesn\'t end with training—it begins there. We work actively to connect our trainees and graduates with companies, employers, garages, and active projects in alternative energy and modern vehicles.',
+    ar: 'في goHypro Academy لا ينتهي دورنا عند التدريب، بل يبدأ منه. نعمل على ربط المتدربين بالخريجين والشركات وأصحاب الأعمال ومراكز الصيانة والمشاريع العاملة في قطاعات الطاقة البديلة والمركبات الحديثة.'
   },
   careerDirectStats: { en: 'Direct Placement Center Metrics', ar: 'أرقام مباشرة للتوظيف والتشبيك' },
   careerGradDb: { en: 'Qualified Graduates Database', ar: 'قاعدة بيانات للخريجين المؤهلين' },
@@ -334,7 +334,7 @@ export const translations = {
 
   // Realigned Navigation Headers
   aboutNav: { en: 'About Us', ar: 'من نحن' },
-  academyNav: { en: 'Hypro Academy', ar: 'أكاديمية هايبـرو' },
+  academyNav: { en: 'goHypro Academy', ar: 'أكاديمية جو هايبـرو' },
   b2bNav: { en: 'Corporate & B2B Solutions', ar: 'الشركات والتطوير' },
   careersNav: { en: 'Careers & Placement', ar: 'الربط مع سوق العمل' },
   partnershipsNav: { en: 'Partners & Cooperation', ar: 'الشركاء والتعاون' },
