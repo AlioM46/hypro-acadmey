@@ -26,7 +26,7 @@ const whys = [
     titleEn: 'National and Agency Trust',
     titleAr: 'اعتماد رسمي وثقة الوكلاء الصارمة',
     descEn: 'We standardise vocational repair skills to qualify graduates for regional dealerships and ministries.',
-    descAr: 'شهاداتنا دبلوم مهني تفتح لك التراخيص، الانضمام لنقابات الحرفيين، والتثبيت في الورش المهنية الكبرى كفني وفاحص معتمد.',
+    descAr: 'شهاداتنا دبلوم تدريبي مهني تفتح لك التراخيص، والتثبيت في الورش المهنية الكبرى كفني وفاحص معتمد محلياً ودولياً.',
   }
 ];
 

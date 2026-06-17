@@ -84,13 +84,13 @@ export default function Accreditations({
                   {lang === 'en' ? 'OFFICIAL PARTNERSHIPS' : 'الجهات الرسمية والتعاون'}
                 </span>
                 <h3 className="text-2xl font-black text-slate-900 leading-tight">
-                  {lang === 'en' ? 'Syndicate & Governmental Alliances' : 'التحالفات والاعتمادات الرسمية المهنية'}
+                  {lang === 'en' ? 'International & Governmental Alliances' : 'التحالفات والاعتمادات الرسمية المهنية'}
                 </h3>
               </div>
               <p className="text-slate-655 text-xs sm:text-sm leading-relaxed font-medium">
                 {lang === 'en'
-                  ? 'We work closely with official automotive repair syndicates and trade unions to legalize our graduates certificates. Our program is built in conjunction with development ministries and labor unions to assure employment compliance.'
-                  : 'تعمل الأكاديمية بالتعاون الوثيق مع نقابات صيانة السيارات واتحادات الحرف الفنية لضمان قانونية الشهادات الصادرة ودعم الخريجين في الحصول على رخص مزاولة المهنة والانتساب للنقابات الحرفية.'}
+                  ? 'We work closely with official automotive repair organizations and trade unions to legalize our graduates certificates. Our program is built in conjunction with development ministries and labor unions to assure employment compliance.'
+                  : 'تعمل الأكاديمية بالتعاون الوثيق مع مراكز صيانة السيارات والجهات التدريبية لضمان قانونية الشهادات الصادرة ودعم الخريجين في الحصول على رخص مزاولة المهنة الرسمية.'}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="bg-slate-50 border border-slate-200 p-4">
@@ -103,7 +103,7 @@ export default function Accreditations({
                 </div>
                 <div className="bg-slate-50 border border-slate-200 p-4">
                   <h4 className="font-extrabold text-xs text-slate-900 uppercase">
-                    {lang === 'en' ? 'Automotive Repair Syndicate' : 'نقابة الحرفيين وصيانة السيارات'}
+                    {lang === 'en' ? 'Automotive Repair Syndicate' : 'هيئة صيانة السيارات الفنية'}
                   </h4>
                   <p className="text-slate-500 text-[10px] mt-1">
                     {lang === 'en' ? 'Direct pathway to obtain official mechanical practice licensing.' : 'مسار مباشر وسريع للخريجين لنيل رخص مزاولة المهنة الرسمية.'}
@@ -133,15 +133,15 @@ export default function Accreditations({
             <div className="bg-white border border-slate-200 p-8 space-y-4">
               <span className="text-[10px] font-mono tracking-wider text-slate-400 block uppercase">01 / TECHNICAL DIPLOMA</span>
               <h4 className="text-lg font-black text-slate-900 font-sans">
-                {lang === 'en' ? 'Advanced Automotive Diagnostics & EV Diploma' : 'دبلوم صيانة السيارات الحديثة والكهربائية المعتمد'}
+                {lang === 'en' ? 'Advanced Automotive Diagnostics & EV Diploma' : 'دبلوم تدريبي مهني في صيانة السيارات الحديثة والكهربائية المعتمد'}
               </h4>
               <p className="text-slate-500 text-xs leading-relaxed font-medium">
                 {lang === 'en'
                   ? 'A professional qualification stating your 360 contact hours of study, demonstrating mastery of scanner calibrations, OBD-II DTC decoding, CAN-Bus logic boards, and hybrid powertrain operations.'
-                  : 'شهادة دبلوم مهني تخصصي تثبت إتمامك لـ 360 ساعة من التدريب العملي المباشر، وتؤكد أهليتك الكاملة لفحص كمبيوتر السيارات وكشف عيوب المحركات وبرمجة البوابات والـ ECU.'}
+                  : 'شهادة دبلوم تدريبي مهني تخصصي تثبت إتمامك لـ 360 ساعة من التدريب العملي المباشر، وتؤكد أهليتك الكاملة لفحص كمبيوتر السيارات وكشف عيوب المحركات وبرمجة البوابات والـ ECU.'}
               </p>
               <ul className="text-xs text-slate-600 space-y-1.5 list-disc list-inside pt-2 font-medium">
-                <li>{lang === 'en' ? 'Licensed by local Educational & Craft Syndicates' : 'معتمد رسمياً من النقابة العامة للمهن الحرة والحرفية.'}</li>
+                <li>{lang === 'en' ? 'Licensed by local Educational & Craft Institutions' : 'معتمد ومطابق لأحدث النظم والمعايير المهنية الرسمية.'}</li>
                 <li>{lang === 'en' ? 'Features unique QR Code for online employer lookup' : 'يحمل كود تحقق فريد ورابط فحص رقمي خاص بالشركات.'}</li>
                 <li>{lang === 'en' ? 'Guarantees priority placement interviews' : 'يمنحك الأولوية التامة في مقابلات التشغيل وشركات التوظيف.'}</li>
               </ul>
@@ -176,16 +176,16 @@ export default function Accreditations({
                 <div className="text-brand-blue font-black text-sm">{lang === 'en' ? '1. Work Licensing' : '1. تراخيص العمل والمقرات'}</div>
                 <p className="text-slate-500 text-xs leading-relaxed font-medium">
                   {lang === 'en'
-                    ? 'The syndicate certificate enables you to obtain official municipal licenses to open your diagnostics center legally.'
-                    : 'تمكنك الشهادة النقابية من استخراج رخص البلدية الرسمية لفتح مركز فحص السيارات الخاص بك والعمل بشكل مرخص وقانوني.'}
+                    ? 'The vocational certificate enables you to obtain official municipal licenses to open your diagnostics center legally.'
+                    : 'تمكنك الشهادة المهنية من استخراج رخص البلدية الرسمية لفتح مركز فحص السيارات الخاص بك والعمل بشكل مرخص وقانوني.'}
                 </p>
               </div>
               <div className="space-y-2">
                 <div className="text-brand-blue font-black text-sm">{lang === 'en' ? '2. NGO Alignment' : '2. ثقة المنظمات الإنسانية'}</div>
                 <p className="text-slate-500 text-xs leading-relaxed font-medium">
                   {lang === 'en'
-                    ? 'Humanitarian NGOs require safety and technical credentials from Hypro to hire technicians for fleet maintenance and vocational programs.'
-                    : 'المنظمات التنموية تشترط شهادة السلامة والشهادات المعتمدة من هايبـرو لتوظيف الفنيين في مشاريع دعم سبل العيش أو صيانة أساطيل المركبات.'}
+                    ? 'Humanitarian NGOs require safety and technical credentials from goHypro to hire technicians for fleet maintenance and vocational programs.'
+                    : 'المنظمات التنموية تشترط شهادة السلامة والشهادات المعتمدة من جو هايبـرو لتوظيف الفنيين في مشاريع دعم سبل العيش أو صيانة أساطيل المركبات.'}
                 </p>
               </div>
               <div className="space-y-2">
@@ -218,16 +218,16 @@ export default function Accreditations({
             <div
               onClick={() => {
                 setActiveAccreditation('https://images.unsplash.com/photo-1589330694653-ded6df53f7ee?auto=format&fit=crop&w=1200&q=80');
-                setLightboxTitle(lang === 'en' ? 'Technical Diagnostics Diploma Template' : 'نموذج دبلوم فحص وصيانة السيارات الحديثة');
-                setLightboxDesc(lang === 'en' ? 'Official diploma structure featuring TVET registrar alignment, unique verification QR code, and signatures.' : 'التصميم الرسمي للشهادة مع ختم النقابة ورمز التحقق الرقمي الفريد للمؤسسات.');
+                setLightboxTitle(lang === 'en' ? 'Technical Diagnostics Diploma Template' : 'نموذج دبلوم تدريبي مهني لفحص وصيانة السيارات الحديثة');
+                setLightboxDesc(lang === 'en' ? 'Official diploma structure featuring TVET registrar alignment, unique verification QR code, and signatures.' : 'التصميم الرسمي للشهادة مع الختم الرسمي ورمز التحقق الرقمي الفريد للمؤسسات.');
               }}
               className="bg-slate-50 border border-slate-200 p-4 hover:border-slate-350 transition-all cursor-zoom-in group"
             >
               <div className="aspect-[1.414/1] w-full bg-white border border-slate-200 relative overflow-hidden flex items-center justify-center p-6 shadow-sm">
                 <div className="border-4 border-double border-slate-300 w-full h-full p-4 flex flex-col justify-between items-center text-center relative">
-                  <span className="text-[7px] font-mono text-slate-400">HYPRO AUTOMOTIVE ACADEMY DIPLOMA</span>
+                  <span className="text-[7px] font-mono text-slate-400">GOHYPRO AUTOMOTIVE ACADEMY DIPLOMA</span>
                   <div className="space-y-1">
-                    <div className="font-extrabold text-xs text-brand-blue">شهادة دبلوم مهني تخصصي</div>
+                    <div className="font-extrabold text-xs text-brand-blue">شهادة دبلوم تدريبي مهني تخصصي</div>
                     <div className="text-[6px] text-slate-400 font-mono">PROFESSIONAL AUTOMOTIVE DIAGNOSTICS DIPLOMA</div>
                   </div>
                   <div className="w-12 h-12 border border-brand-blue/20 rounded-full flex items-center justify-center text-[7px] font-bold text-brand-blue bg-blue-50/50">
@@ -246,10 +246,10 @@ export default function Accreditations({
               </div>
               <div className="mt-4 text-start">
                 <h4 className="font-extrabold text-sm text-slate-900 font-sans">
-                  {lang === 'en' ? 'Diagnostics Diploma Certificate' : 'صورة نموذج دبلوم تشخيص صيانة السيارات'}
+                  {lang === 'en' ? 'Diagnostics Diploma Certificate' : 'صورة نموذج دبلوم تدريبي مهني لتشخيص صيانة السيارات'}
                 </h4>
                 <p className="text-slate-500 text-xs mt-1 font-medium">
-                  {lang === 'en' ? 'Official design issued to graduates of the 4-month program.' : 'الشكل النهائي والختم الرسمي للشهادة المسلمة لطلاب الـ 4 أشهر.'}
+                  {lang === 'en' ? 'Official design issued to graduates of the 300+ hours program.' : 'الشكل النهائي والختم الرسمي للشهادة المسلمة لطلاب برنامج الـ 300+ ساعة.'}
                 </p>
               </div>
             </div>

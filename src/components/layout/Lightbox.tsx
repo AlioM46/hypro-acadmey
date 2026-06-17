@@ -45,8 +45,8 @@ export default function Lightbox({ imageSrc, title, desc, lang, onClose }: Light
               </h5>
               <p className="text-slate-500 text-xs mt-1">
                 {desc || (lang === 'en' 
-                  ? 'Verified by TVET authorities, crafts syndicates, and corporate training divisions.' 
-                  : 'معتمدة وموثقة من قبل هيئات التدريب المهني، نقابات الحرفيين، ووكالات الصيانة.')}
+                  ? 'Verified by TVET authorities, educational bodies, and corporate training divisions.' 
+                  : 'معتمدة وموثقة من قبل هيئات التدريب المهني، والجهات التعليمية، ووكالات الصيانة.')}
               </p>
             </div>
           </motion.div>

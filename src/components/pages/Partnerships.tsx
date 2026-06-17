@@ -83,8 +83,8 @@ export default function Partnerships({ navigateTo, setActiveCategory }: Partners
           </h2>
           <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-medium">
             {lang === 'en'
-              ? 'We establish formal protocols with development organizations, craft syndicates, and car importers to standardize training frameworks.'
-              : 'نؤسس اتفاقيات عمل رسمية مع المنظمات التنموية، والنقابات الحرفية، ومستوردي السيارات لتوحيد أطر التدريب.'}
+              ? 'We establish formal protocols with development organizations, craft institutions, and car importers to standardize training frameworks.'
+              : 'نؤسس اتفاقيات عمل رسمية مع المنظمات التنموية، والمؤسسات الحرفية، ومستوردي السيارات لتوحيد أطر التدريب.'}
           </p>
         </div>
 
@@ -190,7 +190,7 @@ export default function Partnerships({ navigateTo, setActiveCategory }: Partners
               <ArrowRight size={14} />
             </button>
             <a
-              href="https://wa.me/963955408202"
+              href="https://wa.me/962796616549"
               target="_blank"
               rel="noreferrer"
               className="bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-xs px-8 py-4 transition-all border border-slate-200 whitespace-nowrap flex items-center gap-2 decoration-none"

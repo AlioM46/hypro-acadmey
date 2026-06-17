@@ -144,7 +144,7 @@ export default function Careers() {
               </p>
               <div className="flex justify-center">
                 <a
-                  href="https://wa.me/963955408202"
+                  href="https://wa.me/962796616549"
                   target="_blank"
                   rel="noreferrer"
                   className="bg-white hover:bg-slate-100 text-brand-blue font-extrabold text-xs px-8 py-4 transition-all whitespace-nowrap flex items-center gap-2 decoration-none"

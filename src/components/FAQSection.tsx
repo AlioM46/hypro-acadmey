@@ -103,7 +103,7 @@ export default function FAQSection() {
           {lang === 'en' ? "Still have questions? We're here to help." : 'لا تزال لديك أسئلة؟ نحن هنا للمساعدة.'}
         </p>
         <a
-          href="https://wa.me/963955408202"
+          href={academyContent.contact.whatsapp}
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-6 py-3 transition-all cursor-pointer border-none"
