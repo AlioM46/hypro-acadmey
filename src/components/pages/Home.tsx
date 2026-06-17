@@ -14,6 +14,7 @@ import VocationalHighlights from '../home/VocationalHighlights';
 import HyproEnergyShowcase from '../home/HyproEnergyShowcase';
 import HyproServicesShowcase from '../home/HyproServicesShowcase';
 import Skeleton from '../Skeleton';
+import VisionGoals from '../home/VisionGoals';
 
 const FAQSection = lazy(() => import('../FAQSection'));
 
@@ -48,20 +49,8 @@ export default function Home({ navigateTo, setVideoModalOpen, activeCategory, se
       {/* PARTNER LOGOS INFINITE SLIDER */}
       <PartnerSlider />
 
-      {/* GENERAL SOLUTIONS OVERVIEW HEADER */}
-      <section className="py-20 bg-slate-50 border-b border-slate-200 text-center">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">
-            {t('ecoSectionTag')}
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            {t('ecoSectionTitle')}
-          </h2>
-          <p className="text-slate-655 text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto font-medium">
-            {t('ecoSectionDesc')}
-          </p>
-        </div>
-      </section>
+      {/* VISION & GOALS SECTION WITH PROGRESS BAR */}
+      <VisionGoals />
 
       {/* ======================================================== */}
       {/* DIVISION 1: HYPRO ACADEMY OVERVIEW                       */}
