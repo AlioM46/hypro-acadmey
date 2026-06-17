@@ -67,7 +67,7 @@ export default function About({ navigateTo }: AboutProps) {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pb-12 border-b border-slate-200 mb-12">
-          {[{ val: '24+', en: 'Years Experience', ar: 'سنة خبرة' }, { val: '92%', en: 'Job Placement', ar: 'نسبة التوظيف' }, { val: '80%', en: 'Practical', ar: 'تطبيق عملي' }, { val: '4', en: 'Months', ar: 'أشهر' }].map((s, i) => (
+          {[{ val: '24+', en: 'Years Experience', ar: 'سنة خبرة' }, { val: '92%', en: 'Job Placement', ar: 'نسبة التوظيف' }, { val: '80%', en: 'Practical', ar: 'تطبيق عملي' }, { val: '300+', en: 'Hours Training', ar: 'ساعة تدريبية' }].map((s, i) => (
             <div key={i}><div className="text-2xl sm:text-3xl font-black text-brand-blue">{s.val}</div><div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mt-1">{lang === 'en' ? s.en : s.ar}</div></div>
           ))}
         </div>

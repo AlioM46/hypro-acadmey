@@ -27,7 +27,7 @@ export default function CareerPathways() {
             <div className="space-y-4">
               <span className="text-[10px] font-mono tracking-wider text-slate-400 uppercase block">01 / LOCAL PLACEMENT</span>
               <h4 className="text-lg font-extrabold text-slate-900 font-sans">
-                {lang === 'en' ? 'Syrian Domestic Market' : 'السوق المحلي (الشمال السوري)'}
+                {lang === 'en' ? 'Syrian Domestic Market' : 'السوق المحلي (الداخل السوري)'}
               </h4>
               <p className="text-xs text-slate-500 leading-relaxed font-medium">
                 {lang === 'en' 

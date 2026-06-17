@@ -12,12 +12,14 @@ export default function MarketUrgency() {
             {lang === 'en' ? 'MARKET URGENCY REPORT' : 'تقرير حيوية السوق والفرص'}
           </span>
           <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            {lang === 'en' ? 'Why Automotive Diagnostics Matters Now' : 'لماذا يعتبر فحص وبرمجة السيارات الفرصة الأقوى حالياً؟'}
-          </h3>
-          <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-medium">
             {lang === 'en' 
-              ? 'The global and regional automotive industry is going through a rapid technical revolution. Traditional mechanical repairs are decaying as vehicles become rolling computers.' 
-              : 'يمر قطاع صيانة السيارات بالشمال السوري والمنطقة بثورة برمجية وإلكترونية غير مسبوقة. يتلاشى الميكانيك التقليدي لصالح الأنظمة الذكية وفحص الكمبيوتر.'}
+              ? 'Electric Vehicles & Alternative Energy: The Gateway to the Future of Maintenance' 
+              : 'السيارات الكهربائية والطاقة البديلة: بوابة المستقبل لصيانة المركبات في سوريا'}
+          </h3>
+          <p className="text-slate-655 text-xs sm:text-sm leading-relaxed font-medium">
+            {lang === 'en' 
+              ? 'The Syrian market is transitioning rapidly toward electric/hybrid vehicles and alternative energy systems due to rising fuel costs and the need for sustainable solutions. As these technologies spread, the demand for qualified diagnostics technicians grows. With currently limited local experts, now is the golden window to enter this high-paying sector and gain in-demand skills before competition intensifies.' 
+              : 'يشهد السوق السوري تحولاً متسارعاً نحو السيارات الكهربائية والهجينة وأنظمة الطاقة البديلة نتيجة ارتفاع تكاليف الوقود التقليدي وتزايد الحاجة إلى حلول مستدامة. ومع دخول هذه التقنيات، يتصاعد الطلب على فنيين مؤهلين لصيانتها وإدارتها. ونظراً لمحدودية الخبراء حالياً، يمثل هذا الوقت فرصة ذهبية لدخول القطاع واكتساب مهارات مطلوبة بشدة محلياً وإقليمياً قبل اشتداد المنافسة.'}
           </p>
         </div>
 

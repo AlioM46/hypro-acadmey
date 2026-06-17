@@ -36,8 +36,8 @@ export default function AlumniTrust() {
               </div>
               <p className="text-slate-800 text-xs sm:text-sm leading-relaxed font-medium font-sans italic">
                 {lang === 'en'
-                  ? '"I was a traditional mechanic doing simple oil changes. After 4 months at Hypro, I opened my own hybrid battery diagnostics center in Syria. I earn three times more now."'
-                  : '"كنت أعمل كميكانيكي تقليدي وبأجور بسيطة. بعد إتمام دبلوم الـ 4 أشهر في هايبـرو، افتتحت مركزي الخاص لصيانة بطاريات الهايبرد في المنطقة الصناعية، وتضاعف دخلي ٣ مرات."'}
+                  ? '"I was a traditional mechanic doing simple oil changes. After 300+ hours of training at goHypro, I opened my own hybrid battery diagnostics center in Syria. I earn three times more now."'
+                  : '"كنت أعمل كميكانيكي تقليدي وبأجور بسيطة. بعد إتمام دبلوم تدريبي مهني من 300+ ساعة في جو هايبـرو، افتتحت مركزي الخاص لصيانة بطاريات الهايبرد في المنطقة الصناعية، وتضاعف دخلي ٣ مرات."'}
               </p>
             </div>
             <div className="pt-4 border-t border-slate-100 mt-6 text-xs text-slate-450 font-mono">

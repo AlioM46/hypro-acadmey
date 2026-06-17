@@ -30,7 +30,7 @@ export default function DynamicForm({ activeCategory, setActiveCategory }: Dynam
           { id: 'lastName', labelEn: 'Last Name', labelAr: 'اسم العائلة', type: 'text', placeholderEn: 'e.g. Al-Sloom', placeholderAr: 'مثال: السلوم', required: true },
           { id: 'email', labelEn: 'Email Address', labelAr: 'البريد الإلكتروني', type: 'email', placeholderEn: 'e.g. ali@email.com', placeholderAr: 'مثال: ali@email.com', required: false },
           { id: 'phone', labelEn: 'Phone / WhatsApp', labelAr: 'رقم الهاتف / الواتساب', type: 'tel', placeholderEn: 'e.g. +963-955-408202', placeholderAr: 'مثال: 0955408202', required: true },
-          { id: 'city', labelEn: 'City / Governorate', labelAr: 'المحافظة / المدينة', type: 'select', optionsEn: ['Idleb', 'Aleppo', 'Hama', 'Latakia', 'Damascus', 'Other'], optionsAr: ['إدلب', 'حلب', 'حماة', 'اللاذقية', 'دمشق', 'أخرى'], required: true },
+          { id: 'city', labelEn: 'City / Governorate', labelAr: 'المحافظة / المدينة', type: 'select', optionsEn: ['Syrian Interior', 'Aleppo', 'Hama', 'Latakia', 'Damascus', 'Other'], optionsAr: ['الداخل السوري', 'حلب', 'حماة', 'اللاذقية', 'دمشق', 'أخرى'], required: true },
           { id: 'age', labelEn: 'Age', labelAr: 'العمر', type: 'number', placeholderEn: 'e.g. 24', placeholderAr: 'مثال: 24', required: false },
           { id: 'program', labelEn: 'Program of Interest', labelAr: 'البرنامج المطلوب', type: 'select', optionsEn: ['EV/Hybrid Technician Diploma', 'Short Workshop Training', 'Advanced Battery Diagnostics', 'Not Sure Yet'], optionsAr: ['دبلوم فني سيارات كهربائية/هايبرد', 'تدريب ورش قصير', 'تشخيص بطاريات متقدم', 'غير متأكد بعد'], required: true },
           { id: 'source', labelEn: 'How did you hear about us?', labelAr: 'كيف سمعت عنا؟', type: 'select', optionsEn: ['Social Media (Facebook/Instagram)', 'WhatsApp / Friend Referral', 'Google Search', 'NGO / Organization', 'Other'], optionsAr: ['وسائل التواصل الاجتماعي', 'واتساب / توصية صديق', 'بحث جوجل', 'منظمة / جهة رسمية', 'أخرى'], required: false },
@@ -42,7 +42,7 @@ export default function DynamicForm({ activeCategory, setActiveCategory }: Dynam
           { id: 'contactName', labelEn: 'Contact Person Name', labelAr: 'اسم المسؤول للتواصل', type: 'text', placeholderEn: 'e.g. Ahmad Khalil', placeholderAr: 'مثال: أحمد خليل', required: true },
           { id: 'email', labelEn: 'Business Email', labelAr: 'البريد الإلكتروني للعمل', type: 'email', placeholderEn: 'e.g. info@workshop.com', placeholderAr: 'مثال: info@workshop.com', required: false },
           { id: 'phone', labelEn: 'Business Phone / WhatsApp', labelAr: 'هاتف العمل / واتساب', type: 'tel', placeholderEn: 'e.g. +963-955-300100', placeholderAr: 'مثال: 0955300100', required: true },
-          { id: 'city', labelEn: 'City / Location', labelAr: 'المحافظة / الموقع', type: 'select', optionsEn: ['Idleb', 'Aleppo', 'Hama', 'Latakia', 'Damascus', 'Other'], optionsAr: ['إدلب', 'حلب', 'حماة', 'اللاذقية', 'دمشق', 'أخرى'], required: true },
+          { id: 'city', labelEn: 'City / Location', labelAr: 'المحافظة / الموقع', type: 'select', optionsEn: ['Syrian Interior', 'Aleppo', 'Hama', 'Latakia', 'Damascus', 'Other'], optionsAr: ['الداخل السوري', 'حلب', 'حماة', 'اللاذقية', 'دمشق', 'أخرى'], required: true },
           { id: 'teamSize', labelEn: 'Current Team Size', labelAr: 'عدد الفنيين الحالي', type: 'select', optionsEn: ['1-3 mechanics', '4-10 mechanics', '10+ mechanics'], optionsAr: ['1-3 ميكانيكيين', '4-10 ميكانيكيين', '10+ ميكانيكيين'], required: false },
           { id: 'serviceGoal', labelEn: 'What do you need?', labelAr: 'ما الذي تحتاجه؟', type: 'select', optionsEn: ['Hire certified graduates', 'Upskill our current mechanics', 'Become a certified partner workshop', 'Technical consultation'], optionsAr: ['توظيف خريجين معتمدين', 'تدريب طاقمنا الحالي', 'أن نصبح ورشة شريكة معتمدة', 'استشارة فنية'], required: true },
           { id: 'notes', labelEn: 'Additional Details', labelAr: 'تفاصيل إضافية', type: 'textarea', placeholderEn: 'Describe your current equipment, specialties...', placeholderAr: 'صف أجهزتك الحالية وتخصصاتك...', required: false }
@@ -53,7 +53,7 @@ export default function DynamicForm({ activeCategory, setActiveCategory }: Dynam
           { id: 'contactName', labelEn: 'Representative Name', labelAr: 'اسم المسؤول', type: 'text', placeholderEn: 'e.g. Dr. Samir Haddad', placeholderAr: 'مثال: د. سمير حداد', required: true },
           { id: 'email', labelEn: 'Official Email', labelAr: 'البريد الرسمي', type: 'email', placeholderEn: 'e.g. hr@dealer.sy', placeholderAr: 'مثال: hr@dealer.sy', required: true },
           { id: 'phone', labelEn: 'Contact Phone', labelAr: 'هاتف التواصل', type: 'tel', placeholderEn: 'e.g. +963-11-2234567', placeholderAr: 'مثال: 0112234567', required: true },
-          { id: 'city', labelEn: 'HQ Location', labelAr: 'موقع المقر الرئيسي', type: 'select', optionsEn: ['Idleb', 'Aleppo', 'Hama', 'Latakia', 'Damascus', 'Jordan', 'Turkey', 'Other'], optionsAr: ['إدلب', 'حلب', 'حماة', 'اللاذقية', 'دمشق', 'الأردن', 'تركيا', 'أخرى'], required: true },
+          { id: 'city', labelEn: 'HQ Location', labelAr: 'موقع المقر الرئيسي', type: 'select', optionsEn: ['Syrian Interior', 'Aleppo', 'Hama', 'Latakia', 'Damascus', 'Jordan', 'Turkey', 'Other'], optionsAr: ['الداخل السوري', 'حلب', 'حماة', 'اللاذقية', 'دمشق', 'الأردن', 'تركيا', 'أخرى'], required: true },
           { id: 'personnelNeed', labelEn: 'Technicians Needed (Yearly)', labelAr: 'عدد الفنيين المطلوبين سنوياً', type: 'number', placeholderEn: 'e.g. 5', placeholderAr: 'مثال: 5', required: false },
           { id: 'source', labelEn: 'How did you find us?', labelAr: 'كيف وصلت إلينا؟', type: 'select', optionsEn: ['Website', 'Social Media', 'Partner Referral', 'Conference/Event', 'Other'], optionsAr: ['الموقع الإلكتروني', 'وسائل التواصل', 'توصية شريك', 'مؤتمر/فعالية', 'أخرى'], required: false },
           { id: 'notes', labelEn: 'Technical Requirements', labelAr: 'المتطلبات الفنية', type: 'textarea', placeholderEn: 'Describe specializations needed...', placeholderAr: 'صف التخصصات المطلوبة...', required: false }
@@ -76,7 +76,7 @@ export default function DynamicForm({ activeCategory, setActiveCategory }: Dynam
           { id: 'lastName', labelEn: 'Last Name', labelAr: 'اسم العائلة', type: 'text', placeholderEn: 'e.g. Al-Ahmad', placeholderAr: 'مثال: الأحمد', required: true },
           { id: 'email', labelEn: 'Email Address', labelAr: 'البريد الإلكتروني', type: 'email', placeholderEn: 'e.g. mahmoud@email.com', placeholderAr: 'مثال: mahmoud@email.com', required: true },
           { id: 'phone', labelEn: 'Phone / WhatsApp', labelAr: 'رقم الهاتف / الواتساب', type: 'tel', placeholderEn: 'e.g. +963-955-500200', placeholderAr: 'مثال: 0955500200', required: true },
-          { id: 'city', labelEn: 'City / Location', labelAr: 'المحافظة / المدينة', type: 'select', optionsEn: ['Idleb', 'Aleppo', 'Hama', 'Latakia', 'Damascus', 'Other'], optionsAr: ['إدلب', 'حلب', 'حماة', 'اللاذقية', 'دمشق', 'أخرى'], required: true },
+          { id: 'city', labelEn: 'City / Location', labelAr: 'المحافظة / المدينة', type: 'select', optionsEn: ['Syrian Interior', 'Aleppo', 'Hama', 'Latakia', 'Damascus', 'Other'], optionsAr: ['الداخل السوري', 'حلب', 'حماة', 'اللاذقية', 'دمشق', 'أخرى'], required: true },
           { id: 'specialty', labelEn: 'Specialty / Domain', labelAr: 'التخصص التدريبي', type: 'select', optionsEn: ['Electric & Hybrid Vehicles', 'Automotive Electronics', 'High-Voltage Battery Diagnostics', 'Alternative Energy Systems', 'Diagnostics & Scan Tools'], optionsAr: ['السيارات الكهربائية والهجينة', 'إلكترونيات وكهرباء السيارات', 'تشخيص وصيانة بطاريات الجهد العالي', 'أنظمة الطاقة البديلة والمتجددة', 'أجهزة الفحص وتشخيص الأعطال'], required: true },
           { id: 'experience', labelEn: 'Years of Experience', labelAr: 'سنوات الخبرة', type: 'number', placeholderEn: 'e.g. 5', placeholderAr: 'مثال: 5', required: true },
           { id: 'cvLink', labelEn: 'CV / Resume Link', labelAr: 'رابط السيرة الذاتية (لينكد إن أو درايف)', type: 'text', placeholderEn: 'e.g. https://linkedin.com/in/...', placeholderAr: 'مثال: https://linkedin.com/in/...', required: false },
@@ -107,8 +107,8 @@ export default function DynamicForm({ activeCategory, setActiveCategory }: Dynam
   const getWhatsAppURI = () => {
     const fields = getFormFields();
     const prefix = lang === 'en'
-      ? `🌟 *Hypro Academy Inquiry Form* 🌟\n---------------------------------\n`
-      : `🌟 *نموذج تواصل أكاديمية هايبـرو* 🌟\n---------------------------------\n`;
+      ? `🌟 *goHypro Academy Inquiry Form* 🌟\n---------------------------------\n`
+      : `🌟 *نموذج تواصل أكاديمية جو هايبـرو* 🌟\n---------------------------------\n`;
 
     let body = `*Category / الشريحة:* ${activeCategory.toUpperCase()}\n`;
     fields.forEach(f => {
