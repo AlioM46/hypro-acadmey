@@ -47,7 +47,7 @@ export default function App() {
   // Lightbox / Video Modal States
   const [activeAccreditation, setActiveAccreditation] = useState<string | null>(null);
   const [videoModalOpen, setVideoModalOpen] = useState(false);
-  const [activeVideoUrl, setActiveVideoUrl] = useState<string>('/whatsapp-video-2026.mp4');
+  const [activeVideoUrl, setActiveVideoUrl] = useState<string>('/new-vod.mp4');
   const [lightboxTitle, setLightboxTitle] = useState<string | null>(null);
   const [lightboxDesc, setLightboxDesc] = useState<string | null>(null);
 
