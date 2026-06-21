@@ -298,82 +298,162 @@ export const academyContent: AcademyContent = {
     {
       id: "faq-1",
       category: "student",
-      questionEn: "Do I need any prior experience in electrical engineering or mechanics?",
-      questionAr: "هل أحتاج إلى خلفية مسبقة في الكهرباء أو الميكانيك للالتحاق بالدبلوم؟",
-      answerEn: "Absolutely not. Our curriculum is designed from ground zero — we start with electrical fundamentals, basic safety protocols, and tool familiarization before progressing to advanced hybrid battery diagnostics and computer-based fault reading. Over 60% of our graduates had zero prior automotive experience.",
-      answerAr: "لا على الإطلاق. صُمم منهجنا ليبدأ من الصفر التام — نبدأ بأساسيات الكهرباء، بروتوكولات السلامة، والتعرف على الأدوات قبل الانتقال إلى تشخيص بطاريات الهايبرد المتقدمة وقراءة الأعطال بالكمبيوتر. أكثر من 60% من خريجينا لم تكن لديهم أي خبرة سابقة في السيارات."
+      questionEn: "What is the difference between an electric vehicle (EV) and a hybrid vehicle?",
+      questionAr: "ما الفرق بين السيارة الكهربائية والسيارة الهجينة؟",
+      answerEn: "An electric vehicle operates entirely on batteries and electric motors, whereas a hybrid vehicle combines an internal combustion engine with an electric motor to achieve higher fuel efficiency.",
+      answerAr: "السيارة الكهربائية تعمل بالكامل بواسطة البطاريات والمحركات الكهربائية، بينما السيارة الهجينة تجمع بين محرك الاحتراق الداخلي والمحرك الكهربائي لتحقيق كفاءة أعلى في استهلاك الطاقة."
     },
     {
       id: "faq-2",
       category: "student",
-      questionEn: "Why is the program 300+ hours? Is that enough to become a technician?",
-      questionAr: "لماذا مدة الدبلوم التدريبي المهني 300+ ساعة؟ هل هذا كافٍ لأصبح فنياً مؤهلاً؟",
-      answerEn: "We eliminated all theoretical filler. Because 80% of your daily schedule is hands-on lab work on real vehicles, you absorb what would take 2 years in a traditional classroom. Within the 300+ hours of training, you're diagnosing real customer cars under expert supervision — not studying from textbooks.",
-      answerAr: "قمنا بحذف كل الحشو النظري غير المفيد. بما أن 80% من جدولك اليومي هو عمل تطبيقي مباشر على سيارات حقيقية، فإنك تكتسب ما يعادل سنتين من التعليم التقليدي. خلال 300+ ساعة تدريبية، ستقوم بتشخيص سيارات زبائن فعلية تحت إشراف خبراء — وليس الدراسة من الكتب."
+      questionEn: "Do I need prior experience to enroll in the training programs?",
+      questionAr: "هل أحتاج إلى خبرة سابقة للالتحاق بالبرامج التدريبية؟",
+      answerEn: "No, programs are available for both beginners and professionals, and the appropriate level is determined for each trainee during registration.",
+      answerAr: "لا، تتوفر برامج للمبتدئين والمحترفين، ويتم تحديد المستوى المناسب لكل متدرب عند التسجيل."
     },
     {
       id: "faq-3",
       category: "student",
-      questionEn: "What certificates will I receive? Are they recognized internationally?",
-      questionAr: "ما الشهادات التي سأحصل عليها؟ وهل هي معترف بها دولياً؟",
-      answerEn: "You receive a Professional Automotive Technician Diploma from Hypro Academy, accredited internationally and by vocational bodies. Each certificate includes a unique digital verification code that allows employers and international dealers to instantly verify your credentials online.",
-      answerAr: "ستحصل على دبلوم تدريبي مهني فني صيانة سيارات احترافي من أكاديمية هايبـرو، معتمد دولياً ومحلياً من الجهات المهنية الرسمية. تتضمن كل شهادة رمز تحقق رقمي فريد يتيح لأصحاب العمل والوكلاء الإقليميين التحقق الفوري من مؤهلاتك عبر الإنترنت."
+      questionEn: "Is the training practical or theoretical only?",
+      questionAr: "هل التدريب عملي أم نظري فقط؟",
+      answerEn: "The academy's programs rely on hands-on practical training alongside theoretical concepts to ensure the acquisition of skills required for the job market.",
+      answerAr: "تعتمد برامج الأكاديمية على التدريب العملي والتطبيقي إلى جانب الجانب النظري لضمان اكتساب المهارات المطلوبة لسوق العمل."
     },
     {
       id: "faq-4",
       category: "student",
-      questionEn: "How much does the diploma cost? Are payment plans available?",
-      questionAr: "كم تبلغ تكلفة الدبلوم؟ وهل توجد خطط تقسيط؟",
-      answerEn: "We offer competitive tuition rates that reflect the intensive, hands-on nature of our training. Flexible monthly installment plans are available throughout the 300+ hour training program. Contact our admissions office via WhatsApp for the latest pricing and available discounts for early registration.",
-      answerAr: "نقدم رسوماً دراسية تنافسية تعكس الطبيعة المكثفة والعملية لتدريبنا. تتوفر خطط تقسيط شهرية مرنة طوال فترة البرنامج. تواصل مع مكتب القبول عبر واتساب للاطلاع على أحدث الأسعار والخصومات المتاحة للتسجيل المبكر."
+      questionEn: "What is the duration of the training programs?",
+      questionAr: "ما هي مدة البرامج التدريبية؟",
+      answerEn: "The duration varies depending on the program, ranging from short courses to vocational programs and specialized diplomas.",
+      answerAr: "تختلف المدة حسب البرنامج، وتتراوح بين الدورات القصيرة والبرامج المهنية والدبلومات المتخصصة."
     },
     {
       id: "faq-5",
       category: "student",
-      questionEn: "What career opportunities are available after graduation?",
-      questionAr: "ما فرص العمل المتاحة بعد التخرج؟",
-      answerEn: "Our graduates work as EV/Hybrid diagnostic technicians, battery repair specialists, workshop supervisors, and dealer service consultants. With 92% job placement rate, we connect you directly with partner workshops, car dealerships, and international NGO-funded projects across the region.",
-      answerAr: "يعمل خريجونا كفنيي تشخيص سيارات كهربائية وهايبرد، وأخصائيي إصلاح بطاريات، ومشرفي ورش، ومستشاري خدمة لدى الوكلاء. مع نسبة توظيف 92%، نربطك مباشرة بالورش الشريكة ووكلاء السيارات والمشاريع الممولة من المنظمات الدولية."
+      questionEn: "Do I receive a certificate after completing the training?",
+      questionAr: "هل أحصل على شهادة بعد إتمام التدريب؟",
+      answerEn: "Yes, trainees receive a program completion certificate in accordance with the systems and standards approved by the academy.",
+      answerAr: "نعم، يحصل المتدرب على شهادة إتمام البرنامج وفق الأنظمة والمعايير المعتمدة لدى الأكاديمية."
     },
     {
       id: "faq-6",
-      category: "workshop",
-      questionEn: "How do you ensure graduates are qualified to work on client vehicles?",
-      questionAr: "كيف تضمنون أن الخريج مؤهل للتعامل مع سيارات الزبائن؟",
-      answerEn: "During the final phase of training, students work exclusively on real customer cars under direct supervision of senior engineers. Every candidate must also pass a rigorous high-voltage safety certification exam — including double-insulated circuit handling and emergency shutdown protocols — before graduation.",
-      answerAr: "في المرحلة الأخيرة من التدريب، يعمل الطلاب حصرياً على سيارات زبائن حقيقية تحت إشراف مباشر من كبار المهندسين. يجب على كل مرشح أيضاً اجتياز اختبار شهادة سلامة الفولت العالي الصارم — بما في ذلك التعامل مع الدوائر المعزولة وبروتوكولات الإغلاق الطارئ — قبل التخرج."
+      category: "student",
+      questionEn: "Can I work in the electric vehicle field after graduation?",
+      questionAr: "هل يمكنني العمل في مجال السيارات الكهربائية بعد التخرج؟",
+      answerEn: "Yes, the programs are designed to equip trainees with the skills required to work in service centers and companies associated with electric and hybrid vehicles.",
+      answerAr: "نعم، تم تصميم البرامج لتزويد المتدربين بالمهارات المطلوبة للعمل في مراكز الصيانة والشركات المرتبطة بالمركبات الكهربائية والهجينة."
     },
     {
       id: "faq-7",
-      category: "workshop",
-      questionEn: "Can you train our existing mechanics to handle hybrid/EV vehicles?",
-      questionAr: "هل يمكنكم تدريب الميكانيكيين الحاليين لدينا على صيانة سيارات الهايبرد والكهرباء؟",
-      answerEn: "Yes. We offer customized upskilling programs for existing workshop teams. Your mechanics can attend accelerated modules focused specifically on high-voltage safety, battery diagnostics, and electronic calibration — without disrupting your workshop operations.",
-      answerAr: "نعم. نقدم برامج تطوير مخصصة لفرق الورش الحالية. يمكن لميكانيكييك حضور وحدات مكثفة تركز تحديداً على سلامة الفولت العالي، وتشخيص البطاريات، والمعايرة الإلكترونية — دون تعطيل عمليات ورشتك."
+      category: "student",
+      questionEn: "What are the most hazardous components of an electric vehicle?",
+      questionAr: "ما هي أخطر مكونات السيارة الكهربائية؟",
+      answerEn: "High-voltage battery packs and high-voltage electrical connection systems are among the most critical components that require specialized training and safety procedures.",
+      answerAr: "تعتبر بطاريات الجهد العالي وأنظمة التوصيل الكهربائية عالية الجهد من أهم المكونات التي تتطلب تدريباً وإجراءات سلامة خاصة."
     },
     {
       id: "faq-8",
-      category: "workshop",
-      questionEn: "What diagnostic equipment does your academy use for training?",
-      questionAr: "ما أجهزة التشخيص التي تستخدمها الأكاديمية في التدريب؟",
-      answerEn: "We use professional-grade equipment including HV battery cell balancers (up to 1000V DC), 4-channel oscilloscopes, OBD-II advanced scanners, insulated tool kits rated to IEC 60900, and dedicated power generation grids to ensure uninterrupted training despite local power outages.",
-      answerAr: "نستخدم أجهزة بمستوى احترافي تشمل موازنات خلايا بطاريات الفولت العالي (حتى 1000 فولت)، وراسمات إشارة بأربع قنوات، وأجهزة فحص OBD-II متقدمة، وأطقم أدوات معزولة بمعيار IEC 60900، ومولدات طاقة مخصصة لضمان استمرارية التدريب."
+      category: "student",
+      questionEn: "Is there training on lithium-ion batteries?",
+      questionAr: "هل يتم التدريب على بطاريات الليثيوم؟",
+      answerEn: "Yes, the training programs include learning about lithium batteries, their management systems (BMS), diagnostics, troubleshooting, and related safety procedures.",
+      answerAr: "نعم، تشمل البرامج التدريبية التعرف على بطاريات الليثيوم وأنظمة إدارتها وتشخيص أعطالها وإجراءات السلامة الخاصة بها."
     },
     {
       id: "faq-9",
-      category: "ngo",
-      questionEn: "Is the academy physically operational inside Syria?",
-      questionAr: "هل الأكاديمية تعمل فعلياً وبشكل مادي داخل سوريا؟",
-      answerEn: "Yes. Hypro Academy operates fully equipped, modern laboratory and workshop facilities in Syria. We maintain dedicated power generation infrastructure to ensure persistent, uninterrupted teaching regardless of standard power grid outages in the region.",
-      answerAr: "نعم. تدير أكاديمية هايبـرو مرافق مختبرات وورش حديثة ومجهزة بالكامل في سوريا. نملك بنية تحتية مخصصة لتوليد الطاقة لضمان استمرارية التدريس دون انقطاع بغض النظر عن انقطاعات شبكة الكهرباء في المنطقة."
+      category: "student",
+      questionEn: "Does the academy provide field training opportunities?",
+      questionAr: "هل توفر الأكاديمية فرص تدريب ميداني؟",
+      answerEn: "Yes, the academy works on building a partner network to provide hands-on field training opportunities for trainees and graduates.",
+      answerAr: "هل توفر الأكاديمية فرص تدريب ميداني؟"
     },
     {
       id: "faq-10",
+      category: "student",
+      questionEn: "What is a Battery Management System (BMS)?",
+      questionAr: "ما هو نظام إدارة البطارية (BMS)؟",
+      answerEn: "It is the electronic system responsible for monitoring and protecting the battery, as well as managing charging and discharging processes to ensure performance and safety.",
+      answerAr: "هو النظام الإلكتروني المسؤول عن مراقبة البطارية وحمايتها وإدارة عمليات الشحن والتفريغ لضمان الأداء والسلامة."
+    },
+    {
+      id: "faq-11",
+      category: "student",
+      questionEn: "Is there a growing demand for electric vehicle technicians?",
+      questionAr: "هل يوجد طلب متزايد على فنيي السيارات الكهربائية؟",
+      answerEn: "Yes, the sector is experiencing rapid global and regional growth, which increases the demand for qualified technicians.",
+      answerAr: "نعم، يشهد القطاع نمواً متسارعاً عالمياً وإقليمياً، مما يزيد الطلب على الفنيين المؤهلين."
+    },
+    {
+      id: "faq-12",
+      category: "student",
+      questionEn: "How can I register at the academy?",
+      questionAr: "كيف يمكنني التسجيل في الأكاديمية؟",
+      answerEn: "You can register online through the website or by visiting the academy and contacting the admissions and registration team.",
+      answerAr: "يمكن التسجيل إلكترونياً من خلال الموقع أو عبر زيارة الأكاديمية والتواصل مع فريق القبول والتسجيل."
+    },
+    {
+      id: "faq-13",
+      category: "student",
+      questionEn: "Can women enroll in the training programs?",
+      questionAr: "هل يمكن للنساء الالتحاق بالبرامج التدريبية؟",
+      answerEn: "Yes, all programs are open to both male and female applicants in accordance with the registration requirements of each program.",
+      answerAr: "نعم، جميع البرامج متاحة للراغبين والراغبات وفق شروط التسجيل الخاصة بكل برنامج."
+    },
+    {
+      id: "faq-14",
+      category: "student",
+      questionEn: "Does the academy help graduates find job opportunities?",
+      questionAr: "هل تساعد الأكاديمية الخريجين في الحصول على فرص عمل؟",
+      answerEn: "Yes, employment and placement support are provided through the Syrian Competency Bank, partner networks, and employers.",
+      answerAr: "نعم، من خلال بنك الكفاءات السورية وشبكة الشركاء وأصحاب العمل يتم دعم فرص التوظيف والتشغيل."
+    },
+    {
+      id: "faq-15",
+      category: "student",
+      questionEn: "What is the Syrian Competency Bank?",
+      questionAr: "ما هو بنك الكفاءات السورية؟",
+      answerEn: "It is a specialized platform that compiles data on qualified graduates to connect them with employers and partner companies.",
+      answerAr: "منصة متخصصة تجمع بيانات الخريجين والمؤهلين لربطهم بأصحاب العمل والشركات الشريكة."
+    },
+    {
+      id: "faq-16",
+      category: "workshop",
+      questionEn: "Can garages and companies join the partner network?",
+      questionAr: "هل يمكن للكراجات والشركات الانضمام إلى شبكة الشركاء؟",
+      answerEn: "Yes, companies, garages, and maintenance centers can register in the Hypro partner network to benefit from services and qualified personnel.",
+      answerAr: "نعم، يمكن للكراجات والشركات الانضمام إلى شبكة الشركاء للاستفادة من الخدمات والكوادر المؤهلة."
+    },
+    {
+      id: "faq-17",
+      category: "workshop",
+      questionEn: "Can trainers and experts join the academy?",
+      questionAr: "هل يمكن للمدربين والخبراء الانضمام إلى الأكاديمية؟",
+      answerEn: "Yes, the academy provides a dedicated portal to recruit trainers, experts, and technical specialists.",
+      answerAr: "نعم، توفر الأكاديمية نموذجاً خاصاً لاستقطاب المدربين والخبراء وأصحاب الخبرات الفنية."
+    },
+    {
+      id: "faq-18",
+      category: "dealer",
+      questionEn: "Does the academy offer consultation services for businesses?",
+      questionAr: "هل تقدم الأكاديمية خدمات استشارية للشركات؟",
+      answerEn: "Yes, services include technical and training consultations, business development support, and technology transfer.",
+      answerAr: "نعم، تقدم الأكاديمية خدمات استشارية للشركات تشمل الاستشارات الفنية والتدريبية ودعم تطوير الأعمال ونقل التكنولوجيا."
+    },
+    {
+      id: "faq-19",
       category: "ngo",
-      questionEn: "How does the NGO sponsorship and reporting process work?",
-      questionAr: "كيف تعمل عملية رعاية المنظمات وآلية التقارير؟",
-      answerEn: "We provide fully transparent project tracking: monthly progress reports, attendance logs, skills assessment results, and verified post-graduation employment data. All documentation is audit-compliant and formatted to meet international donor reporting standards.",
-      answerAr: "نقدم تتبعاً شفافاً بالكامل للمشاريع: تقارير تقدم شهرية، سجلات حضور، نتائج تقييم المهارات، وبيانات توظيف موثقة بعد التخرج. جميع الوثائق متوافقة مع معايير التدقيق ومُعدة لتلبية متطلبات تقارير المانحين الدوليين."
+      questionEn: "What is the academy's vision for the coming years?",
+      questionAr: "ما هي رؤية الأكاديمية خلال السنوات القادمة؟",
+      answerEn: "The academy aims to contribute to qualifying more than 10,000 young Syrian men and women over the next five years, connecting them to jobs and professional development.",
+      answerAr: "تسعى الأكاديمية للمساهمة في تأهيل أكثر من 10,000 شاب وشابة سورية خلال السنوات الخمس القادمة وربطهم بفرص العمل والتطوير المهني."
+    },
+    {
+      id: "faq-20",
+      category: "ngo",
+      questionEn: "How can organizations and institutions cooperate with the academy?",
+      questionAr: "كيف يمكن للمنظمات والمؤسسات التعاون مع الأكاديمية؟",
+      answerEn: "Cooperation can be established through training programs, personnel qualification, joint projects, employment support, and transferring knowledge and technology into the Syrian market.",
+      answerAr: "كيف يمكن للمنظمات والمؤسسات التعاون مع الأكاديمية؟ يمكن التعاون من خلال برامج التدريب، وتأهيل الكوادر، والمشاريع المشتركة، ودعم التشغيل، ونقل المعرفة والتكنولوجيا إلى السوق السوري"
     }
   ],
   aboutUs: {
