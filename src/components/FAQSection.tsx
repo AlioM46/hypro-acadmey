@@ -7,6 +7,7 @@ export default function FAQSection() {
   const { lang, t, tObj } = useTranslation();
   const [activeTab, setActiveTab] = useState<'all' | 'student' | 'workshop' | 'ngo'>('all');
   const [openId, setOpenId] = useState<string | null>('faq-1');
+  const [showAll, setShowAll] = useState(false);
 
   const faqs = academyContent.faqs;
 
@@ -15,6 +16,12 @@ export default function FAQSection() {
   };
 
   const filteredFaqs = faqs.filter(f => activeTab === 'all' || f.category === activeTab);
+  const visibleFaqs = showAll ? filteredFaqs : filteredFaqs.slice(0, 6);
+
+  const handleTabChange = (tab: 'all' | 'student' | 'workshop' | 'ngo') => {
+    setActiveTab(tab);
+    setShowAll(false);
+  };
 
   return (
     <div className="py-12" id="academy-faqs">
@@ -35,7 +42,7 @@ export default function FAQSection() {
         {(['all', 'student', 'workshop', 'ngo'] as const).map((tab) => (
           <button
             key={tab}
-            onClick={() => setActiveTab(tab)}
+            onClick={() => handleTabChange(tab)}
             id={`btn-faq-tab-${tab}`}
             className={`px-5 py-2.5 text-xs font-bold cursor-pointer transition-all ${activeTab === tab
                 ? 'bg-brand-blue text-white border-none'
@@ -52,8 +59,8 @@ export default function FAQSection() {
 
       {/* FAQ Items */}
       <div className="max-w-3xl mx-auto space-y-3">
-        {filteredFaqs.length > 0 ? (
-          filteredFaqs.map((faq) => {
+        {visibleFaqs.length > 0 ? (
+          visibleFaqs.map((faq) => {
             const isOpen = openId === faq.id;
             return (
               <div
@@ -96,6 +103,20 @@ export default function FAQSection() {
           </div>
         )}
       </div>
+
+      {/* Show More/Less Button */}
+      {filteredFaqs.length > 6 && (
+        <div className="text-center mt-6">
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="px-6 py-2.5 bg-slate-100 hover:bg-slate-200 border-none font-bold text-xs text-slate-700 cursor-pointer transition-colors"
+          >
+            {showAll
+              ? (lang === 'en' ? 'Show Less' : 'عرض أسئلة أقل')
+              : (lang === 'en' ? `Show More (${filteredFaqs.length - 6} more)` : `عرض المزيد (${filteredFaqs.length - 6} أسئلة إضافية)`)}
+          </button>
+        </div>
+      )}
 
       {/* CTA below FAQ */}
       <div className="max-w-3xl mx-auto mt-10 text-center">
