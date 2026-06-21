@@ -16,15 +16,15 @@ const partnerLogos = [
 export default function PartnerSlider() {
   const repeatedLogos = [...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos];
   return (
-    <section className="bg-slate-50 py-3 border-b border-slate-200 overflow-hidden relative z-20" dir="ltr">
+    <section className="bg-slate-50 py-5 border-b border-slate-200 overflow-hidden relative z-20" dir="ltr">
       <div className="marquee-track">
         <div className="marquee-content">
           {repeatedLogos.map((logo, idx) => (
-            <div key={`a-${idx}`} className="flex-shrink-0 mx-6 flex items-center justify-center" style={{ width: '90px', height: '35px' }}>
+            <div key={`a-${idx}`} className="flex-shrink-0 mx-8 flex items-center justify-center" style={{ width: '120px', height: '48px' }}>
               <img
                 src={logo.url}
                 alt={logo.name}
-                className="max-h-[26px] max-w-[80px] object-contain opacity-40 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
+                className="max-h-[38px] max-w-[95px] object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
                 loading="lazy"
                 draggable={false}
               />
@@ -33,11 +33,11 @@ export default function PartnerSlider() {
         </div>
         <div className="marquee-content" aria-hidden="true">
           {repeatedLogos.map((logo, idx) => (
-            <div key={`b-${idx}`} className="flex-shrink-0 mx-6 flex items-center justify-center" style={{ width: '90px', height: '35px' }}>
+            <div key={`b-${idx}`} className="flex-shrink-0 mx-8 flex items-center justify-center" style={{ width: '120px', height: '48px' }}>
               <img
                 src={logo.url}
                 alt={logo.name}
-                className="max-h-[26px] max-w-[80px] object-contain opacity-40 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
+                className="max-h-[38px] max-w-[95px] object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
                 loading="lazy"
                 draggable={false}
               />

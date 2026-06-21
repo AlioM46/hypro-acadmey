@@ -62,7 +62,7 @@ export default function Legal() {
             </div>
             <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium">
               {lang === 'en'
-                ? 'Enrolling in HiPro Academy requires full compliance with occupational health and high-voltage safety instructions. Trainees must wear proper insulated safety CAT III gear during lab classes. Graduation diplomas require passing both theoretical assessments and live practical troubleshooting projects.'
+                ? 'Enrolling in Hypro Academy requires full compliance with occupational health and high-voltage safety instructions. Trainees must wear proper insulated safety CAT III gear during lab classes. Graduation diplomas require passing both theoretical assessments and live practical troubleshooting projects.'
                 : 'يتطلب الانتساب لأكاديمية هايبـرو الالتزام التام بقواعد السلامة المهنية والتعامل مع الجهود العالية. يلتزم الطالب بارتداء اللباس المعزول وCAT III أثناء التدريب الميداني. تمنح الشهادات فقط بعد اجتياز الاختبار النظري والعملي بالكامل.'}
             </p>
           </div>

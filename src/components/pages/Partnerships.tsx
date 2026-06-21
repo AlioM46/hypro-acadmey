@@ -157,7 +157,7 @@ export default function Partnerships({ navigateTo, setActiveCategory }: Partners
               {t('partnershipVisionDesc')}
             </p>
             <div className="pt-4 border-t border-slate-800">
-              <span className="text-xs font-mono text-slate-400 tracking-wider block">HIPRO ACADEMY</span>
+              <span className="text-xs font-mono text-slate-400 tracking-wider block">HYPRO ACADEMY</span>
               <span className="text-base sm:text-lg font-black text-brand-blue block mt-1 font-sans">
                 {t('partnershipSlogan')}
               </span>

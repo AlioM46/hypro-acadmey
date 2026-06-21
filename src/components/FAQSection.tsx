@@ -5,7 +5,7 @@ import { useTranslation } from '../hooks/useTranslation';
 
 export default function FAQSection() {
   const { lang, t, tObj } = useTranslation();
-  const [activeTab, setActiveTab] = useState<'all' | 'student' | 'workshop' | 'ngo'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'student' | 'workshop' | 'ngo' | 'ev-advanced'>('all');
   const [openId, setOpenId] = useState<string | null>('faq-1');
   const [showAll, setShowAll] = useState(false);
 
@@ -18,7 +18,7 @@ export default function FAQSection() {
   const filteredFaqs = faqs.filter(f => activeTab === 'all' || f.category === activeTab);
   const visibleFaqs = showAll ? filteredFaqs : filteredFaqs.slice(0, 6);
 
-  const handleTabChange = (tab: 'all' | 'student' | 'workshop' | 'ngo') => {
+  const handleTabChange = (tab: 'all' | 'student' | 'workshop' | 'ngo' | 'ev-advanced') => {
     setActiveTab(tab);
     setShowAll(false);
   };
@@ -39,7 +39,7 @@ export default function FAQSection() {
 
       {/* Filter Tabs */}
       <div className="flex flex-wrap gap-2 justify-center mb-10">
-        {(['all', 'student', 'workshop', 'ngo'] as const).map((tab) => (
+        {(['all', 'student', 'workshop', 'ngo', 'ev-advanced'] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => handleTabChange(tab)}
@@ -53,6 +53,7 @@ export default function FAQSection() {
             {tab === 'student' && t('tabStudent')}
             {tab === 'workshop' && t('tabWorkshop')}
             {tab === 'ngo' && t('tabNgo')}
+            {tab === 'ev-advanced' && (lang === 'en' ? 'Advanced EV Qs' : 'أسئلة السيارات الكهربائية المتقدمة')}
           </button>
         ))}
       </div>

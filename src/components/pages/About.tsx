@@ -30,7 +30,7 @@ export default function About({ navigateTo }: AboutProps) {
                 {lang === 'en' ? 'CORE PLATFORM' : 'المنصة والرسالة'}
               </span>
               <h3 className="text-xl sm:text-2xl font-black font-sans leading-tight text-white">
-                HiPro Academy
+                Hypro Academy
               </h3>
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-medium">
                 {t('aboutPlatformPara1')}
@@ -101,12 +101,10 @@ export default function About({ navigateTo }: AboutProps) {
             <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">{lang === 'en' ? 'ELITE TECHNICAL MENTORS' : 'كادر المهندسين والمعلمين'}</span>
             <h3 className="text-xl font-extrabold text-slate-900">{lang === 'en' ? 'Learn From Industry Experts' : 'تلقّ الخبرة من رواد السوق'}</h3>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {[
-              { img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80', nameEn: 'Eng. Ammar Al-Ahmad', nameAr: 'المهندس عمار الأحمد', roleEn: 'Lead EV Mentor', roleAr: 'المدير المؤسس', expEn: '24 Years', expAr: '٢٤ عاماً' },
-              { img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80', nameEn: 'Eng. Basel Al-Sagheer', nameAr: 'المهندس باسل الصغير', roleEn: 'Inverter Instructor', roleAr: 'مدرب صيانة مبدلات', expEn: '18 Years', expAr: '١٨ عاماً' },
-              { img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80', nameEn: 'Eng. Omar Al-Sloom', nameAr: 'المهندس عمر السلوم', roleEn: 'Placement Officer', roleAr: 'مسؤول التشبيك', expEn: '12 Years', expAr: '١٢ عاماً' },
-              { img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80', nameEn: 'Ustadh Munir Al-Khatib', nameAr: 'الأستاذ منير الخطيب', roleEn: 'Lab Director', roleAr: 'مدير المختبر', expEn: '15 Years', expAr: '١٥ عاماً' }
+              { img: '/trainers/Mohammed Made.jpeg', nameEn: 'Eng. Mohammed Made', nameAr: 'المهندس محمد ماضي', roleEn: 'Lead Hybrid Engineer & Battery Specialist', roleAr: 'كبير مهندسي الهايبرد وأخصائي بطاريات الجهد العالي', expEn: '20 Years', expAr: '٢٠ عاماً' },
+              { img: '/trainers/Omar Arqawe.jpeg', nameEn: 'Trainer Amer Arqawe', nameAr: 'المدرب عامر عرقاوي', roleEn: 'Electric & Hybrid Vehicle Mechanics Trainer', roleAr: 'مدرب في مجال ميكانيك السيارات الكهربائية والهجينة ومتخصص في المحركات', expEn: '14 Years', expAr: '١٤ عاماً' }
             ].map((m, idx) => (
               <div key={idx} className="border border-slate-200 flex flex-col justify-between group hover:border-brand-blue/30 transition-all">
                 <div>

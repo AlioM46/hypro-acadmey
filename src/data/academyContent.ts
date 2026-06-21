@@ -36,7 +36,7 @@ export interface PartnerBenefit {
 
 export interface FAQItem {
   id: string;
-  category: 'student' | 'workshop' | 'dealer' | 'ngo';
+  category: 'student' | 'workshop' | 'dealer' | 'ngo' | 'ev-advanced';
   questionEn: string;
   questionAr: string;
   answerEn: string;
@@ -104,12 +104,12 @@ export const academyContent: AcademyContent = {
     descriptionAr: "أكاديمية مهنية متخصصة تمنحك دبلوم تدريبي مهني وعملي وتدريب في ورشات حقيقية بنسبة 80%، بإشراف مدربين بخبرة تزيد عن 20 عاماً، مع نظام تشغيل وتوظيف مباشر بالتعاون مع وكلاء وصالات الصيانة والمنظمات."
   },
   contact: {
-    phone: "+963-955-408-202", // Syria country code + sample number
+    phone: "+963 23 881 200", // Syria country code + sample number
     whatsapp: "https://wa.me/962796616549", // Instant WhatsApp messaging API trigger
     telegram: "https://t.me/hypro_academy_sy",
     email: "office@HyproPlatform.com",
-    addressEn: "Industrial District Road, Syria",
-    addressAr: "سوريا، المنطقة الصناعية"
+    addressEn: "Syria",
+    addressAr: "سوريا"
   },
   stats: [
     { valueEn: "80%", valueAr: "80%", labelEn: "Practical Work Focused", labelAr: "تدريب تطبيقي ومهني خالص" },
@@ -455,6 +455,70 @@ export const academyContent: AcademyContent = {
       questionAr: "كيف يمكن للمنظمات والمؤسسات التعاون مع الأكاديمية؟",
       answerEn: "Cooperation can be established through training programs, personnel qualification, joint projects, employment support, and transferring knowledge and technology into the Syrian market.",
       answerAr: "كيف يمكن للمنظمات والمؤسسات التعاون مع الأكاديمية؟ يمكن التعاون من خلال برامج التدريب، وتأهيل الكوادر، والمشاريع المشتركة، ودعم التشغيل، ونقل المعرفة والتكنولوجيا إلى السوق السوري"
+    },
+    {
+      id: "faq-21",
+      category: "ev-advanced",
+      questionEn: "What is the difference between LFP and NMC batteries?",
+      questionAr: "ما هو الفرق بين بطاريات LFP و NMC؟",
+      answerEn: "LFP (Lithium Iron Phosphate) batteries offer longer lifespan, higher thermal stability, and lower cost but have lower energy density. NMC (Nickel Manganese Cobalt) batteries offer higher energy density for longer range and lighter weight but are more sensitive to heat and costlier.",
+      answerAr: "بطاريات LFP (ليثيوم حديد فوسفات) تتميز بعمر افتراضي أطول، وأمان حراري أعلى، وتكلفة أقل، ولكن كثافتها الطاقية أقل. أما NMC (نيكل منغنيز كوبالت) فتتميز بكثافة طاقية عالية تمنح مدى قيادة أطول ووزن أخف، ولكنها أكثر حساسية للحرارة المرتفعة وأعلى تكلفة."
+    },
+    {
+      id: "faq-22",
+      category: "ev-advanced",
+      questionEn: "Why does battery capacity degrade over time?",
+      questionAr: "لماذا تنخفض سعة البطارية مع الزمن؟",
+      answerEn: "Capacity degrades due to natural chemical wear inside the cells, accelerated by factors like frequent charging to 100%, deep discharges, and exposure to high operating temperatures, which increase internal resistance and lead to active lithium loss.",
+      answerAr: "تنخفض السعة بسبب التحلل الكيميائي الطبيعي داخل الخلايا، والذي يزداد بفعل عوامل مثل: الشحن المتكرر للحد الأقصى (100%)، التفريغ العميق جداً، والتعرض المستمر لدرجات الحرارة المرتفعة، مما يؤدي إلى تراكم المقاومة الداخلية وفقدان أيونات الليثيوم النشطة."
+    },
+    {
+      id: "faq-23",
+      category: "ev-advanced",
+      questionEn: "How are inverter faults diagnosed?",
+      questionAr: "كيف يتم تشخيص أعطال الإنفرتر؟",
+      answerEn: "Diagnosis is done using advanced diagnostic scanners to read DTCs, monitoring IGBT transistor temperatures, testing ground insulation of the motor windings, and checking control gate signals to ensure proper DC to 3-phase AC conversion.",
+      answerAr: "تشخيص الأعطال يتم باستخدام أجهزة فحص متطورة لقراءة رموز الأعطال (DTCs)، ومراقبة درجات حرارة ترانزستورات الـ IGBTs، وقياس العزل الأرضي لملفات المحرك، وفحص إشارات التحكم القادمة من البوابة لضمان سلامة تحويل التيار من مستمر (DC) إلى متردد (3-phase AC)."
+    },
+    {
+      id: "faq-24",
+      category: "ev-advanced",
+      questionEn: "What causes battery overheating?",
+      questionAr: "ما أسباب ارتفاع حرارة البطارية؟",
+      answerEn: "Key causes include continuous DC fast charging at high rates, high-stress aggressive driving, liquid cooling system failures (such as coolant leaks or pump malfunction), or damaged internal cells experiencing abnormally high internal resistance.",
+      answerAr: "تشمل الأسباب الرئيسية: الشحن السريع المستمر بقدرات عالية (DC Fast Charging)، القيادة بجهد مرتفع وسرعات عالية، وجود خلل في نظام التبريد السائل (مثل نقص السائل أو تعطل المضخة)، أو وجود خلايا داخلية تالفة ذات مقاومة داخلية مرتفعة جداً."
+    },
+    {
+      id: "faq-25",
+      category: "ev-advanced",
+      questionEn: "How is the BMS calibrated?",
+      questionAr: "كيف تتم معايرة نظام BMS؟",
+      answerEn: "Calibration is performed by running a full charge and discharge cycle. This lets the system register the cell voltage limits, recalibrate the calculated State of Charge (SOC), and balance individual cell voltage variances.",
+      answerAr: "تتم المعايرة من خلال دورة كاملة للشحن والتفريغ (Full Charge & Discharge Cycle) للسماح للنظام بتعلم الحدود الفعلية للجهد (Maximum and Minimum Cell Voltages) وإعادة احتساب سعة البطارية المتبقية (SOC) وموازنة فروقات الجهد بين الخلايا."
+    },
+    {
+      id: "faq-26",
+      category: "ev-advanced",
+      questionEn: "What is the difference between AC and DC charging?",
+      questionAr: "ما الفرق بين الشحن AC و DC؟",
+      answerEn: "AC charging delivers alternating current that must be converted by the vehicle's On-Board Charger, making it ideal for slow overnight/office charging. DC charging bypasses the on-board charger, supplying high-power direct current straight to the battery, allowing rapid charging.",
+      answerAr: "الشحن المتردد (AC) يغذي السيارة بتيار متردد يحتاج إلى محول داخلي (On-Board Charger) لتحويله إلى مستمر، وهو شحن بطيء للمنازل والمكاتب. أما الشحن المستمر (DC) فيتجاوز المحول الداخلي ويغذي البطارية مباشرة بتيار مستمر عالي القدرة من الشاحن الخارجي، وهو شحن سريع جداً للمحطات."
+    },
+    {
+      id: "faq-27",
+      category: "ev-advanced",
+      questionEn: "What is Regenerative Braking?",
+      questionAr: "ما هو نظام الكبح المتجدد Regenerative Braking؟",
+      answerEn: "It is a system that utilizes deceleration when lifting off the accelerator or applying brakes to run the electric motor as a generator. This slows the vehicle down while feeding kinetic energy back to recharge the high-voltage battery, improving efficiency and range.",
+      answerAr: "هو نظام يستغل قوة التباطؤ عند رفع القدم عن دواسة الوقود أو الضغط على الفرامل لتحويل محرك الدفع الكهربائي إلى مولد طاقة (Generator)، مما يؤدي لإبطاء السيارة وإعادة شحن البطارية بجزء من الطاقة الحركية المفقودة، مما يزيد كفاءة الاستهلاك والمدى."
+    },
+    {
+      id: "faq-28",
+      category: "ev-advanced",
+      questionEn: "How is high-voltage (HV) system safety handled?",
+      questionAr: "كيف يتم التعامل الآمن مع أنظمة الجهد العالي HV",
+      answerEn: "Safety requires wearing approved CAT III (1000V) insulated gloves (visually and pneumatically inspected before use), disconnecting the Manual Service Disconnect (MSD) plug, and waiting at least 10 minutes for high-capacity capacitors to discharge before touching orange-clad components.",
+      answerAr: "يتطلب ذلك ارتداء قفازات عازلة معتمدة فئة CAT III (1000V) وفحصها قبل الاستخدام، وفصل مفتاح الأمان الرئيسي للجهد العالي (Service Disconnect / MSD) مع الانتظار لمدة لا تقل عن 10 دقائق لتفريغ المكثفات قبل البدء بأي فحص أو صيانة للمكونات ذات اللون البرتقالي."
     }
   ],
   aboutUs: {

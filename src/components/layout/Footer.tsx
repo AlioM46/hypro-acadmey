@@ -106,9 +106,6 @@ export default function Footer({ lang, t, navigateTo, contact, meta }: FooterPro
 
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-mono">
           <span>{t('footerCopyright')}</span>
-          <span className="text-[10px] text-slate-650 font-sans">
-            {t('cleanLayout')}
-          </span>
         </div>
       </div>
     </footer>
