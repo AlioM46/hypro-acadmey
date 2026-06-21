@@ -52,6 +52,7 @@ export interface TeamMember {
   bioAr: string;
   experienceEn: string;
   experienceAr: string;
+  image?: string;
 }
 
 export interface AboutUsData {
@@ -468,12 +469,35 @@ export const academyContent: AcademyContent = {
     {
       nameEn: "Eng. Ammar Al-Ahmad",
       nameAr: "المهندس عمار الأحمد",
-      roleEn: "Founding Director & Lead EV Mentor",
-      roleAr: "المدير المؤسس والموجه الرئيسي لسيارات الكهرباء",
+      roleEn: "CEO of Hypro Academy & Lead EV Mentor",
+      roleAr: "الرئيس التنفيذي لأكاديمية هايبـرو والموجه الرئيسي لسيارات الكهرباء",
       bioEn: "Specialist in high-voltage micro-controller mapping and hybrid power cell rebuilds. Oversees all core testing protocols.",
       bioAr: "أخصائي هندسة الالكترون وبرمجة العقول الإلكترونية وإعادة موازنة خلايا الفولت العالي. يشرف على اختبارات فحص الكفاءة النهائية.",
       experienceEn: "24 Years of Active Bench Repair",
-      experienceAr: "٢٤ عاماً من الخبرة العملية والورشات"
+      experienceAr: "٢٤ عاماً من الورشات والخبرة العملية",
+      image: "/trainers/CEO.jpeg"
+    },
+    {
+      nameEn: "Eng. Mohammed Made",
+      nameAr: "المهندس محمد مادي",
+      roleEn: "Lead Hybrid Engineer & Battery Specialist",
+      roleAr: "كبير مهندسي الهايبرد وأخصائي بطاريات الجهد العالي",
+      bioEn: "Specialist in battery cell diagnostics, rebuilding modular packs, and electric drivetrain calibration.",
+      bioAr: "أخصائي تشخيص خلايا البطاريات وإعادة موازنة المجموعات ومعايرة أنظمة الدفع الكهربائي.",
+      experienceEn: "16 Years of Advanced Diagnostics",
+      experienceAr: "١٦ عاماً في التشخيص المتقدم للأعطال",
+      image: "/trainers/Mohammed Made.jpeg"
+    },
+    {
+      nameEn: "Eng. Omar Arqawe",
+      nameAr: "المهندس عمر عرقاوي",
+      roleEn: "High-Voltage Safety & Hybrid Diagnostics Engineer",
+      roleAr: "مهندس سلامة الجهد العالي وتشخيص أنظمة الهايبرد",
+      bioEn: "Expert in safety protocols, dual powertrain integration, and factory-level ECU configuration.",
+      bioAr: "خبير في بروتوكولات السلامة وتكامل أنظمة الدفع المزدوج ومعايرة عقول ومحركات السيارات.",
+      experienceEn: "14 Years in Mechanical & Hybrid Instruction",
+      experienceAr: "١٤ عاماً في تدريب صيانة الميكانيك والهايبرد",
+      image: "/trainers/Omar Arqawe.jpeg"
     },
     {
       nameEn: "Eng. Basel Al-Sagheer",
@@ -483,7 +507,8 @@ export const academyContent: AcademyContent = {
       bioEn: "Expert in European, Toyota, and Korean hybrid dual powertrains diagnostics with direct focus on workplace safety.",
       bioAr: "خبير تشخيص وحل أعطال العواكس (الأصناف الكورية واليابانية والأوروبية) مع تركيز صارم على بروتوكولات الأمان الفني وعزل الفولت الفعال.",
       experienceEn: "18 Years of Technical Instruction",
-      experienceAr: "١٨ عاماً من التدريب وصناعة الكوادر"
+      experienceAr: "١٨ عاماً من التدريب وصناعة الكوادر",
+      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&h=500&q=80"
     },
     {
       nameEn: "Eng. Omar Al-Sloom",
@@ -493,7 +518,8 @@ export const academyContent: AcademyContent = {
       bioEn: "Manages employment pathways with NGO sponsors, local repair trade unions, and public agencies.",
       bioAr: "يتولى التنسيق لبناء مسارات رعاية تدريب الشباب، وبناء بروتوكولات التشغيل وخلق فرص عمل واثقة وتوطيد عقود التدريب المهني.",
       experienceEn: "12 Years in Vocational Program Design",
-      experienceAr: "١٢ عاماً في خدمة وتطوير المشاريع المهنية بالمنطقة"
+      experienceAr: "١٢ عاماً في خدمة وتطوير المشاريع المهنية بالمنطقة",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=500&q=80"
     },
     {
       nameEn: "Ustadh Munir Al-Khatib",
@@ -503,7 +529,19 @@ export const academyContent: AcademyContent = {
       bioEn: "Maintains all insulated tools and high-voltage diagnostic systems. Standardizes workshop safety gear compliance.",
       bioAr: "يشرف على تكامل وحداثة أجهزة الفحص، والعدّة المعزولة وحماية الطلاب من صدمات الفولت المرتفع في الورشة والمختبر الميداني للمركز.",
       experienceEn: "15 Years of Lab Operations Support",
-      experienceAr: "١٥ عاماً من إدارة مختبرات الصيانة والسلامة"
+      experienceAr: "١٥ عاماً من إدارة مختبرات الصيانة والسلامة",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&h=500&q=80"
+    },
+    {
+      nameEn: "Eng. Anas Al-Kurd",
+      nameAr: "المهندس أنس الكرد",
+      roleEn: "Alternative Energy & Smart Grids Instructor",
+      roleAr: "مدرب أنظمة الطاقة البديلة والشبكات الذكية",
+      bioEn: "Specialist in solar arrays integration, battery management programming, and sustainable grids.",
+      bioAr: "متخصص في تكامل أنظمة الخلايا الشمسية وبرمجة إدارة البطاريات وتصميم الشبكات المستدامة.",
+      experienceEn: "10 Years of Energy Systems Engineering",
+      experienceAr: "١٠ سنوات في هندسة نظم الطاقة",
+      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&h=500&q=80"
     }
   ]
 };
