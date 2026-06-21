@@ -22,7 +22,7 @@ const galleryItems = [
     descEn: 'Watch our students perform module extraction under absolute insulated parameters.',
     descAr: 'فيديو يوضح سحب خلايا البطارية تحت معايير عزل وفولتية صارمة.',
     image: 'https://images.unsplash.com/photo-1548345680-f5475ea5df84?auto=format&fit=crop&w=800&q=80',
-    videoUrl: '/hero-video.mp4',
+    videoUrl: '/whatsapp-video-2026.mp4',
     type: 'video'
   },
   {

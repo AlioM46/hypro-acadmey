@@ -21,7 +21,7 @@ export default function Hero({ t, contact, navigateTo, setVideoModalOpen }: Hero
         playsInline
         className="absolute inset-0 w-full h-full object-cover z-0 hidden md:block"
       >
-        <source src="/hero-video.mp4" type="video/mp4" />
+        <source src="/whatsapp-video-2026.mp4" type="video/mp4" />
       </video>
 
       {/* Fallback Background Image (Mobile) */}

@@ -184,8 +184,8 @@ export default function Accreditations({
                 <div className="text-brand-blue font-black text-sm">{lang === 'en' ? '2. NGO Alignment' : '2. ثقة المنظمات الإنسانية'}</div>
                 <p className="text-slate-500 text-xs leading-relaxed font-medium">
                   {lang === 'en'
-                    ? 'Humanitarian NGOs require safety and technical credentials from goHypro to hire technicians for fleet maintenance and vocational programs.'
-                    : 'المنظمات التنموية تشترط شهادة السلامة والشهادات المعتمدة من جو هايبـرو لتوظيف الفنيين في مشاريع دعم سبل العيش أو صيانة أساطيل المركبات.'}
+                    ? 'Humanitarian NGOs require safety and technical credentials from Hypro to hire technicians for fleet maintenance and vocational programs.'
+                    : 'المنظمات التنموية تشترط شهادة السلامة والشهادات المعتمدة من هايبـرو لتوظيف الفنيين في مشاريع دعم سبل العيش أو صيانة أساطيل المركبات.'}
                 </p>
               </div>
               <div className="space-y-2">
@@ -225,7 +225,7 @@ export default function Accreditations({
             >
               <div className="aspect-[1.414/1] w-full bg-white border border-slate-200 relative overflow-hidden flex items-center justify-center p-6 shadow-sm">
                 <div className="border-4 border-double border-slate-300 w-full h-full p-4 flex flex-col justify-between items-center text-center relative">
-                  <span className="text-[7px] font-mono text-slate-400">GOHYPRO AUTOMOTIVE ACADEMY DIPLOMA</span>
+                  <span className="text-[7px] font-mono text-slate-400">HYPRO AUTOMOTIVE ACADEMY DIPLOMA</span>
                   <div className="space-y-1">
                     <div className="font-extrabold text-xs text-brand-blue">شهادة دبلوم تدريبي مهني تخصصي</div>
                     <div className="text-[6px] text-slate-400 font-mono">PROFESSIONAL AUTOMOTIVE DIAGNOSTICS DIPLOMA</div>

@@ -95,8 +95,8 @@ export interface AcademyContent {
 
 export const academyContent: AcademyContent = {
   meta: {
-    titleEn: "goHypro Academy",
-    titleAr: "أكاديمية جو هايبـرو",
+    titleEn: "Hypro Academy",
+    titleAr: "أكاديمية هايبـرو",
     taglineEn: "Master Electric, Hybrid, & Fuel Engineering in 300+ Hours",
     taglineAr: "احترف صيانة السيارات الكهربائية، الهجينة (الهايبرد) والبنزين خلال أكثر من 300 ساعة تدريبية",
     descriptionEn: "A high-performance vocational school providing 80% practical hands-on training, expert mentors with 20+ years of experience, and a guaranteed placement ecosystem with top workshops, car dealers, and ministries.",
@@ -105,8 +105,8 @@ export const academyContent: AcademyContent = {
   contact: {
     phone: "+963-955-408-202", // Syria country code + sample number
     whatsapp: "https://wa.me/962796616549", // Instant WhatsApp messaging API trigger
-    telegram: "https://t.me/gohypro_academy_sy",
-    email: "office@goHypro.com",
+    telegram: "https://t.me/hypro_academy_sy",
+    email: "office@HyproPlatform.com",
     addressEn: "Industrial District Road, Syria",
     addressAr: "سوريا، المنطقة الصناعية"
   },
@@ -316,8 +316,8 @@ export const academyContent: AcademyContent = {
       category: "student",
       questionEn: "What certificates will I receive? Are they recognized internationally?",
       questionAr: "ما الشهادات التي سأحصل عليها؟ وهل هي معترف بها دولياً؟",
-      answerEn: "You receive a Professional Automotive Technician Diploma from goHypro Academy, accredited internationally and by vocational bodies. Each certificate includes a unique digital verification code that allows employers and international dealers to instantly verify your credentials online.",
-      answerAr: "ستحصل على دبلوم تدريبي مهني فني صيانة سيارات احترافي من أكاديمية جو هايبـرو، معتمد دولياً ومحلياً من الجهات المهنية الرسمية. تتضمن كل شهادة رمز تحقق رقمي فريد يتيح لأصحاب العمل والوكلاء الإقليميين التحقق الفوري من مؤهلاتك عبر الإنترنت."
+      answerEn: "You receive a Professional Automotive Technician Diploma from Hypro Academy, accredited internationally and by vocational bodies. Each certificate includes a unique digital verification code that allows employers and international dealers to instantly verify your credentials online.",
+      answerAr: "ستحصل على دبلوم تدريبي مهني فني صيانة سيارات احترافي من أكاديمية هايبـرو، معتمد دولياً ومحلياً من الجهات المهنية الرسمية. تتضمن كل شهادة رمز تحقق رقمي فريد يتيح لأصحاب العمل والوكلاء الإقليميين التحقق الفوري من مؤهلاتك عبر الإنترنت."
     },
     {
       id: "faq-4",
@@ -364,8 +364,8 @@ export const academyContent: AcademyContent = {
       category: "ngo",
       questionEn: "Is the academy physically operational inside Syria?",
       questionAr: "هل الأكاديمية تعمل فعلياً وبشكل مادي داخل سوريا؟",
-      answerEn: "Yes. goHypro Academy operates fully equipped, modern laboratory and workshop facilities in Syria. We maintain dedicated power generation infrastructure to ensure persistent, uninterrupted teaching regardless of standard power grid outages in the region.",
-      answerAr: "نعم. تدير أكاديمية جو هايبـرو مرافق مختبرات وورش حديثة ومجهزة بالكامل في سوريا. نملك بنية تحتية مخصصة لتوليد الطاقة لضمان استمرارية التدريس دون انقطاع بغض النظر عن انقطاعات شبكة الكهرباء في المنطقة."
+      answerEn: "Yes. Hypro Academy operates fully equipped, modern laboratory and workshop facilities in Syria. We maintain dedicated power generation infrastructure to ensure persistent, uninterrupted teaching regardless of standard power grid outages in the region.",
+      answerAr: "نعم. تدير أكاديمية هايبـرو مرافق مختبرات وورش حديثة ومجهزة بالكامل في سوريا. نملك بنية تحتية مخصصة لتوليد الطاقة لضمان استمرارية التدريس دون انقطاع بغض النظر عن انقطاعات شبكة الكهرباء في المنطقة."
     },
     {
       id: "faq-10",
@@ -377,8 +377,8 @@ export const academyContent: AcademyContent = {
     }
   ],
   aboutUs: {
-    storyEn: "goHypro Academy was born in Syria to fill an urgent local crisis in modern automotive maintenance. With the rapid arrival of Hybrid and Pure Electric vehicles (EVs) into Syrian domestic markets, traditional workshops struggled with high-voltage electronics. Our academy acts as a critical bridge—equipping local youth with high-tech, high-income practical skills while providing workshop operators, agencies, and public fleets with fully qualified, syndicate-approved technicians.",
-    storyAr: "تأسست أكاديمية جو هايبـرو في سوريا استجابةً لأزمة محلية حقيقية وملحة في صيانة المركبات الحديثة. فمع تدفق سيارات الهايبرد والكهرباء (EV) إلى أسواق الداخل السوري، وجدت الورش الفنية التقليدية صعوبة بالغة في التعامل مع معقدات الكهرباء والفولت العالي. تُعد أكاديميتنا جسراً إنقاذياً تقنياً يمنح الحرفيين والشباب المهارات الفنية المتقدمة ذات الدخل المرتفع، ويسد ثغرة ندرة المصلحين الخبراء لدى أصحاب صالات الصيانة والمؤسسات والمنظمات الإنسانية.",
+    storyEn: "Hypro Academy was born in Syria to fill an urgent local crisis in modern automotive maintenance. With the rapid arrival of Hybrid and Pure Electric vehicles (EVs) into Syrian domestic markets, traditional workshops struggled with high-voltage electronics. Our academy acts as a critical bridge—equipping local youth with high-tech, high-income practical skills while providing workshop operators, agencies, and public fleets with fully qualified, syndicate-approved technicians.",
+    storyAr: "تأسست أكاديمية هايبـرو في سوريا استجابةً لأزمة محلية حقيقية وملحة في صيانة المركبات الحديثة. فمع تدفق سيارات الهايبرد والكهرباء (EV) إلى أسواق الداخل السوري، وجدت الورش الفنية التقليدية صعوبة بالغة في التعامل مع معقدات الكهرباء والفولت العالي. تُعد أكاديميتنا جسراً إنقاذياً تقنياً يمنح الحرفيين والشباب المهارات الفنية المتقدمة ذات الدخل المرتفع، ويسد ثغرة ندرة المصلحين الخبراء لدى أصحاب صالات الصيانة والمؤسسات والمنظمات الإنسانية.",
     missionEn: "To provide world-standard, 100% practical, safe vocational training routines that empower young people, boost domestic repair infrastructure, and guarantee prompt employment through deep-rooted institutional networks.",
     missionAr: "تمكين الكوادر الفنية الوطنية وتأهيل الشباب مهنياً بنسبة 100% عملي آمن ومطابق للمواصفات الدولية، لتسريع إعادة الإعمار وحل أزمات ندرة الخبرة وتأمين مسارات تشغيل موثوقة في سوق الصيانة.",
     visionEn: "To become the premier hub for modern sustainable technology and hybrid powertrain diagnostics training across Syria and the regional market.",
