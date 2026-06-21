@@ -56,7 +56,7 @@ export default function Home({ navigateTo, setVideoModalOpen, activeCategory, se
       {/* DIVISION 1: HYPRO ACADEMY OVERVIEW                       */}
       {/* ======================================================== */}
       <HyproEcosystem division="academy" navigateTo={navigateTo} />
-      
+
       {/* ACADEMY SUB-SECTIONS */}
       <Stats />
       <VocationalHighlights navigateTo={navigateTo} />
