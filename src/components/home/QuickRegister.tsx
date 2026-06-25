@@ -8,13 +8,37 @@ export default function QuickRegister() {
   const [quickRegName, setQuickRegName] = useState('');
   const [quickRegPhone, setQuickRegPhone] = useState('');
   const [quickRegGov, setQuickRegGov] = useState('');
+  const [isSending, setIsSending] = useState(false);
 
-  const handleQuickRegister = (e: React.FormEvent) => {
+  const handleQuickRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!quickRegName || !quickRegPhone || !quickRegGov) {
       alert(lang === 'en' ? 'Please fill in all fields.' : 'يرجى ملء جميع الحقول.');
       return;
     }
+
+    setIsSending(true);
+    try {
+      await fetch('/api/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          formType: 'quick',
+          formData: {
+            name: quickRegName,
+            phone: quickRegPhone,
+            city: quickRegGov
+          }
+        })
+      });
+    } catch (err) {
+      console.error('Email submission error:', err);
+    } finally {
+      setIsSending(false);
+    }
+
     const message = lang === 'en'
       ? `Hello Hypro Academy, I would like to register:\nName: ${quickRegName}\nPhone: ${quickRegPhone}\nGovernorate: ${quickRegGov}`
       : `مرحباً أكاديمية هايبـرو، أود التسجيل:\nالاسم: ${quickRegName}\nالهاتف: ${quickRegPhone}\nالمحافظة: ${quickRegGov}`;
@@ -100,13 +124,18 @@ export default function QuickRegister() {
             {/* WhatsApp CTA */}
             <button
               type="submit"
-              className="w-full text-white font-extrabold text-sm sm:text-base py-4 sm:py-5 flex items-center justify-center gap-3 transition-all cursor-pointer border-none"
-              style={{ background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)' }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)')}
-              onMouseLeave={(e) => (e.currentTarget.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)')}
+              disabled={isSending}
+              className={`w-full text-white font-extrabold text-sm sm:text-base py-4 sm:py-5 flex items-center justify-center gap-3 transition-all border-none ${isSending ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+              style={{ background: isSending ? '#94a3b8' : 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)' }}
+              onMouseEnter={(e) => {
+                if (!isSending) e.currentTarget.style.background = 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)';
+              }}
+              onMouseLeave={(e) => {
+                if (!isSending) e.currentTarget.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)';
+              }}
             >
               <MessageSquare size={18} className="fill-white" />
-              <span>{lang === 'en' ? 'Register via WhatsApp Now' : 'سجّل عبر واتساب الآن'}</span>
+              <span>{isSending ? (lang === 'en' ? 'Sending...' : 'جاري الإرسال...') : (lang === 'en' ? 'Register via WhatsApp Now' : 'سجّل عبر واتساب الآن')}</span>
               <ArrowRight size={16} />
             </button>
           </form>

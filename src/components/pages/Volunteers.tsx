@@ -6,10 +6,44 @@ import { useTranslation } from '../../hooks/useTranslation';
 export default function Volunteers() {
   const { lang } = useTranslation();
   const [submitted, setSubmitted] = useState(false);
+  const [volName, setVolName] = useState('');
+  const [volContact, setVolContact] = useState('');
+  const [volSkill, setVolSkill] = useState('');
+  const [isSending, setIsSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (!volName || !volContact || !volSkill) {
+      return;
+    }
+
+    setIsSending(true);
+    try {
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          formType: 'volunteer',
+          formData: {
+            name: volName,
+            contact: volContact,
+            skill: volSkill
+          }
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send email.');
+      }
+      setSubmitted(true);
+    } catch (err) {
+      console.error('Email submission error:', err);
+      alert(lang === 'en' ? 'Failed to submit form. Please try again.' : 'فشل إرسال النموذج. يرجى المحاولة مرة أخرى.');
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -89,18 +123,18 @@ export default function Volunteers() {
                   </h4>
                   <div>
                     <label className="block text-[11px] font-bold text-slate-400 uppercase mb-1 font-mono">{lang === 'en' ? 'Full Name' : 'الاسم الكامل'}</label>
-                    <input required type="text" className="w-full bg-white border border-slate-200 p-3 rounded-lg text-slate-800 text-xs font-medium focus:border-brand-blue outline-none" />
+                    <input required type="text" value={volName} onChange={(e) => setVolName(e.target.value)} className="w-full bg-white border border-slate-200 p-3 rounded-lg text-slate-800 text-xs font-medium focus:border-brand-blue outline-none" />
                   </div>
                   <div>
                     <label className="block text-[11px] font-bold text-slate-400 uppercase mb-1 font-mono">{lang === 'en' ? 'Email / WhatsApp' : 'البريد أو رقم الواتساب'}</label>
-                    <input required type="text" className="w-full bg-white border border-slate-200 p-3 rounded-lg text-slate-800 text-xs font-medium focus:border-brand-blue outline-none" />
+                    <input required type="text" value={volContact} onChange={(e) => setVolContact(e.target.value)} className="w-full bg-white border border-slate-200 p-3 rounded-lg text-slate-800 text-xs font-medium focus:border-brand-blue outline-none" />
                   </div>
                   <div>
                     <label className="block text-[11px] font-bold text-slate-400 uppercase mb-1 font-mono">{lang === 'en' ? 'Skill / Background' : 'الخبرة أو الخلفية المهنية'}</label>
-                    <textarea rows={3} required className="w-full bg-white border border-slate-200 p-3 rounded-lg text-slate-800 text-xs font-medium focus:border-brand-blue outline-none resize-none" />
+                    <textarea rows={3} required value={volSkill} onChange={(e) => setVolSkill(e.target.value)} className="w-full bg-white border border-slate-200 p-3 rounded-lg text-slate-800 text-xs font-medium focus:border-brand-blue outline-none resize-none" />
                   </div>
-                  <button type="submit" className="w-full bg-brand-blue hover:bg-brand-blue-hover text-white font-extrabold text-xs py-4.5 rounded-lg transition-all border-none cursor-pointer flex items-center justify-center gap-2">
-                    <span>{lang === 'en' ? 'Submit Application' : 'إرسال طلب التطوع'}</span>
+                  <button type="submit" disabled={isSending} className={`w-full bg-brand-blue hover:bg-brand-blue-hover text-white font-extrabold text-xs py-4.5 rounded-lg transition-all border-none flex items-center justify-center gap-2 ${isSending ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}>
+                    <span>{isSending ? (lang === 'en' ? 'Sending...' : 'جاري الإرسال...') : (lang === 'en' ? 'Submit Application' : 'إرسال طلب التطوع')}</span>
                     <ArrowRight size={14} />
                   </button>
                 </form>

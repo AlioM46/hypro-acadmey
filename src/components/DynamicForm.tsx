@@ -105,43 +105,27 @@ export default function DynamicForm({ activeCategory, setActiveCategory }: Dynam
 
     setIsSending(true);
     try {
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-      if (!serviceId || !templateId || !publicKey) {
-        console.warn('EmailJS environment variables are not configured.');
-        // Fallback: Just mark as submitted to show the WhatsApp success page.
-        setSubmitted(true);
-        return;
-      }
-
-      // Map dynamic fields into a readable template params structure
-      const templateParams = {
-        category: activeCategory,
-        ...formData
-      };
-
-      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      const response = await fetch('/api/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          service_id: serviceId,
-          template_id: templateId,
-          user_id: publicKey,
-          template_params: templateParams
+          formType: 'dynamic',
+          formData: {
+            category: activeCategory,
+            ...formData
+          }
         })
       });
 
       if (!response.ok) {
         throw new Error('Failed to send email.');
       }
-      
+
       setSubmitted(true);
     } catch (err) {
-      console.error('EmailJS error:', err);
+      console.error('Email submission error:', err);
       alert(lang === 'en' ? 'Failed to submit form via Email. Please contact us via WhatsApp.' : 'فشل إرسال النموذج عبر البريد. يرجى التواصل معنا عبر الواتساب.');
       setSubmitted(true);
     } finally {
