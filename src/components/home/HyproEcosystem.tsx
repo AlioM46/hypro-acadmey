@@ -27,7 +27,7 @@ export default function HyproEcosystem({ division, navigateTo }: HyproEcosystemP
           statusLabel: t('activeBranch'),
           cta: t('exploreAcademy'),
           action: () => navigateTo('programs'),
-          img: 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80',
+          img: '/images/1.jpeg',
           imgAlt: 'Hypro Academy Technical Training',
           imageLeft: true
         };
@@ -57,7 +57,7 @@ export default function HyproEcosystem({ division, navigateTo }: HyproEcosystemP
           statusLabel: t('comingSoon'),
           cta: lang === 'en' ? 'Learn More' : 'معرفة المزيد',
           action: () => navigateTo('about'),
-          img: 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80',
+          img: '/images/2.jpeg',
           imgAlt: 'Hypro Engineering Consultations',
           imageLeft: true
         };

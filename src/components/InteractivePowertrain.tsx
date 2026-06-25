@@ -88,136 +88,22 @@ export default function InteractivePowertrain() {
       {/* Visual Workspace Row */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
 
-        {/* Animated Schematics SVG Box */}
+        {/* Drive Mode Image Card / Left side */}
         <div className="lg:col-span-7 flex flex-col">
-          <div className="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden relative aspect-[600/320] w-full">
-            {/* Subtle blueprint grid */}
-            <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] [background-size:24px_24px] opacity-70" />
-
-            <svg
-              viewBox="0 0 600 320"
-              className="w-full h-full z-10 relative"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {/* 1. Fuel Tank Section (Only relevant for Fuel & Hybrid) */}
-              <g opacity={activeMode === 'ev' ? 0.2 : 1.0} className="transition-opacity duration-300">
-                <rect x="30" y="40" width="110" height="70" rx="8" fill="#ffffff" stroke={activeMode !== 'ev' ? '#1e40af' : '#cbd5e1'} strokeWidth="2" />
-                <path d="M40 90 h90" stroke="#f1f5f9" strokeWidth="4" />
-
-                <foreignObject x="34" y="44" width="102" height="62">
-                  <div className="w-full h-full flex flex-col items-center justify-center text-center p-1 font-sans">
-                    <span className={`text-[9px] sm:text-[11px] font-bold ${activeMode !== 'ev' ? 'text-slate-800' : 'text-slate-400'}`}>
-                      {components.fuelTank}
-                    </span>
-                  </div>
-                </foreignObject>
-              </g>
-
-              {/* 2. Fuel Engine Combustion Node */}
-              <g opacity={activeMode === 'ev' ? 0.2 : 1.0} className="transition-opacity duration-300">
-                <rect x="210" y="40" width="120" height="70" rx="8" fill="#ffffff" stroke={activeMode !== 'ev' ? '#1e40af' : '#cbd5e1'} strokeWidth="2" />
-
-                <foreignObject x="214" y="44" width="112" height="62">
-                  <div className="w-full h-full flex flex-col items-center justify-center text-center p-1 font-sans">
-                    <span className={`text-[9px] sm:text-[11px] font-bold ${activeMode !== 'ev' ? 'text-slate-900' : 'text-slate-400'}`}>
-                      {components.engine}
-                    </span>
-                  </div>
-                </foreignObject>
-              </g>
-
-              {/* 3. High-Voltage Battery Pack (Only EV and Hybrid) */}
-              <g opacity={activeMode === 'fuel' ? 0.2 : 1.0} className="transition-opacity duration-300">
-                <rect x="30" y="170" width="130" height="80" rx="10" fill="#ffffff" stroke={activeMode !== 'fuel' ? '#0f766e' : '#cbd5e1'} strokeWidth="2" />
-
-                {/* Battery Cells block */}
-                <g fill={activeMode !== 'fuel' ? '#0f766e' : '#e2e8f0'} className="transition-all" opacity="0.6">
-                  <rect x="42" y="185" width="8" height="20" rx="1" />
-                  <rect x="54" y="185" width="8" height="20" rx="1" />
-                  <rect x="66" y="185" width="8" height="20" rx="1" />
-                  <rect x="78" y="185" width="8" height="20" rx="1" />
-                  <rect x="90" y="185" width="8" height="20" rx="1" />
-                  <rect x="102" y="185" width="8" height="20" rx="1" />
-                </g>
-
-                <foreignObject x="34" y="212" width="122" height="34">
-                  <div className="w-full h-full flex flex-col items-center justify-center text-center px-1 font-sans">
-                    <span className={`text-[9px] sm:text-[11px] font-bold ${activeMode !== 'fuel' ? 'text-slate-800' : 'text-slate-400'}`}>
-                      {components.battery}
-                    </span>
-                  </div>
-                </foreignObject>
-              </g>
-
-              {/* 4. Smart Power Inverter & Converter system */}
-              <g opacity={activeMode === 'fuel' ? 0.2 : 1.0} className="transition-opacity duration-300">
-                <rect x="230" y="175" width="120" height="70" rx="8" fill="#ffffff" stroke={activeMode !== 'fuel' ? '#0f766e' : '#cbd5e1'} strokeWidth="2" />
-
-                <foreignObject x="234" y="179" width="112" height="62">
-                  <div className="w-full h-full flex flex-col items-center justify-center text-center p-1 font-sans">
-                    <span className={`text-[9px] sm:text-[11px] font-bold ${activeMode !== 'fuel' ? 'text-slate-800' : 'text-slate-400'}`}>
-                      {components.inverter}
-                    </span>
-                  </div>
-                </foreignObject>
-              </g>
-
-              {/* 5. Electric Traction Motor */}
-              <g opacity={activeMode === 'fuel' ? 0.2 : 1.0} className="transition-opacity duration-300">
-                <rect x="410" y="175" width="120" height="70" rx="8" fill="#ffffff" stroke={activeMode !== 'fuel' ? '#0f766e' : '#cbd5e1'} strokeWidth="2" />
-
-                <foreignObject x="414" y="179" width="112" height="62">
-                  <div className="w-full h-full flex flex-col items-center justify-center text-center p-1 font-sans">
-                    <span className={`text-[9px] sm:text-[11px] font-bold ${activeMode !== 'fuel' ? 'text-slate-900' : 'text-slate-400'}`}>
-                      {components.motor}
-                    </span>
-                  </div>
-                </foreignObject>
-              </g>
-
-              {/* 6. Drive Axle & Wheels */}
-              <g>
-                {/* Back Wheels */}
-                <rect x="320" y="275" width="24" height="14" rx="3" fill="#64748b" />
-                {/* Connecting axle */}
-                <line x1="435" y1="110" x2="435" y2="275" stroke="#94a3b8" strokeWidth="3" />
-
-                {/* Front Main Drive Wheels */}
-                <g>
-                  <rect x="420" y="260" width="30" height="42" rx="6" fill="#334155" stroke="#475569" strokeWidth="2" />
-                  <line x1="427" y1="268" x2="443" y2="268" stroke="#cbd5e1" strokeWidth="2" />
-                  <line x1="427" y1="281" x2="443" y2="281" stroke="#cbd5e1" strokeWidth="2" />
-                  <line x1="427" y1="294" x2="443" y2="294" stroke="#cbd5e1" strokeWidth="2" />
-                </g>
-
-                {/* Wheel Label */}
-                <foreignObject x="460" y="265" width="120" height="35">
-                  <div className="w-full h-full flex items-center justify-start text-start font-sans">
-                    <span className="text-[9px] sm:text-[11px] font-bold text-slate-500">
-                      {components.wheels}
-                    </span>
-                  </div>
-                </foreignObject>
-              </g>
-
-              {/* Flows */}
-              {/* FUEL FLOW */}
-              {activeMode !== 'ev' && (
-                <>
-                  <line x1="140" y1="75" x2="210" y2="75" stroke="#1e40af" strokeWidth="2" strokeDasharray="5 3" />
-                  <path d="M330 75 h105" stroke="#1e40af" strokeWidth="2" strokeDasharray="5 3" />
-                </>
-              )}
-
-              {/* EV/HYBRID FLOW */}
-              {activeMode !== 'fuel' && (
-                <>
-                  <path d="M160 210 h70" stroke="#0f766e" strokeWidth="2" strokeDasharray="5 3" />
-                  <path d="M350 210 h60" stroke="#0f766e" strokeWidth="2" strokeDasharray="5 3" />
-                  <path d="M470 245 v15" stroke="#0f766e" strokeWidth="2" />
-                </>
-              )}
-            </svg>
+          <div className="overflow-hidden border border-slate-200 aspect-[600/320] bg-white relative rounded-xl shadow-sm">
+            <img
+              src={
+                activeMode === 'hybrid'
+                  ? '/images/3.jpeg'
+                  : activeMode === 'ev'
+                  ? '/images/4.jpeg'
+                  : '/images/5.jpeg'
+              }
+              alt={modes[activeMode].label}
+              className={`w-full h-full object-contain transition-transform duration-300 ${
+                activeMode === 'fuel' ? 'scale-125' : 'scale-100'
+              }`}
+            />
           </div>
 
           {/* Simple Clean Status Bar */}

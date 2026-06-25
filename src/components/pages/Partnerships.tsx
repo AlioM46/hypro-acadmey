@@ -201,24 +201,7 @@ export default function Partnerships({ navigateTo, setActiveCategory }: Partners
           </div>
         </div>
 
-        {/* Partner Logos Grid */}
-        <div>
-          <div className="space-y-2 mb-8">
-            <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">
-              {lang === 'en' ? 'STRATEGIC ALLIANCE NETWORK' : 'شبكة التحالفات الاستراتيجية'}
-            </span>
-            <h3 className="text-xl font-extrabold text-slate-900">
-              {lang === 'en' ? 'Our Strategic Alliance Network' : 'شبكة التحالفات والمؤسسات الشريكة'}
-            </h3>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-0 border border-slate-200">
-            {partnerLogos.map((logo, idx) => (
-              <div key={idx} className="p-8 bg-white border-b border-r border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-all">
-                <img src={logo.url} alt={logo.name} className="max-h-[40px] max-w-[80px] object-contain grayscale hover:grayscale-0 transition-all duration-300" loading="lazy" />
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Partner Logos Grid (Hidden) */}
 
       </div>
     </motion.div>

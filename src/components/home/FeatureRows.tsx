@@ -11,7 +11,7 @@ export default function FeatureRows() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div className="relative overflow-hidden border border-slate-200 aspect-[4/3] bg-slate-100">
             <img
-              src="https://images.unsplash.com/photo-1517524206127-48bbd363f3d7?auto=format&fit=crop&w=500&q=50"
+              src="/images/6.jpeg"
               alt="Hands-on training"
               loading="lazy"
               className="w-full h-full object-cover"
@@ -45,7 +45,7 @@ export default function FeatureRows() {
           </div>
           <div className="relative overflow-hidden border border-slate-200 aspect-[4/3] bg-slate-100 md:order-2 order-1">
             <img
-              src="https://images.unsplash.com/photo-1616788494707-ec28f08d05a1?auto=format&fit=crop&w=500&q=50"
+              src="/images/7.jpeg"
               alt="Accredited training"
               loading="lazy"
               className="w-full h-full object-cover"
@@ -57,7 +57,7 @@ export default function FeatureRows() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div className="relative overflow-hidden border border-slate-200 aspect-[4/3] bg-slate-100">
             <img
-              src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?auto=format&fit=crop&w=500&q=50"
+              src="/images/8.jpeg"
               alt="Employment placement"
               loading="lazy"
               className="w-full h-full object-cover"

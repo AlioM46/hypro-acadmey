@@ -1,44 +1,12 @@
-- تعديل النصوص الاتية الى:
-الشمال السوري -> الداخل السوري او سوريا
-ادلب -> سوريا
-(لانه عندنا اكثر من فرع في سوريا)
+ماذا ستتعلم؟ المهارات الأساسية
+٦ محاور رئيسية لاحتراف الصيانة الفنية
+يغطي برنامجنا التدريبي المحاور الستة الأكثر طلباً في سوق العمل وصيانة السيارات الحديث
+in hypro academy page
 
-- add progress bar component for what?
-add title "our vision and\or our goal" 
-with description says
-"تأهيل 10,000 فني سوري لمهن المستقبل في الطاقة البديلة والمركبات الكهربائية خلال الخميس سنوات"
-with this description: "هي منصة متخصصة في التدريب والتأهيل والتطوير التقني، تعمل على بناء الكفاءات المهنية وربطها باحتياجات سوق العمل، مع التركيز على قطاعات المركبات الكهربائية والهجينة،" improve it but with same meaning
-then add the progress bar
-where to add it?:
-"منظومة الخدمات الهندسية والتعليمية التخصصية"
-remove this component and replace it with the new one.
-it does exist in home page under hero.
+10 = أنظمة البطاريات
+11= تشخيص الأعطال والعيوب
+12= أنظمة الهايبرد والهجين
+13= لصيانة العملية والتطبيق الميداني
+14= السلامة الكهربائية للفولت العالي
+15= الفحص الإلكتروني وبرمجة العقول
 
-- in the hero title use this text"بنبي مهارات المستقبل ونربطها بسوق العمل" 
-fix any text issues and tell me what could be imrpoved
-
--in the duration of academy diploma, use hours instead of months
-put 300+ hours instead of 4months
-- استبدال اي كلمة دبلومات بـ: دبلومات تدريبي او دبلوم تدريبي مهني لانهما شيء مختلف تماماً
-
-- in acadmey page: "لماذا يعتبر فحص وبرمجة السيارات الفرصة الأقوى حالياً؟" in this section
-edit the title with something better, then
-and add this text as reference: 
-"
-قطاع السيارات الكهربائية والطاقة البديلة فرصة السوق السوري القادمة
-يشهد السوق السوري تحولاً متسارعاً نحو السيارات الكهربائية والهجينة وأنظمة الطاقة البديلة نتيجة ارتفاع تكاليف الوقود التقليدي، وتزايد الحاجة إلى حلول أكثر توفيراً واستدامة. ومع دخول هذه التقنيات إلى السوق، يزداد الطلب على الفنيين والمتخصصين المؤهلين القادرين على صيانتها وتشغيلها وإدارتها.
-في المقابل، لا يزال عدد الخبراء والكفاءات المدربة محدوداً، مما يجعل الوقت الحالي فرصة حقيقية للدخول إلى هذا القطاع واكتساب مهارات مطلوبة في سوق العمل المحلي والإقليمي قبل ازدياد المنافسة"
-enhance it but with same meaning, use it as reasones for why you should learn now.
-
-- in academy page: in "80% تطبيق فني مباشر باليد" section
-use this text as discrption:
-"تدريب عملي في مشاغل حقيقية، بإشراف مدربين محترفين، من الصفر إلى الاحتراف، لتصبح جاهزاً لسوق العمل بثقة وكفاءة"
-
-
-- in academy page: in "دبلوم مهني مرخص ومعترف به نقابياً" section
-change the word "نقابياً" and use "دولياً" 
-- remove "نقابياً" from the whole website text, and replace with the fit word like "دولياً"
-
-
-- link the whatsapp icon number with this number ** NOT CONTACT US whatsapp ** 
-"+962 7 9661 6549"

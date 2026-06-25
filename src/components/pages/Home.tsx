@@ -5,7 +5,6 @@ import { useTranslation } from '../../hooks/useTranslation';
 
 import Hero from '../home/Hero';
 import HyproEcosystem from '../home/HyproEcosystem';
-import PartnerSlider from '../home/PartnerSlider';
 import QuickRegister from '../home/QuickRegister';
 import HyproEnergyBrief from '../home/HyproEnergyBrief';
 import HyproServicesBrief from '../home/HyproServicesBrief';
@@ -45,9 +44,6 @@ export default function Home({ navigateTo, setVideoModalOpen, activeCategory, se
         navigateTo={navigateTo}
         setVideoModalOpen={setVideoModalOpen}
       />
-
-      {/* PARTNER LOGOS INFINITE SLIDER */}
-      <PartnerSlider />
 
       {/* VISION & GOALS SECTION WITH PROGRESS BAR */}
       <VisionGoals />

@@ -22,10 +22,10 @@ export default function VisionGoals() {
         
         {/* Title */}
         <div className="space-y-3">
-          <span className="text-xs font-mono font-bold text-emerald-600 tracking-widest uppercase block">
-            {lang === 'en' ? 'OUR MISSION' : 'رؤيتنا وهدفنا'}
+          <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-emerald-600 tracking-tight block">
+            {lang === 'en' ? 'OUR VISION' : 'رؤيتنا وهدفنا'}
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-tight font-sans">
+          <h2 className="text-lg sm:text-xl font-bold text-slate-800 tracking-tight leading-tight font-sans">
             {lang === 'en' 
               ? 'Qualifying 10,000 Technicians for the Future' 
               : 'تأهيل 10,000 فني سوري لمهن المستقبل'}

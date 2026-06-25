@@ -12,7 +12,7 @@ export default function LearnSection() {
       titleAr: "أنظمة البطاريات",
       descEn: "Hybrid & EV battery construction, cells testing, state-of-health diagnostics, module replacement, and computerized battery balancing.",
       descAr: "دراسة وتفكيك بطاريات الهايبريد والكهرباء، فحص المقاومة الفنية للخلايا، تشخيص الأعطال واستبدال الأجزاء التالفة والموازنة المؤتمتة.",
-      image: "https://images.unsplash.com/photo-1548345680-f5475ea5df84?auto=format&fit=crop&w=600&q=80"
+      image: "/images/10.jpeg"
     },
     {
       icon: Wrench,
@@ -20,7 +20,7 @@ export default function LearnSection() {
       titleAr: "تشخيص الأعطال والعيوب",
       descEn: "Isolating short circuits, tracking parasitic draws, deciphering complex DTC trouble codes, and mapping wiring schematics.",
       descAr: "تتبع الأعطال الكهربائية المعقدة والمتقطعة، قراءة وتحليل رموز الأعطال DTC، قراءة المخططات الهندسية وحصر المشاكل الفنية.",
-      image: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80"
+      image: "/images/11.jpeg"
     },
     {
       icon: Cpu,
@@ -28,7 +28,7 @@ export default function LearnSection() {
       titleAr: "أنظمة الهايبرد والهجين",
       descEn: "Planetary gear synchronization, high-voltage inverter coolant management, traction motor operations, and regenerative breaking loops.",
       descAr: "أجزاء الحركة الهجينة ونواقل الحركة، مبدلات الفولت العالي وعزلها، مضخة تبريد العاكس (Inverter)، ومكابح تدوير الطاقة.",
-      image: "https://images.unsplash.com/photo-1517524206127-48bbd363f3d7?auto=format&fit=crop&w=600&q=80"
+      image: "/images/12.jpeg"
     },
     {
       icon: CheckCircle2,
@@ -36,7 +36,7 @@ export default function LearnSection() {
       titleAr: "الفحص الإلكتروني وبرمجة العقول",
       descEn: "OBD-II live data analysis, actuator testing, throttle adaptation, key coding, and electronic control unit (ECU) flashing.",
       descAr: "التعامل الاحترافي مع أجهزة فحص السيارات وكشف الكمبيوتر OBD-II، قراءة البيانات الحية، برمجة البوابات الإلكترونية، وتهيئة العقول والـ ECU.",
-      image: "https://images.unsplash.com/photo-1507136566006-cfc505b114fc?auto=format&fit=crop&w=600&q=80"
+      image: "/images/15.jpeg"
     },
     {
       icon: ShieldCheck,
@@ -44,7 +44,7 @@ export default function LearnSection() {
       titleAr: "السلامة الكهربائية للفولت العالي",
       descEn: "Working with up to 1000V DC safely, removal of MSD high-voltage loops, using double-insulated tools, and personal protective clothing (PPC).",
       descAr: "بروتوكولات الأمان للجهود الفائقة التي تصل إلى 1000 فولت، فك قواطع الأمان MSD، استخدام المفكات والعدد المعزولة مهنياً.",
-      image: "https://images.unsplash.com/photo-1616788494707-ec28f08d05a1?auto=format&fit=crop&w=600&q=80"
+      image: "/images/14.jpeg"
     },
     {
       icon: Settings,
@@ -52,7 +52,7 @@ export default function LearnSection() {
       titleAr: "الصيانة العملية والتطبيق الميداني",
       descEn: "Regular maintenance, direct fluid changes of hybrid gearboxes, replacing cells, and working on live customer vehicles under supervision.",
       descAr: "تغيير سوائل وزيوت الفولت العالي لعلب التروس الهجينة، الصيانة الوقائية السريعة، وتجربة إصلاح سيارات زبائن فعلية تحت ظروف العمل الميدانية.",
-      image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=600&q=80"
+      image: "/images/13.jpeg"
     }
   ];
 
