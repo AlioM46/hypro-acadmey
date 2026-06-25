@@ -10,7 +10,7 @@ export default function Logo({ className = '', imgClassName = 'h-11 sm:h-14', on
   return (
     <div onClick={onClick} className={`flex items-center select-none ${className}`}>
       <img
-        src="/logo.png"
+        src="/logo.svg"
         alt="HyPro Academy"
         className={`${imgClassName} w-auto object-contain hover:opacity-95 transition-opacity`}
       />
