@@ -1,47 +1,15 @@
-import React, { useState } from 'react';
-import { Users, Phone, MapPin, MessageSquare, ArrowRight, CheckCircle } from 'lucide-react';
+import React from 'react';
+import { MessageSquare, ArrowRight, CheckCircle } from 'lucide-react';
 import { useTranslation } from '../../hooks/useTranslation';
 
 export default function QuickRegister() {
   const { lang, t } = useTranslation();
 
-  const [quickRegName, setQuickRegName] = useState('');
-  const [quickRegPhone, setQuickRegPhone] = useState('');
-  const [quickRegGov, setQuickRegGov] = useState('');
-  const [isSending, setIsSending] = useState(false);
-
-  const handleQuickRegister = async (e: React.FormEvent) => {
+  const handleQuickRegister = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!quickRegName || !quickRegPhone || !quickRegGov) {
-      alert(lang === 'en' ? 'Please fill in all fields.' : 'يرجى ملء جميع الحقول.');
-      return;
-    }
-
-    setIsSending(true);
-    try {
-      await fetch('/api/send', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          formType: 'quick',
-          formData: {
-            name: quickRegName,
-            phone: quickRegPhone,
-            city: quickRegGov
-          }
-        })
-      });
-    } catch (err) {
-      console.error('Email submission error:', err);
-    } finally {
-      setIsSending(false);
-    }
-
     const message = lang === 'en'
-      ? `Hello Hypro Academy, I would like to register:\nName: ${quickRegName}\nPhone: ${quickRegPhone}\nGovernorate: ${quickRegGov}`
-      : `مرحباً أكاديمية هايبـرو، أود التسجيل:\nالاسم: ${quickRegName}\nالهاتف: ${quickRegPhone}\nالمحافظة: ${quickRegGov}`;
+      ? `Hello Hypro Academy, I would like to register and get more information about your courses.`
+      : `مرحباً أكاديمية هايبـرو، أود الاستفسار والتسجيل في برامجكم التدريبية.`;
     const whatsappUrl = `https://wa.me/963955408202?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -65,86 +33,27 @@ export default function QuickRegister() {
         </h3>
         <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-medium max-w-xl mx-auto mb-10">
           {lang === 'en' 
-            ? 'Fill in your details and connect instantly via WhatsApp. It takes less than 30 seconds.' 
-            : 'أدخل بياناتك وتواصل فوراً عبر واتساب. لن يستغرق الأمر أكثر من 30 ثانية.'}
+            ? 'Connect with us instantly via WhatsApp to register. It takes less than 30 seconds.' 
+            : 'تواصل معنا مباشرة عبر واتساب للتسجيل. لن يستغرق الأمر أكثر من 30 ثانية.'}
         </p>
 
         {/* Form Card */}
-        <div className="bg-white/[0.07] backdrop-blur-sm border border-white/10 p-8 sm:p-10">
+        <div className="bg-white/[0.07] backdrop-blur-sm border border-white/10 p-8 sm:p-10 max-w-xl mx-auto">
           <form onSubmit={handleQuickRegister} className="space-y-5">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {/* Name */}
-              <div className="space-y-2 text-start">
-                <label className="text-[10px] font-bold text-slate-400 uppercase font-mono tracking-wider flex items-center gap-1.5">
-                  <Users size={10} className="text-blue-400" />
-                  {t('fullNameLabel')}
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={quickRegName}
-                  onChange={(e) => setQuickRegName(e.target.value)}
-                  placeholder={lang === 'en' ? 'Your full name' : 'الاسم الثنائي أو الثلاثي'}
-                  className="w-full bg-white/10 border border-white/15 text-white text-sm px-4 py-3.5 placeholder-slate-500 focus:outline-none focus:border-blue-400 focus:bg-white/[0.12] transition-all h-[50px]"
-                />
-              </div>
-              {/* Phone */}
-              <div className="space-y-2 text-start">
-                <label className="text-[10px] font-bold text-slate-400 uppercase font-mono tracking-wider flex items-center gap-1.5">
-                  <Phone size={10} className="text-blue-400" />
-                  {t('phoneLabel')}
-                </label>
-                <input
-                  type="tel"
-                  required
-                  value={quickRegPhone}
-                  onChange={(e) => setQuickRegPhone(e.target.value)}
-                  placeholder={lang === 'en' ? '+963 XXX XXX XXX' : 'رقم الهاتف مع الرمز'}
-                  className="w-full bg-white/10 border border-white/15 text-white text-sm px-4 py-3.5 placeholder-slate-500 focus:outline-none focus:border-blue-400 focus:bg-white/[0.12] transition-all h-[50px] text-start"
-                  dir="ltr"
-                />
-              </div>
-              {/* Governorate */}
-              <div className="space-y-2 text-start">
-                <label className="text-[10px] font-bold text-slate-400 uppercase font-mono tracking-wider flex items-center gap-1.5">
-                  <MapPin size={10} className="text-blue-400" />
-                  {t('govLabel')}
-                </label>
-                <select
-                  required
-                  value={quickRegGov}
-                  onChange={(e) => setQuickRegGov(e.target.value)}
-                  className="w-full bg-slate-900 border border-white/15 text-white text-sm px-4 py-3 cursor-pointer focus:outline-none focus:border-blue-400 focus:bg-slate-800 transition-all h-[50px] appearance-none"
-                  style={{ colorScheme: 'dark' }}
-                >
-                  <option value="" className="bg-slate-900 text-slate-400">-- {lang === 'en' ? 'Select Governorate' : 'اختر المحافظة'} --</option>
-                  {(lang === 'en'
-                    ? ['Idlib', 'Aleppo', 'Hama', 'Latakia', 'Tartus', 'Damascus', 'Rif Dimashq', 'Homs', 'Daraa', 'As-Suwayda', 'Quneitra', 'Deir ez-Zor', 'Raqqa', 'Al-Hasakah']
-                    : ['إدلب', 'حلب', 'حماة', 'اللاذقية', 'طرطوس', 'دمشق', 'ريف دمشق', 'حمص', 'درعا', 'السويداء', 'القنيطرة', 'دير الزور', 'الرقة', 'الحسكة']
-                  ).map((city, idx) => (
-                    <option key={idx} value={city} className="bg-slate-900 text-white">
-                      {city}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
             {/* WhatsApp CTA */}
             <button
               type="submit"
-              disabled={isSending}
-              className={`w-full text-white font-extrabold text-sm sm:text-base py-4 sm:py-5 flex items-center justify-center gap-3 transition-all border-none ${isSending ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
-              style={{ background: isSending ? '#94a3b8' : 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)' }}
+              className="w-full text-white font-extrabold text-sm sm:text-base py-4 sm:py-5 flex items-center justify-center gap-3 transition-all border-none cursor-pointer"
+              style={{ background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)' }}
               onMouseEnter={(e) => {
-                if (!isSending) e.currentTarget.style.background = 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)';
+                e.currentTarget.style.background = 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)';
               }}
               onMouseLeave={(e) => {
-                if (!isSending) e.currentTarget.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)';
+                e.currentTarget.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)';
               }}
             >
               <MessageSquare size={18} className="fill-white" />
-              <span>{isSending ? (lang === 'en' ? 'Sending...' : 'جاري الإرسال...') : (lang === 'en' ? 'Register via WhatsApp Now' : 'سجّل عبر واتساب الآن')}</span>
+              <span>{lang === 'en' ? 'Register via WhatsApp Now' : 'سجّل عبر واتساب الآن'}</span>
               <ArrowRight size={16} />
             </button>
           </form>
@@ -170,3 +79,4 @@ export default function QuickRegister() {
     </section>
   );
 }
+

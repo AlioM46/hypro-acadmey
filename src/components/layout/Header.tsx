@@ -58,7 +58,7 @@ export default function Header({
   ];
 
   const renderDesktopNav = () => (
-    <nav className="hidden lg:flex items-center gap-6 text-xs font-black uppercase tracking-wider">
+    <nav className="hidden lg:flex items-center lg:gap-3 xl:gap-6 lg:text-[10px] xl:text-xs font-black uppercase tracking-wider">
       {navItems.map((item) => {
         if (item.type === 'link') {
           const isActive = currentPage === item.id;
