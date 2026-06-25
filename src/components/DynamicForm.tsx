@@ -12,10 +12,12 @@ export default function DynamicForm({ activeCategory, setActiveCategory }: Dynam
   const { lang, t, tObj } = useTranslation();
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState<boolean>(false);
+  const [isSending, setIsSending] = useState<boolean>(false);
 
   useEffect(() => {
     setFormData({});
     setSubmitted(false);
+    setIsSending(false);
   }, [activeCategory]);
 
   const handleInputChange = (field: string, value: string) => {
@@ -87,7 +89,7 @@ export default function DynamicForm({ activeCategory, setActiveCategory }: Dynam
     }
   };
 
-  const handleSubmission = (e: React.FormEvent) => {
+  const handleSubmission = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const fields = getFormFields();
@@ -101,7 +103,50 @@ export default function DynamicForm({ activeCategory, setActiveCategory }: Dynam
       }
     }
 
-    setSubmitted(true);
+    setIsSending(true);
+    try {
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+      if (!serviceId || !templateId || !publicKey) {
+        console.warn('EmailJS environment variables are not configured.');
+        // Fallback: Just mark as submitted to show the WhatsApp success page.
+        setSubmitted(true);
+        return;
+      }
+
+      // Map dynamic fields into a readable template params structure
+      const templateParams = {
+        category: activeCategory,
+        ...formData
+      };
+
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          service_id: serviceId,
+          template_id: templateId,
+          user_id: publicKey,
+          template_params: templateParams
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send email.');
+      }
+      
+      setSubmitted(true);
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      alert(lang === 'en' ? 'Failed to submit form via Email. Please contact us via WhatsApp.' : 'فشل إرسال النموذج عبر البريد. يرجى التواصل معنا عبر الواتساب.');
+      setSubmitted(true);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const getWhatsAppURI = () => {
@@ -253,10 +298,11 @@ export default function DynamicForm({ activeCategory, setActiveCategory }: Dynam
             <button
               type="submit"
               id="btn-form-submit"
-              className="w-full sm:w-auto bg-brand-blue hover:bg-brand-blue-hover text-white font-bold text-xs px-8 py-3.5 flex items-center justify-center gap-2 transition-all cursor-pointer select-none border-none"
+              disabled={isSending}
+              className={`w-full sm:w-auto bg-brand-blue hover:bg-brand-blue-hover text-white font-bold text-xs px-8 py-3.5 flex items-center justify-center gap-2 transition-all select-none border-none ${isSending ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
             >
-              <Send size={14} />
-              <span>{t('submitBtn')}</span>
+              <Send size={14} className={isSending ? 'animate-pulse' : ''} />
+              <span>{isSending ? (lang === 'en' ? 'Sending...' : 'جاري الإرسال...') : t('submitBtn')}</span>
             </button>
           </div>
         </form>
