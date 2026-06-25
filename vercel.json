@@ -5,8 +5,9 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/(about|programs|testing-lab|partnerships|contact|practical-training|accreditations|team|careers|b2b|gallery|news|volunteers|legal|academy)",
       "destination": "/index.html"
     }
   ]
 }
+

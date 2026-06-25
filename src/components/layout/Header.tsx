@@ -66,9 +66,8 @@ export default function Header({
             <button
               key={item.id}
               onClick={() => navigateTo(item.id as PageType)}
-              className={`transition-all cursor-pointer bg-transparent border-none pb-1 ${
-                isActive ? 'text-white border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'
-              }`}
+              className={`transition-all cursor-pointer bg-transparent border-none pb-1 ${isActive ? 'text-white border-b-2 border-white' : 'text-white/85 hover:text-sky-400 font-semibold'
+                }`}
             >
               {item.label}
             </button>
@@ -107,16 +106,15 @@ export default function Header({
     <>
       {/* STATIC/RELATIVE HEADER */}
       <header
-        className={`z-50 px-4 sm:px-6 lg:px-8 ${
-          currentPage === 'home'
-            ? 'absolute top-0 left-0 right-0 bg-transparent border-b border-white/20 py-5 text-white'
-            : 'sticky top-0 bg-brand-blue border-b border-white/10 py-3 text-white'
-        }`}
+        className={`z-50 px-4 sm:px-6 lg:px-8 ${currentPage === 'home'
+          ? 'absolute top-0 left-0 right-0 bg-transparent border-b border-white/20 py-3 text-white'
+          : 'sticky top-0 bg-brand-blue border-b border-white/10 py-1.5 text-white'
+          }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <Logo
             onClick={() => navigateTo('home')}
-            imgClassName="h-14 sm:h-18"
+            imgClassName="h-12 sm:h-14"
             className="cursor-pointer hover:opacity-90 transition-opacity"
           />
 
@@ -134,11 +132,10 @@ export default function Header({
 
             <button
               onClick={() => navigateTo('contact')}
-              className={`hidden sm:flex font-extrabold text-[10px] px-4 py-2 items-center gap-1.5 transition-all cursor-pointer border ${
-                currentPage !== 'home'
-                  ? 'bg-white text-brand-blue hover:bg-slate-50 border-transparent'
-                  : 'bg-brand-blue hover:bg-brand-blue-hover text-white border-white/20'
-              }`}
+              className={`hidden sm:flex font-extrabold text-[10px] px-4 py-2 items-center gap-1.5 transition-all cursor-pointer border ${currentPage !== 'home'
+                ? 'bg-white text-brand-blue hover:bg-slate-50 border-transparent'
+                : 'bg-brand-blue hover:bg-brand-blue-hover text-white border-white/20'
+                }`}
             >
               <Clock size={12} />
               <span>{t('registerNow')}</span>
@@ -159,14 +156,13 @@ export default function Header({
       {/* STICKY SLIDE-DOWN HEADER (Home page only) */}
       {currentPage === 'home' && (
         <header
-          className={`fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 bg-brand-blue/95 backdrop-blur-md border-b border-white/20 py-3.5 text-white transform transition-all duration-300 ease-out ${
-            showStickyHeader ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'
-          }`}
+          className={`fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 bg-brand-blue/95 backdrop-blur-md border-b border-white/20 py-1.5 text-white transform transition-all duration-300 ease-out ${showStickyHeader ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'
+            }`}
         >
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
             <Logo
               onClick={() => navigateTo('home')}
-              imgClassName="h-12 sm:h-16"
+              imgClassName="h-14 sm:h-18"
               className="cursor-pointer hover:opacity-90 transition-opacity"
             />
 
@@ -226,7 +222,7 @@ export default function Header({
                     setIsMobileMenuOpen(false);
                     navigateTo('home');
                   }}
-                  imgClassName="h-10 sm:h-12"
+                  imgClassName="h-12 sm:h-15"
                   className="cursor-pointer"
                 />
                 <button
@@ -241,9 +237,8 @@ export default function Header({
               <div className="flex-grow overflow-y-auto px-4 py-6 space-y-2 flex flex-col text-start">
                 <button
                   onClick={() => { setIsMobileMenuOpen(false); navigateTo('home'); }}
-                  className={`py-2 px-3 text-start text-xs font-bold border-none rounded-xl transition-all cursor-pointer ${
-                    currentPage === 'home' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50'
-                  }`}
+                  className={`py-2 px-3 text-start text-xs font-bold border-none rounded-xl transition-all cursor-pointer ${currentPage === 'home' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50'
+                    }`}
                 >
                   {t('home')}
                 </button>
@@ -322,36 +317,32 @@ export default function Header({
 
                 <button
                   onClick={() => { setIsMobileMenuOpen(false); navigateTo('b2b'); }}
-                  className={`py-2 px-3 text-start text-xs font-bold border-none rounded-xl transition-all cursor-pointer ${
-                    currentPage === 'b2b' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50'
-                  }`}
+                  className={`py-2 px-3 text-start text-xs font-bold border-none rounded-xl transition-all cursor-pointer ${currentPage === 'b2b' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50'
+                    }`}
                 >
                   {t('b2bNav')}
                 </button>
 
                 <button
                   onClick={() => { setIsMobileMenuOpen(false); navigateTo('careers'); }}
-                  className={`py-2 px-3 text-start text-xs font-bold border-none rounded-xl transition-all cursor-pointer ${
-                    currentPage === 'careers' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50'
-                  }`}
+                  className={`py-2 px-3 text-start text-xs font-bold border-none rounded-xl transition-all cursor-pointer ${currentPage === 'careers' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50'
+                    }`}
                 >
                   {t('careersNav')}
                 </button>
 
                 <button
                   onClick={() => { setIsMobileMenuOpen(false); navigateTo('partnerships'); }}
-                  className={`py-2 px-3 text-start text-xs font-bold border-none rounded-xl transition-all cursor-pointer ${
-                    currentPage === 'partnerships' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50'
-                  }`}
+                  className={`py-2 px-3 text-start text-xs font-bold border-none rounded-xl transition-all cursor-pointer ${currentPage === 'partnerships' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50'
+                    }`}
                 >
                   {t('partnershipsNav')}
                 </button>
 
                 <button
                   onClick={() => { setIsMobileMenuOpen(false); navigateTo('contact'); }}
-                  className={`py-2 px-3 text-start text-xs font-bold border-none rounded-xl transition-all cursor-pointer ${
-                    currentPage === 'contact' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50'
-                  }`}
+                  className={`py-2 px-3 text-start text-xs font-bold border-none rounded-xl transition-all cursor-pointer ${currentPage === 'contact' ? 'bg-blue-50 text-brand-blue' : 'bg-transparent text-slate-600 hover:bg-slate-50'
+                    }`}
                 >
                   {t('contactNav')}
                 </button>

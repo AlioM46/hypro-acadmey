@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { AnimatePresence } from 'motion/react';
 
 import { academyContent } from './data/academyContent';
@@ -10,23 +10,23 @@ import Footer from './components/layout/Footer';
 import VideoModal from './components/layout/VideoModal';
 import Lightbox from './components/layout/Lightbox';
 
-// Page components
-import Home from './components/pages/Home';
-import About from './components/pages/About';
-import Programs from './components/pages/Programs';
-import PracticalTraining from './components/pages/PracticalTraining';
-import Accreditations from './components/pages/Accreditations';
-import Team from './components/pages/Team';
-import Partnerships from './components/pages/Partnerships';
-import TestingLab from './components/pages/TestingLab';
-import Contact from './components/pages/Contact';
-import Careers from './components/pages/Careers';
-import B2B from './components/pages/B2B';
-import Gallery from './components/pages/Gallery';
-import News from './components/pages/News';
-import Volunteers from './components/pages/Volunteers';
-import Legal from './components/pages/Legal';
-import Academy from './components/pages/Academy';
+// Page components (lazy loaded for improved performance)
+const Home = lazy(() => import('./components/pages/Home'));
+const About = lazy(() => import('./components/pages/About'));
+const Programs = lazy(() => import('./components/pages/Programs'));
+const PracticalTraining = lazy(() => import('./components/pages/PracticalTraining'));
+const Accreditations = lazy(() => import('./components/pages/Accreditations'));
+const Team = lazy(() => import('./components/pages/Team'));
+const Partnerships = lazy(() => import('./components/pages/Partnerships'));
+const TestingLab = lazy(() => import('./components/pages/TestingLab'));
+const Contact = lazy(() => import('./components/pages/Contact'));
+const Careers = lazy(() => import('./components/pages/Careers'));
+const B2B = lazy(() => import('./components/pages/B2B'));
+const Gallery = lazy(() => import('./components/pages/Gallery'));
+const News = lazy(() => import('./components/pages/News'));
+const Volunteers = lazy(() => import('./components/pages/Volunteers'));
+const Legal = lazy(() => import('./components/pages/Legal'));
+const Academy = lazy(() => import('./components/pages/Academy'));
 
 type CategoryType = 'student' | 'workshop' | 'dealer' | 'ngo' | 'trainer';
 type PageType = 'home' | 'about' | 'programs' | 'testing-lab' | 'partnerships' | 'contact' | 'practical-training' | 'accreditations' | 'team' | 'careers' | 'b2b' | 'gallery' | 'news' | 'volunteers' | 'legal' | 'academy';
@@ -71,6 +71,83 @@ export default function App() {
       window.removeEventListener('popstate', handlePopState);
     };
   }, []);
+
+  // Dynamic SEO Page Title & Meta Description Updater
+  useEffect(() => {
+    const seoConfig: Record<PageType, { title: string; desc: string }> = {
+      home: {
+        title: 'Hypro Academy | Master Hybrid & EV Diagnostics | Syria',
+        desc: 'Syria\'s premier vocational training hub for hybrid and electric vehicle mechanics. 80% practical learning, elite mentors, and direct garage placements.'
+      },
+      about: {
+        title: 'About Us | Hypro Academy Syria',
+        desc: 'Learn about Hypro Academy\'s vision, mission, and commitment to transferring high-voltage technology to Syria\'s local workforce.'
+      },
+      academy: {
+        title: 'Vocational Programs & Courses | Hypro Academy',
+        desc: 'Explore our intensive training programs in EV technology, Hybrid systems, and automotive electronic diagnostics.'
+      },
+      programs: {
+        title: 'Technical Curriculums & Syllabuses | Hypro Academy',
+        desc: 'View the modular course breakdown, contact hours, and practical training ratios of our accredited diplomas.'
+      },
+      'practical-training': {
+        title: 'Hands-On Practical Training | Hypro Academy',
+        desc: 'See how our trainees gain real-world shop experience working directly on high-voltage battery banks under expert guidance.'
+      },
+      accreditations: {
+        title: 'Accreditations & Certification | Hypro Academy',
+        desc: 'Hypro Academy certificates are standardized with local craft syndicates and feature online validation verification codes.'
+      },
+      team: {
+        title: 'Our Elite Technical Faculty & Mentors | Hypro Academy',
+        desc: 'Meet the professional engineers and workshop masters training the next generation of automotive technicians in Syria.'
+      },
+      partnerships: {
+        title: 'Partnerships & Alliances | Hypro Academy',
+        desc: 'Establish training, placement, or sponsorship collaborations with Syria\'s leading vocational training platform.'
+      },
+      'testing-lab': {
+        title: 'Interactive Testing & Diagnostics Lab | Hypro Academy',
+        desc: 'Explore our high-voltage testing lab and interactive powertrain simulator for modern hybrid and electric vehicle systems.'
+      },
+      contact: {
+        title: 'Contact Us | Hypro Academy Admissions Syria',
+        desc: 'Register interest or contact our admissions coordinators directly via WhatsApp or phone. Visit our Damascus campus.'
+      },
+      careers: {
+        title: 'Careers & Job Placement Center | Hypro Academy',
+        desc: 'We connect certified graduates directly with top maintenance centers, fleet importers, and NGOs, achieving 92% placement rates.'
+      },
+      volunteers: {
+        title: 'Volunteer Portal | Hypro Academy Syria',
+        desc: 'Join our community, assist in diagnostics labs, and help transfer modern automotive tech to the Syrian workforce.'
+      },
+      legal: {
+        title: 'Legal Agreements & Privacy | Hypro Academy',
+        desc: 'Read the privacy policies, terms, and conditions governing registration at Hypro Academy.'
+      },
+      b2b: {
+        title: 'B2B Solutions & Partnerships | Hypro Academy',
+        desc: 'Customized automotive training and fleet maintenance standards for corporate and developmental clients.'
+      },
+      gallery: {
+        title: 'Photo & Video Gallery | Hypro Academy',
+        desc: 'Look inside our training workshops, high-voltage labs, and student practical projects in Syria.'
+      },
+      news: {
+        title: 'News & Technical Events | Hypro Academy',
+        desc: 'Stay updated with Hypro Academy\'s workshops, seminars, and technical automotive events in Syria.'
+      }
+    };
+
+    const currentSeo = seoConfig[currentPage] || seoConfig.home;
+    document.title = currentSeo.title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', currentSeo.desc);
+    }
+  }, [currentPage]);
 
   const navigateTo = (page: PageType) => {
     const path = page === 'home' ? '/' : `/${page}`;
@@ -170,7 +247,14 @@ export default function App() {
 
       <main className="flex-grow">
         <AnimatePresence mode="wait">
-          {renderPage()}
+          <Suspense fallback={
+            <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4 bg-slate-50">
+              <div className="w-10 h-10 border-4 border-brand-blue border-t-transparent rounded-full animate-spin" />
+              <span className="text-xs font-mono tracking-widest text-slate-400 font-bold uppercase animate-pulse">Loading Academy Page...</span>
+            </div>
+          }>
+            {renderPage()}
+          </Suspense>
         </AnimatePresence>
       </main>
 

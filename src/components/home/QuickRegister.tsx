@@ -110,14 +110,23 @@ export default function QuickRegister() {
                   <MapPin size={10} className="text-blue-400" />
                   {t('govLabel')}
                 </label>
-                <input
-                  type="text"
+                <select
                   required
                   value={quickRegGov}
                   onChange={(e) => setQuickRegGov(e.target.value)}
-                  placeholder={lang === 'en' ? 'City / Governorate' : 'المحافظة أو المدينة'}
-                  className="w-full bg-white/10 border border-white/15 text-white text-sm px-4 py-3.5 placeholder-slate-500 focus:outline-none focus:border-blue-400 focus:bg-white/[0.12] transition-all h-[50px]"
-                />
+                  className="w-full bg-slate-900 border border-white/15 text-white text-sm px-4 py-3 cursor-pointer focus:outline-none focus:border-blue-400 focus:bg-slate-800 transition-all h-[50px] appearance-none"
+                  style={{ colorScheme: 'dark' }}
+                >
+                  <option value="" className="bg-slate-900 text-slate-400">-- {lang === 'en' ? 'Select Governorate' : 'اختر المحافظة'} --</option>
+                  {(lang === 'en'
+                    ? ['Idlib', 'Aleppo', 'Hama', 'Latakia', 'Tartus', 'Damascus', 'Rif Dimashq', 'Homs', 'Daraa', 'As-Suwayda', 'Quneitra', 'Deir ez-Zor', 'Raqqa', 'Al-Hasakah']
+                    : ['إدلب', 'حلب', 'حماة', 'اللاذقية', 'طرطوس', 'دمشق', 'ريف دمشق', 'حمص', 'درعا', 'السويداء', 'القنيطرة', 'دير الزور', 'الرقة', 'الحسكة']
+                  ).map((city, idx) => (
+                    <option key={idx} value={city} className="bg-slate-900 text-white">
+                      {city}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
 
