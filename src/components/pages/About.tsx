@@ -101,7 +101,7 @@ export default function About({ navigateTo }: AboutProps) {
             <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">{lang === 'en' ? 'ELITE TECHNICAL MENTORS' : 'كادر المهندسين والمعلمين'}</span>
             <h3 className="text-xl font-extrabold text-slate-900">{lang === 'en' ? 'Learn From Industry Experts' : 'تلقّ الخبرة من رواد السوق'}</h3>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-xl mx-auto">
             {[
               { img: '/trainers/Mohammed Made.jpeg', nameEn: 'Eng. Mohammed Made', nameAr: 'المهندس محمد ماضي', roleEn: 'Lead Hybrid Engineer & Battery Specialist', roleAr: 'كبير مهندسي الهايبرد وأخصائي بطاريات الجهد العالي', expEn: '20 Years', expAr: '٢٠ عاماً' },
               { img: '/trainers/Omar Arqawe.jpeg', nameEn: 'Trainer Amer Arqawe', nameAr: 'المدرب عامر عرقاوي', roleEn: 'Electric & Hybrid Vehicle Mechanics Trainer', roleAr: 'مدرب في مجال ميكانيك السيارات الكهربائية والهجينة ومتخصص في المحركات', expEn: '14 Years', expAr: '١٤ عاماً' }
