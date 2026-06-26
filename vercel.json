@@ -16,6 +16,9 @@
       "dest": "api/send.ts"
     },
     {
+      "handle": "filesystem"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
