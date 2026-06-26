@@ -5,9 +5,12 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/((?!api/).*)",
+      "source": "/api/send",
+      "destination": "/api/send"
+    },
+    {
+      "source": "/:path*",
       "destination": "/index.html"
     }
   ]
 }
-
