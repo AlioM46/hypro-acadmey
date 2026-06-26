@@ -5,7 +5,11 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/(about|programs|testing-lab|partnerships|contact|practical-training|accreditations|team|careers|b2b|gallery|news|volunteers|legal|academy)",
+      "source": "/api/send",
+      "destination": "/api/send"
+    },
+    {
+      "source": "/((?!api/|assets/|images/|trainers/|.*\\..*$).*)",
       "destination": "/index.html"
     }
   ]
