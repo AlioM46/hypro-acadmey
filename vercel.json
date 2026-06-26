@@ -1,19 +1,9 @@
 {
-  "framework": "vite",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
   "cleanUrls": true,
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/send",
-      "dest": "/api/send"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
     }
   ]
 }
