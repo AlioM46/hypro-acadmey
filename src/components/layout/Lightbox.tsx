@@ -39,16 +39,6 @@ export default function Lightbox({ imageSrc, title, desc, lang, onClose }: Light
               alt="Accreditation Certificate"
               className="max-h-[70vh] w-auto object-contain border border-slate-100"
             />
-            <div className="mt-4 text-center font-sans">
-              <h5 className="font-extrabold text-sm text-slate-900">
-                {title || (lang === 'en' ? 'Official Institutional Credential' : 'وثيقة الاعتماد المؤسساتي الرسمية')}
-              </h5>
-              <p className="text-slate-500 text-xs mt-1">
-                {desc || (lang === 'en' 
-                  ? 'Verified by TVET authorities, educational bodies, and corporate training divisions.' 
-                  : 'معتمدة وموثقة من قبل هيئات التدريب المهني، والجهات التعليمية، ووكالات الصيانة.')}
-              </p>
-            </div>
           </motion.div>
         </motion.div>
       )}

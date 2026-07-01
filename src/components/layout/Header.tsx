@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Globe, Clock, Menu, X, ChevronDown } from 'lucide-react';
 import Logo from '../Logo';
 
-type PageType = 'home' | 'about' | 'programs' | 'testing-lab' | 'partnerships' | 'contact' | 'practical-training' | 'accreditations' | 'team' | 'careers' | 'b2b' | 'gallery' | 'news' | 'volunteers' | 'legal';
+type PageType = 'home' | 'about' | 'programs' | 'testing-lab' | 'partnerships' | 'contact' | 'practical-training' | 'accreditations' | 'team' | 'careers' | 'b2b' | 'gallery' | 'news' | 'volunteers' | 'legal' | 'academy';
 
 interface HeaderProps {
   currentPage: PageType;

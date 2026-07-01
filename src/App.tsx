@@ -215,7 +215,15 @@ export default function App() {
       case 'b2b':
         return <B2B />;
       case 'gallery':
-        return <Gallery />;
+        return (
+          <Gallery
+            setVideoModalOpen={setVideoModalOpen}
+            setActiveVideoUrl={setActiveVideoUrl}
+            setActiveAccreditation={setActiveAccreditation}
+            setLightboxTitle={setLightboxTitle}
+            setLightboxDesc={setLightboxDesc}
+          />
+        );
       case 'news':
         return <News />;
       case 'volunteers':
