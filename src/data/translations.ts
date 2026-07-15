@@ -279,7 +279,7 @@ export const translations = {
   servicesPortalSubtitle: { en: 'Equipping service centers with smart diagnostic arrays, factory-level programming support, and comprehensive technical audits.', ar: 'نعمل على تمكين البنية التحتية للصيانة عبر رفد الورش بأحدث العدد والبرمجيات الذكية، وبرمجة الأنظمة وتوحيد معايير جودة العمل.' },
 
   // New Navigation Brief translation keys
-  programs: { en: 'Diplomas & Programs', ar: 'الدبلومات التدريبية والبرامج' },
+  programs: { en: 'Training Course', ar: 'الدورة التدريبية' },
   testingLab: { en: 'Testing Lab', ar: 'مختبر الفحص' },
   partnerships: { en: 'Partnerships & Development', ar: 'الشراكات والتطوير' },
   contactUsNav: { en: 'Contact Us', ar: 'اتصل بنا' },
