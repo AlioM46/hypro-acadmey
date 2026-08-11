@@ -1,12 +1,12 @@
 import React from 'react';
-import { Wrench, Award, Send, MessageSquare, Clock, CheckCircle } from 'lucide-react';
+import { Wrench, Award, Send, MessageSquare, Image, CheckCircle } from 'lucide-react';
 
 interface HeroProps {
   t: (key: string) => string;
   contact: {
     whatsapp: string;
   };
-  navigateTo: (page: 'home' | 'about' | 'programs' | 'testing-lab' | 'partnerships' | 'contact' | 'practical-training' | 'accreditations' | 'team') => void;
+  navigateTo: (page: 'home' | 'about' | 'programs' | 'testing-lab' | 'partnerships' | 'contact' | 'practical-training' | 'accreditations' | 'team' | 'careers' | 'b2b' | 'gallery' | 'news' | 'volunteers' | 'legal' | 'academy') => void;
   setVideoModalOpen: (open: boolean) => void;
 }
 
@@ -26,7 +26,7 @@ export default function Hero({ t, contact, navigateTo, setVideoModalOpen }: Hero
 
       {/* Fallback Background Image (Mobile) */}
       <img
-        src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=1200&q=80"
+        src="/gallery/workshop_practice_1.jpg"
         alt="Hypro Automotive Technician diagnostic check"
         className="absolute inset-0 w-full h-full object-cover z-0 md:hidden grayscale brightness-75"
       />
@@ -34,34 +34,37 @@ export default function Hero({ t, contact, navigateTo, setVideoModalOpen }: Hero
       {/* Dark Vignette Overlay for Readability */}
       <div className="absolute inset-0 bg-slate-950/65 z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
-        <div className="max-w-3xl space-y-6 text-start">
-          <div className="flex flex-wrap gap-2">
-            <span className="inline-flex items-center gap-1.5 bg-blue-500/10 text-blue-300 border border-blue-400/20 px-3.5 py-1.5 rounded-full text-xs font-bold font-sans tracking-wide uppercase">
-              <Wrench size={12} />
-              <span>{t('heroBadge')}</span>
-            </span>
-            <span className="inline-flex items-center gap-1.5 bg-white/5 text-slate-300 border border-white/10 px-3.5 py-1.5 rounded-full text-xs font-bold font-sans tracking-wide uppercase">
-              <Award size={12} />
-              <span>{t('heroBadge2')}</span>
+      {/* Hero Content Container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full text-start">
+        <div className="max-w-3xl space-y-6">
+          
+          {/* Top Badge */}
+          <div className="inline-flex items-center gap-2 bg-blue-900/60 border border-blue-500/30 px-3.5 py-1.5 rounded-full backdrop-blur-md">
+            <Wrench size={13} className="text-blue-400" />
+            <span className="text-xs font-semibold text-blue-200 tracking-wide font-sans">
+              {t('heroBadge')}
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold tracking-tight leading-tight font-sans text-white">
-            {t('heroTitlePart1')} <span className="text-blue-400">{t('heroTitlePart2')}</span>
+          {/* Main Headline */}
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15] font-sans text-white">
+            {t('heroTitlePart1')}{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-200 to-white">
+              {t('heroTitlePart2')}
+            </span>
           </h1>
 
-          <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl font-sans font-medium">
-            {t('heroSubtitle')}
+          {/* Subtitle */}
+          <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed font-sans font-normal max-w-2xl">
+            {t('heroSub')}
           </p>
 
-          {/* CTAs */}
-          <div className="flex flex-wrap gap-4 pt-2">
+          {/* Call to Actions (CTAs) */}
+          <div className="flex flex-wrap items-center gap-3 pt-4">
             <button
               onClick={() => navigateTo('contact')}
-              className="bg-white text-brand-blue hover:bg-slate-100 font-extrabold text-sm px-6 py-4 flex items-center justify-center gap-2 transition-all cursor-pointer border-none"
+              className="bg-brand-blue hover:bg-brand-blue-hover text-white font-extrabold text-sm px-7 py-4 transition-all cursor-pointer border-none flex items-center justify-center gap-2 shadow-lg"
             >
-              <Send size={15} />
               <span>{t('bookSeatNow')}</span>
             </button>
 
@@ -76,10 +79,10 @@ export default function Hero({ t, contact, navigateTo, setVideoModalOpen }: Hero
             </a>
 
             <button
-              onClick={() => setVideoModalOpen(true)}
+              onClick={() => navigateTo('gallery')}
               className="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-sm px-6 py-4 flex items-center justify-center gap-2 transition-all cursor-pointer"
             >
-              <Clock size={14} className="text-blue-300 rotate-90" />
+              <Image size={14} className="text-blue-300" />
               <span>{t('watchWorkshopsNav')}</span>
             </button>
           </div>
