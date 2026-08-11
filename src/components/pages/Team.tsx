@@ -42,7 +42,7 @@ export default function Team({ navigateTo }: TeamProps) {
       {/* Mentors Grid Section */}
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {academyContent.team.map((member, idx) => {
               return (
                 <div
@@ -53,9 +53,9 @@ export default function Team({ navigateTo }: TeamProps) {
                   {/* Image Container */}
                   <div className="aspect-[4/5] bg-slate-100 overflow-hidden relative border-b border-slate-200">
                     <img
-                      src={member.image || "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&h=500&q=80"}
+                      src={member.image}
                       alt={lang === 'en' ? member.nameEn : member.nameAr}
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-105"
+                      className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-105"
                     />
                     {/* Tenure tag */}
                     <div className="absolute top-4 left-4 bg-slate-900/90 text-white font-mono text-[9px] font-bold tracking-widest px-3 py-1.5 border border-white/10 uppercase">

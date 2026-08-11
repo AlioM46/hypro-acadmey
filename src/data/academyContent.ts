@@ -80,6 +80,9 @@ export interface AcademyContent {
     addressEn: string;
     addressAr: string;
     telegram: string;
+    facebook: string;
+    linkedin: string;
+    instagram: string;
   };
   stats: AcademyStats[];
   modules: CourseModule[];
@@ -107,6 +110,9 @@ export const academyContent: AcademyContent = {
     phone: "+963 23 881 200", // Syria country code + sample number
     whatsapp: "https://wa.me/962796616549", // Instant WhatsApp messaging API trigger
     telegram: "https://t.me/hypro_academy_sy",
+    facebook: "https://www.facebook.com/profile.php?id=61586683203347",
+    linkedin: "https://www.linkedin.com/company/117234531/admin/analytics/search-appearances/",
+    instagram: "https://www.instagram.com/hypro_academy?igsh=MWI5aDA0MHc1ejViOA%3D%3D&utm_source=qr",
     email: "office@HyproPlatform.com",
     addressEn: "Syria",
     addressAr: "سوريا"
@@ -531,22 +537,33 @@ export const academyContent: AcademyContent = {
   },
   team: [
     {
-      nameEn: "Eng. Ammar Al-Ahmad",
-      nameAr: "المهندس عمار الأحمد",
-      roleEn: "CEO of Hypro Academy & Lead EV Mentor",
-      roleAr: "الرئيس التنفيذي لأكاديمية هايبـرو والموجه الرئيسي لسيارات الكهرباء",
-      bioEn: "Specialist in high-voltage micro-controller mapping and hybrid power cell rebuilds. Oversees all core testing protocols.",
-      bioAr: "أخصائي هندسة الالكترون وبرمجة العقول الإلكترونية وإعادة موازنة خلايا الفولت العالي. يشرف على اختبارات فحص الكفاءة النهائية.",
-      experienceEn: "24 Years of Active Bench Repair",
-      experienceAr: "٢٤ عاماً من الورشات والخبرة العملية",
+      nameEn: "Yazan Al-Banna",
+      nameAr: "يزن البنا",
+      roleEn: "Managing Director & CEO",
+      roleAr: "المدير الإداري CEO",
+      bioEn: "General strategic management oversight, leading academic plans, and driving vocational development for Hypro Academy.",
+      bioAr: "الإشراف الإداري العام وتوجيه الرؤية الاستراتيجية لأكاديمية هايبـرو وتطوير برامج التأهيل الفني.",
+      experienceEn: "Executive Leadership",
+      experienceAr: "قيادة وإدارة استراتيجية",
       image: "/trainers/CEO.jpeg"
+    },
+    {
+      nameEn: "Ahmed Al-Subeih",
+      nameAr: "أحمد الصبيح",
+      roleEn: "Executive Director",
+      roleAr: "المدير التنفيذي",
+      bioEn: "Overseeing executive operations, daily administration, student affairs, and institutional partnerships.",
+      bioAr: "متابعة وتشغيل الخطط التنفيذية، وإدارة العمليات اليومية وتنسيق شؤون التدريب والأكاديمية.",
+      experienceEn: "Executive Operations Leadership",
+      experienceAr: "إدارة العمليات والتشغيل",
+      image: "/trainers/احمد_صبيح.jpeg"
     },
     {
       nameEn: "Eng. Mohammed Made",
       nameAr: "المهندس محمد ماضي",
       roleEn: "Lead Hybrid Engineer & Battery Specialist",
       roleAr: "كبير مهندسي الهايبرد وأخصائي بطاريات الجهد العالي",
-      bioEn: "Specialist in battery cell diagnostics, rebuilding modular packs, and electric drivetrain calibration.",
+      bioEn: "20 years of expertise in electric & hybrid vehicle mechanics and high-voltage battery systems.",
       bioAr: "خبرة ٢٠ سنة في مجال ميكانيك السيارات الكهربائية والبطاريات الهجينة.",
       experienceEn: "20 Years of Active Experience",
       experienceAr: "خبرة ٢٠ عاماً في ميكانيك السيارات والبطاريات",
@@ -557,55 +574,22 @@ export const academyContent: AcademyContent = {
       nameAr: "المدرب عامر عرقاوي",
       roleEn: "Electric & Hybrid Vehicle Mechanics Trainer",
       roleAr: "مدرب في مجال ميكانيك السيارات الكهربائية والهجينة ومتخصص في المحركات العاملة بالبنزين",
-      bioEn: "Specialist in gasoline engines and electric/hybrid vehicle mechanics instruction.",
+      bioEn: "Specialist instructor in gasoline engines, electric drivetrains, and hybrid diagnostics.",
       bioAr: "مدرب ومتخصص في صيانة المحركات العاملة بالبنزين وأنظمة الدفع الكهربائية والهجينة.",
       experienceEn: "14 Years of Active Instruction",
       experienceAr: "١٤ عاماً في تدريب صيانة الميكانيك والهايبرد",
       image: "/trainers/Omar Arqawe.jpeg"
     },
     {
-      nameEn: "Eng. Basel Al-Sagheer",
-      nameAr: "المهندس باسل الصغير",
-      roleEn: "Senior Inverter & Calibration Instructor",
-      roleAr: "كبير مدربي صيانة مبدلات الطاقة والمحركات",
-      bioEn: "Expert in European, Toyota, and Korean hybrid dual powertrains diagnostics with direct focus on workplace safety.",
-      bioAr: "خبير تشخيص وحل أعطال العواكس (الأصناف الكورية واليابانية والأوروبية) مع تركيز صارم على بروتوكولات الأمان الفني وعزل الفولت الفعال.",
-      experienceEn: "18 Years of Technical Instruction",
-      experienceAr: "١٨ عاماً من التدريب وصناعة الكوادر",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&h=500&q=80"
-    },
-    {
-      nameEn: "Eng. Omar Al-Sloom",
-      nameAr: "المهندس عمر السلوم",
-      roleEn: "B2B & Placement Liaison Officer",
-      roleAr: "مسؤول التشبيك والتنسيق مع المنظمات والورش",
-      bioEn: "Manages employment pathways with NGO sponsors, local repair trade unions, and public agencies.",
-      bioAr: "يتولى التنسيق لبناء مسارات رعاية تدريب الشباب، وبناء بروتوكولات التشغيل وخلق فرص عمل واثقة وتوطيد عقود التدريب المهني.",
-      experienceEn: "12 Years in Vocational Program Design",
-      experienceAr: "١٢ عاماً في خدمة وتطوير المشاريع المهنية بالمنطقة",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=500&q=80"
-    },
-    {
-      nameEn: "Ustadh Munir Al-Khatib",
-      nameAr: "الأستاذ منير الخطيب",
-      roleEn: "Lab Director & Safety Controller",
-      roleAr: "مدير المختبر والمشرف الميداني للسلامة",
-      bioEn: "Maintains all insulated tools and high-voltage diagnostic systems. Standardizes workshop safety gear compliance.",
-      bioAr: "يشرف على تكامل وحداثة أجهزة الفحص، والعدّة المعزولة وحماية الطلاب من صدمات الفولت المرتفع في الورشة والمختبر الميداني للمركز.",
-      experienceEn: "15 Years of Lab Operations Support",
-      experienceAr: "١٥ عاماً من إدارة مختبرات الصيانة والسلامة",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&h=500&q=80"
-    },
-    {
-      nameEn: "Eng. Anas Al-Kurd",
-      nameAr: "المهندس أنس الكرد",
-      roleEn: "Alternative Energy & Smart Grids Instructor",
-      roleAr: "مدرب أنظمة الطاقة البديلة والشبكات الذكية",
-      bioEn: "Specialist in solar arrays integration, battery management programming, and sustainable grids.",
-      bioAr: "متخصص في تكامل أنظمة الخلايا الشمسية وبرمجة إدارة البطاريات وتصميم الشبكات المستدامة.",
-      experienceEn: "10 Years of Energy Systems Engineering",
-      experienceAr: "١٠ سنوات في هندسة نظم الطاقة",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&h=500&q=80"
+      nameEn: "Ata Khamis",
+      nameAr: "عطا خميس",
+      roleEn: "Hybrid & EV Engineering Mechanical Trainer",
+      roleAr: "مدرب ميكانيك هندسة الهايبرد والكهرباء",
+      bioEn: "Expert instructor specializing in hybrid powertrain engineering and EV mechanics.",
+      bioAr: "مدرب وخبير ميكانيكي متخصص في أنظمة هندسة الهايبرد والسيارات الكهربائية.",
+      experienceEn: "Advanced Mechanics Instructor",
+      experienceAr: "خبرة متقدمة في تدريب الميكانيك والهايبرد",
+      image: "/trainers/عطا مدرب.jpeg"
     }
   ]
 };
