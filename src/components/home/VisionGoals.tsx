@@ -60,7 +60,7 @@ export default function VisionGoals() {
             </div>
           </div>
 
-          <div className="text-xs text-slate-400 font-mono tracking-wide">
+          <div className="text-xs text-slate-500 font-sans font-medium">
             {lang === 'en' ? '5-Year Strategic Transition Plan' : 'خطة التحول الاستراتيجي خلال 5 سنوات'}
           </div>
         </div>

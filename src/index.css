@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Poppins", "Tajawal", system-ui, -apple-system, sans-serif;
+  --font-sans: "Tajawal", "Poppins", "Inter", system-ui, -apple-system, sans-serif;
 
   --color-brand-blue: #232f5b;
   --color-brand-blue-hover: #182142;
@@ -16,17 +16,35 @@
 }
 
 @layer base {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     border-radius: 0px !important;
-    font-family: 'Poppins', 'Tajawal', system-ui, -apple-system, sans-serif;
+    font-family: 'Tajawal', 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
-    font-family: 'Poppins', 'Tajawal', system-ui, -apple-system, sans-serif;
+    font-family: 'Tajawal', 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     scrollbar-color: var(--color-brand-blue) #f1f5f9;
     scrollbar-width: thin;
+  }
+
+  /* Prevent tracking/letter-spacing breaking Arabic joined script in RTL */
+  [dir="rtl"] *,
+  [lang="ar"] * {
+    letter-spacing: 0px !important;
+  }
+
+  /* Monospace fonts break Arabic character joining into separate letters; override font-mono for RTL */
+  [dir="rtl"] .font-mono,
+  [lang="ar"] .font-mono {
+    font-family: 'Tajawal', sans-serif !important;
+    letter-spacing: 0px !important;
   }
 
   /* Custom scrollbar styling for webkit browsers */
@@ -49,7 +67,25 @@
     background: var(--color-brand-blue-hover);
   }
 
-  body, input, textarea, select, button, span, p, h1, h2, h3, h4, h5, h6, a, div, label, li, td, th {
+  body,
+  input,
+  textarea,
+  select,
+  button,
+  span,
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  a,
+  div,
+  label,
+  li,
+  td,
+  th {
     font-family: 'Poppins', 'Tajawal', system-ui, -apple-system, sans-serif;
   }
 
@@ -80,6 +116,7 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-100%);
   }
