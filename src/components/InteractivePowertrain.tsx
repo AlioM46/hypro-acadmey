@@ -180,11 +180,19 @@ export default function InteractivePowertrain() {
           <div className="mt-6 border-t border-slate-100 pt-4 flex gap-6 text-xs font-mono text-slate-500">
             <div>
               <span className="text-slate-400 block text-[9px] uppercase tracking-wider">{t('difficulty')}</span>
-              <strong className="text-slate-800">{activeMode === 'fuel' ? 'INTERMEDIATE' : 'ADVANCED SPECIALIST'}</strong>
+              <strong className="text-slate-800">
+                {activeMode === 'fuel'
+                  ? tVal({ en: 'INTERMEDIATE', ar: 'مستوى متوسط' })
+                  : tVal({ en: 'ADVANCED SPECIALIST', ar: 'مختص متقدم' })}
+              </strong>
             </div>
             <div>
               <span className="text-slate-400 block text-[9px] uppercase tracking-wider">{t('practicalHours')}</span>
-              <strong className="text-slate-800">{activeMode === 'fuel' ? '90 Hours' : '150 Hours'}</strong>
+              <strong className="text-slate-800">
+                {activeMode === 'fuel'
+                  ? tVal({ en: '90 Hours', ar: '90 ساعة' })
+                  : tVal({ en: '150 Hours', ar: '150 ساعة' })}
+              </strong>
             </div>
           </div>
         </div>

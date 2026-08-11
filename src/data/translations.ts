@@ -205,6 +205,10 @@ export const translations = {
   // Footer
   directCoordinates: { en: 'Direct Coordinates', ar: 'إحداثيات الاتصال بنا' },
   channels: { en: 'Channels', ar: 'قنوات التواصل' },
+  socialMedia: { en: 'Social Media', ar: 'وسائل التواصل الاجتماعي' },
+  facebookLink: { en: 'Facebook Page', ar: 'صفحة فيسبوك' },
+  linkedinLink: { en: 'LinkedIn Profile', ar: 'صفحة لينكد إن' },
+  instagramLink: { en: 'Instagram Account', ar: 'حساب انستغرام' },
   telegramWaLink: { en: 'Direct Official Telegram / WA', ar: 'رابط واتساب الاستفساري المباشر' },
   admissionsHours: { en: 'Admissions Office Hours:', ar: 'ساعات عمل مكتب القبول:' },
   footerCopyright: { en: '© 2026 Hypro Academy. All Rights Reserved.', ar: '© ٢٠٢٦ أكاديمية هايبـرو لتدريب صيانة هندسة السيارات. جميع الحقوق محفوظة.' },
@@ -293,7 +297,7 @@ export const translations = {
   // Additional Brief Keys
   bookSeatNow: { en: 'Book Your Seat Now', ar: 'احجز مقعدك الآن' },
   talkAdvisor: { en: 'Talk to Advisor', ar: 'تحدث مع المستشار' },
-  watchWorkshopsNav: { en: 'Watch Practical Workshops', ar: 'شاهد الورش العملية' },
+  watchWorkshopsNav: { en: 'Explore Photo Gallery', ar: 'شاهد معرض الصور' },
   whatYouWillLearn: { en: 'What You Will Learn', ar: 'ماذا ستتعلم' },
   practicalTrainingTitle: { en: 'Practical Training', ar: 'التدريب العملي' },
   quickRegRibbonTitle: { en: 'Quick Registration Ribbon', ar: 'التسجيل السريع والمباشر' },
