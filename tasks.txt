@@ -1,2 +1,6 @@
-replace resend with Comapny emails
-change the gallery Pages & videos
+- change the loading spinner
+- (maybe change the font)
+
+
+
+

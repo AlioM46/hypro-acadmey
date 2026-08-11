@@ -1,5 +1,6 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { AnimatePresence } from 'motion/react';
+import { Loader2 } from 'lucide-react';
 
 import { academyContent } from './data/academyContent';
 import { useTranslation } from './hooks/useTranslation';
@@ -256,9 +257,11 @@ export default function App() {
       <main className="flex-grow">
         <AnimatePresence mode="wait">
           <Suspense fallback={
-            <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4 bg-slate-50">
-              <div className="w-10 h-10 border-4 border-brand-blue border-t-transparent rounded-full animate-spin" />
-              <span className="text-xs font-mono tracking-widest text-slate-400 font-bold uppercase animate-pulse">Loading Academy Page...</span>
+            <div className="min-h-[50vh] flex flex-col items-center justify-center gap-3 bg-slate-50 text-center font-sans">
+              <Loader2 className="w-8 h-8 animate-spin text-brand-blue" />
+              <span className="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider">
+                {lang === 'en' ? 'Loading...' : 'جاري التحميل...'}
+              </span>
             </div>
           }>
             {renderPage()}
