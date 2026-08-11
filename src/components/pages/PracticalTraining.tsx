@@ -11,7 +11,7 @@ const galleryItems = [
     titleAr: 'تفكيك بطارية تويوتا هايبريد في ورشة التدريب',
     descEn: 'Trainees learning component isolation, safety inspection, and battery busbar cleaning.',
     descAr: 'المتدربون يتعلمون عزل الأجزاء، الفحص الأمني، وتنظيف الخطوط النحاسية الموصلة للبطارية.',
-    image: 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80',
+    image: '/gallery/hv_battery_training_1.jpg',
     type: 'photo'
   },
   {
@@ -21,7 +21,7 @@ const galleryItems = [
     titleAr: 'فيديو تفكيك وفحص خلايا بطارية الفولت العالي',
     descEn: 'Watch our students perform module extraction under absolute insulated parameters.',
     descAr: 'فيديو يوضح سحب خلايا البطارية تحت معايير عزل وفولتية صارمة.',
-    image: 'https://images.unsplash.com/photo-1548345680-f5475ea5df84?auto=format&fit=crop&w=800&q=80',
+    image: '/gallery/workshop_practice_1.jpg',
     videoUrl: '/new-vod.mp4',
     type: 'video'
   },
@@ -32,7 +32,7 @@ const galleryItems = [
     titleAr: 'جهاز توازن وشحن وتفريغ بطاريات الهايبريد',
     descEn: 'Automated cell testing bench measuring internal resistance and modular health parameters.',
     descAr: 'طاولة قياس وتفريغ الخلايا المؤتمتة لفحص قيم المقاومة الداخلية وحالة الخلايا بدقة.',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+    image: '/gallery/diagnostic_equipment_1.jpg',
     type: 'photo'
   },
   {
@@ -42,7 +42,7 @@ const galleryItems = [
     titleAr: 'صالة الصيانة والفحص الكبرى بالأكاديمية',
     descEn: 'Live view of the workshop with multiple vehicles undergoing system scans and repair.',
     descAr: 'لقطة حية لصالة الورشة والسيارات الحقيقية التي يجري تشخيصها.',
-    image: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80',
+    image: '/gallery/chassis_lecture_1.jpg',
     type: 'photo'
   },
   {
@@ -52,7 +52,7 @@ const galleryItems = [
     titleAr: 'العدد والمفكات المعزولة المخصصة للجهود العالية',
     descEn: 'Professional VDE-certified tools and isolation equipment used for safe high-voltage operations.',
     descAr: 'مجموعة العدة والقفازات المعزولة المعتمدة للتعامل مع الدوائر الكهربائية بجهد يصل إلى 1000 فولت.',
-    image: 'https://images.unsplash.com/photo-1616788494707-ec28f08d05a1?auto=format&fit=crop&w=800&q=80',
+    image: '/gallery/electrical_board_1.jpg',
     type: 'photo'
   },
   {
@@ -62,8 +62,8 @@ const galleryItems = [
     titleAr: 'فيديو تشخيص أعطال المحركات والبرمجة بالكمبيوتر',
     descEn: 'Demonstrating dynamic sensors calibration and reading wave signals.',
     descAr: 'شرح حي لمعايرة الحساسات وفحص موجات الإشارة بالكومبيوتر والسكوب.',
-    image: 'https://images.unsplash.com/photo-1517524206127-48bbd363f3d7?auto=format&fit=crop&w=800&q=80',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-mechanical-technician-inspecting-a-car-engine-42247-large.mp4',
+    image: '/gallery/obd_diagnostics_1.jpg',
+    videoUrl: '/gallery/workshop_practice_clip.mp4',
     type: 'video'
   },
   {
@@ -73,7 +73,7 @@ const galleryItems = [
     titleAr: 'الطلاب يتدربون على قياس قيم الجهد المستمر والمتناوب',
     descEn: 'Hands-on training of circuit isolation checking and checking low voltage control links.',
     descAr: 'تدريب الطلاب على قياس مقاومة العزل وفحص خطوط التحكم بجهد منخفض.',
-    image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80',
+    image: '/gallery/pcb_soldering_1.jpg',
     type: 'photo'
   },
   {
@@ -83,7 +83,7 @@ const galleryItems = [
     titleAr: 'لوحة التحكم والتشخيص المبرمج لمنظومة الهايبرد',
     descEn: 'Testing the inverter modules and high voltage cooling loops on live setups.',
     descAr: 'اختبار كفاءة المبدلات ومضخات التبريد الكهربائية على سيارات ومجسمات حية.',
-    image: 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80',
+    image: '/gallery/whiteboard_lecture_1.jpg',
     type: 'photo'
   }
 ];

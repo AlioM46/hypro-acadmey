@@ -15,7 +15,7 @@ export default function News() {
       titleEn: 'Launching the Intensive Hybrid Diagnostics Course',
       descAr: 'بدء استقبال متدربي الفصل الجديد للتعامل العملي مع بطاريات ودوائر السيارات الحديثة.',
       descEn: 'Starting academic registrations for our live, hands-on Toyota high-voltage circuit lab.',
-      img: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80'
+      img: '/gallery/graduation_group_1.jpg'
     },
     {
       date: '2026-05-28',
@@ -25,7 +25,7 @@ export default function News() {
       titleEn: 'Signing Joint Placement Agreement in Syria',
       descAr: 'شراكة جديدة مع كبرى ورشات صيانة السيارات لتسهيل توظيف أوائل الخريجين مباشرة.',
       descEn: 'A fresh B2B alliance signed to coordinate hiring dossiers directly with repair shops.',
-      img: 'https://images.unsplash.com/photo-1521791136364-728647526959?auto=format&fit=crop&w=800&q=80'
+      img: '/gallery/certificate_handover_1.jpg'
     },
     {
       date: '2026-05-15',
@@ -35,7 +35,7 @@ export default function News() {
       titleEn: 'Workshop on High-Voltage Insulation & Safety Standards',
       descAr: 'ندوة فنية لشرح حماية CAT III وكيفية استخدام الملابس المعزولة وتجنب أخطار الصعق.',
       descEn: 'Safety seminar focusing on insulation rules and handling 1000V rated multimeters.',
-      img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80'
+      img: '/gallery/faculty_group_1.jpg'
     }
   ];
 

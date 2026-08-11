@@ -22,7 +22,7 @@ export default function AlumniTrust() {
             <div>
               <div className="flex items-center gap-4 mb-6">
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80"
+                  src="/gallery/students_outdoor_1.jpg"
                   alt="Mustafa H."
                   className="w-16 h-16 object-cover border border-slate-200 grayscale"
                 />
@@ -50,7 +50,7 @@ export default function AlumniTrust() {
             <div>
               <div className="flex items-center gap-4 mb-6">
                 <img
-                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&h=120&q=80"
+                  src="/gallery/workshop_practice_1.jpg"
                   alt="Ahmad A."
                   className="w-16 h-16 object-cover border border-slate-200 grayscale"
                 />
@@ -78,7 +78,7 @@ export default function AlumniTrust() {
             <div>
               <div className="flex items-center gap-4 mb-6">
                 <img
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=120&h=120&q=80"
+                  src="/gallery/pcb_soldering_1.jpg"
                   alt="Yaseen K."
                   className="w-16 h-16 object-cover border border-slate-200 grayscale"
                 />

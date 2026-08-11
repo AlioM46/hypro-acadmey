@@ -42,7 +42,7 @@ export default function HyproEcosystem({ division, navigateTo }: HyproEcosystemP
           statusLabel: t('comingSoon'),
           cta: lang === 'en' ? 'Learn More' : 'معرفة المزيد',
           action: () => navigateTo('about'),
-          img: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=800&q=80',
+          img: '/gallery/electrical_board_1.jpg',
           imgAlt: 'Hypro Energy Solar and Storage Solutions',
           imageLeft: false
         };

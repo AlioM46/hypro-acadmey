@@ -41,7 +41,7 @@ export default function TestingLab() {
           <div className="border border-slate-200 p-6 flex flex-col md:flex-row gap-6 bg-slate-50">
             <div className="w-full md:w-1/3 aspect-[4/3] bg-slate-100 border border-slate-100 overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80" 
+                src="/gallery/hv_battery_training_1.jpg" 
                 alt="Hypro HV Battery Tester" 
                 className="w-full h-full object-cover grayscale"
               />
@@ -73,7 +73,7 @@ export default function TestingLab() {
           <div className="border border-slate-200 p-6 flex flex-col md:flex-row gap-6 bg-slate-50">
             <div className="w-full md:w-1/3 aspect-[4/3] bg-slate-100 border border-slate-100 overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80" 
+                src="/gallery/diagnostic_equipment_1.jpg" 
                 alt="Technical diagnostic oscilloscopes" 
                 className="w-full h-full object-cover grayscale"
               />
