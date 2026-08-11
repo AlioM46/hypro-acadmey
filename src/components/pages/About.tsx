@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Layers, Users, Award, Zap, ArrowRight } from 'lucide-react';
 import { useTranslation } from '../../hooks/useTranslation';
+import { academyContent } from '../../data/academyContent';
 
 interface AboutProps {
   navigateTo: (page: 'home' | 'about' | 'programs' | 'testing-lab' | 'partnerships' | 'contact' | 'practical-training' | 'accreditations' | 'team') => void;
@@ -9,6 +10,14 @@ interface AboutProps {
 
 export default function About({ navigateTo }: AboutProps) {
   const { lang, t } = useTranslation();
+
+  const trainersOnly = academyContent.team.filter(
+    (m) =>
+      m.roleEn.toLowerCase().includes('trainer') ||
+      m.roleEn.toLowerCase().includes('engineer') ||
+      m.roleAr.includes('مدرب') ||
+      m.roleAr.includes('مهندس')
+  );
 
   return (
     <motion.div key="about" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.2 }} className="py-16 bg-white text-slate-800 text-start">
@@ -98,25 +107,25 @@ export default function About({ navigateTo }: AboutProps) {
 
         <div>
           <div className="space-y-2 mb-8">
-            <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">{lang === 'en' ? 'ELITE TECHNICAL MENTORS' : 'كادر المهندسين والمعلمين'}</span>
-            <h3 className="text-xl font-extrabold text-slate-900">{lang === 'en' ? 'Learn From Industry Experts' : 'تلقّ الخبرة من رواد السوق'}</h3>
+            <span className="text-xs font-mono font-bold text-brand-blue tracking-widest uppercase block">{lang === 'en' ? 'ELITE TECHNICAL INSTRUCTORS' : 'كادر المدربين والمهندسين'}</span>
+            <h3 className="text-xl font-extrabold text-slate-900">{lang === 'en' ? 'Learn From Industry Experts' : 'تلقّ الخبرة من رواد التدريب في السوق'}</h3>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-xl mx-auto">
-            {[
-              { img: '/trainers/Mohammed Made.jpeg', nameEn: 'Eng. Mohammed Made', nameAr: 'المهندس محمد ماضي', roleEn: 'Lead Hybrid Engineer & Battery Specialist', roleAr: 'كبير مهندسي الهايبرد وأخصائي بطاريات الجهد العالي', expEn: '20 Years', expAr: '٢٠ عاماً' },
-              { img: '/trainers/Omar Arqawe.jpeg', nameEn: 'Trainer Amer Arqawe', nameAr: 'المدرب عامر عرقاوي', roleEn: 'Electric & Hybrid Vehicle Mechanics Trainer', roleAr: 'مدرب في مجال ميكانيك السيارات الكهربائية والهجينة ومتخصص في المحركات', expEn: '14 Years', expAr: '١٤ عاماً' }
-            ].map((m, idx) => (
-              <div key={idx} className="border border-slate-200 flex flex-col justify-between group hover:border-brand-blue/30 transition-all">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {trainersOnly.map((m, idx) => (
+              <div key={idx} className="border border-slate-200 flex flex-col justify-between group hover:border-brand-blue/30 transition-all bg-white">
                 <div>
-                  <div className="aspect-[3/4] w-full bg-slate-100 overflow-hidden"><img src={m.img} alt={lang === 'en' ? m.nameEn : m.nameAr} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" /></div>
-                  <div className="p-5">
+                  <div className="aspect-[3/4] w-full bg-slate-100 overflow-hidden">
+                    <img src={m.image} alt={lang === 'en' ? m.nameEn : m.nameAr} className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500" />
+                  </div>
+                  <div className="p-5 space-y-1.5">
+                    <span className="text-[10px] font-mono font-bold text-brand-blue tracking-wider block">{lang === 'en' ? m.roleEn : m.roleAr}</span>
                     <h4 className="font-extrabold text-sm text-slate-950">{lang === 'en' ? m.nameEn : m.nameAr}</h4>
-                    <span className="text-[10px] font-mono font-bold text-brand-blue tracking-wider block mt-1">{lang === 'en' ? m.roleEn : m.roleAr}</span>
+                    <p className="text-xs text-slate-500 leading-relaxed font-medium line-clamp-3">{lang === 'en' ? m.bioEn : m.bioAr}</p>
                   </div>
                 </div>
-                <div className="px-5 pb-5 border-t border-slate-100 pt-3 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                <div className="px-5 pb-4 border-t border-slate-100 pt-3 flex items-center justify-between text-[10px] font-mono text-slate-400">
                   <span>{lang === 'en' ? 'EXPERIENCE:' : 'الخبرة:'}</span>
-                  <span className="text-slate-900 font-bold">{lang === 'en' ? m.expEn : m.expAr}</span>
+                  <span className="text-slate-900 font-bold">{lang === 'en' ? m.experienceEn : m.experienceAr}</span>
                 </div>
               </div>
             ))}
